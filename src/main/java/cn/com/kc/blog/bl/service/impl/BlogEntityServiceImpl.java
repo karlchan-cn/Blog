@@ -40,13 +40,10 @@ public class BlogEntityServiceImpl implements IBlogEntityService {
 		this.entityDao = newDAO;
 	}
 
-	/**
-	 * 
-	 * @param entity
-	 */
 	public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
 		// BlogUser user2 = this.userDao.get(user.getId());
 		entity.setUser(user);
+		entity.setId(1l);
 		return entityDao.save(entity);
 	}
 }
