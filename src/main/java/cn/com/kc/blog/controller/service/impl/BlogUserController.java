@@ -25,6 +25,7 @@ public class BlogUserController {
 	private IBlogUserService userService;
 
 	public IBlogUserService getUserService() {
+		System.out.println("");
 		return userService;
 	}
 
