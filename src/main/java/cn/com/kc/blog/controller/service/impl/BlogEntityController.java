@@ -5,6 +5,7 @@ package cn.com.kc.blog.controller.service.impl;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,8 +40,18 @@ public class BlogEntityController {
 		this.blogEntityService = newblogEntityService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping("/create")
 	public String createEntity() {
+		return "entity";
+	}
+
+	@RequestMapping("/{entityId}/endit")
+	public String enditEntity(@PathVariable final String entityId) {
+		return "entity";
+	}
+
+	@RequestMapping("/{entityId}")
+	public String showEntity(@PathVariable final String entityId) {
 		return "entity";
 	}
 }
