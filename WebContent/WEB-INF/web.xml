@@ -63,6 +63,11 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
 	<!-- Spring配置文件结束 -->
 
 	<!-- 如果 发现报 该错误 No mapping found for HTTP request with URI 加入下mapping <servlet-mapping> 
