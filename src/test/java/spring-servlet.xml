@@ -17,7 +17,7 @@
 	<mvc:annotation-driven validator="hibernateBeanValidator"
 		conversion-service="conversion-service">
 	</mvc:annotation-driven>
-	<!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
+	<!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
 	<bean id="hibernateBeanValidator"
 
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -37,23 +37,16 @@
 	</context:component-scan>
 
 
-	<!--  <mvc:interceptors>-->
-	<!--
-		<bean class="cn.javass.test.interceptor.TestInterceptor"/>
-	-->
-	<!--        <mvc:interceptor>-->
-	<!--            <mvc:mapping path="/edit.kz"/>-->
-	<!--
-		<bean class="cn.javass.test.interceptor.TestInterceptor"/>
-	-->
-	<!--        </mvc:interceptor>-->
-	<!--    </mvc:interceptors>-->
+	<!-- <mvc:interceptors> -->
+	<!-- <bean class="cn.javass.test.interceptor.TestInterceptor"/> -->
+	<!-- <mvc:interceptor> -->
+	<!-- <mvc:mapping path="/edit.kz"/> -->
+	<!-- <bean class="cn.javass.test.interceptor.TestInterceptor"/> -->
+	<!-- </mvc:interceptor> -->
+	<!-- </mvc:interceptors> -->
 
 	<!-- <mvc:view-controller path="/" view-name="index" /> -->
-	<!--
-		当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern>
-		映射时，能映射静态资源
-	-->
+	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
 	<mvc:default-servlet-handler />
 	<!-- 静态资源映射 -->
 	<mvc:resources mapping="/assets/images/**"
@@ -61,11 +54,11 @@
 	<mvc:resources mapping="/assets/css/**"
 		location="/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/" />
 	<mvc:resources mapping="/assets/js/**"
-		location="/WEB-INF/assets/js/,/WEB-INF/assets/js/bootstrap/,/WEB-INF/assets/js/jquery/" />
+		location="/WEB-INF/assets/js/,/WEB-INF/assets/js/bootstrap/,/WEB-INF/assets/js/jquery/,/WEB-INF/assets/js/fileupload/" />
 	<mvc:resources mapping="/assets/ico/**" location="/WEB-INF/assets/ico/" />
 
 	<!-- ========================= VIEW定义 ========================= -->
-	<!-- bean name view resolver-->
+	<!-- bean name view resolver -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		p:order="0" />
 
@@ -73,22 +66,18 @@
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
 		p:order="1">
-		<!-- 设置为true以忽略对Accept Header的支持-->
+		<!-- 设置为true以忽略对Accept Header的支持 -->
 		<!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
 		<property name="favorPathExtension" value="false" />
 
 		<!-- 用于开启 /userinfo/123?format=json 的支持 -->
 		<property name="favorParameter" value="false" />
 
-		<property name="mediaTypes">  <!--favorPathExtension, favorParameter是true时才起作用  -->
+		<property name="mediaTypes">  <!--favorPathExtension, favorParameter是true时才起作用 -->
 			<map>
-				<!--                <entry key="wml" value="text/vnd.wap.wml"/>-->
-				<!--
-					<entry key="vnd" value="application/vnd.wap.xhtml+xml"/>
-				-->
-				<!--
-					<entry key="xhtml" value="application/xhtml+xml"/>
-				-->
+				<!-- <entry key="wml" value="text/vnd.wap.wml"/> -->
+				<!-- <entry key="vnd" value="application/vnd.wap.xhtml+xml"/> -->
+				<!-- <entry key="xhtml" value="application/xhtml+xml"/> -->
 				<entry key="atom" value="application/atom+xml" />
 				<entry key="html" value="text/html" />
 				<entry key="json" value="application/json" />
@@ -106,11 +95,8 @@
 				</bean>
 			</list>
 		</property>
-		<!--
-			可配置Not Found url <property name="defaultViews"> <list> <bean
-			class="org.springframework.web.servlet.view.JstlView"
-			p:url="/notfound"/> </list> </property>
-		-->
+		<!-- 可配置Not Found url <property name="defaultViews"> <list> <bean class="org.springframework.web.servlet.view.JstlView" 
+			p:url="/notfound"/> </list> </property> -->
 	</bean>
 
 
@@ -126,17 +112,10 @@
 	</bean>
 
 	<!-- json view -->
-	<!--
-		<bean id="defaultJsonView"
-		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
-	-->
+	<!-- <bean id="defaultJsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/> -->
 
-	<!--
-		文件上传相关 <bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
-		<property name="maxUploadSize" value="100000"/> </bean>
-	-->
+	<!-- 文件上传相关 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<property name="maxUploadSize" value="100000"/> </bean> -->
 
 	<!-- 控制器异常处理 -->
 	<bean id="exceptionResolver"
@@ -145,7 +124,7 @@
 			<props>
 				<prop key="java.lang.Exception">
 					error_all
-                </prop>
+				</prop>
 			</props>
 		</property>
 	</bean>
