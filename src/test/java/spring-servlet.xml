@@ -50,7 +50,7 @@
 	<mvc:default-servlet-handler />
 	<!-- 静态资源映射 -->
 	<mvc:resources mapping="/assets/images/**"
-		location="/WEB-INF/assets/images/,/WEB-INF/assets/images/bootstrap/" />
+		location="/WEB-INF/assets/images/,/WEB-INF/assets/images/bootstrap/,/WEB-INF/assets/images/base/" />
 	<mvc:resources mapping="/assets/css/**"
 		location="/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/" />
 	<mvc:resources mapping="/assets/js/**"
@@ -112,7 +112,7 @@
 	</bean>
 
 	<!-- json view -->
-	<!-- <bean id="defaultJsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/> -->
+	 <bean id="defaultJsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/> 
 
 	<!-- 文件上传相关 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 		<property name="maxUploadSize" value="100000"/> </bean> -->

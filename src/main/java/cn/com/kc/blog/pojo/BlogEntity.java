@@ -53,6 +53,17 @@ public class BlogEntity implements Serializable {
 	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class)
 	private List<BlogCategory> categorys;
 
+	@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
+	private List<BlogImage> images;
+
+	public List<BlogImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<BlogImage> images) {
+		this.images = images;
+	}
+
 	public List<BlogCategory> getCategorys() {
 		return categorys;
 	}

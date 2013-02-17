@@ -4,10 +4,13 @@
 package cn.com.kc.blog.controller.service.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.com.kc.blog.bl.service.IBlogEntityService;
 import cn.com.kc.blog.common.util.CommonControllerUtils;
+import cn.com.kc.blog.pojo.BlogImage;
 
 /**
  * @author chenjinlong2
@@ -94,7 +98,10 @@ public class BlogEntityController {
 	@RequestMapping("/savefile")
 	@ResponseBody
 	@SuppressWarnings("unchecked")
-	public String saveFile() {
+	public List<BlogImage> saveFile() {
+		final BlogImage blogImage = new BlogImage();
+		List<BlogImage> imageList = new ArrayList<BlogImage>();
+		imageList.add(blogImage);
 		final HttpServletRequest request = CommonControllerUtils.getRequest();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
@@ -106,17 +113,35 @@ public class BlogEntityController {
 			final String uploadDir = getUploadDir(request);
 			while (iterator.hasNext()) {
 				item = iterator.next();
+
 				if (!item.isFormField()) {
-					File file = new File(uploadDir
-							+ String.valueOf(System.currentTimeMillis())
-							+ ".JPG");
-					item.write(file);
+					// File file = new File(uploadDir
+					// + String.valueOf(System.currentTimeMillis())
+					// + ".JPG");
+					// item.write(file);
+					blogImage.setSize(item.getSize());
+				} else {
+					try {
+						PropertyUtils.setProperty(blogImage,
+								item.getFieldName(),
+								Long.valueOf(item.getString()));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		return null;
+		return imageList;
+	}
+
+	@RequestMapping("/saveimage")
+	@ResponseBody
+	@SuppressWarnings("unchecked")
+	public BlogImage saveImage() {
+		final BlogImage blogImage = new BlogImage();
+		return blogImage;
 	}
 }
