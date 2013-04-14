@@ -3,8 +3,12 @@
  */
 package cn.com.kc.blog.dao.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import cn.com.kc.blog.commondao.service.impl.BaseDaoImpl;
@@ -27,9 +31,18 @@ public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 		this.userDao = newDao;
 	}
 
-	@Override
 	public void saveNewEntity(final BlogUser user, final BlogEntity entity) {
 		entity.setUser(user);
 		this.save(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<BlogEntity> getTempEntity(final BlogUser user) {
+		final Session session = getCurrentSession();
+		final Query query = session
+				.createQuery("from BlogEntity entity where entity.isTemp = true and entity.user = ?");
+		query.setEntity(0, user);
+		List<BlogEntity> list = query.list();
+		return list;
 	}
 }

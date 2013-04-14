@@ -4,6 +4,7 @@
 package cn.com.kc.blog.bl.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -45,5 +46,12 @@ public class BlogEntityServiceImpl implements IBlogEntityService {
 		entity.setUser(user);
 		entity.setId(1l);
 		return entityDao.save(entity);
+	}
+
+	public BlogEntity getTempEntity(Long userId) {
+		BlogUser user = new BlogUser();
+		user.setId(userId);
+		final List<BlogEntity> list = this.entityDao.getTempEntity(user);
+		return list.get(0);
 	}
 }

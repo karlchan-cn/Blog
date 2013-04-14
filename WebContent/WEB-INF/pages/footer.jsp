@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8" %>
 <!-- /container -->
@@ -30,3 +31,8 @@ pageEncoding="utf-8" %>
 </script>
 <script src="/Blog/assets/js/bootstrap-typeahead.js">
 </script>
+<script src="/Blog/assets/js/sugar-1.2.2.js">
+</script>
+<script src="/Blog/assets/js/jquery.json-2.4.js">
+</script>
+

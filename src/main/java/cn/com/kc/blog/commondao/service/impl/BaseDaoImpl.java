@@ -73,24 +73,20 @@ public class BaseDaoImpl<M extends Serializable, PK extends Serializable>
 		session.save(object);
 	}
 
-	@Override
 	public void delete(M model) {
 		getCurrentSession().delete(model);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public M get(PK pk) {
 		return (M) getCurrentSession().get(this.entityClass, pk);
 	}
 
-	@Override
 	public Serializable save(M model) {
 		return getCurrentSession().save(model);
 	}
 
-	@Override
 	public void update(M model) {
 		getCurrentSession().update(model);
 

@@ -37,7 +37,7 @@ public class BlogImage implements Serializable {
 	}
 
 	@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogEntity.class)
-	@JoinColumn(name = "ENTITY_ID", nullable = false)
+	@JoinColumn(name = "ENTITY_ID", nullable = true)
 	private BlogEntity entity;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,6 +48,16 @@ public class BlogImage implements Serializable {
 	private Long tempid;
 	@Transient
 	private Long size;
+	@Transient
+	private String showName;
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
 
 	public Long getSize() {
 		return size;
@@ -98,3 +108,4 @@ public class BlogImage implements Serializable {
 	}
 
 }
+//

@@ -4,24 +4,42 @@
 package cn.com.kc.blog.controller.service.impl;
 
 import java.io.File;
+import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.kc.blog.bl.service.IBlogEntityService;
-import cn.com.kc.blog.common.util.CommonControllerUtils;
+import cn.com.kc.blog.bl.service.IBlogImageService;
+import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogImage;
+import cn.com.kc.blog.pojo.BlogUser;
 
 /**
  * @author chenjinlong2
@@ -30,14 +48,58 @@ import cn.com.kc.blog.pojo.BlogImage;
 @Controller(value = "cn.com.kc.blog.controller.service.impl.BlogEntityController")
 @RequestMapping("/entity")
 public class BlogEntityController {
+
 	/**
 	 * 
 	 */
 	public static final String CONST_ENTITY_PAGE = "entity";
+	public static final String CONST_IMAGES_COUNT = "image-count";
+	public static final String CONST_IMAGES_SIZE = "image-size";
+	public static final String CONST_RET_ERROR = "error";
+	public static final String CONST_RET_ERROR_MSG = "error-msg";
+	public static final String CONST_RET_IMGLIST = "imagelist";
+	public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张图片。";
+	public static final String CONST_ERRORMSG_OULSIZE = "一次只允许上传5Mb图片。";
+	public static final String CONST_UL_ACTION_INIT = "init";
+	public static final String CONST_UL_ACTION_CLEAR = "clear";
+	public static final BigDecimal CONST_MAX_UPLOAD_SIZE = new BigDecimal(
+			1024 * 1024 * 5);
+
+	/**
+	 * json mapper
+	 */
+	private static final ObjectMapper mapper = new ObjectMapper();
 	/**
 		 * 
 		 */
+	@Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
 	private IBlogEntityService blogEntityService;
+	@Resource(name = "cn.com.kc.blog.bl.service.IBlogImageService")
+	private IBlogImageService blogImageDaoService;
+
+	public IBlogImageService getBlogImageDaoService() {
+		return blogImageDaoService;
+	}
+
+	public void setBlogImageDaoService(IBlogImageService blogImageDaoService) {
+		this.blogImageDaoService = blogImageDaoService;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IBlogEntityService getBlogEntityService() {
+		return blogEntityService;
+	}
+
+	/**
+	 * 
+	 * @param blogEntityService
+	 */
+	public void setBlogEntityService(final IBlogEntityService blogEntityService) {
+		this.blogEntityService = blogEntityService;
+	}
 
 	/**
 	 * 
@@ -82,6 +144,10 @@ public class BlogEntityController {
 
 	@RequestMapping("/create")
 	public String createEntity() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName(CONST_ENTITY_PAGE);
+		BlogEntity entity = new BlogEntity();
+		modelAndView.getModelMap().put("entity", entity);
 		return CONST_ENTITY_PAGE;
 	}
 
@@ -98,50 +164,161 @@ public class BlogEntityController {
 	@RequestMapping("/savefile")
 	@ResponseBody
 	@SuppressWarnings("unchecked")
-	public List<BlogImage> saveFile() {
+	public ResponseEntity<String> saveFile(HttpServletRequest request,
+			HttpServletResponse response, HttpSession httpSession) {
+		JsonFactory jsonFactory = new JsonFactory();
+		Integer imageCount = (Integer) httpSession
+				.getAttribute(CONST_IMAGES_COUNT);
+		BigDecimal imageSize = (BigDecimal) httpSession
+				.getAttribute(CONST_IMAGES_SIZE);
+		if (imageCount == null) {
+			imageCount = 0;
+			imageSize = new BigDecimal(0);
+
+		}
+		final Map<String, Object> retVal = new HashMap<String, Object>();
 		final BlogImage blogImage = new BlogImage();
 		List<BlogImage> imageList = new ArrayList<BlogImage>();
 		imageList.add(blogImage);
-		final HttpServletRequest request = CommonControllerUtils.getRequest();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		List<FileItem> items = null;
-		try {
-			items = upload.parseRequest(request);
-			Iterator<FileItem> iterator = items.iterator();
-			FileItem item = null;
-			final String uploadDir = getUploadDir(request);
-			while (iterator.hasNext()) {
-				item = iterator.next();
-
-				if (!item.isFormField()) {
-					// File file = new File(uploadDir
-					// + String.valueOf(System.currentTimeMillis())
-					// + ".JPG");
-					// item.write(file);
-					blogImage.setSize(item.getSize());
-				} else {
-					try {
-						PropertyUtils.setProperty(blogImage,
-								item.getFieldName(),
-								Long.valueOf(item.getString()));
-					} catch (Exception e) {
-						e.printStackTrace();
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type", "text/plain");
+		responseHeaders.set("charset", "UTF-8");
+		if (imageCount >= 20) {
+			retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+			retVal.put(CONST_RET_ERROR_MSG, CONST_ERRORMSG_OULCOUNT);
+		} else {
+			try {
+				// 增加文件数量
+				imageCount++;
+				items = upload.parseRequest(request);
+				Iterator<FileItem> iterator = items.iterator();
+				FileItem item = null;
+				final String uploadDir = getUploadDir(request);
+				while (iterator.hasNext()) {
+					item = iterator.next();
+					if (!item.isFormField()) {
+						// to-do 判断文件时图片文件 该次上传的文件数量不超过 20张, 判断该次上传文件长度不超过5mb
+						/**
+						 * int emptySize = CONST_MAX_UPLOAD_SIZE.subtract(
+						 * imageSize).intValue(); if (emptySize < 0 || emptySize
+						 * - item.getSize() < 0) { retVal.put(CONST_RET_ERROR,
+						 * Boolean.TRUE); retVal.put(CONST_RET_ERROR_MSG,
+						 * CONST_ERRORMSG_OULSIZE); break; }
+						 **/
+						// 判断文件大小是否超过最大上限
+						if (CONST_MAX_UPLOAD_SIZE.subtract(
+								BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
+							retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+							retVal.put(CONST_RET_ERROR_MSG,
+									CONST_ERRORMSG_OULSIZE);
+							break;
+						}
+						imageSize = imageSize.add(BigDecimal.valueOf(item
+								.getSize()));
+						String fileName = String.valueOf(System
+								.currentTimeMillis()) + item.getName();
+						File file = new File(uploadDir + fileName);
+						blogImage.setName(fileName);
+						blogImage.setShowName(item.getName());
+						blogImage.setSize(item.getSize());
+						item.write(file);
+						blogImageDaoService.saveImage(blogImage);
+					} else if ("tempid".equals(item.getFieldName())) {
+						blogImage.setTempid(Long.valueOf(item.getString()));
+					} else if ("entity".equals(item.getFieldName())) {
+						JsonParser jp = jsonFactory.createJsonParser(item
+								.getString());
+						blogImage.setEntity(mapper.readValue(jp,
+								BlogEntity.class));
 					}
+
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
+		}
+		// 用此类构造字符串
+		StringWriter w = new StringWriter();
+		retVal.put(CONST_RET_IMGLIST, imageList);
+		try {
+			mapper.writeValue(w, retVal);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		return imageList;
+		ResponseEntity<String> responseEntity = new ResponseEntity<String>(
+				w.toString(), responseHeaders, HttpStatus.CREATED);
+		httpSession.setAttribute(CONST_IMAGES_COUNT, imageCount);
+		httpSession.setAttribute(CONST_IMAGES_SIZE, imageSize);
+		return responseEntity;
+	}
+
+	@RequestMapping("/delentity")
+	@ResponseBody
+	public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
+		return null;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping("/saveentity")
+	@ResponseBody
+	public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
+			HttpServletRequest request, HttpServletResponse response) {
+		BlogEntity retVal = null;
+		try {
+			retVal = mapper.readValue(entity, BlogEntity.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		final BlogUser user = new BlogUser();
+
+		retVal.setCreatedate(new Timestamp(Calendar.getInstance()
+				.getTimeInMillis()));
+		user.setId(1L);
+		getBlogEntityService().saveEntity(user, retVal);
+		return retVal;
 	}
 
 	@RequestMapping("/saveimage")
 	@ResponseBody
-	@SuppressWarnings("unchecked")
 	public BlogImage saveImage() {
 		final BlogImage blogImage = new BlogImage();
 		return blogImage;
 	}
+
+	@RequestMapping("/inituploadinfo")
+	@ResponseBody
+	public void initUploadinfo(@ModelAttribute("action") final String action,
+			final HttpServletRequest request, final HttpSession httpSession) {
+		httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
+		httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
+	}
+
+	/**
+	 * 
+	 * @param entityid
+	 * @return
+	 */
+	@RequestMapping("/")
+	public ModelAndView newEntity(
+			@ModelAttribute("entityid") final String entityid) {
+		BlogEntity model = null;
+		if (entityid == null) {
+			model = blogEntityService.getTempEntity(1L);
+		}
+		ModelAndView retVal = new ModelAndView();
+		retVal.setViewName(CONST_ENTITY_PAGE);
+		retVal.getModelMap().put("entity", model);
+		return retVal;
+	}
 }
+// to do 保存图片,删除图片,控制上传窗口的状态.

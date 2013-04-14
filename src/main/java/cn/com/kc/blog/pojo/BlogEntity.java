@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,18 +43,18 @@ public class BlogEntity implements Serializable {
 	@NotNull
 	private Timestamp createdate;
 	@NotNull
-	private Blob content;
-
-	@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
-	@JoinColumn(name = "USER_ID", nullable = false)
-	private BlogUser user;
-
-	@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
-	private Set<BlogComments> comments;
-	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class)
-	private List<BlogCategory> categorys;
-
-	@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
+	@Column(columnDefinition = "BLOB")
+	private String content;
+	/**
+	 * P-all S-friend X-self
+	 */
+	@NotNull
+	private String readprivate;
+	@NotNull
+	private Boolean commentable;
+	@NotNull
+	private Boolean isTemp;
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogImage.class, mappedBy = "entity", cascade = { CascadeType.REMOVE })
 	private List<BlogImage> images;
 
 	public List<BlogImage> getImages() {
@@ -63,6 +64,39 @@ public class BlogEntity implements Serializable {
 	public void setImages(List<BlogImage> images) {
 		this.images = images;
 	}
+
+	public String getReadprivate() {
+		return readprivate;
+	}
+
+	public void setReadprivate(String readprivate) {
+		this.readprivate = readprivate;
+	}
+
+	public Boolean getIsTemp() {
+		return isTemp;
+	}
+
+	public void setIsTemp(Boolean isTemp) {
+		this.isTemp = isTemp;
+	}
+
+	public Boolean getCommentable() {
+		return commentable;
+	}
+
+	public void setCommentable(Boolean commentable) {
+		this.commentable = commentable;
+	}
+
+	@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
+	@JoinColumn(name = "USER_ID", nullable = false)
+	private BlogUser user;
+
+	@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
+	private Set<BlogComments> comments;
+	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class)
+	private List<BlogCategory> categorys;
 
 	public List<BlogCategory> getCategorys() {
 		return categorys;
@@ -104,11 +138,11 @@ public class BlogEntity implements Serializable {
 		this.createdate = createdate;
 	}
 
-	public Blob getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(Blob content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 

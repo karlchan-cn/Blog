@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.Email;
 
 /**
@@ -52,12 +51,10 @@ public class BlogUser implements Serializable {
 	@NotNull
 	private String validateCode;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user")
-	@Cascade(value = { CascadeType.DELETE })
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
 	private Set<BlogEntity> entities;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user")
-	@Cascade(value = { CascadeType.DELETE })
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
 	private Set<BlogComments> comments;
 
 	public Set<BlogComments> getComments() {

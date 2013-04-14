@@ -28,4 +28,6 @@ public interface IBlogEntityService {
 	 * @return entity to be saved
 	 */
 	Serializable saveEntity(final BlogUser user, final BlogEntity entity);
+
+	BlogEntity getTempEntity(final Long userId);
 }
