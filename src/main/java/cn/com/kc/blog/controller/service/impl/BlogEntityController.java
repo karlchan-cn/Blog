@@ -50,7 +50,7 @@ import cn.com.kc.blog.pojo.BlogUser;
 public class BlogEntityController {
 
 	/**
-	 * 
+	 * tet commite
 	 */
 	public static final String CONST_ENTITY_PAGE = "entity";
 	public static final String CONST_IMAGES_COUNT = "image-count";
