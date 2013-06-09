@@ -117,7 +117,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =0);
+	filter: alpha(opacity =         0);
 	opacity: 0;
 }
 </style>
@@ -514,7 +514,19 @@ input[type="file"] {
 								data.submit();
 							},
 							done : function(e, data) {
-							
+								$.each(data.result,
+										function(index, file) {
+											var currentFile = file[0];
+											var tr = $('#tempid_'
+													+ currentFile.tempid);
+											tr.find('.uploadlistsize')
+													.removeClass('fileloading')
+													.text(
+															file.size / 1024
+																	+ 'kb');
+											tr.addClass('warning');
+											tr = null;
+										});
 							}
 						});
 

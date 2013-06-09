@@ -161,21 +161,40 @@ public class BlogEntityController {
 		return CONST_ENTITY_PAGE;
 	}
 
-	@RequestMapping("/savefile")
-	@ResponseBody
-	@SuppressWarnings("unchecked")
-	public ResponseEntity<String> saveFile(HttpServletRequest request,
-			HttpServletResponse response, HttpSession httpSession) {
-		JsonFactory jsonFactory = new JsonFactory();
-		Integer imageCount = (Integer) httpSession
-				.getAttribute(CONST_IMAGES_COUNT);
-		BigDecimal imageSize = (BigDecimal) httpSession
+	/**
+	 * 获取当前上传数量-get current uploaded image count / upload window.
+	 * 
+	 * @param session
+	 *            session对象.
+	 * @return 数量-count
+	 */
+	private Integer getCurrentUploadedCount(HttpSession session) {
+		// 初始化获取当前上传文件总数量
+		Integer imageCount = (Integer) session.getAttribute(CONST_IMAGES_COUNT);
+		BigDecimal imageSize = (BigDecimal) session
 				.getAttribute(CONST_IMAGES_SIZE);
 		if (imageCount == null) {
 			imageCount = 0;
 			imageSize = new BigDecimal(0);
 
 		}
+		return imageCount;
+	}
+
+	private void setCurrentUploadedCount(Integer uploadedCount,
+			HttpSession session) {
+		session.setAttribute(CONST_IMAGES_COUNT, uploadedCount);
+	}
+
+	@RequestMapping("/savefile")
+	@ResponseBody
+	@SuppressWarnings("unchecked")
+	public ResponseEntity<String> saveFile(HttpServletRequest request,
+			HttpServletResponse response, HttpSession httpSession) {
+		 BigDecimal imageSize = null;
+		JsonFactory jsonFactory = new JsonFactory();
+		// 初始化获取当前上传文件总数量
+		Integer uploadedCount = getCurrentUploadedCount(httpSession);
 		final Map<String, Object> retVal = new HashMap<String, Object>();
 		final BlogImage blogImage = new BlogImage();
 		List<BlogImage> imageList = new ArrayList<BlogImage>();
@@ -186,13 +205,14 @@ public class BlogEntityController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type", "text/plain");
 		responseHeaders.set("charset", "UTF-8");
-		if (imageCount >= 20) {
+		// if over 20 images upload, return false-如果上传超过20张,直接返回false.
+		if (uploadedCount >= 20) {
 			retVal.put(CONST_RET_ERROR, Boolean.TRUE);
 			retVal.put(CONST_RET_ERROR_MSG, CONST_ERRORMSG_OULCOUNT);
 		} else {
 			try {
 				// 增加文件数量
-				imageCount++;
+				uploadedCount++;
 				items = upload.parseRequest(request);
 				Iterator<FileItem> iterator = items.iterator();
 				FileItem item = null;
@@ -252,9 +272,24 @@ public class BlogEntityController {
 		}
 		ResponseEntity<String> responseEntity = new ResponseEntity<String>(
 				w.toString(), responseHeaders, HttpStatus.CREATED);
-		httpSession.setAttribute(CONST_IMAGES_COUNT, imageCount);
+
 		httpSession.setAttribute(CONST_IMAGES_SIZE, imageSize);
 		return responseEntity;
+	}
+
+	/**
+	 * 弹出上传窗口时初始化本次上传数量Session信息
+	 * 
+	 * @param action
+	 * @param request
+	 * @param httpSession
+	 */
+	@RequestMapping("/inituploadinfo")
+	@ResponseBody
+	public void initUploadinfo(@ModelAttribute("action") final String action,
+			final HttpServletRequest request, final HttpSession httpSession) {
+		httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
+		httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
 	}
 
 	@RequestMapping("/delentity")
@@ -293,14 +328,6 @@ public class BlogEntityController {
 	public BlogImage saveImage() {
 		final BlogImage blogImage = new BlogImage();
 		return blogImage;
-	}
-
-	@RequestMapping("/inituploadinfo")
-	@ResponseBody
-	public void initUploadinfo(@ModelAttribute("action") final String action,
-			final HttpServletRequest request, final HttpSession httpSession) {
-		httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
-		httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
 	}
 
 	/**

@@ -49,6 +49,8 @@ public class BlogImage implements Serializable {
 	@Transient
 	private Long size;
 	@Transient
+	private String sizeUnit;
+	@Transient
 	private String showName;
 
 	public String getShowName() {
@@ -105,6 +107,14 @@ public class BlogImage implements Serializable {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public String getSizeUnit() {
+		return sizeUnit;
+	}
+
+	public void setSizeUnit(String sizeUnit) {
+		this.sizeUnit = sizeUnit;
 	}
 
 }
