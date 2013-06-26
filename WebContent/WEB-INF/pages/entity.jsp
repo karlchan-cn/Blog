@@ -453,6 +453,7 @@ input[type="file"] {
 				return retVal;
 			}
 		};
+		var pageController = window.pageController;
 		pageController.init();
 		$('#fileupload')
 				.fileupload(

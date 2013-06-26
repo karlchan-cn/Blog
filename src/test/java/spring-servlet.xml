@@ -14,12 +14,15 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
 	<!-- 自动注册 validator conversionService -->
-	<mvc:annotation-driven validator="hibernateBeanValidator"
-		conversion-service="conversion-service">
-	</mvc:annotation-driven>
+	<!-- <mvc:annotation-driven validator="hibernateBeanValidator" conversion-service="conversion-service"> 
+		</mvc:annotation-driven> -->
+	<!-- annotation-driven的所有展开元素 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="order" value="0" />
+	</bean>
 	<!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
 	<bean id="hibernateBeanValidator"
-
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
 		<!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
@@ -27,7 +30,27 @@
 	</bean>
 	<bean id="conversion-service"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean
+				class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<property name="validator" ref="hibernateBeanValidator" />
+			</bean>
+		</property>
+		<property name="messageConverters">
+			<list>
 
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- 开启controller注解支持 -->
 	<!-- 注：如果base-package=cn.javass 则注解事务不起作用 TODO 读源码 -->

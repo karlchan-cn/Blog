@@ -311,6 +311,7 @@ public class BlogEntityController {
 		try {
 			retVal = mapper.readValue(entity, BlogEntity.class);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -322,7 +323,9 @@ public class BlogEntityController {
 		getBlogEntityService().saveEntity(user, retVal);
 		return retVal;
 	}
-
+	public BlogEntity initEditEntity(){
+		return null;
+	}
 	@RequestMapping("/saveimage")
 	@ResponseBody
 	public BlogImage saveImage() {

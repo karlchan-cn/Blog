@@ -22,36 +22,42 @@ import cn.com.kc.blog.pojo.BlogUser;
  */
 @Service("cn.com.kc.blog.bl.service.IBlogEntityService")
 public class BlogEntityServiceImpl implements IBlogEntityService {
-	/**
+/**
 	 * 
 	 */
-	private IBlogEntityDaoService entityDao;
-	/**
+private IBlogEntityDaoService entityDao;
+/**
 	 * 
 	 */
-	private IBlogUserDaoService userDao;
+private IBlogUserDaoService userDao;
 
-	@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
-	public void setUserDao(IBlogUserDaoService userDao) {
-		this.userDao = userDao;
-	}
+@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
+public void setUserDao(IBlogUserDaoService userDao) {
+	this.userDao = userDao;
+}
 
-	@Resource(name = "cn.com.kc.blog.dao.service.IBlogEntityDaoService")
-	public void setEntityDao(final IBlogEntityDaoService newDAO) {
-		this.entityDao = newDAO;
-	}
+@Resource(name = "cn.com.kc.blog.dao.service.IBlogEntityDaoService")
+public void setEntityDao(final IBlogEntityDaoService newDAO) {
+	this.entityDao = newDAO;
+}
 
-	public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
-		// BlogUser user2 = this.userDao.get(user.getId());
-		entity.setUser(user);
-		entity.setId(1l);
-		return entityDao.save(entity);
-	}
+public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
+	// BlogUser user2 = this.userDao.get(user.getId());
+	entity.setUser(user);
+	entity.setId(1l);
+	return entityDao.save(entity);
+}
 
-	public BlogEntity getTempEntity(Long userId) {
-		BlogUser user = new BlogUser();
-		user.setId(userId);
-		final List<BlogEntity> list = this.entityDao.getTempEntity(user);
-		return list.get(0);
+/**
+ * {@inheritDoc}
+ */
+public BlogEntity getTempEntity(Long userId) {
+	BlogUser user = new BlogUser();
+	user.setId(userId);
+	final List<BlogEntity> list = this.entityDao.getTempEntity(user);
+	if (list.size() == 0) {
+
 	}
+	return list.get(0);
+}
 }

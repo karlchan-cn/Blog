@@ -14,26 +14,27 @@ import cn.com.kc.blog.pojo.BlogUser;
  * 
  */
 public class BlogEntityServiceTest extends BootTester {
-	@Test
-	public void saveEntity() {
-		final BlogUser blogUser = new BlogUser();
-		blogUser.setId(1l);
-		final IBlogEntityService blogEntityService = (IBlogEntityService) context
-				.getBean(IBlogEntityService.class.getName());
-		BlogEntity blogEntity = new BlogEntity();
-		Assert.assertNotNull(blogEntityService.saveEntity(blogUser, blogEntity));
-	}
-
-	@Test
-	public void testQueryTempEntity() {
-		try {
-			final IBlogEntityService blogEntityService = (IBlogEntityService) context
+@Test
+public void saveEntity() {
+	final BlogUser blogUser = new BlogUser();
+	blogUser.setId(1l);
+	final IBlogEntityService blogEntityService = (IBlogEntityService) context
 					.getBean(IBlogEntityService.class.getName());
-			blogEntityService.getTempEntity(1l);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+	BlogEntity blogEntity = new BlogEntity();
+	Assert.assertNotNull(blogEntityService.saveEntity(blogUser, blogEntity));
+}
 
+@Test
+public void testQueryTempEntity() {
+	try {
+		final IBlogEntityService blogEntityService = (IBlogEntityService) context
+						.getBean(IBlogEntityService.class.getName());
+		final BlogEntity entity = blogEntityService.getTempEntity(1l);
+		Assert.assertNotNull(entity);
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new RuntimeException(e);
 	}
+
+}
 }
