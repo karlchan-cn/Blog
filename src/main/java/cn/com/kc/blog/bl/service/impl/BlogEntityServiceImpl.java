@@ -56,7 +56,7 @@ public BlogEntity getTempEntity(Long userId) {
 	user.setId(userId);
 	final List<BlogEntity> list = this.entityDao.getTempEntity(user);
 	if (list.size() == 0) {
-
+		return new BlogEntity();
 	}
 	return list.get(0);
 }

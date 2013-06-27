@@ -49,306 +49,308 @@ import cn.com.kc.blog.pojo.BlogUser;
 @RequestMapping("/entity")
 public class BlogEntityController {
 
-	/**
-	 * tet commite
-	 */
-	public static final String CONST_ENTITY_PAGE = "entity";
-	public static final String CONST_IMAGES_COUNT = "image-count";
-	public static final String CONST_IMAGES_SIZE = "image-size";
-	public static final String CONST_RET_ERROR = "error";
-	public static final String CONST_RET_ERROR_MSG = "error-msg";
-	public static final String CONST_RET_IMGLIST = "imagelist";
-	public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张图片。";
-	public static final String CONST_ERRORMSG_OULSIZE = "一次只允许上传5Mb图片。";
-	public static final String CONST_UL_ACTION_INIT = "init";
-	public static final String CONST_UL_ACTION_CLEAR = "clear";
-	public static final BigDecimal CONST_MAX_UPLOAD_SIZE = new BigDecimal(
-			1024 * 1024 * 5);
+/**
+ * tet commite
+ */
+public static final String CONST_ENTITY_PAGE = "entity";
+public static final String CONST_IMAGES_COUNT = "image-count";
+public static final String CONST_IMAGES_SIZE = "image-size";
+public static final String CONST_RET_ERROR = "error";
+public static final String CONST_RET_ERROR_MSG = "error-msg";
+public static final String CONST_RET_IMGLIST = "imagelist";
+public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张图片。";
+public static final String CONST_ERRORMSG_OULSIZE = "一次只允许上传5Mb图片。";
+public static final String CONST_UL_ACTION_INIT = "init";
+public static final String CONST_UL_ACTION_CLEAR = "clear";
+public static final BigDecimal CONST_MAX_UPLOAD_SIZE = new BigDecimal(
+				1024 * 1024 * 5);
 
-	/**
-	 * json mapper
-	 */
-	private static final ObjectMapper mapper = new ObjectMapper();
-	/**
+/**
+ * json mapper
+ */
+private static final ObjectMapper mapper = new ObjectMapper();
+/**
 		 * 
 		 */
-	@Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
-	private IBlogEntityService blogEntityService;
-	@Resource(name = "cn.com.kc.blog.bl.service.IBlogImageService")
-	private IBlogImageService blogImageDaoService;
+@Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
+private IBlogEntityService blogEntityService;
+@Resource(name = "cn.com.kc.blog.bl.service.IBlogImageService")
+private IBlogImageService blogImageDaoService;
 
-	public IBlogImageService getBlogImageDaoService() {
-		return blogImageDaoService;
-	}
+public IBlogImageService getBlogImageDaoService() {
+	return blogImageDaoService;
+}
 
-	public void setBlogImageDaoService(IBlogImageService blogImageDaoService) {
-		this.blogImageDaoService = blogImageDaoService;
-	}
+public void setBlogImageDaoService(IBlogImageService blogImageDaoService) {
+	this.blogImageDaoService = blogImageDaoService;
+}
 
-	/**
+/**
+ * 
+ * @return
+ */
+public IBlogEntityService getBlogEntityService() {
+	return blogEntityService;
+}
+
+/**
+ * 
+ * @param blogEntityService
+ */
+public void setBlogEntityService(final IBlogEntityService blogEntityService) {
+	this.blogEntityService = blogEntityService;
+}
+
+/**
+ * 
+ * @return
+ */
+public IBlogEntityService getUserService() {
+	return blogEntityService;
+}
+
+/**
 	 * 
-	 * @return
 	 */
-	public IBlogEntityService getBlogEntityService() {
-		return blogEntityService;
-	}
+private static String UPLOAD_DIR = null;
 
-	/**
-	 * 
-	 * @param blogEntityService
-	 */
-	public void setBlogEntityService(final IBlogEntityService blogEntityService) {
-		this.blogEntityService = blogEntityService;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public IBlogEntityService getUserService() {
-		return blogEntityService;
-	}
-
-	/**
-	 * 
-	 */
-	private static String UPLOAD_DIR = null;
-
-	/**
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public static String getUploadDir(final HttpServletRequest request) {
-		if (UPLOAD_DIR == null) {
-			UPLOAD_DIR = request.getSession().getServletContext()
-					.getRealPath("/")
-					+ "/WEB-INF/upload/images/";
-			// 初始化下载目录
-			File uploadDir = new File(UPLOAD_DIR);
-			if (!uploadDir.exists()) {
-				uploadDir.mkdirs();
-			}
+/**
+ * 
+ * @param request
+ * @return
+ */
+public static String getUploadDir(final HttpServletRequest request) {
+	if (UPLOAD_DIR == null) {
+		UPLOAD_DIR = request.getSession().getServletContext()
+						.getRealPath("/")
+						+ "/WEB-INF/upload/images/";
+		// 初始化下载目录
+		File uploadDir = new File(UPLOAD_DIR);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdirs();
 		}
-		return UPLOAD_DIR;
 	}
+	return UPLOAD_DIR;
+}
 
-	/**
-	 * 
-	 * @param newblogEntityService
-	 */
-	@Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
-	public void setUserService(final IBlogEntityService newblogEntityService) {
-		this.blogEntityService = newblogEntityService;
+/**
+ * 
+ * @param newblogEntityService
+ */
+@Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
+public void setUserService(final IBlogEntityService newblogEntityService) {
+	this.blogEntityService = newblogEntityService;
+}
+
+@RequestMapping("/create")
+public String createEntity() {
+	ModelAndView modelAndView = new ModelAndView();
+	modelAndView.setViewName(CONST_ENTITY_PAGE);
+	BlogEntity entity = new BlogEntity();
+	modelAndView.getModelMap().put("entity", entity);
+	return CONST_ENTITY_PAGE;
+}
+
+@RequestMapping("/{entityId}/endit")
+public String enditEntity(@PathVariable final String entityId) {
+	return CONST_ENTITY_PAGE;
+}
+
+@RequestMapping("/{entityId}")
+public String showEntity(@PathVariable final String entityId) {
+	return CONST_ENTITY_PAGE;
+}
+
+/**
+ * 获取当前上传数量-get current uploaded image count / upload window.
+ * 
+ * @param session
+ *            session对象.
+ * @return 数量-count
+ */
+private Integer getCurrentUploadedCount(HttpSession session) {
+	// 初始化获取当前上传文件总数量
+	Integer imageCount = (Integer) session.getAttribute(CONST_IMAGES_COUNT);
+	BigDecimal imageSize = (BigDecimal) session
+					.getAttribute(CONST_IMAGES_SIZE);
+	if (imageCount == null) {
+		imageCount = 0;
+		imageSize = new BigDecimal(0);
+
 	}
+	return imageCount;
+}
 
-	@RequestMapping("/create")
-	public String createEntity() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(CONST_ENTITY_PAGE);
-		BlogEntity entity = new BlogEntity();
-		modelAndView.getModelMap().put("entity", entity);
-		return CONST_ENTITY_PAGE;
-	}
+private void setCurrentUploadedCount(Integer uploadedCount,
+				HttpSession session) {
+	session.setAttribute(CONST_IMAGES_COUNT, uploadedCount);
+}
 
-	@RequestMapping("/{entityId}/endit")
-	public String enditEntity(@PathVariable final String entityId) {
-		return CONST_ENTITY_PAGE;
-	}
-
-	@RequestMapping("/{entityId}")
-	public String showEntity(@PathVariable final String entityId) {
-		return CONST_ENTITY_PAGE;
-	}
-
-	/**
-	 * 获取当前上传数量-get current uploaded image count / upload window.
-	 * 
-	 * @param session
-	 *            session对象.
-	 * @return 数量-count
-	 */
-	private Integer getCurrentUploadedCount(HttpSession session) {
-		// 初始化获取当前上传文件总数量
-		Integer imageCount = (Integer) session.getAttribute(CONST_IMAGES_COUNT);
-		BigDecimal imageSize = (BigDecimal) session
-				.getAttribute(CONST_IMAGES_SIZE);
-		if (imageCount == null) {
-			imageCount = 0;
-			imageSize = new BigDecimal(0);
-
-		}
-		return imageCount;
-	}
-
-	private void setCurrentUploadedCount(Integer uploadedCount,
-			HttpSession session) {
-		session.setAttribute(CONST_IMAGES_COUNT, uploadedCount);
-	}
-
-	@RequestMapping("/savefile")
-	@ResponseBody
-	@SuppressWarnings("unchecked")
-	public ResponseEntity<String> saveFile(HttpServletRequest request,
-			HttpServletResponse response, HttpSession httpSession) {
-		 BigDecimal imageSize = null;
-		JsonFactory jsonFactory = new JsonFactory();
-		// 初始化获取当前上传文件总数量
-		Integer uploadedCount = getCurrentUploadedCount(httpSession);
-		final Map<String, Object> retVal = new HashMap<String, Object>();
-		final BlogImage blogImage = new BlogImage();
-		List<BlogImage> imageList = new ArrayList<BlogImage>();
-		imageList.add(blogImage);
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		List<FileItem> items = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type", "text/plain");
-		responseHeaders.set("charset", "UTF-8");
-		// if over 20 images upload, return false-如果上传超过20张,直接返回false.
-		if (uploadedCount >= 20) {
-			retVal.put(CONST_RET_ERROR, Boolean.TRUE);
-			retVal.put(CONST_RET_ERROR_MSG, CONST_ERRORMSG_OULCOUNT);
-		} else {
-			try {
-				// 增加文件数量
-				uploadedCount++;
-				items = upload.parseRequest(request);
-				Iterator<FileItem> iterator = items.iterator();
-				FileItem item = null;
-				final String uploadDir = getUploadDir(request);
-				while (iterator.hasNext()) {
-					item = iterator.next();
-					if (!item.isFormField()) {
-						// to-do 判断文件时图片文件 该次上传的文件数量不超过 20张, 判断该次上传文件长度不超过5mb
-						/**
-						 * int emptySize = CONST_MAX_UPLOAD_SIZE.subtract(
-						 * imageSize).intValue(); if (emptySize < 0 || emptySize
-						 * - item.getSize() < 0) { retVal.put(CONST_RET_ERROR,
-						 * Boolean.TRUE); retVal.put(CONST_RET_ERROR_MSG,
-						 * CONST_ERRORMSG_OULSIZE); break; }
-						 **/
-						// 判断文件大小是否超过最大上限
-						if (CONST_MAX_UPLOAD_SIZE.subtract(
-								BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
-							retVal.put(CONST_RET_ERROR, Boolean.TRUE);
-							retVal.put(CONST_RET_ERROR_MSG,
-									CONST_ERRORMSG_OULSIZE);
-							break;
-						}
-						imageSize = imageSize.add(BigDecimal.valueOf(item
-								.getSize()));
-						String fileName = String.valueOf(System
-								.currentTimeMillis()) + item.getName();
-						File file = new File(uploadDir + fileName);
-						blogImage.setName(fileName);
-						blogImage.setShowName(item.getName());
-						blogImage.setSize(item.getSize());
-						item.write(file);
-						blogImageDaoService.saveImage(blogImage);
-					} else if ("tempid".equals(item.getFieldName())) {
-						blogImage.setTempid(Long.valueOf(item.getString()));
-					} else if ("entity".equals(item.getFieldName())) {
-						JsonParser jp = jsonFactory.createJsonParser(item
-								.getString());
-						blogImage.setEntity(mapper.readValue(jp,
-								BlogEntity.class));
+@RequestMapping("/savefile")
+@ResponseBody
+@SuppressWarnings("unchecked")
+public ResponseEntity<String> saveFile(HttpServletRequest request,
+				HttpServletResponse response, HttpSession httpSession) {
+	BigDecimal imageSize = null;
+	JsonFactory jsonFactory = new JsonFactory();
+	// 初始化获取当前上传文件总数量
+	Integer uploadedCount = getCurrentUploadedCount(httpSession);
+	final Map<String, Object> retVal = new HashMap<String, Object>();
+	final BlogImage blogImage = new BlogImage();
+	List<BlogImage> imageList = new ArrayList<BlogImage>();
+	imageList.add(blogImage);
+	DiskFileItemFactory factory = new DiskFileItemFactory();
+	ServletFileUpload upload = new ServletFileUpload(factory);
+	List<FileItem> items = null;
+	HttpHeaders responseHeaders = new HttpHeaders();
+	responseHeaders.set("Content-Type", "text/plain");
+	responseHeaders.set("charset", "UTF-8");
+	// if over 20 images upload, return false-如果上传超过20张,直接返回false.
+	if (uploadedCount >= 20) {
+		retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+		retVal.put(CONST_RET_ERROR_MSG, CONST_ERRORMSG_OULCOUNT);
+	} else {
+		try {
+			// 增加文件数量
+			uploadedCount++;
+			items = upload.parseRequest(request);
+			Iterator<FileItem> iterator = items.iterator();
+			FileItem item = null;
+			final String uploadDir = getUploadDir(request);
+			while (iterator.hasNext()) {
+				item = iterator.next();
+				if (!item.isFormField()) {
+					// to-do 判断文件时图片文件 该次上传的文件数量不超过 20张, 判断该次上传文件长度不超过5mb
+					/**
+					 * int emptySize = CONST_MAX_UPLOAD_SIZE.subtract(
+					 * imageSize).intValue(); if (emptySize < 0 || emptySize -
+					 * item.getSize() < 0) { retVal.put(CONST_RET_ERROR,
+					 * Boolean.TRUE); retVal.put(CONST_RET_ERROR_MSG,
+					 * CONST_ERRORMSG_OULSIZE); break; }
+					 **/
+					// 判断文件大小是否超过最大上限
+					if (CONST_MAX_UPLOAD_SIZE.subtract(
+									BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
+						retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+						retVal.put(CONST_RET_ERROR_MSG,
+										CONST_ERRORMSG_OULSIZE);
+						break;
 					}
-
+					imageSize = imageSize.add(BigDecimal.valueOf(item
+									.getSize()));
+					String fileName = String.valueOf(System
+									.currentTimeMillis()) + item.getName();
+					File file = new File(uploadDir + fileName);
+					blogImage.setName(fileName);
+					blogImage.setShowName(item.getName());
+					blogImage.setSize(item.getSize());
+					item.write(file);
+					blogImageDaoService.saveImage(blogImage);
+				} else if ("tempid".equals(item.getFieldName())) {
+					blogImage.setTempid(Long.valueOf(item.getString()));
+				} else if ("entity".equals(item.getFieldName())) {
+					JsonParser jp = jsonFactory.createJsonParser(item
+									.getString());
+					blogImage.setEntity(mapper.readValue(jp,
+									BlogEntity.class));
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
+
 			}
-		}
-		// 用此类构造字符串
-		StringWriter w = new StringWriter();
-		retVal.put(CONST_RET_IMGLIST, imageList);
-		try {
-			mapper.writeValue(w, retVal);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		ResponseEntity<String> responseEntity = new ResponseEntity<String>(
-				w.toString(), responseHeaders, HttpStatus.CREATED);
-
-		httpSession.setAttribute(CONST_IMAGES_SIZE, imageSize);
-		return responseEntity;
 	}
-
-	/**
-	 * 弹出上传窗口时初始化本次上传数量Session信息
-	 * 
-	 * @param action
-	 * @param request
-	 * @param httpSession
-	 */
-	@RequestMapping("/inituploadinfo")
-	@ResponseBody
-	public void initUploadinfo(@ModelAttribute("action") final String action,
-			final HttpServletRequest request, final HttpSession httpSession) {
-		httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
-		httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
+	// 用此类构造字符串
+	StringWriter w = new StringWriter();
+	retVal.put(CONST_RET_IMGLIST, imageList);
+	try {
+		mapper.writeValue(w, retVal);
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new RuntimeException(e);
 	}
+	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
+					w.toString(), responseHeaders, HttpStatus.CREATED);
 
-	@RequestMapping("/delentity")
-	@ResponseBody
-	public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
-		return null;
-	}
+	httpSession.setAttribute(CONST_IMAGES_SIZE, imageSize);
+	return responseEntity;
+}
 
-	/**
-	 * 
-	 * @return
-	 */
+/**
+ * 弹出上传窗口时初始化本次上传数量Session信息
+ * 
+ * @param action
+ * @param request
+ * @param httpSession
+ */
+@RequestMapping("/inituploadinfo")
+@ResponseBody
+public void initUploadinfo(@ModelAttribute("action") final String action,
+				final HttpServletRequest request, final HttpSession httpSession) {
+	httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
+	httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
+}
 
-	@RequestMapping("/saveentity")
-	@ResponseBody
-	public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
-			HttpServletRequest request, HttpServletResponse response) {
-		BlogEntity retVal = null;
-		try {
-			retVal = mapper.readValue(entity, BlogEntity.class);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		final BlogUser user = new BlogUser();
+@RequestMapping("/delentity")
+@ResponseBody
+public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
+	return null;
+}
 
-		retVal.setCreatedate(new Timestamp(Calendar.getInstance()
-				.getTimeInMillis()));
-		user.setId(1L);
-		getBlogEntityService().saveEntity(user, retVal);
-		return retVal;
-	}
-	public BlogEntity initEditEntity(){
-		return null;
-	}
-	@RequestMapping("/saveimage")
-	@ResponseBody
-	public BlogImage saveImage() {
-		final BlogImage blogImage = new BlogImage();
-		return blogImage;
-	}
+/**
+ * 
+ * @return
+ */
 
-	/**
-	 * 
-	 * @param entityid
-	 * @return
-	 */
-	@RequestMapping("/")
-	public ModelAndView newEntity(
-			@ModelAttribute("entityid") final String entityid) {
-		BlogEntity model = null;
-		if (entityid == null) {
-			model = blogEntityService.getTempEntity(1L);
-		}
-		ModelAndView retVal = new ModelAndView();
-		retVal.setViewName(CONST_ENTITY_PAGE);
-		retVal.getModelMap().put("entity", model);
-		return retVal;
+@RequestMapping("/saveentity")
+@ResponseBody
+public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
+				HttpServletRequest request, HttpServletResponse response) {
+	BlogEntity retVal = null;
+	try {
+		retVal = mapper.readValue(entity, BlogEntity.class);
+	} catch (Exception e) {
+
+		e.printStackTrace();
+		throw new RuntimeException(e);
 	}
+	final BlogUser user = new BlogUser();
+
+	retVal.setCreatedate(new Timestamp(Calendar.getInstance()
+					.getTimeInMillis()));
+	user.setId(1L);
+	getBlogEntityService().saveEntity(user, retVal);
+	return retVal;
+}
+
+public BlogEntity initEditEntity() {
+	return null;
+}
+
+@RequestMapping("/saveimage")
+@ResponseBody
+public BlogImage saveImage() {
+	final BlogImage blogImage = new BlogImage();
+	return blogImage;
+}
+
+/**
+ * 
+ * @param entityid
+ * @return
+ */
+@RequestMapping("/")
+public ModelAndView newEntity(
+				@ModelAttribute("entityid") final String entityid) {
+	BlogEntity model = null;
+	if (entityid == null) {
+		model = blogEntityService.getTempEntity(1L);
+	}
+	ModelAndView retVal = new ModelAndView();
+	retVal.setViewName(CONST_ENTITY_PAGE);
+	retVal.getModelMap().put("entity", model);
+	return retVal;
+}
 }
 // to do 保存图片,删除图片,控制上传窗口的状态.
