@@ -11,6 +11,7 @@
 <!-- 导入通用的css ico --><%@ include file="header.jsp"%>
 <style type="text/css">
 body {
+	font: Helvetica, ​Arial, ​sans-serif 12px;
 	padding-top: 20px;
 }
 
@@ -117,7 +118,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =         0);
+	filter: alpha(opacity =             0);
 	opacity: 0;
 }
 </style>
