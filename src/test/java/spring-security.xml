@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<http auto-config="true">
 		<intercept-url pattern="/entity/create" access="ROLE_USER" />
+		<form-login login-page="/user/login"
+			authentication-failure-url="/user/login?a=1234" />
+		<!-- authentication-failure-handler-ref="" -->
 	</http>
 
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="admin" password="123456" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+	<beans:bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<!-- <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
+			/> -->
+	</beans:bean>
+	
+	<authentication-manager alias="authenticationManager">
+		<!-- <authentication-provider> <user-service> <user name="admin" password="123456" 
+			authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
+		<authentication-provider
+			ref="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" />
 	</authentication-manager>
-
+	<beans:bean
+		id="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" class="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl">
+	</beans:bean>
 </beans:beans>

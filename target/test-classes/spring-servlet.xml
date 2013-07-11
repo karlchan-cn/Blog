@@ -17,6 +17,7 @@
 	<!-- <mvc:annotation-driven validator="hibernateBeanValidator" conversion-service="conversion-service"> 
 		</mvc:annotation-driven> -->
 	<!-- annotation-driven的所有展开元素 -->
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="order" value="0" />
