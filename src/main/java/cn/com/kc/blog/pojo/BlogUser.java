@@ -5,6 +5,7 @@ package cn.com.kc.blog.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,125 +25,135 @@ import org.hibernate.validator.constraints.Email;
  * 
  */
 @Entity
-@Table(name = "BLOG_USER")
+@Table(name = "USER")
 public class BlogUser implements Serializable {
-	/**
+/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2467016020275506982L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@NotNull(message = "{username.illegal}")
-	private String userName;
-	@NotNull
-	private String showName;
-	@NotNull
-	private String password;
-	@NotNull
-	@Email
-	private String email;
-	@NotNull
-	private Timestamp createTime;
-	@NotNull
-	private String address;
-	@NotNull
-	private String phoneNumber;
-	@NotNull
-	private String validateCode;
+private static final long serialVersionUID = -2467016020275506982L;
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
+@NotNull(message = "{username.illegal}")
+private String userName;
+@NotNull
+private String showName;
+@NotNull
+private String password;
+@NotNull
+@Email
+private String email;
+@NotNull
+private Timestamp createTime;
+@NotNull
+private String address;
+@NotNull
+private String phoneNumber;
+@NotNull
+private String validateCode;
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private List<BlogAuthorities> authorities;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-	private Set<BlogEntity> entities;
+public List<BlogAuthorities> getAuthorities() {
+	return authorities;
+}
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-	private Set<BlogComments> comments;
+public void setAuthorities(List<BlogAuthorities> authorities) {
+	this.authorities = authorities;
+}
 
-	public Set<BlogComments> getComments() {
-		return comments;
-	}
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private Set<BlogEntity> entities;
 
-	public void setComments(Set<BlogComments> comments) {
-		this.comments = comments;
-	}
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private Set<BlogComments> comments;
 
-	public Set<BlogEntity> getEntities() {
-		return entities;
-	}
+public Set<BlogComments> getComments() {
+	return comments;
+}
 
-	public void setEntities(Set<BlogEntity> entities) {
-		this.entities = entities;
-	}
+public void setComments(Set<BlogComments> comments) {
+	this.comments = comments;
+}
 
-	public Long getId() {
-		return id;
-	}
+public Set<BlogEntity> getEntities() {
+	return entities;
+}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+public void setEntities(Set<BlogEntity> entities) {
+	this.entities = entities;
+}
 
-	public String getUserName() {
-		return userName;
-	}
+public Long getId() {
+	return id;
+}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+public void setId(Long id) {
+	this.id = id;
+}
 
-	public String getShowName() {
-		return showName;
-	}
+public String getUserName() {
+	return userName;
+}
 
-	public void setShowName(String showName) {
-		this.showName = showName;
-	}
+public void setUserName(String userName) {
+	this.userName = userName;
+}
 
-	public String getPassword() {
-		return password;
-	}
+public String getShowName() {
+	return showName;
+}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+public void setShowName(String showName) {
+	this.showName = showName;
+}
 
-	public String getEmail() {
-		return email;
-	}
+public String getPassword() {
+	return password;
+}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+public void setPassword(String password) {
+	this.password = password;
+}
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+public String getEmail() {
+	return email;
+}
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+public void setEmail(String email) {
+	this.email = email;
+}
 
-	public String getAddress() {
-		return address;
-	}
+public Timestamp getCreateTime() {
+	return createTime;
+}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+public void setCreateTime(Timestamp createTime) {
+	this.createTime = createTime;
+}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+public String getAddress() {
+	return address;
+}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+public void setAddress(String address) {
+	this.address = address;
+}
 
-	public String getValidateCode() {
-		return validateCode;
-	}
+public String getPhoneNumber() {
+	return phoneNumber;
+}
 
-	public void setValidateCode(String validateCode) {
-		this.validateCode = validateCode;
-	}
+public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+}
+
+public String getValidateCode() {
+	return validateCode;
+}
+
+public void setValidateCode(String validateCode) {
+	this.validateCode = validateCode;
+}
 
 }
