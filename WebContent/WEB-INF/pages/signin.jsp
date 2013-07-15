@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="org.springframework.security.web.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,12 +45,18 @@ body {
 </head>
 <body>
 	<div class="container">
-		<form class="form-signin" action="/Blog/j_spring_security_check" method="POST">
+
+		<form class="form-signin" action="/Blog/j_spring_security_check"
+			method="POST">
 			<h4 class="form-signin-heading lead muted">请登陆</h4>
-			<input type="text" name="j_username" class="input-block-level" placeholder="用户名"><input
-				type="password" name="j_password" class="input-block-level" placeholder="密码">
-			<label class="checkbox"> <input type="checkbox"
-				value="remember-me">记住我
+			<span style="color: red">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
+				<!--  <%=session
+					.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION)%>
+					-->
+			</span> <input type="text" name="j_username" class="input-block-level"
+				placeholder="用户名"><input type="password" name="j_password"
+				class="input-block-level" placeholder="密码"> <label
+				class="checkbox"> <input type="checkbox" value="remember-me">记住我
 			</label>
 			<button class="btn btn-normal btn-primary" type="submit">登陆
 			</button>

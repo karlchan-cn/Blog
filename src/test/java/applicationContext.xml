@@ -23,8 +23,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${connection.driver_class}"></property>
-		<property name="url"
-			value="${connection.url}"></property>
+		<property name="url" value="${connection.url}"></property>
 		<property name="username" value="${connection.username}"></property>
 		<property name="password" value="${connection.password}"></property>
 	</bean>
@@ -88,11 +87,14 @@
 			<list>
 				<!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找 -->
 				<value>classpath:validatormessage</value>
+				<value>classpath:messages_zh_CN</value>
 			</list>
 		</property>
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="cacheSeconds" value="60" />
+		<!--<property name="defaultEncoding" value="UTF-8" /> <property name="cacheSeconds" 
+			value="60" /> -->
 	</bean>
+	<bean id="localeResolver"
+	class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
 
 	<!-- 声明一个Spring提供的JPA事务管理器，传入的参数是Spring中的实体管理器工厂 -->
 	<!-- <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 

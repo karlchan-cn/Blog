@@ -15,19 +15,23 @@
 		<!-- authentication-failure-handler-ref="" -->
 	</http>
 
-	<!--  <beans:bean id="authenticationFilter"
-		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-		<beans:property name="authenticationManager" ref="authenticationManager" />
-		 <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
-			/> 
-	</beans:bean>-->
+	<!-- <beans:bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"> 
+		<beans:property name="authenticationManager" ref="authenticationManager" 
+		/> <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
+		/> </beans:bean> -->
 
 	<authentication-manager alias="authenticationManager">
-		<!-- <authentication-provider> <user-service> <user name="admin" password="123456" 
-			authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
-		<authentication-provider
-			ref="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" />
+		<authentication-provider user-service-ref='jdbcUserDetailsService' />
 	</authentication-manager>
-	<!-- <beans:bean id="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" 
-		class="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl"> </beans:bean> -->
+
+	<beans:bean id="jdbcUserDetailsService"
+		class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<!-- <authentication-manager alias="authenticationManager"> <authentication-provider> 
+		<user-service> <user name="admin" password="123456" authorities="ROLE_USER" 
+		/> </user-service> </authentication-provider> <authentication-provider ref="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" 
+		/> </authentication-manager> -->
+
 </beans:beans>
