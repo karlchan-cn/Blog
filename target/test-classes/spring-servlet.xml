@@ -31,27 +31,43 @@
 	</bean>
 	<bean id="conversion-service"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="webBindingInitializer">
-			<bean
-				class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-				<property name="validator" ref="hibernateBeanValidator" />
-			</bean>
-		</property>
 		<property name="messageConverters">
 			<list>
-
-				<bean
-					class="org.springframework.http.converter.StringHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
-				<bean
-					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
-				<bean
-					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<ref bean="byteArray_hmc" />
+				<ref bean="string_hmc" />
+				<ref bean="resource_hmc" />
+				<ref bean="source_hmc" />
+				<ref bean="xmlAwareForm_hmc" />
+				<ref bean="jaxb2RootElement_hmc" />
+				<ref bean="jackson_hmc" />
 			</list>
 		</property>
 	</bean>
+	<bean id="byteArray_hmc"
+		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="string_hmc"
+		class="org.springframework.http.converter.StringHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="resource_hmc"
+		class="org.springframework.http.converter.ResourceHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="source_hmc"
+		class="org.springframework.http.converter.xml.SourceHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="xmlAwareForm_hmc"
+		class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="jaxb2RootElement_hmc"
+		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" /><!-- 
+		处理.. -->
+	<bean id="jackson_hmc"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" /><!-- 
+		处理json -->
+
 
 	<!-- 开启controller注解支持 -->
 	<!-- 注：如果base-package=cn.javass 则注解事务不起作用 TODO 读源码 -->
@@ -125,20 +141,14 @@
 
 
 	<!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
-	<bean id="defaultViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:order="3">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="contentType" value="text/html" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	<!-- <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:order="3"> <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+		/> <property name="contentType" value="text/html" /> <property name="prefix" 
+		value="/WEB-INF/jsp/" /> <property name="suffix" value=".jsp" /> </bean> -->
 
 	<!-- json view -->
 	<bean id="defaultJsonView"
 		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-
 	<!-- 文件上传相关 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 		<property name="maxUploadSize" value="100000"/> </bean> -->
 

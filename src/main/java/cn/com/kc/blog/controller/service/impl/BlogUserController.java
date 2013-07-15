@@ -3,8 +3,19 @@
  */
 package cn.com.kc.blog.controller.service.impl;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
+
 import javax.annotation.Resource;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
+import cn.com.kc.blog.common.util.CommonControllerUtils;
 import cn.com.kc.blog.pojo.BlogUser;
+
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @author chenjinlong2
@@ -22,43 +39,111 @@ import cn.com.kc.blog.pojo.BlogUser;
 @Controller(value = "cn.com.kc.blog.controller.service.impl.BlogUserController")
 @RequestMapping("/user")
 public class BlogUserController {
-	private IBlogUserService userService;
 
-	public IBlogUserService getUserService() {
-		System.out.println("");
-		return userService;
-	}
+private IBlogUserService userService;
 
-	@Resource(name = "cn.com.kc.blog.bl.service.IBlogUserService")
-	public void setUserService(final IBlogUserService userService) {
-		this.userService = userService;
-	}
+private CaptchaService captchaService;
+/**
+ * content Type represent image.
+ */
+private static final String IMAGE_CONTENT_TYPE = "image/jpeg";
 
-	@RequestMapping("/validate")
-	@ResponseBody
-	public String validateUser(
-			@Validated @ModelAttribute("user") final BlogUser user,
-			final BindingResult result) {
-		return result.toString();
-	}
+/**
+ * 
+ * @return
+ */
+public CaptchaService getCaptchaService() {
+	return captchaService;
+}
 
-	@RequestMapping(value = { "/login" })
-	public String signin() {
-		return "signin";
-	}
+/**
+ * 
+ * @param captchaService
+ */
+@Resource(name = "jcaptchaService")
+public void setCaptchaService(CaptchaService captchaService) {
+	this.captchaService = captchaService;
+}
 
-	@RequestMapping(value = { "/register" })
-	public String register() {
-		return "register";
-	}
+public IBlogUserService getUserService() {
+	System.out.println("");
+	return userService;
+}
 
-	@RequestMapping(value = { "/adduser" })
-	public void saveUser(
-			@Validated @ModelAttribute("user") final BlogUser user,
-			final BindingResult result) {
-		if (result.getErrorCount() > 0) {
-			return;
+@Resource(name = "cn.com.kc.blog.bl.service.IBlogUserService")
+public void setUserService(final IBlogUserService userService) {
+	this.userService = userService;
+}
+
+@RequestMapping("/validate")
+@ResponseBody
+public String validateUser(
+				@Validated @ModelAttribute("user") final BlogUser user,
+				final BindingResult result) {
+	return result.toString();
+}
+
+@RequestMapping(produces = MediaType.IMAGE_JPEG_VALUE, value = { "/securitycode" })
+@ResponseBody
+public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequest,
+				HttpServletResponse httpServletResponse, HttpSession httpSession) {
+	byte[] captchaChallengeAsJpeg = null;
+	// the output stream to render the captcha image as jpeg into
+	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+	ResponseEntity<byte[]> responseEntity = null;
+	try {
+		try {
+			// get the session id that will identify the generated captcha.
+			// the same id must be used to validate the response, the session id
+			// is
+			// a good candidate!
+			String captchaId = httpServletRequest.getSession().getId();
+			// call the ImageCaptchaService getChallenge method
+			BufferedImage challenge =
+							(BufferedImage) captchaService.getChallengeForID(captchaId,
+											httpServletRequest.getLocale());
+
+			// a jpeg encoder
+			JPEGImageEncoder jpegEncoder =
+							JPEGCodec.createJPEGEncoder(jpegOutputStream);
+			jpegEncoder.encode(challenge);
+		} catch (IllegalArgumentException e) {
+			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		} catch (CaptchaServiceException e) {
+			httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return null;
 		}
-		this.userService.saveUser(user);
+
+		// final String codeImageContent =
+		// Arrays.toString(jpegOutputStream.toByteArray());
+		responseEntity = new ResponseEntity<byte[]>(
+						jpegOutputStream.toByteArray(),
+						CommonControllerUtils.getHttpHeadersByType(MediaType.IMAGE_JPEG_VALUE),
+						HttpStatus.CREATED);
+		return responseEntity;
+	} catch (Exception e) {
+		throw new RuntimeException("生成验证码报错!");
 	}
+}
+
+@RequestMapping(value = { "/login" })
+public String signin() {
+	return "signin";
+}
+
+@RequestMapping(value = { "/register" })
+public String register() {
+	return "register";
+}
+
+@RequestMapping(value = { "/adduser" })
+public void saveUser(
+				@Validated @ModelAttribute("user") final BlogUser user,
+				final BindingResult result) {
+	if (result.getErrorCount() > 0) {
+		return;
+	}
+	this.userService.saveUser(user);
+}
 }

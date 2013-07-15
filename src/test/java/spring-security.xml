@@ -8,26 +8,47 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<http pattern="/user/login*" security="none" />
-	<http auto-config="true">
+
+	<http entry-point-ref="authenticationEntryPoint">
 		<intercept-url pattern="/entity/create" access="ROLE_USER" />
-		<form-login login-page="/user/login"
-			authentication-failure-url="/user/login?a=1234" />
+		<!-- <form-login login-page="/user/login" authentication-failure-url="/user/login?a=1234" 
+			/> -->
+		<custom-filter ref="securityCodeUsernamePasswordAuthenticationFilter"
+			position="FORM_LOGIN_FILTER" />
 		<!-- authentication-failure-handler-ref="" -->
 	</http>
 
-	<!--  <beans:bean id="authenticationFilter"
-		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-		<beans:property name="authenticationManager" ref="authenticationManager" />
-		 <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
-			/> 
-	</beans:bean>-->
-
+	<!-- <beans:bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"> 
+		<beans:property name="authenticationManager" ref="authenticationManager" 
+		/> <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
+		/> </beans:bean> -->
 	<authentication-manager alias="authenticationManager">
 		<!-- <authentication-provider> <user-service> <user name="admin" password="123456" 
 			authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
 		<authentication-provider
 			ref="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" />
 	</authentication-manager>
-	<!-- <beans:bean id="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" 
-		class="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl"> </beans:bean> -->
+
+	<beans:bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/user/login" />
+	</beans:bean>
+
+	<beans:bean id="securityCodeUsernamePasswordAuthenticationFilter"
+		class="cn.com.kc.blog.userauthenfilter.impl.SecurityCodeUsernamePasswordAuthenticationFilter">
+		<!-- <beans:property name="filterProcessesUrl" value="/logon"></beans:property> -->
+		<beans:property name="authenticationSuccessHandler"
+			ref="loginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationFailureHandler"
+			ref="simpleUrlAuthenticationFailureHandler"></beans:property>
+		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+	</beans:bean>
+	<beans:bean id="loginLogAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/"></beans:property>
+	</beans:bean>
+	<beans:bean id="simpleUrlAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/login"></beans:property>
+	</beans:bean>
 </beans:beans>
