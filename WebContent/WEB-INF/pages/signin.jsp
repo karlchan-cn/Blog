@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="org.springframework.security.web.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@ body {
 }
 
 .form-signin {
-	max-width: 400px;
+	max-width: 300px;
 	padding: 19px 29px 29px;
 	margin: 0 auto 20px;
 	background-color: #fff;
@@ -30,106 +31,36 @@ body {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
 
+.form-signin .form-signin-heading,.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
 .form-signin input[type="text"],.form-signin input[type="password"] {
-	font-size: 14px;
-}
-
-.form-horizontal .control-group {
-	margin-bottom: 5px;
-}
-
-.form-horizontal .control-group .controls img {
-	height: 50px;
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
 }
 </style>
 </head>
 <body>
 	<div class="container">
-		<!-- 
+
 		<form class="form-signin" action="/Blog/j_spring_security_check"
 			method="POST">
 			<h4 class="form-signin-heading lead muted">请登陆</h4>
-			<input type="text" name="j_username" class="input-block-level"
+			<span style="color: red">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
+				<!--  <%=session
+					.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION)%>
+					-->
+			</span> <input type="text" name="j_username" class="input-block-level"
 				placeholder="用户名"><input type="password" name="j_password"
-				class="input-block-level" placeholder="密码"> <img
-				src="/Blog/user/securitycode"> <input type="password"
-				name="j_password" class="input-block-level" placeholder="请输入上图中的字母">
-			<label class="checkbox"> <input type="checkbox"
-				value="remember-me">记住我
+				class="input-block-level" placeholder="密码"> <label
+				class="checkbox"> <input type="checkbox" value="remember-me">记住我
 			</label>
 			<button class="btn btn-normal btn-primary" type="submit">登陆
 			</button>
 		</form>
-		 -->
-		<form class="form-signin form-horizontal"
-			action="/Blog/j_spring_security_check" method="POST">
-			<h2 class="form-signin-heading">请登陆</h2>
-			<div class="control-group">
-				<label class="control-label" for="j_username">用户名</label>
-				<div class="controls">
-					<input type="text" name="j_username" id="j_username">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="j_password">密码</label>
-				<div class="controls">
-					<input type="password" id="j_password" name="j_password">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<img src="/Blog/user/securitycode">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label muted" for="securitycode">请输入上图中的字母</label>
-				<div class="controls">
-					<input type="text" id="securitycode" name="securitycode">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<label class="checkbox"> <input type="checkbox">
-						记住我
-					</label>
-					<button type="submit" class="btn">登陆</button>
-				</div>
-			</div>
-		</form>
-		<!-- 
-		<form class="form-horizontal">
-			<div class="control-group">
-				<label class="control-label" for="j_username">用户名</label>
-				<div class="controls">
-					<input type="text" name="j_username" id="j_username"
-						placeholder="Email">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="j_password">密码</label>
-				<div class="controls">
-					<input type="password" id="j_password" name="j_password"
-						placeholder="Password">
-				</div>
-			</div>
-			<div class="control-group">
-				<img src="/Blog/user/securitycode">
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="securitycode">请输入上图中的字母</label>
-				<div class="controls">
-					<input type="text" id="securitycode" name="securitycode">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<label class="checkbox"> <input type="checkbox">
-						记住我
-					</label>
-					<button type="submit" class="btn">登陆</button>
-				</div>
-			</div>
-		</form> -->
 	</div>
 </body>
 <!-- 导入通用js  -->
