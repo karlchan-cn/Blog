@@ -38,7 +38,7 @@ body {
 	margin-bottom: 5px;
 }
 
-.form-horizontal .control-group .controls img {
+.form-horizontal .control-group .control-label img {
 	height: 50px;
 }
 </style>
@@ -65,6 +65,12 @@ body {
 			action="/Blog/j_spring_security_check" method="POST">
 			<h2 class="form-signin-heading">请登陆</h2>
 			<div class="control-group">
+				<label class="controls text-error" for="errormsg">
+				${requestScope.SPRING_SECURITY_LAST_EXCEPTION}
+				<!-- ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message} -->
+				</label>
+			</div>
+			<div class="control-group">
 				<label class="control-label" for="j_username">用户名</label>
 				<div class="controls">
 					<input type="text" name="j_username" id="j_username">
@@ -77,8 +83,9 @@ body {
 				</div>
 			</div>
 			<div class="control-group">
+			<label class="control-label" ><img src="/Blog/user/securitycode"></label>
 				<div class="controls">
-					<img src="/Blog/user/securitycode">
+					
 				</div>
 			</div>
 			<div class="control-group">

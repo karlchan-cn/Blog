@@ -5,10 +5,8 @@ package cn.com.kc.blog.controller.service.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.util.Arrays;
 
 import javax.annotation.Resource;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -114,9 +114,6 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 			httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return null;
 		}
-
-		// final String codeImageContent =
-		// Arrays.toString(jpegOutputStream.toByteArray());
 		responseEntity = new ResponseEntity<byte[]>(
 						jpegOutputStream.toByteArray(),
 						CommonControllerUtils.getHttpHeadersByType(MediaType.IMAGE_JPEG_VALUE),
@@ -128,7 +125,18 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 }
 
 @RequestMapping(value = { "/login" })
-public String signin() {
+public String signin(HttpSession session, HttpServletRequest httpServletRequest) {
+	//security validate exception message key stored in session.
+	final String excpetionSessionKey  = AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY;
+	//get the expcetion.
+	final AuthenticationServiceException expception = ((AuthenticationServiceException) session
+					.getAttribute(excpetionSessionKey));
+	if(expception != null){
+		//set the message in request,remove exception stored in Session
+		final String message = expception.getMessage();
+		session.removeAttribute(excpetionSessionKey);
+		httpServletRequest.setAttribute(excpetionSessionKey, message);
+	}
 	return "signin";
 }
 

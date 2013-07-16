@@ -49,6 +49,6 @@
 	</beans:bean>
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/login"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/user/login"></beans:property>
 	</beans:bean>
 </beans:beans>
