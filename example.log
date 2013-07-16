@@ -24,7 +24,7 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'hibernateBeanValidator'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'hibernateBeanValidator'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'hibernateBeanValidator' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'hibernateBeanValidator' to allow for resolvsadfsadfing potential circular references
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'messageSource'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'hibernateBeanValidator'
 INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.2.0.Final
