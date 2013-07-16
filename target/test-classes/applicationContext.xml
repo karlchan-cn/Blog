@@ -80,6 +80,7 @@
 		</property>
 	</bean>
 
+
 	<!-- 国际化的消息资源文件 -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -93,8 +94,18 @@
 		<!--<property name="defaultEncoding" value="UTF-8" /> <property name="cacheSeconds" 
 			value="60" /> -->
 	</bean>
+	
 	<bean id="localeResolver"
 	class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+	<!-- Jcaptcha相关的配置 -->
+	<bean id="jcaptchaService"
+		class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
+		<property name="captchaEngine">
+			<bean class="cn.com.kc.blog.userauthenfilter.impl.GMailEngine" />
+		</property>
+		<!-- 默认生成的图片180秒过期 , 可另行设置 <property name="minGuarantedStorageDelayInSeconds" 
+			value="180" /> -->
+	</bean>
 
 	<!-- 声明一个Spring提供的JPA事务管理器，传入的参数是Spring中的实体管理器工厂 -->
 	<!-- <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 
