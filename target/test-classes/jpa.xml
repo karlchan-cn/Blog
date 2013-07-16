@@ -15,7 +15,7 @@
     <bean
         class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<!-- 利用Spring的实体管理器工厂来创建JPA实体管理器 -->
+	<!-- 利用Spring的实体管理器工厂来创建JPA实体管理器 -->  
     <bean id="entityManagerFactory"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
