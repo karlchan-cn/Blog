@@ -11,9 +11,17 @@ import cn.com.kc.blog.pojo.BlogUser;
  * 
  */
 public interface IBlogUserDaoService extends IBaseDao<BlogUser, Long> {
-	/**
-	 * Bean name;
-	 */
-	String BEAN_NAME = IBlogUserDaoService.class.getName();
+/**
+ * Bean name;
+ */
+String BEAN_NAME = IBlogUserDaoService.class.getName();
 
+/**
+ * get user according to the parameter username
+ * 
+ * @param username
+ *            user's name
+ * @return specified user
+ */
+BlogUser getUserByUsername(final String username);
 }

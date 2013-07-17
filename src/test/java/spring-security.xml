@@ -8,6 +8,7 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<http pattern="/user/login*" security="none" />
+	<http pattern="*/assets/*" security="none" />
 
 	<http entry-point-ref="authenticationEntryPoint">
 		<intercept-url pattern="/entity/create" access="ROLE_USER" />
