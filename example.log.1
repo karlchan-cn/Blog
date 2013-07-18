@@ -1,387 +1,3 @@
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: update BLOG_IMAGE set ENTITY_ID=null where ENTITY_ID=? and id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: update BLOG_IMAGE set ENTITY_ID=null where ENTITY_ID=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogEntity.comments
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: update BLOG_COMMENT set ENTITY_ID=? where id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: update BLOG_COMMENT set ENTITY_ID=null where ENTITY_ID=? and id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: update BLOG_COMMENT set ENTITY_ID=null where ENTITY_ID=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogUser.entities
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: update BLOG_ENTITY set USER_ID=? where id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: update BLOG_ENTITY set USER_ID=null where USER_ID=? and id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: update BLOG_ENTITY set USER_ID=null where USER_ID=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogUser.comments
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: update BLOG_COMMENT set USER_ID=? where id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: update BLOG_COMMENT set USER_ID=null where USER_ID=? and id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: update BLOG_COMMENT set USER_ID=null where USER_ID=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogEntity.categorys
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: insert into BLOG_ENTITY_BLOG_CATEGORY (BLOG_ENTITY_id, categorys_id) values (?, ?)
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row update: update BLOG_ENTITY_BLOG_CATEGORY set categorys_id=? where BLOG_ENTITY_id=? and categorys_id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: delete from BLOG_ENTITY_BLOG_CATEGORY where BLOG_ENTITY_id=? and categorys_id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: delete from BLOG_ENTITY_BLOG_CATEGORY where BLOG_ENTITY_id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogCategory.children
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: update BLOG_CATEGORY set PARENT_ID=? where id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: update BLOG_CATEGORY set PARENT_ID=null where PARENT_ID=? and id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: update BLOG_CATEGORY set PARENT_ID=null where PARENT_ID=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister - Static SQL for collection: cn.com.kc.blog.pojo.BlogCategory.entities
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row insert: insert into BLOG_ENTITY_CATE (BLOG_CATEGORY_id, entities_id) values (?, ?)
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row update: update BLOG_ENTITY_CATE set entities_id=? where BLOG_CATEGORY_id=? and entities_id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  Row delete: delete from BLOG_ENTITY_CATE where BLOG_CATEGORY_id=? and entities_id=?
-DEBUG main org.hibernate.persister.collection.AbstractCollectionPersister -  One-shot delete: delete from BLOG_ENTITY_CATE where BLOG_CATEGORY_id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [NONE]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [READ]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [UPGRADE]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [UPGRADE_NOWAIT]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [FORCE]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [PESSIMISTIC_READ]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? lock in share mode
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [PESSIMISTIC_WRITE]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [PESSIMISTIC_FORCE_INCREMENT]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [OPTIMISTIC]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogImage [OPTIMISTIC_FORCE_INCREMENT]: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity cn.com.kc.blog.pojo.BlogImage: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity cn.com.kc.blog.pojo.BlogImage: select blogimage0_.id as id3_0_, blogimage0_.ENTITY_ID as ENTITY4_3_0_, blogimage0_.name as name3_0_, blogimage0_.position as position3_0_ from BLOG_IMAGE blogimage0_ where blogimage0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [NONE]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [READ]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [UPGRADE]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [UPGRADE_NOWAIT]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [FORCE]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [PESSIMISTIC_READ]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? lock in share mode
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [PESSIMISTIC_WRITE]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [PESSIMISTIC_FORCE_INCREMENT]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [OPTIMISTIC]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogUser [OPTIMISTIC_FORCE_INCREMENT]: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity cn.com.kc.blog.pojo.BlogUser: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity cn.com.kc.blog.pojo.BlogUser: select bloguser0_.id as id4_0_, bloguser0_.address as address4_0_, bloguser0_.createTime as createTime4_0_, bloguser0_.email as email4_0_, bloguser0_.password as password4_0_, bloguser0_.phoneNumber as phoneNum6_4_0_, bloguser0_.showName as showName4_0_, bloguser0_.userName as userName4_0_, bloguser0_.validateCode as validate9_4_0_ from BLOG_USER bloguser0_ where bloguser0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [NONE]: select blogentity0_.id as id2_1_, blogentity0_.commentable as commenta2_2_1_, blogentity0_.content as content2_1_, blogentity0_.createdate as createdate2_1_, blogentity0_.isTemp as isTemp2_1_, blogentity0_.readprivate as readpriv6_2_1_, blogentity0_.title as title2_1_, blogentity0_.USER_ID as USER8_2_1_, categorys1_.BLOG_ENTITY_id as BLOG1_2_3_, blogcatego2_.id as categorys2_3_, blogcatego2_.id as id0_0_, blogcatego2_.name as name0_0_, blogcatego2_.PARENT_ID as PARENT3_0_0_ from BLOG_ENTITY blogentity0_ left outer join BLOG_ENTITY_BLOG_CATEGORY categorys1_ on blogentity0_.id=categorys1_.BLOG_ENTITY_id left outer join BLOG_CATEGORY blogcatego2_ on categorys1_.categorys_id=blogcatego2_.id where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [READ]: select blogentity0_.id as id2_1_, blogentity0_.commentable as commenta2_2_1_, blogentity0_.content as content2_1_, blogentity0_.createdate as createdate2_1_, blogentity0_.isTemp as isTemp2_1_, blogentity0_.readprivate as readpriv6_2_1_, blogentity0_.title as title2_1_, blogentity0_.USER_ID as USER8_2_1_, categorys1_.BLOG_ENTITY_id as BLOG1_2_3_, blogcatego2_.id as categorys2_3_, blogcatego2_.id as id0_0_, blogcatego2_.name as name0_0_, blogcatego2_.PARENT_ID as PARENT3_0_0_ from BLOG_ENTITY blogentity0_ left outer join BLOG_ENTITY_BLOG_CATEGORY categorys1_ on blogentity0_.id=categorys1_.BLOG_ENTITY_id left outer join BLOG_CATEGORY blogcatego2_ on categorys1_.categorys_id=blogcatego2_.id where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [UPGRADE]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [UPGRADE_NOWAIT]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [FORCE]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [PESSIMISTIC_READ]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? lock in share mode
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [PESSIMISTIC_WRITE]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [PESSIMISTIC_FORCE_INCREMENT]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [OPTIMISTIC]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogEntity [OPTIMISTIC_FORCE_INCREMENT]: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity cn.com.kc.blog.pojo.BlogEntity: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity cn.com.kc.blog.pojo.BlogEntity: select blogentity0_.id as id2_0_, blogentity0_.commentable as commenta2_2_0_, blogentity0_.content as content2_0_, blogentity0_.createdate as createdate2_0_, blogentity0_.isTemp as isTemp2_0_, blogentity0_.readprivate as readpriv6_2_0_, blogentity0_.title as title2_0_, blogentity0_.USER_ID as USER8_2_0_ from BLOG_ENTITY blogentity0_ where blogentity0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [NONE]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [READ]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [UPGRADE]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [UPGRADE_NOWAIT]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [FORCE]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [PESSIMISTIC_READ]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? lock in share mode
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [PESSIMISTIC_WRITE]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [PESSIMISTIC_FORCE_INCREMENT]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [OPTIMISTIC]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogCategory [OPTIMISTIC_FORCE_INCREMENT]: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity cn.com.kc.blog.pojo.BlogCategory: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity cn.com.kc.blog.pojo.BlogCategory: select blogcatego0_.id as id0_0_, blogcatego0_.name as name0_0_, blogcatego0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY blogcatego0_ where blogcatego0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [NONE]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [READ]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [UPGRADE]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [UPGRADE_NOWAIT]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [FORCE]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [PESSIMISTIC_READ]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? lock in share mode
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [PESSIMISTIC_WRITE]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [PESSIMISTIC_FORCE_INCREMENT]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=? for update
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [OPTIMISTIC]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for entity cn.com.kc.blog.pojo.BlogComments [OPTIMISTIC_FORCE_INCREMENT]: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity cn.com.kc.blog.pojo.BlogComments: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity cn.com.kc.blog.pojo.BlogComments: select blogcommen0_.id as id1_0_, blogcommen0_.commenttime as commentt2_1_0_, blogcommen0_.content as content1_0_, blogcommen0_.ENTITY_ID as ENTITY4_1_0_, blogcommen0_.USER_ID as USER5_1_0_ from BLOG_COMMENT blogcommen0_ where blogcommen0_.id=?
-DEBUG main org.hibernate.loader.collection.OneToManyLoader - Static select for one-to-many cn.com.kc.blog.pojo.BlogEntity.images: select images0_.ENTITY_ID as ENTITY4_2_1_, images0_.id as id1_, images0_.id as id3_0_, images0_.ENTITY_ID as ENTITY4_3_0_, images0_.name as name3_0_, images0_.position as position3_0_ from BLOG_IMAGE images0_ where images0_.ENTITY_ID=?
-DEBUG main org.hibernate.loader.collection.OneToManyLoader - Static select for one-to-many cn.com.kc.blog.pojo.BlogEntity.comments: select comments0_.ENTITY_ID as ENTITY4_2_1_, comments0_.id as id1_, comments0_.id as id1_0_, comments0_.commenttime as commentt2_1_0_, comments0_.content as content1_0_, comments0_.ENTITY_ID as ENTITY4_1_0_, comments0_.USER_ID as USER5_1_0_ from BLOG_COMMENT comments0_ where comments0_.ENTITY_ID=?
-DEBUG main org.hibernate.loader.collection.OneToManyLoader - Static select for one-to-many cn.com.kc.blog.pojo.BlogUser.comments: select comments0_.USER_ID as USER5_4_1_, comments0_.id as id1_, comments0_.id as id1_0_, comments0_.commenttime as commentt2_1_0_, comments0_.content as content1_0_, comments0_.ENTITY_ID as ENTITY4_1_0_, comments0_.USER_ID as USER5_1_0_ from BLOG_COMMENT comments0_ where comments0_.USER_ID=?
-DEBUG main org.hibernate.loader.collection.OneToManyLoader - Static select for one-to-many cn.com.kc.blog.pojo.BlogUser.entities: select entities0_.USER_ID as USER8_4_1_, entities0_.id as id1_, entities0_.id as id2_0_, entities0_.commentable as commenta2_2_0_, entities0_.content as content2_0_, entities0_.createdate as createdate2_0_, entities0_.isTemp as isTemp2_0_, entities0_.readprivate as readpriv6_2_0_, entities0_.title as title2_0_, entities0_.USER_ID as USER8_2_0_ from BLOG_ENTITY entities0_ where entities0_.USER_ID=?
-DEBUG main org.hibernate.loader.collection.BasicCollectionLoader - Static select for collection cn.com.kc.blog.pojo.BlogEntity.categorys: select categorys0_.BLOG_ENTITY_id as BLOG1_2_1_, categorys0_.categorys_id as categorys2_1_, blogcatego1_.id as id0_0_, blogcatego1_.name as name0_0_, blogcatego1_.PARENT_ID as PARENT3_0_0_ from BLOG_ENTITY_BLOG_CATEGORY categorys0_ inner join BLOG_CATEGORY blogcatego1_ on categorys0_.categorys_id=blogcatego1_.id where categorys0_.BLOG_ENTITY_id=?
-DEBUG main org.hibernate.loader.collection.OneToManyLoader - Static select for one-to-many cn.com.kc.blog.pojo.BlogCategory.children: select children0_.PARENT_ID as PARENT3_0_1_, children0_.id as id1_, children0_.id as id0_0_, children0_.name as name0_0_, children0_.PARENT_ID as PARENT3_0_0_ from BLOG_CATEGORY children0_ where children0_.PARENT_ID=?
-DEBUG main org.hibernate.loader.collection.BasicCollectionLoader - Static select for collection cn.com.kc.blog.pojo.BlogCategory.entities: select entities0_.BLOG_CATEGORY_id as BLOG1_0_1_, entities0_.entities_id as entities2_1_, blogentity1_.id as id2_0_, blogentity1_.commentable as commenta2_2_0_, blogentity1_.content as content2_0_, blogentity1_.createdate as createdate2_0_, blogentity1_.isTemp as isTemp2_0_, blogentity1_.readprivate as readpriv6_2_0_, blogentity1_.title as title2_0_, blogentity1_.USER_ID as USER8_2_0_ from BLOG_ENTITY_CATE entities0_ inner join BLOG_ENTITY blogentity1_ on entities0_.entities_id=blogentity1_.id where entities0_.BLOG_CATEGORY_id=?
-DEBUG main org.hibernate.internal.SessionFactoryRegistry - Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@324a897c
-DEBUG main org.hibernate.internal.SessionFactoryRegistry - Registering SessionFactory: 29f670ea-b1ee-4757-860d-e641561d9509 (<unnamed>)
-DEBUG main org.hibernate.internal.SessionFactoryRegistry - Not binding SessionFactory to JNDI, no JNDI name configured
-DEBUG main org.hibernate.internal.SessionFactoryImpl - Instantiated session factory
-DEBUG main org.hibernate.cfg.Configuration - Processing hbm.xml files
-DEBUG main org.hibernate.cfg.Configuration - Process annotated classes
-DEBUG main org.hibernate.cfg.Configuration - Processing fk mappings (*ToOne and JoinedSubclass)
-DEBUG main org.hibernate.cfg.Configuration - Processing extends queue
-DEBUG main org.hibernate.cfg.Configuration - Processing extends queue
-DEBUG main org.hibernate.cfg.Configuration - Processing collection mappings
-DEBUG main org.hibernate.cfg.Configuration - Processing native query and ResultSetMapping mappings
-DEBUG main org.hibernate.cfg.Configuration - Processing association property references
-DEBUG main org.hibernate.cfg.Configuration - Processing foreign key constraints
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogUser
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogUser
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.cfg.Configuration - Processing hbm.xml files
-DEBUG main org.hibernate.cfg.Configuration - Process annotated classes
-DEBUG main org.hibernate.cfg.Configuration - Processing fk mappings (*ToOne and JoinedSubclass)
-DEBUG main org.hibernate.cfg.Configuration - Processing extends queue
-DEBUG main org.hibernate.cfg.Configuration - Processing extends queue
-DEBUG main org.hibernate.cfg.Configuration - Processing collection mappings
-DEBUG main org.hibernate.cfg.Configuration - Processing native query and ResultSetMapping mappings
-DEBUG main org.hibernate.cfg.Configuration - Processing association property references
-DEBUG main org.hibernate.cfg.Configuration - Processing foreign key constraints
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogUser
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogUser
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogCategory
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.cfg.Configuration - Resolving reference to class: cn.com.kc.blog.pojo.BlogEntity
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-DEBUG main org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Setting dialect [org.hibernate.dialect.MySQL5Dialect]
-INFO main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
-DEBUG main org.hibernate.tool.hbm2ddl.SchemaExport - Import file not found: /import.sql
-DEBUG main org.hibernate.SQL - alter table BLOG_CATEGORY drop foreign key FKB0842CFB3B379B74
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_CATEGORY drop foreign key FKB0842CFB3B379B74
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_category' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_COMMENT drop foreign key FKA15786A28232200
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_COMMENT drop foreign key FKA15786A28232200
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_comment' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_COMMENT drop foreign key FKA15786A29614CA80
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_COMMENT drop foreign key FKA15786A29614CA80
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_comment' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY drop foreign key FK94F633209614CA80
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_ENTITY drop foreign key FK94F633209614CA80
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_entity' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_BLOG_CATEGORY drop foreign key FK21E03A1C39CA9A3
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_ENTITY_BLOG_CATEGORY drop foreign key FK21E03A1C39CA9A3
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_entity_blog_category' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_BLOG_CATEGORY drop foreign key FK21E03A1CD946B109
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_ENTITY_BLOG_CATEGORY drop foreign key FK21E03A1CD946B109
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_entity_blog_category' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_CATE drop foreign key FK57E6ED0E1EAFC183
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_ENTITY_CATE drop foreign key FK57E6ED0E1EAFC183
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_entity_cate' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_CATE drop foreign key FK57E6ED0E65B2C962
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_ENTITY_CATE drop foreign key FK57E6ED0E65B2C962
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_entity_cate' doesn't exist
-DEBUG main org.hibernate.SQL - alter table BLOG_IMAGE drop foreign key FK5FDC7A5E8232200
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table BLOG_IMAGE drop foreign key FK5FDC7A5E8232200
-ERROR main org.hibernate.tool.hbm2ddl.SchemaExport - Table 'blog.blog_image' doesn't exist
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_CATEGORY
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_COMMENT
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_ENTITY
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_ENTITY_BLOG_CATEGORY
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_ENTITY_CATE
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_IMAGE
-DEBUG main org.hibernate.SQL - drop table if exists BLOG_USER
-DEBUG main org.hibernate.SQL - create table BLOG_CATEGORY (id bigint not null auto_increment, name varchar(255), PARENT_ID bigint, primary key (id))
-DEBUG main org.hibernate.SQL - create table BLOG_COMMENT (id bigint not null auto_increment, commenttime datetime, content varchar(255), ENTITY_ID bigint not null, USER_ID bigint not null, primary key (id))
-DEBUG main org.hibernate.SQL - create table BLOG_ENTITY (id bigint not null auto_increment, commentable boolean, content BLOB, createdate datetime, isTemp boolean, readprivate varchar(255), title varchar(255), USER_ID bigint not null, primary key (id))
-DEBUG main org.hibernate.SQL - create table BLOG_ENTITY_BLOG_CATEGORY (BLOG_ENTITY_id bigint not null, categorys_id bigint not null)
-DEBUG main org.hibernate.SQL - create table BLOG_ENTITY_CATE (BLOG_CATEGORY_id bigint not null, entities_id bigint not null)
-DEBUG main org.hibernate.SQL - create table BLOG_IMAGE (id bigint not null auto_increment, name varchar(255), position varchar(255), ENTITY_ID bigint, primary key (id))
-DEBUG main org.hibernate.SQL - create table BLOG_USER (id bigint not null auto_increment, address varchar(255), createTime datetime, email varchar(255), password varchar(255), phoneNumber varchar(255), showName varchar(255), userName varchar(255), validateCode varchar(255), primary key (id))
-DEBUG main org.hibernate.SQL - alter table BLOG_CATEGORY add index FKB0842CFB3B379B74 (PARENT_ID), add constraint FKB0842CFB3B379B74 foreign key (PARENT_ID) references BLOG_CATEGORY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_COMMENT add index FKA15786A28232200 (ENTITY_ID), add constraint FKA15786A28232200 foreign key (ENTITY_ID) references BLOG_ENTITY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_COMMENT add index FKA15786A29614CA80 (USER_ID), add constraint FKA15786A29614CA80 foreign key (USER_ID) references BLOG_USER (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY add index FK94F633209614CA80 (USER_ID), add constraint FK94F633209614CA80 foreign key (USER_ID) references BLOG_USER (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_BLOG_CATEGORY add index FK21E03A1C39CA9A3 (BLOG_ENTITY_id), add constraint FK21E03A1C39CA9A3 foreign key (BLOG_ENTITY_id) references BLOG_ENTITY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_BLOG_CATEGORY add index FK21E03A1CD946B109 (categorys_id), add constraint FK21E03A1CD946B109 foreign key (categorys_id) references BLOG_CATEGORY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_CATE add index FK57E6ED0E1EAFC183 (BLOG_CATEGORY_id), add constraint FK57E6ED0E1EAFC183 foreign key (BLOG_CATEGORY_id) references BLOG_CATEGORY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_ENTITY_CATE add index FK57E6ED0E65B2C962 (entities_id), add constraint FK57E6ED0E65B2C962 foreign key (entities_id) references BLOG_ENTITY (id)
-DEBUG main org.hibernate.SQL - alter table BLOG_IMAGE add index FK5FDC7A5E8232200 (ENTITY_ID), add constraint FK5FDC7A5E8232200 foreign key (ENTITY_ID) references BLOG_ENTITY (id)
-INFO main org.hibernate.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
-DEBUG main org.hibernate.internal.SessionFactoryImpl - Checking 0 named HQL queries
-DEBUG main org.hibernate.internal.SessionFactoryImpl - Checking 0 named SQL queries
-DEBUG main org.hibernate.stat.internal.StatisticsInitiator - Statistics initialized [enabled=false]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.dao.service.IBlogUserDaoService'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.bl.service.IBlogEntityService': ResourceElement for public void cn.com.kc.blog.bl.service.impl.BlogEntityServiceImpl.setEntityDao(cn.com.kc.blog.dao.service.IBlogEntityDaoService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.dao.service.impl.BlogEntityDaoImpl]: ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.dao.service.impl.BlogEntityDaoImpl]: ResourceElement for public void cn.com.kc.blog.dao.service.impl.BlogEntityDaoImpl.setUserDao(cn.com.kc.blog.dao.service.IBlogUserDaoService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService': ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService': ResourceElement for public void cn.com.kc.blog.dao.service.impl.BlogEntityDaoImpl.setUserDao(cn.com.kc.blog.dao.service.IBlogUserDaoService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogUserDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'txAdvice'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'txAdvice'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'txAdvice' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'hibTransactionManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'hibTransactionManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'hibTransactionManager' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'hibTransactionManager'
-INFO main org.springframework.orm.hibernate4.HibernateTransactionManager - Using DataSource [org.apache.commons.dbcp.BasicDataSource@13de6be9] of Hibernate SessionFactory for HibernateTransactionManager
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'hibTransactionManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean '(inner bean)'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource - Adding transactional method [get*] with attribute [PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly]
-DEBUG main org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource - Adding transactional method [save*] with attribute [PROPAGATION_REQUIRED,ISOLATION_DEFAULT]
-DEBUG main org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource - Adding transactional method [del*] with attribute [PROPAGATION_REQUIRED,ISOLATION_DEFAULT]
-DEBUG main org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource - Adding transactional method [update*] with attribute [PROPAGATION_REQUIRED,ISOLATION_DEFAULT]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'txAdvice'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'txAdvice'
-DEBUG main org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator - Creating implicit proxy for bean 'cn.com.kc.blog.bl.service.IBlogEntityService' with 0 common interceptors and 2 specific interceptors
-DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogEntityServiceImpl@3feef1eb]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogEntityService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogImageService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.bl.service.IBlogImageService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl]: ResourceElement for private cn.com.kc.blog.dao.service.IBlogImageDaoService cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl.dao
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.bl.service.IBlogImageService' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.bl.service.IBlogImageService': ResourceElement for private cn.com.kc.blog.dao.service.IBlogImageDaoService cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl.dao
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.dao.service.impl.BlogImageDaoImpl]: ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService': ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator - Creating implicit proxy for bean 'cn.com.kc.blog.bl.service.IBlogImageService' with 0 common interceptors and 2 specific interceptors
-DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl@5a333b2e]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogImageService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogUserService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.bl.service.IBlogUserService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl]: ResourceElement for public void cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl.setUserDao(cn.com.kc.blog.dao.service.IBlogUserDaoService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.bl.service.IBlogUserService' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.bl.service.IBlogUserService': ResourceElement for public void cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl.setUserDao(cn.com.kc.blog.dao.service.IBlogUserDaoService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogUserDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator - Creating implicit proxy for bean 'cn.com.kc.blog.bl.service.IBlogUserService' with 0 common interceptors and 2 specific interceptors
-DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl@4631c43f]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogUserService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.commondao.service.IBaseDao'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.commondao.service.IBaseDao'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.commondao.service.impl.BaseDaoImpl]: ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.commondao.service.IBaseDao' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.commondao.service.IBaseDao': ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.commondao.service.IBaseDao'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogEntityDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogUserDaoService'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalPersistenceAnnotationProcessor'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'dataSource'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'txAdvice'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'hibTransactionManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'propertyConfigurer'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'messageSource'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTxManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'jdbcTxManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'jdbcTxManager' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'dataSource'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'jdbcTxManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'jdbcTxManager'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0' to allow for resolving potential circular references
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@4dd36dfe: startup date [Tue Jun 25 17:32:17 CST 2013]; root of context hierarchy
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogEntityService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogImageService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogUserService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.commondao.service.IBaseDao': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogEntityDaoService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogImageDaoService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogUserDaoService': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalRequiredAnnotationProcessor': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalCommonAnnotationProcessor': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalPersistenceAnnotationProcessor': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'dataSource': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'txAdvice': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.aop.config.internalAutoProxyCreator': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'blogServicePointCut': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'localSessionFactory': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'hibTransactionManager': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'propertyConfigurer': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'messageSource': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'jdbcTxManager': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'hibernateBeanValidator': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'conversion-service': no URL paths identified
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0': no URL paths identified
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogEntityController]: ResourceElement for private cn.com.kc.blog.bl.service.IBlogEntityService cn.com.kc.blog.controller.service.impl.BlogEntityController.blogEntityService
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogEntityController]: ResourceElement for private cn.com.kc.blog.bl.service.IBlogImageService cn.com.kc.blog.controller.service.impl.BlogEntityController.blogImageDaoService
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogEntityController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogEntityController.setUserService(cn.com.kc.blog.bl.service.IBlogEntityService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController' to allow for resolving potential circular references
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController': ResourceElement for private cn.com.kc.blog.bl.service.IBlogEntityService cn.com.kc.blog.controller.service.impl.BlogEntityController.blogEntityService
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogEntityService'
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController': ResourceElement for private cn.com.kc.blog.bl.service.IBlogImageService cn.com.kc.blog.controller.service.impl.BlogEntityController.blogImageDaoService
@@ -391,17 +7,17 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
@@ -470,8 +86,11 @@ INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandle
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogUserController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setCaptchaService(com.octo.captcha.service.CaptchaService)
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogUserController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.controller.service.impl.BlogUserController' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController': ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setCaptchaService(com.octo.captcha.service.CaptchaService)
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jcaptchaService'
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController': ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogUserService'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
@@ -495,6 +114,12 @@ INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandle
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/validate/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/securitycode] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/securitycode.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/securitycode/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/login] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/login.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
@@ -504,3 +129,459 @@ DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandl
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.view.BeanNameViewResolver#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'defaultJsonView': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'exceptionResolver': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'environment': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'systemProperties': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'systemEnvironment': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importRegistry': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'applicationEventMulticaster': no URL paths identified
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'hibernateBeanValidator'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'hibernateBeanValidator'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'hibernateBeanValidator' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'messageSource'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'hibernateBeanValidator'
+INFO main org.hibernate.validator.util.Version - Hibernate Validator 4.2.0.Final
+DEBUG main org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+DEBUG main org.hibernate.validator.engine.resolver.DefaultTraversableResolver - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.engine.resolver.JPATraversableResolver.
+DEBUG main org.hibernate.validator.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+DEBUG main org.hibernate.validator.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'hibernateBeanValidator'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'conversion-service'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'conversion-service'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'conversion-service' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'conversion-service'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'conversion-service'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'byteArray_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'byteArray_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'byteArray_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'byteArray_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'string_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'string_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'string_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'string_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'resource_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'resource_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'resource_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'resource_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'source_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'source_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'source_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'source_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'xmlAwareForm_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'xmlAwareForm_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'xmlAwareForm_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'xmlAwareForm_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'jaxb2RootElement_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'jaxb2RootElement_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'jaxb2RootElement_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'jaxb2RootElement_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'jackson_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'jackson_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'jackson_hmc' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'jackson_hmc'
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'byteArray_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'string_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'resource_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'source_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'xmlAwareForm_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jaxb2RootElement_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jackson_hmc'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogImageController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogIndexController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping' to allow for resolving potential circular references
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@30419d05: startup date [Thu Jul 18 16:30:24 CST 2013]; root of context hierarchy
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogEntityService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogImageService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogUserService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.commondao.service.IBaseDao': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogEntityDaoService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogImageDaoService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogUserDaoService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalRequiredAnnotationProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalCommonAnnotationProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalPersistenceAnnotationProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'dataSource': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'txAdvice': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.aop.config.internalAutoProxyCreator': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'blogServicePointCut': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'localSessionFactory': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'hibTransactionManager': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'propertyConfigurer': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'messageSource': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'localeResolver': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'jcaptchaService': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'jdbcTxManager': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'hibernateBeanValidator': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'conversion-service': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'byteArray_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'string_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'resource_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'source_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'xmlAwareForm_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'jaxb2RootElement_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'jackson_hmc': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.controller.service.impl.BlogEntityController': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.controller.service.impl.BlogImageController': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.controller.service.impl.BlogIndexController': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.controller.service.impl.BlogUserController': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.view.BeanNameViewResolver#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'defaultJsonView': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'exceptionResolver': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'environment': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'systemProperties': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'systemEnvironment': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importRegistry': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'applicationEventMulticaster': no URL paths identified
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/assets/images/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/assets/css/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2'
+INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/assets/js/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#2'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3'
+INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/assets/ico/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#3'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#4'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.view.BeanNameViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.view.BeanNameViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.view.BeanNameViewResolver#0' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.view.BeanNameViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0' to allow for resolving potential circular references
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.view.InternalResourceViewResolver#6098f192'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.view.InternalResourceViewResolver#6098f192'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.view.ContentNegotiatingViewResolver#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'defaultJsonView'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'defaultJsonView'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'defaultJsonView' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'defaultJsonView'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'exceptionResolver'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'exceptionResolver'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'exceptionResolver' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'exceptionResolver'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+DEBUG main org.springframework.context.support.ClassPathXmlApplicationContext - Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@1ad60225]
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'lifecycleProcessor'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'dataSource'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jdbcTxManager'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl'
+DEBUG main org.springframework.orm.hibernate4.HibernateTransactionManager - Creating new transaction with name [cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl.getUserByUsername]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly

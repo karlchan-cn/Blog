@@ -24,7 +24,7 @@ import cn.com.kc.blog.pojo.BlogUser;
 public class BlogUserDaoImpl extends BaseDaoImpl<BlogUser, Long> implements
 				IBlogUserDaoService {
 
-public static final String CONST_HQL_QUERY_USER_BY_USERNAME = "from BlogUser user where user.username = ?";
+public static final String CONST_HQL_QUERY_USER_BY_USERNAME = "from BlogUser user where user.userName = ?";
 
 @Override
 public BlogUser getUserByUsername(String username) {

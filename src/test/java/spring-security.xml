@@ -23,12 +23,17 @@
 		<beans:property name="authenticationManager" ref="authenticationManager" 
 		/> <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
 		/> </beans:bean> -->
+		
 	<authentication-manager alias="authenticationManager">
-		<!-- <authentication-provider> <user-service> <user name="admin" password="123456" 
-			authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
-		<authentication-provider
-			ref="cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl" />
+		<authentication-provider ref="daoAuthenticationProvider" />
 	</authentication-manager>
+
+	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService"
+			ref="cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl" />
+		<!-- <beans:property name="passwordEncoder" ref="passwordEncoder" /> -->
+	</beans:bean>
 
 	<beans:bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
