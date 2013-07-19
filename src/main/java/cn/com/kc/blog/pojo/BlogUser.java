@@ -27,143 +27,143 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Table(name = "USERS")
 public class BlogUser implements Serializable {
-	/**
+/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2467016020275506982L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@NotNull(message = "{username.illegal}")
-	private String userName;
-	@NotNull
-	private String showName;
-	@NotNull
-	private String password;
-	@NotNull
-	@Email
-	private String email;
-	@NotNull
-	private Timestamp createTime;
-	@NotNull
-	private String address;
-	@NotNull
-	private String phoneNumber;
-	@NotNull
-	private String validateCode;
-	private Boolean enabled;
+private static final long serialVersionUID = -2467016020275506982L;
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
+@NotNull(message = "{username.illegal}")
+private String userName;
+@NotNull
+private String showName;
+@NotNull
+private String password;
+@NotNull
+@Email
+private String email;
+@NotNull
+private Timestamp createTime;
+@NotNull
+private String address;
+@NotNull
+private String phoneNumber;
+@NotNull
+private String validateCode;
+private Boolean enabled;
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
+public Boolean getEnabled() {
+	return enabled;
+}
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
+public void setEnabled(Boolean enabled) {
+	this.enabled = enabled;
+}
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-	private List<BlogAuthorities> authorities;
+@OneToMany(fetch = FetchType.EAGER, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private List<BlogAuthorities> authorities;
 
-	public List<BlogAuthorities> getAuthorities() {
-		return authorities;
-	}
+public List<BlogAuthorities> getAuthorities() {
+	return authorities;
+}
 
-	public void setAuthorities(List<BlogAuthorities> authorities) {
-		this.authorities = authorities;
-	}
+public void setAuthorities(List<BlogAuthorities> authorities) {
+	this.authorities = authorities;
+}
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-	private Set<BlogEntity> entities;
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private Set<BlogEntity> entities;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-	private Set<BlogComments> comments;
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+private Set<BlogComments> comments;
 
-	public Set<BlogComments> getComments() {
-		return comments;
-	}
+public Set<BlogComments> getComments() {
+	return comments;
+}
 
-	public void setComments(Set<BlogComments> comments) {
-		this.comments = comments;
-	}
+public void setComments(Set<BlogComments> comments) {
+	this.comments = comments;
+}
 
-	public Set<BlogEntity> getEntities() {
-		return entities;
-	}
+public Set<BlogEntity> getEntities() {
+	return entities;
+}
 
-	public void setEntities(Set<BlogEntity> entities) {
-		this.entities = entities;
-	}
+public void setEntities(Set<BlogEntity> entities) {
+	this.entities = entities;
+}
 
-	public Long getId() {
-		return id;
-	}
+public Long getId() {
+	return id;
+}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+public void setId(Long id) {
+	this.id = id;
+}
 
-	public String getUserName() {
-		return userName;
-	}
+public String getUserName() {
+	return userName;
+}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+public void setUserName(String userName) {
+	this.userName = userName;
+}
 
-	public String getShowName() {
-		return showName;
-	}
+public String getShowName() {
+	return showName;
+}
 
-	public void setShowName(String showName) {
-		this.showName = showName;
-	}
+public void setShowName(String showName) {
+	this.showName = showName;
+}
 
-	public String getPassword() {
-		return password;
-	}
+public String getPassword() {
+	return password;
+}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+public void setPassword(String password) {
+	this.password = password;
+}
 
-	public String getEmail() {
-		return email;
-	}
+public String getEmail() {
+	return email;
+}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+public void setEmail(String email) {
+	this.email = email;
+}
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+public Timestamp getCreateTime() {
+	return createTime;
+}
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+public void setCreateTime(Timestamp createTime) {
+	this.createTime = createTime;
+}
 
-	public String getAddress() {
-		return address;
-	}
+public String getAddress() {
+	return address;
+}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+public void setAddress(String address) {
+	this.address = address;
+}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+public String getPhoneNumber() {
+	return phoneNumber;
+}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+}
 
-	public String getValidateCode() {
-		return validateCode;
-	}
+public String getValidateCode() {
+	return validateCode;
+}
 
-	public void setValidateCode(String validateCode) {
-		this.validateCode = validateCode;
-	}
+public void setValidateCode(String validateCode) {
+	this.validateCode = validateCode;
+}
 
 }

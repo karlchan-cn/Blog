@@ -34,6 +34,8 @@ private UserDetailsService getUserDetailServiceImpl() {
 @Test
 public void saveNewUser() {
 	final BlogUser blogUser = new BlogUser();
+	blogUser.setUserName("KarlChan");
+	blogUser.setPassword("password");
 	final BlogUserController blogUserController = getController();
 	final BindingResult bindingResult = new BeanPropertyBindingResult(
 					blogUser, "");
@@ -46,8 +48,6 @@ public void delUser() {
 	final BlogUser blogUser = blogUserController.getUserService().getUser(21l);
 	blogUserController.getUserService().delUser(blogUser);
 }
-
-
 
 @Test
 public void testLoadUserByName() {

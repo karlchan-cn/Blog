@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.management.RuntimeErrorException;
 import javax.persistence.Inheritance;
 
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
@@ -30,6 +31,10 @@ public void setUserDao(final IBlogUserDaoService newUserDao) {
  * {@inheritDoc}
  */
 public void saveUser(final BlogUser user) {
+	/**
+	 * use spring md5password encoder to encode password with the salt username.
+	 */
+	user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPassword(), user.getUserName()));
 	this.userDao.save(user);
 }
 

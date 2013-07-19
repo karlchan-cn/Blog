@@ -23,7 +23,7 @@
 		<beans:property name="authenticationManager" ref="authenticationManager" 
 		/> <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
 		/> </beans:bean> -->
-		
+
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider ref="daoAuthenticationProvider" />
 	</authentication-manager>
@@ -32,9 +32,14 @@
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		<beans:property name="userDetailsService"
 			ref="cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl" />
+		<beans:property name="saltSource" ref="reflectionSaltSource" />
 		<!-- <beans:property name="passwordEncoder" ref="passwordEncoder" /> -->
 	</beans:bean>
 
+	<beans:bean id="reflectionSaltSource"
+		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+		<beans:property name="userPropertyToUse" value="userName" />
+	</beans:bean>
 	<beans:bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<beans:property name="loginFormUrl" value="/user/login" />
