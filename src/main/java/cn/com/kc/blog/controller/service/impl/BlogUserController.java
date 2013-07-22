@@ -129,7 +129,7 @@ public String signin(HttpSession session, HttpServletRequest httpServletRequest)
 	//security validate exception message key stored in session.
 	final String excpetionSessionKey  = AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY;
 	//get the expcetion.
-	final AuthenticationServiceException expception = ((AuthenticationServiceException) session
+	final Exception expception = ((Exception) session
 					.getAttribute(excpetionSessionKey));
 	if(expception != null){
 		//set the message in request,remove exception stored in Session

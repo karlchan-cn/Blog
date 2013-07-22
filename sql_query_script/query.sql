@@ -1,1 +1,2 @@
-SELECT * FROM BLOG_ENTITY
+SELECT * FROM users;
+delete from users;

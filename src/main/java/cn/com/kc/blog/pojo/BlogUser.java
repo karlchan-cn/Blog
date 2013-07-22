@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -24,8 +26,9 @@ import org.hibernate.validator.constraints.Email;
  * @author chenjinlong2
  * 
  */
+
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", uniqueConstraints = { @UniqueConstraint(columnNames = { "USERNAME" }) })
 public class BlogUser implements Serializable {
 /**
 	 * 
@@ -35,6 +38,7 @@ private static final long serialVersionUID = -2467016020275506982L;
 @GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
 @NotNull(message = "{username.illegal}")
+@Column(unique = true, name = "USERNAME")
 private String userName;
 @NotNull
 private String showName;
@@ -61,7 +65,7 @@ public void setEnabled(Boolean enabled) {
 	this.enabled = enabled;
 }
 
-@OneToMany(fetch = FetchType.EAGER, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
 private List<BlogAuthorities> authorities;
 
 public List<BlogAuthorities> getAuthorities() {

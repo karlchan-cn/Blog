@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.naming.AuthenticationException;
 import javax.sql.DataSource;
 
+import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -59,18 +61,18 @@ public void setUserService(final IBlogUserService newUserService) {
 @Override
 public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 	final BlogUser user = userService.getUserByUsername(username);
-	final List<BlogAuthorities> authorities = user.getAuthorities();
-	if (authorities.size() == 0) {
-		logger.debug("User '" + username + "' has no authorities and will be treated as 'not found'");
-		throw new UsernameNotFoundException(
-						messages.getMessage("JdbcDaoImpl.noAuthority",
-										new Object[] { username }, "User {0} has no GrantedAuthority"), username);
+	if (user == null) {
+		try {
+			throw new AuthenticationException("");
+		} catch (AuthenticationException e) {
+			throw new RuntimeException(e);
+		}
 	}
+	final List<BlogAuthorities> authorities = user.getAuthorities();
 	List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 	for (BlogAuthorities authority : authorities) {
 		grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
 	}
-
 	return new User(user.getUserName(), user.getPassword(), user.getEnabled(),
 					true, true, true, grantedAuthorities);
 }

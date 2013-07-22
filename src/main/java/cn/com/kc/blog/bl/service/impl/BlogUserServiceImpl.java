@@ -3,6 +3,9 @@
  */
 package cn.com.kc.blog.bl.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 import javax.management.RuntimeErrorException;
 import javax.persistence.Inheritance;
@@ -35,6 +38,8 @@ public void saveUser(final BlogUser user) {
 	 * use spring md5password encoder to encode password with the salt username.
 	 */
 	user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPassword(), user.getUserName()));
+	user.setEnabled(true);
+	user.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 	this.userDao.save(user);
 }
 
