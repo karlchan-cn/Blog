@@ -47,14 +47,6 @@ h2 {
 	padding: 7px 9px;
 }
 
-.navhead {
-	border-bottom: 1px dashed #DDDDDD
-}
-
-.navhead .nav {
-	margin-bottom: 5px;
-}
-
 .container {
 	margin-top: 20px;
 }
@@ -98,13 +90,7 @@ small,#sidebar ul ol li,.nocomments,.postmetadata,blockquote,strike {
 </style>
 </head>
 <body>
-	<div class="container navhead">
-		<ul class="nav nav-pills">
-			<li class="active"><a href="/Blog/">日记</a></li>
-			<li><a href="#">活动</a></li>
-			<li><a href="#">联系我们</a></li>
-		</ul>
-	</div>
+	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container" id="content">
 		<div class="row-fluid blogentity">
 			<div class='span7'>

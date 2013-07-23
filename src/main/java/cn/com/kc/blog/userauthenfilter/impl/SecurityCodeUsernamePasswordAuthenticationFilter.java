@@ -37,6 +37,8 @@ public void setCaptchaService(CaptchaService captchaService) {
 public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 	throws AuthenticationException {
 	// get seesion id as to validate
+
+	
 	final String captchaId = request.getSession().getId();
 	final String respSecurityCode = request.getParameter(SUCURITYCODE_VALUE);
 	Boolean isSCodeCorrent = Boolean.FALSE;
