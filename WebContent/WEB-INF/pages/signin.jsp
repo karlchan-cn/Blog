@@ -9,7 +9,15 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 导入通用的css ico --><%@ include file="header.jsp"%>
+
 <style type="text/css">
+.form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+
+.form-horizontal .control-group .controls img {
+	height: 30px;
+}
 </style>
 </head>
 <body>
@@ -34,49 +42,60 @@
 			</button>
 		</form>
 		 -->
-		<form class="form-signin form-horizontal"
-			action="/Blog/j_spring_security_check" id="signinform" method="POST">
-			<h2 class="form-signin-heading">请登陆</h2>
-			<div class="control-group">
-				<label class="controls text-error" for="errormsg">
-					${requestScope.SPRING_SECURITY_LAST_EXCEPTION} <!-- ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message} -->
-				</label>
+
+		<div class="row">
+			<div class="span4">
+				<form class="form-signin form-horizontal"
+					action="/Blog/j_spring_security_check" id="signinform"
+					method="POST">
+					<div class="control-group">
+						<h2 class=" control-label">请登陆</h2>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="text-error" for="errormsg">
+								${requestScope.SPRING_SECURITY_LAST_EXCEPTION} </label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="j_username">用户名</label>
+						<div class="controls">
+							<input type="text" name="j_username" id="j_username" class="" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="j_password">密码</label>
+						<div class="controls">
+							<input type="password" id="j_password" name="j_password" class="" />
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<img src="/Blog/user/securitycode">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label muted " for="securitycode">请输入上图中的字母</label>
+						<div class="controls">
+							<input type="text" id="securitycode" name="securitycode"
+								class="input-small">
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox"> <input type="checkbox">
+								记住我
+							</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">登陆</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="control-group">
-				<label class="control-label input-small" for="j_username">用户名</label>
-				<div class="controls">
-					<input type="text" name="j_username" id="j_username"
-						class="input-small">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="j_password">密码</label>
-				<div class="controls">
-					<input type="password" id="j_password" name="j_password"
-						class="input-small">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label input-small"><img
-					src="/Blog/user/securitycode"></label>
-				<div class="controls"></div>
-			</div>
-			<div class="control-group">
-				<label class="control-label muted input-small" for="securitycode">请输入上图中的字母</label>
-				<div class="controls">
-					<input type="text" id="securitycode" name="securitycode"
-						class="input-small">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<label class="checkbox"> <input type="checkbox">
-						记住我
-					</label>
-					<button type="submit" class="btn">登陆</button>
-				</div>
-			</div>
-		</form>
+		</div>
 	</div>
 </body>
 

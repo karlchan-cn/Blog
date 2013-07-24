@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <style type="text/css">
+body {
+	font: 12px Helvetica, Arial, sans-serif;
+
+	/**
+	padding-top: 10px;
+	background-color: #f5f5f5; 
+	**/
+}
+
 .navhead {
 	border-bottom: 1px dashed #DDDDDD
 }

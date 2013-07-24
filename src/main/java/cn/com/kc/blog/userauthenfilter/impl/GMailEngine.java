@@ -34,9 +34,9 @@ public class GMailEngine extends ListImageCaptchaEngine {
 protected void buildInitialFactories() {
 	int minWordLength = 4;
 	int maxWordLength = 5;
-	int fontSize = 50;
-	int imageWidth = 250;
-	int imageHeight = 100;
+	int fontSize = 25;
+	int imageWidth = 220;
+	int imageHeight = 50;
 	WordGenerator dictionnaryWords = new ComposeDictionaryWordGenerator(
 					new FileDictionary("toddlist"));
 
@@ -50,16 +50,15 @@ protected void buildInitialFactories() {
 	BackgroundGenerator background = new UniColorBackgroundGenerator(
 					imageWidth, imageHeight, Color.white);
 	FontGenerator font = new RandomFontGenerator(fontSize, fontSize,
-					new Font[] { new Font("nyala", Font.BOLD, fontSize),
-								new Font("Bell MT", Font.PLAIN, fontSize),
-								new Font("Credit valley", Font.BOLD, fontSize) });
+					new Font[] { new Font("Helvetica", Font.PLAIN, fontSize),
+								new Font("Arial", Font.PLAIN, fontSize),
+								new Font("sans-serif", Font.PLAIN, fontSize) });
 	ImageDeformation postDef = new ImageDeformationByFilters(
 					new ImageFilter[] {});
 	ImageDeformation backDef = new ImageDeformationByFilters(
 					new ImageFilter[] {});
 	ImageDeformation textDef = new ImageDeformationByFilters(
 					new ImageFilter[] {});
-
 	WordToImage word2image = new DeformedComposedWordToImage(font,
 					background, randomPaster, backDef, textDef, postDef);
 	addFactory(new GimpyFactory(dictionnaryWords, word2image));
