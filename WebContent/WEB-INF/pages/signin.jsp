@@ -16,7 +16,14 @@
 }
 
 .form-horizontal .control-group .controls img {
-	height: 30px;
+	height: 40px;
+}
+
+.form-horizontal .control-group .changeimage {
+	font-size: 8px;
+	display: inline;
+	position: relative;
+	top: 10px;
 }
 </style>
 </head>
@@ -44,7 +51,7 @@
 		 -->
 
 		<div class="row">
-			<div class="span4">
+			<div class="span6">
 				<form class="form-signin form-horizontal"
 					action="/Blog/j_spring_security_check" id="signinform"
 					method="POST">
@@ -71,7 +78,10 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<img src="/Blog/user/securitycode">
+							<img src="/Blog/user/securitycode" id="securitycodeimg">
+							<p class="muted changeimage">
+								看不清？<a href="" id="changeimagebtn">换一个</a>
+							</p>
 						</div>
 					</div>
 					<div class="control-group">
@@ -83,7 +93,7 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<label class="checkbox"> <input type="checkbox">
+							<label class="checkbox muted"> <input type="checkbox">
 								记住我
 							</label>
 						</div>
@@ -101,6 +111,10 @@
 
 <!-- 导入通用js  -->
 <%@ include file="footer.jsp"%>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var win = window, controller;
@@ -109,13 +123,56 @@
 			j_password : $('#j_password'),
 			securitycode : $('#securitycode'),
 			init : function() {
-				$('#signinform').submit(this.checkform());
+				//$('#signinform').submit(this.checkform());
+				$('#changeimagebtn').click(function() {
+					$('#securitycodeimg').attr({
+						src : "/Blog/user/securitycode"
+					});
+					return false;
+				});
+				$('#signinform')
+						.validate(
+								{
+									rules : {
+										j_username : {
+											required : true
+										},
+										j_password : {
+											required : true
+										},
+										securitycode : {
+											required : true
+										}
+									},
+									onfocusout : true,
+									showErrors : function(errorMap, errorList) {
+										var errorCount = errorList.length, error, messageLabel;
+
+										//"<span class='help-inline'>Inline help text</span>";
+										while (errorCount--) {
+											error = errorList[errorCount];
+											messageLabel = $(error.element)
+													.siblings(
+															"[class='help-inline']");
+											if (messageLabel.length == 0) {
+												$(error.element)
+														.parent()
+														.append(
+																"<span class='help-inline'>"
+																		+ error.message
+																		+ "</span>");
+											} else {
+												messageLabel
+														.text(error.message);
+											}
+										}
+									}
+								});
 			},
 			//check form inpurt elements			
 			checkform : function() {
 				var that = this;
-
-				return false;
+				//return false;
 			}
 		};
 		win.pageController = controller;
@@ -123,4 +180,5 @@
 
 	});
 </script>
+
 </html>
