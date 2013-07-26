@@ -20,10 +20,33 @@
 }
 
 .form-horizontal .control-group .changeimage {
-	font-size: 8px;
+	font-size: 12px;
 	display: inline;
 	position: relative;
 	top: 10px;
+}
+
+.form-horizontal .text-error {
+	color: #FE2617;
+	line-height: 19.2px;
+	font-size: 12px;
+}
+
+.form-horizontal #changeimagebtn {
+	
+}
+
+.form-horizontal .mutedlabel {
+	font-size: 12px;
+	color: #666666;
+	line-height: 19.2px;
+	font-size-adjust: none;
+}
+
+a:hover {
+	background: none repeat scroll 0 0 #3377AA;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 </style>
 </head>
@@ -85,7 +108,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label muted " for="securitycode">请输入上图中的字母</label>
+						<label class="control-label muted mutedlabel" for="securitycode">请输入上图中的字母</label>
 						<div class="controls">
 							<input type="text" id="securitycode" name="securitycode"
 								class="input-small">
@@ -93,8 +116,8 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<label class="checkbox muted"> <input type="checkbox">
-								记住我
+							<label class="checkbox muted mutedlabel"> <input
+								type="checkbox"> 记住我
 							</label>
 						</div>
 					</div>
@@ -130,44 +153,54 @@
 					});
 					return false;
 				});
-				$('#signinform')
-						.validate(
-								{
-									rules : {
-										j_username : {
-											required : true
-										},
-										j_password : {
-											required : true
-										},
-										securitycode : {
-											required : true
-										}
-									},
-									onfocusout : true,
-									showErrors : function(errorMap, errorList) {
-										var errorCount = errorList.length, error, messageLabel;
-
-										//"<span class='help-inline'>Inline help text</span>";
-										while (errorCount--) {
-											error = errorList[errorCount];
-											messageLabel = $(error.element)
-													.siblings(
-															"[class='help-inline']");
-											if (messageLabel.length == 0) {
-												$(error.element)
-														.parent()
-														.append(
-																"<span class='help-inline'>"
-																		+ error.message
-																		+ "</span>");
-											} else {
-												messageLabel
-														.text(error.message);
-											}
-										}
-									}
-								});
+				$('#signinform').validate({
+					rules : {
+						j_username : {
+							required : true
+						},
+						j_password : {
+							required : true
+						},
+						securitycode : {
+							required : true
+						}
+					},
+					messages : {
+						j_username : {
+							required : "请输入用户名"
+						},
+						j_password : {
+							required : "请输入密码"
+						},
+						securitycode : {
+							required : "请输入验证码 "
+						}
+					},
+					errorElement : "span",
+					errorClass : "help-inline text-error"
+				/**
+				showErrors : function(errorMap, errorList) {
+					var errorCount = errorList.length, error, messageLabel;
+					//"<span class='help-inline'>Inline help text</span>";
+					while (errorCount--) {
+						error = errorList[errorCount];
+						messageLabel = $(error.element)
+								.siblings(
+										"[class='help-inline']");
+						if (messageLabel.length == 0) {
+							$(error.element)
+									.parent()
+									.append(
+											"<span class='help-inline error'>"
+													+ error.message
+													+ "</span>");
+						} else {
+							messageLabel
+									.text(error.message);
+						}
+					}
+				}**/
+				});
 			},
 			//check form inpurt elements			
 			checkform : function() {

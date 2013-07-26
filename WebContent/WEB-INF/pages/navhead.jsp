@@ -2,12 +2,21 @@
 	pageEncoding="utf-8"%>
 <style type="text/css">
 body {
-	font: 12px Helvetica, Arial, sans-serif;
-
+	font: 12px arial, ​helvetica, ​sans-serif;
+	font-style: normal;
+	font-size-adjust: none;
 	/**
 	padding-top: 10px;
 	background-color: #f5f5f5; 
 	**/
+}
+
+a:focus {
+	outline: none;
+}
+
+body h1,h2,h3 {
+	color: #494949;
 }
 
 .navhead {
