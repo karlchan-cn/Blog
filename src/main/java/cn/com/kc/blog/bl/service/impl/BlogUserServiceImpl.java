@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
 import cn.com.kc.blog.common.util.CommonUtils;
+import cn.com.kc.blog.controller.service.impl.RolesListConst;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
 import cn.com.kc.blog.pojo.BlogAuthorities;
 import cn.com.kc.blog.pojo.BlogUser;
@@ -27,6 +28,7 @@ import cn.com.kc.blog.pojo.BlogUser;
  */
 @Service("cn.com.kc.blog.bl.service.IBlogUserService")
 public class BlogUserServiceImpl implements IBlogUserService {
+
 /** Logger available to subclasses */
 protected final Log logger = LogFactory.getLog(getClass());
 /**
@@ -49,7 +51,7 @@ public void saveUser(final BlogUser user) {
 	user.setPassword(CommonUtils.ecodePasswordBySalt(user.getPassword(), user.getUserName()));
 	BlogAuthorities authorities = new BlogAuthorities();
 	authorities.setUser(user);
-	authorities.setAuthority("");
+	authorities.setAuthority(RolesListConst.ROLE_USER);
 	user.getAuthorities().add(authorities);
 	user.setEnabled(true);
 	user.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -72,7 +74,6 @@ public BlogUser getUser(final Long id) {
 public void delUser(final BlogUser user) {
 	this.userDao.delete(user);
 }
-
 
 /**
  * {@inheritDoc}

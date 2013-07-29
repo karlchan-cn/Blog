@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import cn.com.kc.blog.bl.service.IBlogUserService;
 import cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl;
 import cn.com.kc.blog.controller.service.impl.BlogUserController;
+import cn.com.kc.blog.controller.service.impl.RolesListConst;
 import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl;
 
@@ -44,7 +45,7 @@ public void saveNewUser() {
 	blogUser.setPassword("admin");
 	final BlogUserController blogUserController = getController();
 	final BindingResult bindingResult = new BeanPropertyBindingResult(
-					blogUser, "");
+					blogUser, RolesListConst.ROLE_USER);
 	blogUserController.saveUser(blogUser, bindingResult);
 }
 

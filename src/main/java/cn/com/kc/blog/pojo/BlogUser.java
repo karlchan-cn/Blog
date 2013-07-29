@@ -68,7 +68,7 @@ public void setEnabled(Boolean enabled) {
 	this.enabled = enabled;
 }
 
-@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.ALL })
 private List<BlogAuthorities> authorities;
 
 public List<BlogAuthorities> getAuthorities() {

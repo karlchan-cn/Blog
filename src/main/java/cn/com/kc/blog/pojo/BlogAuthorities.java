@@ -30,8 +30,8 @@ public class BlogAuthorities implements Serializable {
 	 * 
 	 */
 private static final long serialVersionUID = 1L;
-@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
-@JoinColumn(name = "USERNAME", nullable = false)
+@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
+@JoinColumn(name = "USERNAME", nullable = false, insertable = true, updatable = true, referencedColumnName = "USERNAME")
 @Index(name = "USERNAME")
 private BlogUser user;
 @Column(name = "AUTHORITY")
