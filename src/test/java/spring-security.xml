@@ -33,12 +33,16 @@
 		<beans:property name="userDetailsService"
 			ref="cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl" />
 		<beans:property name="saltSource" ref="reflectionSaltSource" />
+		<beans:property name="passwordEncoder" ref="Md5PasswordEncoder" />
 		<!-- <beans:property name="passwordEncoder" ref="passwordEncoder" /> -->
+	</beans:bean>
+	<beans:bean id="Md5PasswordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
 	</beans:bean>
 
 	<beans:bean id="reflectionSaltSource"
 		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
-		<beans:property name="userPropertyToUse" value="userName" />
+		<beans:property name="userPropertyToUse" value="username" />
 	</beans:bean>
 	<beans:bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">

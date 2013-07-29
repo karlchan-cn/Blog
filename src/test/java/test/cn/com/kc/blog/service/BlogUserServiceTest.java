@@ -12,6 +12,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
+import cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl;
 import cn.com.kc.blog.controller.service.impl.BlogUserController;
 import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl;
@@ -26,6 +27,11 @@ private BlogUserController getController() {
 					.getBean(BlogUserController.class.getName());
 }
 
+private IBlogUserService getUserService() {
+	return (IBlogUserService) context
+					.getBean(IBlogUserService.class.getName());
+}
+
 private UserDetailsService getUserDetailServiceImpl() {
 	return (UserDetailsService) context
 					.getBean(UserDetailServiceHibernateImpl.class.getName());
@@ -34,8 +40,8 @@ private UserDetailsService getUserDetailServiceImpl() {
 @Test
 public void saveNewUser() {
 	final BlogUser blogUser = new BlogUser();
-	blogUser.setUserName("KarlChan");
-	blogUser.setPassword("password");
+	blogUser.setUserName("admin");
+	blogUser.setPassword("admin");
 	final BlogUserController blogUserController = getController();
 	final BindingResult bindingResult = new BeanPropertyBindingResult(
 					blogUser, "");
@@ -55,4 +61,14 @@ public void testLoadUserByName() {
 	UserDetails user = userDetailsService.loadUserByUsername("");
 	Assert.assertNotNull(user);
 }
+
+@Test
+public void testUpdateUserPassword() {
+	IBlogUserService userService = getUserService();
+	final BlogUser user = new BlogUser();
+	user.setUserName("KarlChan");
+	user.setPassword("test");
+	Assert.assertSame(1, userService.updateUserPassword(user));
+}
+
 }

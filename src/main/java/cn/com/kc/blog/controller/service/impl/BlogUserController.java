@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
-import cn.com.kc.blog.common.util.CommonControllerUtils;
+import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.pojo.BlogUser;
 
 import com.octo.captcha.service.CaptchaService;
@@ -116,7 +116,7 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 		}
 		responseEntity = new ResponseEntity<byte[]>(
 						jpegOutputStream.toByteArray(),
-						CommonControllerUtils.getHttpHeadersByType(MediaType.IMAGE_JPEG_VALUE),
+						CommonUtils.getHttpHeadersByType(MediaType.IMAGE_JPEG_VALUE),
 						HttpStatus.CREATED);
 		return responseEntity;
 	} catch (Exception e) {

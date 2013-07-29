@@ -6,6 +6,7 @@ package cn.com.kc.blog.common.util;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -13,12 +14,36 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author chenjinlong2
  * 
  */
-public class CommonControllerUtils {
+public class CommonUtils {
 /**
  * private constructor.
  */
-private CommonControllerUtils() {
+private CommonUtils() {
 
+}
+
+private static final Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
+
+/**
+ * get Md5PasswordEncoder
+ * 
+ * @return
+ */
+public static Md5PasswordEncoder getMd5PasswordEncoder() {
+	return md5PasswordEncoder;
+}
+
+/**
+ * encode password with the specified salt.
+ * 
+ * @param rawPassword
+ *            raw password
+ * @param salt
+ *            salt
+ * @return encoded password
+ */
+public static String ecodePasswordBySalt(final String rawPassword, final Object salt) {
+	return md5PasswordEncoder.encodePassword(rawPassword, salt);
 }
 
 /**

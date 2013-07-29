@@ -3,6 +3,8 @@
  */
 package cn.com.kc.blog.bl.service;
 
+import org.antlr.grammar.v3.ANTLRParser.finallyClause_return;
+
 import cn.com.kc.blog.pojo.BlogUser;
 
 /**
@@ -44,5 +46,14 @@ void delUser(final BlogUser user);
  * @return specified user
  */
 BlogUser getUserByUsername(final String username);
+
+/**
+ * update user's password.
+ * 
+ * @param user
+ *            user to be updated.
+ * @return numbers about updated entities.
+ */
+int updateUserPassword(final BlogUser user);
 
 }

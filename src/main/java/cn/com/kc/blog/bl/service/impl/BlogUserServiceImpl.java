@@ -10,11 +10,15 @@ import javax.annotation.Resource;
 import javax.management.RuntimeErrorException;
 import javax.persistence.Inheritance;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
+import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
+import cn.com.kc.blog.pojo.BlogAuthorities;
 import cn.com.kc.blog.pojo.BlogUser;
 
 /**
@@ -23,6 +27,11 @@ import cn.com.kc.blog.pojo.BlogUser;
  */
 @Service("cn.com.kc.blog.bl.service.IBlogUserService")
 public class BlogUserServiceImpl implements IBlogUserService {
+/** Logger available to subclasses */
+protected final Log logger = LogFactory.getLog(getClass());
+/**
+ * dao
+ */
 private IBlogUserDaoService userDao;
 
 @Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
@@ -37,7 +46,11 @@ public void saveUser(final BlogUser user) {
 	/**
 	 * use spring md5password encoder to encode password with the salt username.
 	 */
-	user.setPassword(new Md5PasswordEncoder().encodePassword(user.getPassword(), user.getUserName()));
+	user.setPassword(CommonUtils.ecodePasswordBySalt(user.getPassword(), user.getUserName()));
+	BlogAuthorities authorities = new BlogAuthorities();
+	authorities.setUser(user);
+	authorities.setAuthority("");
+	user.getAuthorities().add(authorities);
 	user.setEnabled(true);
 	user.setCreateTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 	this.userDao.save(user);
@@ -60,10 +73,25 @@ public void delUser(final BlogUser user) {
 	this.userDao.delete(user);
 }
 
+
 /**
  * {@inheritDoc}
  */
 public BlogUser getUserByUsername(String username) {
 	return userDao.getUserByUsername(username);
+}
+
+/**
+ * {@inheritDoc}
+ */
+public int updateUserPassword(final BlogUser user) {
+	try {
+		return userDao.updateUserPassword(user.getUserName(),
+						CommonUtils.ecodePasswordBySalt(user.getPassword(), user.getUserName()));
+	} catch (Exception e) {
+		logger.error(e.getMessage());
+		throw new RuntimeException(e);
+	}
+
 }
 }

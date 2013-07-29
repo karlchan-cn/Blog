@@ -5,6 +5,7 @@ package cn.com.kc.blog.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.Email;
 
 /**
@@ -39,6 +41,7 @@ private static final long serialVersionUID = -2467016020275506982L;
 private Long id;
 @NotNull(message = "{username.illegal}")
 @Column(unique = true, name = "USERNAME")
+@IndexColumn(name = "USERNAME")
 private String userName;
 @NotNull
 private String showName;
@@ -69,6 +72,9 @@ public void setEnabled(Boolean enabled) {
 private List<BlogAuthorities> authorities;
 
 public List<BlogAuthorities> getAuthorities() {
+	if (authorities == null) {
+		authorities = new ArrayList<BlogAuthorities>();
+	}
 	return authorities;
 }
 

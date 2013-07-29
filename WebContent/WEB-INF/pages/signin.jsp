@@ -148,8 +148,9 @@ a:hover {
 			init : function() {
 				//$('#signinform').submit(this.checkform());
 				$('#changeimagebtn').click(function() {
-					$('#securitycodeimg').attr({
-						src : "/Blog/user/securitycode"
+					var securitycodeimg = $('#securitycodeimg');
+					securitycodeimg.attr({
+						src : "/Blog/user/securitycode?" + new Date().getTime()
 					});
 					return false;
 				});
@@ -201,11 +202,6 @@ a:hover {
 					}
 				}**/
 				});
-			},
-			//check form inpurt elements			
-			checkform : function() {
-				var that = this;
-				//return false;
 			}
 		};
 		win.pageController = controller;

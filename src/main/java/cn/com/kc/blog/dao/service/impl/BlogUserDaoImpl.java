@@ -21,6 +21,7 @@ public class BlogUserDaoImpl extends BaseDaoImpl<BlogUser, Long> implements
 				IBlogUserDaoService {
 
 public static final String CONST_HQL_QUERY_USER_BY_USERNAME = "from BlogUser user where user.userName = ?";
+public static final String CONST_HQL_UPDATE_PASSWORD_BY_USERNAME = "update BlogUser user set user.password = ? where user.userName = ?";
 
 @Override
 public BlogUser getUserByUsername(String username) {
@@ -32,6 +33,16 @@ public BlogUser getUserByUsername(String username) {
 	} catch (NonUniqueResultException e) {
 		return null;
 	}
+}
+
+@Override
+public int updateUserPassword(String userName, String password) {
+	final Session session = getCurrentSession();
+	final Query query = session.createQuery(CONST_HQL_UPDATE_PASSWORD_BY_USERNAME);
+	query.setString(0, password);
+	query.setString(1, userName);
+	return query.executeUpdate();
+
 }
 
 }

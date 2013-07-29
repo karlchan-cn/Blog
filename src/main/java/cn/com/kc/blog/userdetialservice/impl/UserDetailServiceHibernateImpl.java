@@ -42,7 +42,6 @@ public class UserDetailServiceHibernateImpl implements UserDetailsService {
 @Resource(name = "cn.com.kc.blog.common.util.BlogMessageSourceHelper")
 protected BlogMessageSourceHelper blogMessageSourceHelper;
 
-protected final MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 /** Logger available to subclasses */
 protected final Log logger = LogFactory.getLog(getClass());
 /**
