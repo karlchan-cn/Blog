@@ -7,8 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import cn.com.kc.blog.pojo.BlogUser;
 
 /**
  * @author chenjinlong2
@@ -72,5 +76,22 @@ public static HttpHeaders getHttpHeadersByType(final String contentType) {
 	responseHeaders.set("Pragma", "no-store");
 	responseHeaders.set("Expires", "0");
 	return responseHeaders;
+}
+
+/**
+ * get current user. if
+ * 
+ * @return
+ */
+public static BlogUser getCurrentUser() {
+	BlogUser user = null;
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+	if (principal instanceof UserDetails) {
+		String username = ((UserDetails) principal).getUsername();
+	} else {
+		String username = principal.toString();
+	}
+	return null;
 }
 }

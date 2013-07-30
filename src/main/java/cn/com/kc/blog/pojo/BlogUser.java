@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -32,6 +33,7 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Table(name = "USERS", uniqueConstraints = { @UniqueConstraint(columnNames = { "USERNAME" }) })
 public class BlogUser implements Serializable {
+
 /**
 	 * 
 	 */

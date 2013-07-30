@@ -23,26 +23,27 @@ import cn.com.kc.blog.pojo.BlogUser;
  */
 @Repository("cn.com.kc.blog.dao.service.IBlogEntityDaoService")
 public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
-		IBlogEntityDaoService {
-	private IBlogUserDaoService userDao;
+				IBlogEntityDaoService {
+public static final String CONST_HQL_LOAD_TEMP_ENTITY = "from BlogEntity entity where entity.isTemp = true and entity.user = ?";
+private IBlogUserDaoService userDao;
 
-	@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
-	public void setUserDao(final IBlogUserDaoService newDao) {
-		this.userDao = newDao;
-	}
+@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
+public void setUserDao(final IBlogUserDaoService newDao) {
+	this.userDao = newDao;
+}
 
-	public void saveNewEntity(final BlogUser user, final BlogEntity entity) {
-		entity.setUser(user);
-		this.save(entity);
-	}
+public void saveNewEntity(final BlogUser user, final BlogEntity entity) {
+	entity.setUser(user);
+	this.save(entity);
+}
 
-	@SuppressWarnings("unchecked")
-	public List<BlogEntity> getTempEntity(final BlogUser user) {
-		final Session session = getCurrentSession();
-		final Query query = session
-				.createQuery("from BlogEntity entity where entity.isTemp = true and entity.user = ?");
-		query.setEntity(0, user);
-		List<BlogEntity> list = query.list();
-		return list;
-	}
+@SuppressWarnings("unchecked")
+public List<BlogEntity> getTempEntity(final BlogUser user) {
+	final Session session = getCurrentSession();
+	final Query query = session
+					.createQuery(CONST_HQL_LOAD_TEMP_ENTITY);
+	query.setEntity(0, user);
+	List<BlogEntity> list = query.list();
+	return list;
+}
 }

@@ -27,12 +27,12 @@ import org.hibernate.annotations.Index;
 public class BlogAuthorities implements Serializable {
 
 /**
-	 * 
+	 * 	
 	 */
 private static final long serialVersionUID = 1L;
 @ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
-@JoinColumn(name = "USERNAME", nullable = false, insertable = true, updatable = true, referencedColumnName = "USERNAME")
-@Index(name = "USERNAME")
+@JoinColumn(name = "USER_ID", nullable = false, insertable = true, updatable = true, referencedColumnName = "ID")
+@Index(name = "USER_ID")
 private BlogUser user;
 @Column(name = "AUTHORITY")
 private String authority;

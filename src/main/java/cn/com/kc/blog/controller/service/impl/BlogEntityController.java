@@ -144,6 +144,7 @@ public void setUserService(final IBlogEntityService newblogEntityService) {
 
 @RequestMapping("/create")
 public String createEntity() {
+	// 如有有缓存文章,直接读取
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	BlogEntity entity = new BlogEntity();
@@ -151,13 +152,8 @@ public String createEntity() {
 	return CONST_ENTITY_PAGE;
 }
 
-@RequestMapping("/{entityId}/endit")
+@RequestMapping("/endit/{entityId}")
 public String enditEntity(@PathVariable final String entityId) {
-	return CONST_ENTITY_PAGE;
-}
-
-@RequestMapping("/{entityId}")
-public String showEntity(@PathVariable final String entityId) {
 	return CONST_ENTITY_PAGE;
 }
 
@@ -171,19 +167,10 @@ public String showEntity(@PathVariable final String entityId) {
 private Integer getCurrentUploadedCount(HttpSession session) {
 	// 初始化获取当前上传文件总数量
 	Integer imageCount = (Integer) session.getAttribute(CONST_IMAGES_COUNT);
-	BigDecimal imageSize = (BigDecimal) session
-					.getAttribute(CONST_IMAGES_SIZE);
 	if (imageCount == null) {
 		imageCount = 0;
-		imageSize = new BigDecimal(0);
-
 	}
 	return imageCount;
-}
-
-private void setCurrentUploadedCount(Integer uploadedCount,
-				HttpSession session) {
-	session.setAttribute(CONST_IMAGES_COUNT, uploadedCount);
 }
 
 @RequestMapping("/savefile")
@@ -191,7 +178,7 @@ private void setCurrentUploadedCount(Integer uploadedCount,
 @SuppressWarnings("unchecked")
 public ResponseEntity<String> saveFile(HttpServletRequest request,
 				HttpServletResponse response, HttpSession httpSession) {
-	BigDecimal imageSize = null;
+
 	JsonFactory jsonFactory = new JsonFactory();
 	// 初始化获取当前上传文件总数量
 	Integer uploadedCount = getCurrentUploadedCount(httpSession);
@@ -221,13 +208,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 				item = iterator.next();
 				if (!item.isFormField()) {
 					// to-do 判断文件时图片文件 该次上传的文件数量不超过 20张, 判断该次上传文件长度不超过5mb
-					/**
-					 * int emptySize = CONST_MAX_UPLOAD_SIZE.subtract(
-					 * imageSize).intValue(); if (emptySize < 0 || emptySize -
-					 * item.getSize() < 0) { retVal.put(CONST_RET_ERROR,
-					 * Boolean.TRUE); retVal.put(CONST_RET_ERROR_MSG,
-					 * CONST_ERRORMSG_OULSIZE); break; }
-					 **/
 					// 判断文件大小是否超过最大上限
 					if (CONST_MAX_UPLOAD_SIZE.subtract(
 									BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
@@ -236,8 +216,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 										CONST_ERRORMSG_OULSIZE);
 						break;
 					}
-					imageSize = imageSize.add(BigDecimal.valueOf(item
-									.getSize()));
 					String fileName = String.valueOf(System
 									.currentTimeMillis()) + item.getName();
 					File file = new File(uploadDir + fileName);
@@ -245,7 +223,7 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 					blogImage.setShowName(item.getName());
 					blogImage.setSize(item.getSize());
 					item.write(file);
-					blogImageDaoService.saveImage(blogImage);
+
 				} else if ("tempid".equals(item.getFieldName())) {
 					blogImage.setTempid(Long.valueOf(item.getString()));
 				} else if ("entity".equals(item.getFieldName())) {
@@ -261,6 +239,7 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 			throw new RuntimeException(e);
 		}
 	}
+	blogImageDaoService.saveImage(blogImage);
 	// 用此类构造字符串
 	StringWriter w = new StringWriter();
 	retVal.put(CONST_RET_IMGLIST, imageList);
@@ -272,8 +251,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 	}
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
 					w.toString(), responseHeaders, HttpStatus.CREATED);
-
-	httpSession.setAttribute(CONST_IMAGES_SIZE, imageSize);
 	return responseEntity;
 }
 
@@ -289,7 +266,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 public void initUploadinfo(@ModelAttribute("action") final String action,
 				final HttpServletRequest request, final HttpSession httpSession) {
 	httpSession.setAttribute(CONST_IMAGES_COUNT, 0);
-	httpSession.setAttribute(CONST_IMAGES_SIZE, new BigDecimal(0));
 }
 
 @RequestMapping("/delentity")
@@ -313,7 +289,7 @@ public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
 	} catch (Exception e) {
 
 		e.printStackTrace();
-		throw new RuntimeException(e);
+		// throw new RuntimeException(e);
 	}
 	final BlogUser user = new BlogUser();
 
