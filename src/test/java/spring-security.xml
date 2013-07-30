@@ -61,6 +61,7 @@
 	<beans:bean id="loginLogAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/"></beans:property>
+		
 	</beans:bean>
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
