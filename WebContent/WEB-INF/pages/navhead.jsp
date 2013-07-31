@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <style type="text/css">
 body {
 	font: 12px arial, ​helvetica, ​sans-serif;
@@ -33,4 +35,7 @@ body h1,h2,h3 {
 		<li><a href="#">活动</a></li>
 		<li><a href="#">联系我们</a></li>
 	</ul>
+	<sec:authorize ifAllGranted="ROLE_USER">
+		<a href="/Blog/j_spring_security_logout">登出</a>
+	</sec:authorize>
 </div>

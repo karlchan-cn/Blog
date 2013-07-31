@@ -44,7 +44,7 @@
 	</filter>
 	<filter>
 		<filter-name>hibernateFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter
+		<filter-class>cn.com.kc.blog.bl.service.impl.OpenSessionInViewFilterCustomedImpl
 		</filter-class>
 		<init-param>
 			<param-name>sessionFactoryBeanName</param-name>
@@ -58,7 +58,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
+
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>

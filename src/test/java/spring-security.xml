@@ -8,10 +8,13 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<http pattern="/user/login*" security="none" />
-	<http pattern="*/assets/*" security="none" />
+	<http pattern="/assets/**" security="none" />
 
 	<http entry-point-ref="authenticationEntryPoint">
+		<logout logout-success-url="/" />
 		<intercept-url pattern="/entity/create" access="ROLE_USER" />
+		<intercept-url pattern="/entity/modify" access="ROLE_USER" />
+		<intercept-url pattern="/entity/delete" access="ROLE_USER" />
 		<!-- <form-login login-page="/user/login" authentication-failure-url="/user/login?a=1234" 
 			/> -->
 		<custom-filter ref="securityCodeUsernamePasswordAuthenticationFilter"
@@ -61,7 +64,7 @@
 	<beans:bean id="loginLogAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/"></beans:property>
-		
+
 	</beans:bean>
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
