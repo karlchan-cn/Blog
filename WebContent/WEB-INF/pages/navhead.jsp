@@ -7,10 +7,6 @@ body {
 	font: 12px arial, ​helvetica, ​sans-serif;
 	font-style: normal;
 	font-size-adjust: none;
-	/**
-	padding-top: 10px;
-	background-color: #f5f5f5; 
-	**/
 }
 
 a:focus {
@@ -28,14 +24,88 @@ body h1,h2,h3 {
 .navhead .nav {
 	margin-bottom: 5px;
 }
+
+.global-nav {
+	background-color: #545652;
+	color: #D5D5D5;
+	height: 28px;
+	min-width: 950px;
+}
+
+.navbar-static-top {
+	color: #D5D5D5;
+}
+
+.navbar-static-top .navbar-inner {
+	background-color: #545652;
+	background-image: none;
+	min-height: 25px;
+}
+
+.navbar-static-top .navbar-inner .container {
+	margin: 0;
+}
+
+#topnavbarcontainer .nav>li>a {
+	font-family: Helvetica, ​Arial, ​sans-serif;
+	color: #D5D5D5;
+	float: none;
+	padding: 10px 15px;
+	text-decoration: none;
+	color: #D5D5D5;
+	text-shadow: none;
+	line-height: 30px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.navbar-static-top .navbar-inner .container:before,.navbar-static-top .navbar-inner .container:after
+	{
+	content: "";
+	display: table;
+	line-height: 0;
+}
+
+.navbar-static-top .navbar-inner .container:after {
+	clear: both;
+}
+
+.navbar-static-top .navbar-inner .container:before,.navbar-static-top .navbar-inner .container:after
+	{
+	content: "";
+	display: table;
+	line-height: 0;
+}
+
+.navbar-static-top .navbar-inner .container {
+	width: auto;
+}
+
+#topnavbarcontainer .nav>li>a:active,#topnavbarcontainer .nav>li>a:hover
+	{
+	color: #FFFFFF;
+}
 </style>
+<sec:authorize ifAllGranted="ROLE_USER">
+	<div class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<div class="container" id="topnavbarcontainer">
+				<ul class="nav">
+					<li><a href="/entiy/create">日志</a></li>
+				</ul>
+				<!-- /.nav-collapse -->
+				<ul class="nav pull-right">
+					<li><a href="/Blog/j_spring_security_logout">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- /navbar-inner -->
+	</div>
+</sec:authorize>
 <div class="container navhead">
 	<ul class="nav nav-pills">
-		<li><a href="/Blog/">日记</a></li>
+		<li><a class="brand" href="/Blog/">日记</a></li>
 		<li><a href="#">活动</a></li>
 		<li><a href="#">联系我们</a></li>
 	</ul>
-	<sec:authorize ifAllGranted="ROLE_USER">
-		<a href="/Blog/j_spring_security_logout">登出</a>
-	</sec:authorize>
 </div>

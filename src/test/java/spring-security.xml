@@ -9,6 +9,8 @@
 
 	<http pattern="/user/login*" security="none" />
 	<http pattern="/assets/**" security="none" />
+	<http pattern="/WEB-INF/pages/**" security="none" />
+
 
 	<http entry-point-ref="authenticationEntryPoint">
 		<logout logout-success-url="/" />
