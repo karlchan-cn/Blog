@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 
  */
 @Controller(value = "cn.com.kc.blog.controller.service.impl.BlogIndexController")
-@RequestMapping("index")
+@RequestMapping("/")
 public class BlogIndexController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showIndex() {

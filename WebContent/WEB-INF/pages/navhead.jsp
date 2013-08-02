@@ -9,6 +9,10 @@ body {
 	font-size-adjust: none;
 }
 
+.container {
+	margin-top: 10px;
+}
+
 a:focus {
 	outline: none;
 }
@@ -91,7 +95,7 @@ body h1,h2,h3 {
 		<div class="navbar-inner">
 			<div class="container" id="topnavbarcontainer">
 				<ul class="nav">
-					<li><a href="/entiy/create">日志</a></li>
+					<li><a href="/Blog/entity/create">日志</a></li>
 				</ul>
 				<!-- /.nav-collapse -->
 				<ul class="nav pull-right">

@@ -51,9 +51,6 @@ a:hover {
 </style>
 </head>
 <body>
-	<div class="container">
-		<form action=""></form>
-	</div>
 	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container">
 		<!-- 

@@ -16,9 +16,6 @@ h2 {
 	margin: 5px 0 1px 0;
 }
 
-.container {
-	margin-top: 20px;
-}
 
 #content {
 	font-size: 12px;

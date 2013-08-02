@@ -12,7 +12,6 @@
 <style type="text/css">
 body {
 	font: Helvetica, ​Arial, ​sans-serif 12px;
-	padding-top: 20px;
 }
 
 .btn:focus {
@@ -34,14 +33,6 @@ h1 {
 
 .infotips {
 	color: #666666;
-}
-
-.navhead {
-	border-bottom: 1px dashed #DDDDDD
-}
-
-.navhead .nav {
-	margin-bottom: 5px;
 }
 
 #container {
@@ -118,7 +109,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =             0);
+	filter: alpha(opacity =       0);
 	opacity: 0;
 }
 </style>
@@ -229,13 +220,7 @@ input[type="file"] {
 </style>
 </head>
 <body>
-	<div class="container navhead">
-		<ul class="nav nav-pills">
-			<li class="active"><a href="/Blog/">日记</a></li>
-			<li><a href="#">活动</a></li>
-			<li><a href="#">联系我们</a></li>
-		</ul>
-	</div>
+	<%@ include file="navhead.jsp"%>
 	<div class="container" id="container">
 		<div class='row'>
 			<h1 class="span12 offset1" id="form-welcome">新加日记</h1>
@@ -244,15 +229,15 @@ input[type="file"] {
 			<form class="entity-form" action="addentity" method="POST">
 				<fieldset>
 					<label> 题目： </label> <input type="text" name="title" id="title"
-						class="input-xxlarge" placeholder="" /><span id="title-info"
-						class="help-block" tabindex="1"></span> <span id="title-info"
-						class="help-block" tabindex="1"></span> <label class="float-label">
+						class="input-xxlarge" placeholder="" value="${requestScope.entity.title}" /><span
+						id="title-info" class="help-block" tabindex="1"></span> <span
+						id="title-info" class="help-block" tabindex="1"></span> <label
+						class="float-label">
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a class="btn btn-small" href="#">连接</a></span>
 					</label>
-					<textarea name="content" id="content" tabindex="2">
-                        </textarea>
+					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
 					<div class="blogoptiondiv">
 						<p>设置可见：</p>
@@ -390,6 +375,7 @@ input[type="file"] {
 					}
 					delRow.remove();
 				});
+				/**
 				//暂存文章,或者加载上次临时保存的文章
 				$.post("/Blog/entity/saveentity", {
 					entity : $.toJSON(this.blogentity)
@@ -397,6 +383,7 @@ input[type="file"] {
 					//临时保存对象
 					pageController.blogentity = data;
 				}, "json");
+				 **/
 				//注册上传窗体hide事件
 				var uploadModel = $('#myModal');
 				uploadModel.on('hidden', function() {

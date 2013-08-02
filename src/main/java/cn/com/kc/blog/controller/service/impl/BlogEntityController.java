@@ -143,13 +143,15 @@ public void setUserService(final IBlogEntityService newblogEntityService) {
 }
 
 @RequestMapping("/create")
-public String createEntity() {
+public ModelAndView createEntity() {
 	// 如有有缓存文章,直接读取
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	BlogEntity entity = new BlogEntity();
+	entity.setTitle("test");
+	entity.setContent("testContent");
 	modelAndView.getModelMap().put("entity", entity);
-	return CONST_ENTITY_PAGE;
+	return modelAndView;
 }
 
 @RequestMapping("/endit/{entityId}")
