@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -35,11 +36,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.com.kc.blog.bl.service.IBlogEntityService;
 import cn.com.kc.blog.bl.service.IBlogImageService;
+import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.pojo.BlogEntity;
+import cn.com.kc.blog.pojo.BlogEntityConst;
 import cn.com.kc.blog.pojo.BlogImage;
 import cn.com.kc.blog.pojo.BlogUser;
+import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
 
 /**
  * @author chenjinlong2
@@ -48,6 +54,19 @@ import cn.com.kc.blog.pojo.BlogUser;
 @Controller(value = "cn.com.kc.blog.controller.service.impl.BlogEntityController")
 @RequestMapping("/entity")
 public class BlogEntityController {
+/**
+ * get user infor if login successfully
+ * 
+ * @return
+ */
+private BlogUser getCurrentLoginSuccessUser() {
+	BlogUser user = (BlogUser) CommonUtils.getRequest().getSession()
+					.getAttribute(CustomedAuthenticateConst.CONST_BLOG_USER_ATTRIBUTE);
+	if (user == null) {
+		throw new RuntimeException("请登录。");
+	}
+	return user;
+}
 
 /**
  * tet commite
@@ -144,13 +163,20 @@ public void setUserService(final IBlogEntityService newblogEntityService) {
 
 @RequestMapping("/create")
 public ModelAndView createEntity() {
-	// 如有有缓存文章,直接读取
+	// load the temperay
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
-	BlogEntity entity = new BlogEntity();
-	entity.setTitle("test");
-	entity.setContent("testContent");
+	final BlogUser user = getCurrentLoginSuccessUser();
+	BlogEntity entity = blogEntityService.getTempEntity(user);
+	if (entity.getId() == null) {
+		entity.setIsTemp(true);
+		entity.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		entity.setCommentable(true);
+		entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
+		blogEntityService.saveEntity(user, entity);
+	}
 	modelAndView.getModelMap().put("entity", entity);
+	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entity));
 	return modelAndView;
 }
 
@@ -323,7 +349,7 @@ public ModelAndView newEntity(
 				@ModelAttribute("entityid") final String entityid) {
 	BlogEntity model = null;
 	if (entityid == null) {
-		model = blogEntityService.getTempEntity(1L);
+		model = blogEntityService.getTempEntity(null);
 	}
 	ModelAndView retVal = new ModelAndView();
 	retVal.setViewName(CONST_ENTITY_PAGE);

@@ -27,8 +27,10 @@ import org.springframework.stereotype.Component;
 
 import cn.com.kc.blog.bl.service.IBlogUserService;
 import cn.com.kc.blog.common.util.BlogMessageSourceHelper;
+import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.pojo.BlogAuthorities;
 import cn.com.kc.blog.pojo.BlogUser;
+import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
 
 /**
  * @author kchen1
@@ -72,6 +74,8 @@ public UserDetails loadUserByUsername(final String username) throws UsernameNotF
 						blogMessageSourceHelper.getAccessor().getMessage(
 										"AbstractUserDetailsAuthenticationProvider.usernamenonexist"));
 	}
+	//save current user for use.
+	CommonUtils.getRequest().getSession().setAttribute(CustomedAuthenticateConst.CONST_BLOG_USER_ATTRIBUTE, user);
 	final List<BlogAuthorities> authorities = user.getAuthorities();
 	List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 	for (BlogAuthorities authority : authorities) {

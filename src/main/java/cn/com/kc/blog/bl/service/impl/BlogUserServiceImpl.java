@@ -93,6 +93,5 @@ public int updateUserPassword(final BlogUser user) {
 		logger.error(e.getMessage());
 		throw new RuntimeException(e);
 	}
-
 }
 }

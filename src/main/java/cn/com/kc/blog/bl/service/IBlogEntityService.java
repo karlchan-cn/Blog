@@ -13,26 +13,28 @@ import cn.com.kc.blog.pojo.BlogUser;
  * 
  */
 public interface IBlogEntityService {
-	/**
-	 * Bean name;
-	 */
-	String BEAN_NAME = IBlogEntityService.class.getName();
+/**
+ * Bean name;
+ */
+String BEAN_NAME = IBlogEntityService.class.getName();
 
-	/**
-	 * 保存用户.
-	 * 
-	 * @param user
-	 *            用户.
-	 * @param entity
-	 *            日志
-	 * @return entity to be saved
-	 */
-	Serializable saveEntity(final BlogUser user, final BlogEntity entity);
-	/**
-	 * 获取缓存
-	 * @param userId
-	 * @return
-	 */
-	BlogEntity getTempEntity(final Long userId);
-	
+/**
+ * 保存用户.
+ * 
+ * @param user
+ *            用户.
+ * @param entity
+ *            日志
+ * @return entity to be saved
+ */
+Serializable saveEntity(final BlogUser user, final BlogEntity entity);
+
+/**
+ * 获取缓存
+ * 
+ * @param userId
+ * @return
+ */
+BlogEntity getTempEntity(final BlogUser user);
+
 }

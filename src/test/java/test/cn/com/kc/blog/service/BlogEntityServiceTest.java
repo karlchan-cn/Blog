@@ -25,11 +25,15 @@ public void saveEntity() {
 }
 
 @Test
+public void testNullId(){
+	Assert.assertNull(new BlogEntity().getId());
+}
+@Test
 public void testQueryTempEntity() {
 	try {
 		final IBlogEntityService blogEntityService = (IBlogEntityService) context
 						.getBean(IBlogEntityService.class.getName());
-		final BlogEntity entity = blogEntityService.getTempEntity(1l);
+		final BlogEntity entity = blogEntityService.getTempEntity(null);
 		Assert.assertNotNull(entity);
 	} catch (Exception e) {
 		e.printStackTrace();

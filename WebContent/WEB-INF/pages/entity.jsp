@@ -109,7 +109,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =       0);
+	filter: alpha(opacity =                           0);
 	opacity: 0;
 }
 </style>
@@ -229,10 +229,10 @@ input[type="file"] {
 			<form class="entity-form" action="addentity" method="POST">
 				<fieldset>
 					<label> 题目： </label> <input type="text" name="title" id="title"
-						class="input-xxlarge" placeholder="" value="${requestScope.entity.title}" /><span
-						id="title-info" class="help-block" tabindex="1"></span> <span
-						id="title-info" class="help-block" tabindex="1"></span> <label
-						class="float-label">
+						class="input-xxlarge" placeholder=""
+						value="${requestScope.entity.title}" /><span id="title-info"
+						class="help-block" tabindex="1"></span> <span id="title-info"
+						class="help-block" tabindex="1"></span> <label class="float-label">
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a class="btn btn-small" href="#">连接</a></span>
@@ -254,12 +254,13 @@ input[type="file"] {
 						<input type="checkbox" id="cannot_reply" value="true"><span>不允许回应</span>
 					</div>
 					<label class="float-label">
-						<button type="" class="btn btn-small btm-btn">预览</button>
+						<button type="button" class="btn btn-small btm-btn">预览</button>
 						<button type="submit" class="btn btn-small btn-success btm-btn">
 							发表</button>
-						<button id='cancel-btn' type="" class="btn btn-small btm-btn">
-							取消</button>
-					</label>
+						<button id='cancel-btn' type="button"
+							class="btn btn-small btm-btn">取消</button>
+					</label> <input type="hidden" id="entityid"
+						value="${requestScope.entity.id}" />
 				</fieldset>
 			</form>
 		</div>
@@ -324,6 +325,9 @@ input[type="file"] {
 </script>
 <script src="/Blog/assets/js/jquery.fileupload.js">
 	
+</script>
+<script type="x-script" id="x-script">
+	${requestScope.entityjson}
 </script>
 <script type="text/javascript">
 	$(function() {

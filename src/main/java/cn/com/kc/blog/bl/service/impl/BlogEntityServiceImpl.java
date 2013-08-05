@@ -51,9 +51,7 @@ public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
 /**
  * {@inheritDoc}
  */
-public BlogEntity getTempEntity(Long userId) {
-	BlogUser user = new BlogUser();
-	user.setId(userId);
+public BlogEntity getTempEntity(BlogUser user) {
 	final List<BlogEntity> list = this.entityDao.getTempEntity(user);
 	if (list.size() == 0) {
 		return new BlogEntity();

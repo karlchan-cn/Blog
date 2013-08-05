@@ -92,6 +92,6 @@ public static BlogUser getCurrentUser() {
 	} else {
 		String username = principal.toString();
 	}
-	return null;
+	return user;
 }
 }
