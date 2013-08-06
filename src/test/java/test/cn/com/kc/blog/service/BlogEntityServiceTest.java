@@ -41,4 +41,8 @@ public void testQueryTempEntity() {
 	}
 
 }
+@Test
+public void testSaveTempEntity(){
+	
+}
 }

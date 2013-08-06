@@ -169,15 +169,19 @@ public ModelAndView createEntity() {
 	final BlogUser user = getCurrentLoginSuccessUser();
 	BlogEntity entity = blogEntityService.getTempEntity(user);
 	if (entity.getId() == null) {
-		entity.setIsTemp(true);
-		entity.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		entity.setCommentable(true);
-		entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
-		blogEntityService.saveEntity(user, entity);
+		createTempEntity(user, entity);
 	}
 	modelAndView.getModelMap().put("entity", entity);
 	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entity));
 	return modelAndView;
+}
+
+public void createTempEntity(final BlogUser user, final BlogEntity entity) {
+	entity.setIsTemp(true);
+	entity.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+	entity.setCommentable(true);
+	entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
+	blogEntityService.saveEntity(user, entity);
 }
 
 @RequestMapping("/endit/{entityId}")
