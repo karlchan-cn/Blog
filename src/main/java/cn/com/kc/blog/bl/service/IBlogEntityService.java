@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogUser;
+import cn.com.kc.blog.vo.BlogEntityVO;
 
 /**
  * @author chenjinlong2
@@ -27,7 +28,7 @@ String BEAN_NAME = IBlogEntityService.class.getName();
  *            日志
  * @return entity to be saved
  */
-Serializable saveEntity(final BlogUser user, final BlogEntity entity);
+Serializable saveEntity(final BlogUser user, final BlogEntityVO entity);
 
 /**
  * 获取缓存
@@ -35,6 +36,6 @@ Serializable saveEntity(final BlogUser user, final BlogEntity entity);
  * @param userId
  * @return
  */
-BlogEntity getTempEntity(final BlogUser user);
+BlogEntityVO getTempEntity(final BlogUser user);
 
 }

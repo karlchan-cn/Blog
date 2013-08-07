@@ -46,6 +46,7 @@ import cn.com.kc.blog.pojo.BlogEntityConst;
 import cn.com.kc.blog.pojo.BlogImage;
 import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
+import cn.com.kc.blog.vo.BlogEntityVO;
 
 /**
  * @author chenjinlong2
@@ -167,21 +168,26 @@ public ModelAndView createEntity() {
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	final BlogUser user = getCurrentLoginSuccessUser();
-	BlogEntity entity = blogEntityService.getTempEntity(user);
-	if (entity.getId() == null) {
-		createTempEntity(user, entity);
+	BlogEntityVO entityVO = blogEntityService.getTempEntity(user);
+	if (entityVO.getId() == null) {
+		entityVO = createTempEntity(user, entityVO);
 	}
-	modelAndView.getModelMap().put("entity", entity);
-	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entity));
+	modelAndView.getModelMap().put("entity", entityVO);
+	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entityVO));
 	return modelAndView;
 }
 
-public void createTempEntity(final BlogUser user, final BlogEntity entity) {
+/**
+ * 
+ * @param user
+ * @param entity
+ */
+public BlogEntityVO createTempEntity(final BlogUser user, final BlogEntityVO entity) {
 	entity.setIsTemp(true);
 	entity.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 	entity.setCommentable(true);
 	entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
-	blogEntityService.saveEntity(user, entity);
+	return (BlogEntityVO) blogEntityService.saveEntity(user, entity);
 }
 
 @RequestMapping("/endit/{entityId}")
@@ -315,13 +321,13 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
 @ResponseBody
 public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
 				HttpServletRequest request, HttpServletResponse response) {
-	BlogEntity retVal = null;
+	BlogEntityVO retVal = null;
 	try {
-		retVal = mapper.readValue(entity, BlogEntity.class);
+		retVal = mapper.readValue(entity, BlogEntityVO.class);
 	} catch (Exception e) {
 
 		e.printStackTrace();
-		// throw new RuntimeException(e);
+		throw new RuntimeException(e);
 	}
 	final BlogUser user = new BlogUser();
 
@@ -329,7 +335,7 @@ public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
 					.getTimeInMillis()));
 	user.setId(1L);
 	getBlogEntityService().saveEntity(user, retVal);
-	return retVal;
+	return null;
 }
 
 public BlogEntity initEditEntity() {
@@ -351,7 +357,7 @@ public BlogImage saveImage() {
 @RequestMapping("/")
 public ModelAndView newEntity(
 				@ModelAttribute("entityid") final String entityid) {
-	BlogEntity model = null;
+	BlogEntityVO model = null;
 	if (entityid == null) {
 		model = blogEntityService.getTempEntity(null);
 	}

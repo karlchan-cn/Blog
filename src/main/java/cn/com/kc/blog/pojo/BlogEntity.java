@@ -57,6 +57,15 @@ private Boolean isTemp;
 @OneToMany(fetch = FetchType.LAZY, targetEntity = BlogImage.class, mappedBy = "entity", cascade = { CascadeType.REMOVE })
 private List<BlogImage> images;
 
+@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
+@JoinColumn(name = "USER_ID", nullable = false)
+private BlogUser user;
+
+@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
+private Set<BlogComments> comments;
+@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class, mappedBy = "entities")
+private List<BlogCategory> categorys;
+
 public List<BlogImage> getImages() {
 	return images;
 }
@@ -88,15 +97,6 @@ public Boolean getCommentable() {
 public void setCommentable(Boolean commentable) {
 	this.commentable = commentable;
 }
-
-@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)
-@JoinColumn(name = "USER_ID", nullable = false)
-private BlogUser user;
-
-@OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
-private Set<BlogComments> comments;
-@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class, mappedBy = "entities")
-private List<BlogCategory> categorys;
 
 public List<BlogCategory> getCategorys() {
 	return categorys;
