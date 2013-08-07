@@ -31,6 +31,8 @@ import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.pojo.BlogAuthorities;
 import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
+import cn.com.kc.blog.vo.BlogAuthoritiesVO;
+import cn.com.kc.blog.vo.BlogUserVO;
 
 /**
  * @author kchen1
@@ -68,19 +70,20 @@ public void setUserService(final IBlogUserService newUserService) {
  */
 @Override
 public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-	final BlogUser user = userService.getUserByUsername(username);
+	final BlogUserVO user = userService.getUserByUsername(username);
 	if (user == null) {
 		throw new AuthenticationServiceException(
 						blogMessageSourceHelper.getAccessor().getMessage(
 										"AbstractUserDetailsAuthenticationProvider.usernamenonexist"));
 	}
-	//save current user for use.
-	CommonUtils.getRequest().getSession().setAttribute(CustomedAuthenticateConst.CONST_BLOG_USER_ATTRIBUTE, user);
-	final List<BlogAuthorities> authorities = user.getAuthorities();
+	// save current user for use.
+	
+	final List<BlogAuthoritiesVO> authorities = user.getAuthorities();
 	List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-	for (BlogAuthorities authority : authorities) {
+	for (BlogAuthoritiesVO authority : authorities) {
 		grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
 	}
+	CommonUtils.getRequest().getSession().setAttribute(CustomedAuthenticateConst.CONST_BLOG_USER_ATTRIBUTE, user);
 	return new User(user.getUserName(), user.getPassword(), user.getEnabled(),
 					true, true, true, grantedAuthorities);
 }

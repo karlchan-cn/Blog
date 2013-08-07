@@ -86,7 +86,7 @@ public void testSaveNewEntity() {
 		entity.setUser(user);
 		final IBlogEntityService entityService = (IBlogEntityService) context
 						.getBean(IBlogEntityService.BEAN_NAME);
-		entityService.saveEntity(user, entity);
+		// entityService.saveEntity(user, entity);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}

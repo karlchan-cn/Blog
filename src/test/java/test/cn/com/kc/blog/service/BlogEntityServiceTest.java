@@ -70,7 +70,7 @@ public void testQueryTempEntity() {
 public void testSaveTempEntity() {
 	BlogUser user = userService.getUser(1l);
 	BlogEntity entity = new BlogEntity();
-	 entityController.createTempEntity(user, entity);
+	 //entityController.createTempEntity(user, entity);
 	System.out.println(JSON.toJSONString(entity));
 }
 }

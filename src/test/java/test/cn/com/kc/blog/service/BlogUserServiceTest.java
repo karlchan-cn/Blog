@@ -59,7 +59,7 @@ public void delUser() {
 @Test
 public void testLoadUserByName() {
 	UserDetailsService userDetailsService = getUserDetailServiceImpl();
-	UserDetails user = userDetailsService.loadUserByUsername("");
+	UserDetails user = userDetailsService.loadUserByUsername("admin");
 	Assert.assertNotNull(user);
 }
 

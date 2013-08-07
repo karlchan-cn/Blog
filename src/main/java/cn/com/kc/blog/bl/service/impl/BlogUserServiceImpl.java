@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.management.RuntimeErrorException;
 import javax.persistence.Inheritance;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -21,6 +22,7 @@ import cn.com.kc.blog.controller.service.impl.RolesListConst;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
 import cn.com.kc.blog.pojo.BlogAuthorities;
 import cn.com.kc.blog.pojo.BlogUser;
+import cn.com.kc.blog.vo.BlogUserVO;
 
 /**
  * @author chenjinlong2
@@ -78,8 +80,15 @@ public void delUser(final BlogUser user) {
 /**
  * {@inheritDoc}
  */
-public BlogUser getUserByUsername(String username) {
-	return userDao.getUserByUsername(username);
+public BlogUserVO getUserByUsername(String username) {
+	BlogUser user = userDao.getUserByUsername(username);
+	BlogUserVO retVal = new BlogUserVO();
+	try {
+		BeanUtils.copyProperties(retVal, user);
+	} catch (Exception e) {
+		throw new RuntimeException(e);
+	}
+	return retVal;
 }
 
 /**

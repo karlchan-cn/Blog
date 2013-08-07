@@ -48,11 +48,7 @@ public Serializable saveEntity(final BlogUser user, final BlogEntityVO entity) {
 	final BlogEntity entityPo = new BlogEntity();
 	try {
 		BeanUtils.copyProperties(entityPo, entity);
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		throw new RuntimeException(e);
-	} catch (InvocationTargetException e) {
+	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		throw new RuntimeException(e);

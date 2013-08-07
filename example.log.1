@@ -1,3 +1,24 @@
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogEntityService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogImageService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.bl.service.IBlogImageService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl]: ResourceElement for private cn.com.kc.blog.dao.service.IBlogImageDaoService cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl.dao
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.bl.service.IBlogImageService' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.bl.service.IBlogImageService': ResourceElement for private cn.com.kc.blog.dao.service.IBlogImageDaoService cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl.dao
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.dao.service.impl.BlogImageDaoImpl]: ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService': ResourceElement for private org.hibernate.SessionFactory cn.com.kc.blog.commondao.service.impl.BaseDaoImpl.sessionFactory
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'localSessionFactory'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.dao.service.IBlogImageDaoService'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator - Creating implicit proxy for bean 'cn.com.kc.blog.bl.service.IBlogImageService' with 0 common interceptors and 2 specific interceptors
+DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogImageServiceImpl@5cd622e5]
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogImageService'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl'
@@ -16,7 +37,7 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator - Creating implicit proxy for bean 'cn.com.kc.blog.bl.service.IBlogUserService' with 0 common interceptors and 2 specific interceptors
-DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl@2cdf88d2]
+DEBUG main org.springframework.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [cn.com.kc.blog.bl.service.impl.BlogUserServiceImpl@3c250cce]
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.bl.service.IBlogUserService'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.common.util.BlogMessageSourceHelper'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.common.util.BlogMessageSourceHelper'
@@ -54,6 +75,13 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.vo.BlogUserConverter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.vo.BlogUserConverter'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.vo.BlogUserConverter' to allow for resolving potential circular references
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.vo.BlogUserConverter'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
@@ -79,11 +107,11 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 INFO main com.octo.captcha.service.image.DefaultManageableImageCaptchaService - Init com.octo.captcha.service.captchastore.FastHashMapCaptchaStore
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'jcaptchaService' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.userauthenfilter.impl.GMailEngine#5b5a5cf'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.userauthenfilter.impl.GMailEngine#3d73eca6'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.userauthenfilter.impl.GMailEngine#5b5a5cf'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.userauthenfilter.impl.GMailEngine#3d73eca6'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'jcaptchaService'
@@ -120,7 +148,7 @@ DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new S
 DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
 DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
 DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@4026e9f9: startup date [Wed Aug 07 15:28:37 CST 2013]; root of context hierarchy
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@63deeb40: startup date [Wed Aug 07 17:25:09 CST 2013]; root of context hierarchy
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogEntityService': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogImageService': no URL paths identified
@@ -132,6 +160,7 @@ DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandl
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogImageDaoService': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogUserDaoService': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl': no URL paths identified
+DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'cn.com.kc.blog.vo.BlogUserConverter': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalRequiredAnnotationProcessor': no URL paths identified
@@ -176,17 +205,23 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveentity/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/create/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/endit/{entityId}] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
@@ -199,12 +234,6 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/savefile.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/savefile/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/saveimage/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/entity/inituploadinfo] onto handler 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogEntityController'
@@ -245,13 +274,13 @@ INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandle
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogUserController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogUserController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setCaptchaService(com.octo.captcha.service.CaptchaService)
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Found injected element on class [cn.com.kc.blog.controller.service.impl.BlogUserController]: ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'cn.com.kc.blog.controller.service.impl.BlogUserController' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController': ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogUserService'
 DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController': ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setCaptchaService(com.octo.captcha.service.CaptchaService)
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'jcaptchaService'
+DEBUG main org.springframework.beans.factory.annotation.InjectionMetadata - Processing injected method of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController': ResourceElement for public void cn.com.kc.blog.controller.service.impl.BlogUserController.setUserService(cn.com.kc.blog.bl.service.IBlogUserService)
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.bl.service.IBlogUserService'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
@@ -260,6 +289,12 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/register.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/register/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
+INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/validate] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
@@ -278,12 +313,6 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/login.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/login/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser.*] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'cn.com.kc.blog.controller.service.impl.BlogUserController'
-INFO main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Mapped URL path [/user/adduser/] onto handler 'cn.com.kc.blog.controller.service.impl.BlogUserController'
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0': no URL paths identified
 DEBUG main org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping - Rejected bean name 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping': no URL paths identified
@@ -438,7 +467,7 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping' to allow for resolving potential circular references
-DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@4026e9f9: startup date [Wed Aug 07 15:28:37 CST 2013]; root of context hierarchy
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Looking for URL mappings in application context: org.springframework.context.support.ClassPathXmlApplicationContext@63deeb40: startup date [Wed Aug 07 17:25:09 CST 2013]; root of context hierarchy
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogEntityService': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.IBlogImageService': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.bl.service.impl.BlogUserAuthenticateDaoImpl': no URL paths identified
@@ -449,6 +478,7 @@ DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - R
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogImageDaoService': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.dao.service.IBlogUserDaoService': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.userdetialservice.impl.UserDetailServiceHibernateImpl': no URL paths identified
+DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'cn.com.kc.blog.vo.BlogUserConverter': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor': no URL paths identified
 DEBUG main org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping - Rejected bean name 'org.springframework.context.annotation.internalRequiredAnnotationProcessor': no URL paths identified
@@ -522,40 +552,3 @@ DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory 
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter'
 DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' to allow for resolving potential circular references
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.core.env.StandardEnvironment - Initializing new StandardEnvironment
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-DEBUG main org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1' to allow for resolving potential circular references
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-INFO main org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/assets/images/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#1'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
-DEBUG main org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
