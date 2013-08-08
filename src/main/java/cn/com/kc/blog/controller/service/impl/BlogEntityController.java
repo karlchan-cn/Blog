@@ -168,12 +168,18 @@ public ModelAndView createEntity() {
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	final BlogUser user = getCurrentLoginSuccessUser();
-	BlogEntityVO entityVO = blogEntityService.getTempEntity(user);
-	if (entityVO.getId() == null) {
-		entityVO = createTempEntity(user, entityVO);
+	BlogEntity entity = blogEntityService.getTempEntity(user);
+	if (entity.getId() == null) {
+		entity = createTempEntity(user, entity);
 	}
-	modelAndView.getModelMap().put("entity", entityVO);
-	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entityVO));
+	modelAndView.getModelMap().put("entity", entity);
+	BlogEntity entityJson = new BlogEntity();
+	entityJson.setId(entity.getId());
+	entityJson.setTitle(entity.getTitle());
+	entityJson.setContent(entity.getContent());
+	entityJson.setReadprivate(entity.getReadprivate());
+	entityJson.setCommentable(entity.getCommentable());
+	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entityJson));
 	return modelAndView;
 }
 
@@ -182,12 +188,12 @@ public ModelAndView createEntity() {
  * @param user
  * @param entity
  */
-public BlogEntityVO createTempEntity(final BlogUser user, final BlogEntityVO entity) {
+public BlogEntity createTempEntity(final BlogUser user, final BlogEntity entity) {
 	entity.setIsTemp(true);
 	entity.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 	entity.setCommentable(true);
 	entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
-	return (BlogEntityVO) blogEntityService.saveEntity(user, entity);
+	return (BlogEntity) blogEntityService.saveEntity(user, entity);
 }
 
 @RequestMapping("/endit/{entityId}")
@@ -321,9 +327,9 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
 @ResponseBody
 public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
 				HttpServletRequest request, HttpServletResponse response) {
-	BlogEntityVO retVal = null;
+	BlogEntity retVal = null;
 	try {
-		retVal = mapper.readValue(entity, BlogEntityVO.class);
+		retVal = mapper.readValue(entity, BlogEntity.class);
 	} catch (Exception e) {
 
 		e.printStackTrace();
@@ -357,7 +363,7 @@ public BlogImage saveImage() {
 @RequestMapping("/")
 public ModelAndView newEntity(
 				@ModelAttribute("entityid") final String entityid) {
-	BlogEntityVO model = null;
+	BlogEntity model = null;
 	if (entityid == null) {
 		model = blogEntityService.getTempEntity(null);
 	}

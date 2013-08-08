@@ -46,7 +46,7 @@ void delUser(final BlogUser user);
  *            user's name
  * @return specified user
  */
-BlogUserVO getUserByUsername(final String username);
+BlogUser getUserByUsername(final String username);
 
 /**
  * update user's password.

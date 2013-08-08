@@ -109,7 +109,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                           0);
+	filter: alpha(opacity =                                           0);
 	opacity: 0;
 }
 </style>
@@ -251,7 +251,7 @@ input[type="file"] {
 					</div>
 					<div class="blogoptiondiv">
 						<p>设置权限：</p>
-						<input type="checkbox" id="cannot_reply" value="true"><span>不允许回应</span>
+						<input type="checkbox" id="cannot_reply" value=""><span>不允许回应</span>
 					</div>
 					<label class="float-label">
 						<button type="button" class="btn btn-small btm-btn">预览</button>
@@ -411,7 +411,13 @@ input[type="file"] {
 				$('#saveupload').click(function() {
 					//alert('saveupload');
 				});
-
+				//initialize read private and commentable
+				var currentEntity = $.evalJSON($("#x-script").text());
+				this.currentEntity = currentEntity;
+				var readPrivate = currentEntity.readprivate;
+				var commentable = currentEntity.commentable;
+				(commentable == true) || $("#cannot_reply").attr("checked", true);
+				$("#entity_private" + readPrivate).attr("checked", true);
 			},
 			inituploadinfo : function() {
 				var uploadtable = this.uploadtable;

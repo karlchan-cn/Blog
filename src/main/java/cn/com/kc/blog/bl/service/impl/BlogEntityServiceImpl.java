@@ -43,7 +43,7 @@ public void setUserDao(IBlogUserDaoService userDao) {
 public void setEntityDao(final IBlogEntityDaoService newDAO) {
 	this.entityDao = newDAO;
 }
-
+/**
 public Serializable saveEntity(final BlogUser user, final BlogEntityVO entity) {
 	final BlogEntity entityPo = new BlogEntity();
 	try {
@@ -62,21 +62,31 @@ public Serializable saveEntity(final BlogUser user, final BlogEntityVO entity) {
 		throw new RuntimeException(e);
 	}
 	return entityPo;
+} 
+**/
+public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
+	entity.setUser(user);
+	entityDao.save(entity);
+	return entity;
 }
 
 /**
  * {@inheritDoc}
  */
-public BlogEntityVO getTempEntity(BlogUser user) {
+public BlogEntity getTempEntity(BlogUser user) {
 	final List<BlogEntity> list = this.entityDao.getTempEntity(user);
-	BlogEntityVO retVal = new BlogEntityVO();
+	//BlogEntityVO retVal = new BlogEntityVO();
+	BlogEntity entity;
 	if (list.size() != 0) {
-		try {
-			BeanUtils.copyProperties(retVal, list.get(0));
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		entity = list.get(0);
+//		try {
+//			BeanUtils.copyProperties(retVal, list.get(0));
+//		} catch (Exception e) {
+//			throw new RuntimeException(e);
+//		}
+	} else {
+		entity = new BlogEntity();
 	}
-	return retVal;
+	return entity;
 }
 }

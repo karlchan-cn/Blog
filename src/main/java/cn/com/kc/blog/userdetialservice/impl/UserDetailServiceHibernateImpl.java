@@ -70,17 +70,17 @@ public void setUserService(final IBlogUserService newUserService) {
  */
 @Override
 public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-	final BlogUserVO user = userService.getUserByUsername(username);
+	final BlogUser user = userService.getUserByUsername(username);
 	if (user == null) {
 		throw new AuthenticationServiceException(
 						blogMessageSourceHelper.getAccessor().getMessage(
 										"AbstractUserDetailsAuthenticationProvider.usernamenonexist"));
 	}
 	// save current user for use.
-	
-	final List<BlogAuthoritiesVO> authorities = user.getAuthorities();
+
+	final List<BlogAuthorities> authorities = user.getAuthorities();
 	List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-	for (BlogAuthoritiesVO authority : authorities) {
+	for (BlogAuthorities authority : authorities) {
 		grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
 	}
 	CommonUtils.getRequest().getSession().setAttribute(CustomedAuthenticateConst.CONST_BLOG_USER_ATTRIBUTE, user);

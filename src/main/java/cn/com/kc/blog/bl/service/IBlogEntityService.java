@@ -28,7 +28,7 @@ String BEAN_NAME = IBlogEntityService.class.getName();
  *            日志
  * @return entity to be saved
  */
-Serializable saveEntity(final BlogUser user, final BlogEntityVO entity);
+Serializable saveEntity(final BlogUser user, final BlogEntity entity);
 
 /**
  * 获取缓存
@@ -36,6 +36,6 @@ Serializable saveEntity(final BlogUser user, final BlogEntityVO entity);
  * @param userId
  * @return
  */
-BlogEntityVO getTempEntity(final BlogUser user);
+BlogEntity getTempEntity(final BlogUser user);
 
 }

@@ -18,14 +18,14 @@ private BlogEntityConst() {
 /**
  * all could read.
  */
-public static final String CONSTR_READ_PRATE_ALL = "1";
+public static final String CONSTR_READ_PRATE_ALL = "P";
 /**
  * friend could read.
  */
-public static final String CONSTR_READ_PRATE_FRIEND = "2";
+public static final String CONSTR_READ_PRATE_FRIEND = "S";
 /**
  * read yourself.
  */
-public static final String CONSTR_READ_PRATE_OWN = "3";
+public static final String CONSTR_READ_PRATE_OWN = "X";
 
 }
