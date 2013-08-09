@@ -109,7 +109,9 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                           0);
+	filter: alpha(opacity =                           
+		                                                         
+		                             0);
 	opacity: 0;
 }
 </style>
@@ -217,6 +219,16 @@ input[type="file"] {
 .blogoptiondiv input[type="checkbox"] {
 	margin-top: 0;
 }
+
+#error-tips {
+	display: block;
+	position: absolute;
+	background: url("/Blog/assets/images/tips_arrow.gif") no-repeat scroll 0
+		0 transparent;
+	background-position: left -52px;
+	padding-left: 10px;
+	color: #FF0000;
+}
 </style>
 </head>
 <body>
@@ -230,9 +242,8 @@ input[type="file"] {
 				<fieldset>
 					<label> 题目： </label> <input type="text" name="title" id="title"
 						class="input-xxlarge" placeholder=""
-						value="${requestScope.entity.title}" /><span id="title-info"
-						class="help-block" tabindex="1"></span> <span id="title-info"
-						class="help-block" tabindex="1"></span> <label class="float-label">
+						value="${requestScope.entity.title}" /> <span class="help-inline"></span>
+					<label class="float-label">
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a class="btn btn-small" href="#">连接</a></span>
@@ -254,7 +265,8 @@ input[type="file"] {
 						<input type="checkbox" id="cannot_reply" value=""><span>不允许回应</span>
 					</div>
 					<label class="float-label">
-						<button type="button" class="btn btn-small btm-btn">预览</button>
+						<button type="button" class="btn btn-small btm-btn"
+							id="preview-btn">预览</button>
 						<button type="submit" class="btn btn-small btn-success btm-btn">
 							发表</button>
 						<button id='cancel-btn' type="button"
@@ -314,6 +326,9 @@ input[type="file"] {
 		</div>
 	</div>
 	<!-- /container -->
+
+	<div class="error" id="error-tips"
+		style="top: 260.183px; left: 1071.5px; display: none;">给日记加个标题吧</div>
 </body>
 <!-- 导入通用js  -->
 <%@ include file="footer.jsp"%>
@@ -416,8 +431,52 @@ input[type="file"] {
 				this.currentEntity = currentEntity;
 				var readPrivate = currentEntity.readprivate;
 				var commentable = currentEntity.commentable;
-				(commentable == true) || $("#cannot_reply").attr("checked", true);
+				(commentable == true)
+						|| $("#cannot_reply").attr("checked", true);
 				$("#entity_private" + readPrivate).attr("checked", true);
+				//add preview btn click handler
+				var previewBtn = $("#preview-btn");
+				previewBtn.bind('click', function() {
+					var entityTitle = $("#title");
+					var entityContent = $("#content");
+					var blogutils = $.blogutils;
+					var docElement = $('html,body');
+					var errorTips = $('#error-tips');
+					var editTipsFun = function() {
+						errorTips.css({
+							display : "block"
+						});
+						window.setTimeout(function() {
+							errorTips.css({
+								display : "none"
+							});
+						}, 5000);
+					}
+					if ($.blogutils.isEmptyString(entityTitle.val())) {
+						var elePosition = entityTitle.position();
+						errorTips.css({
+							left : elePosition.left + entityTitle.width() + 16,
+							top : elePosition.top + 5
+						});
+						docElement.animate({
+							scrollTop : elePosition.top - 30
+						}, 300);
+						editTipsFun();
+						return;
+					}
+					if (blogutils.isEmptyString(entityContent.val())) {
+						var elePosition = entityContent.position();
+						errorTips.css({
+							left : elePosition.left + entityTitle.width() + 16,
+							top : elePosition.top + 5
+						});
+						editTipsFun();
+						docElement.animate({
+							scrollTop : elePosition.top - 30
+						}, 300);
+						return;
+					}
+				});
 			},
 			inituploadinfo : function() {
 				var uploadtable = this.uploadtable;
