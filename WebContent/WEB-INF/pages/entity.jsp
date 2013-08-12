@@ -35,7 +35,7 @@ h1 {
 	color: #666666;
 }
 
-#container {
+#edit-container {
 	font-family: "Arial,Helvetica,sans-serif";
 }
 
@@ -109,9 +109,9 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                           
+	filter: alpha(opacity =                                                
 		                                                         
-		                             0);
+		                                                  0);
 	opacity: 0;
 }
 </style>
@@ -229,11 +229,21 @@ input[type="file"] {
 	padding-left: 10px;
 	color: #FF0000;
 }
+
+#preview-container .row {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#content-preview .note {
+	border: none;
+	background-color: white;
+}
 </style>
 </head>
 <body>
 	<%@ include file="navhead.jsp"%>
-	<div class="container" id="container">
+	<div class="container" id="edit-container">
 		<div class='row'>
 			<h1 class="span12 offset1" id="form-welcome">新加日记</h1>
 		</div>
@@ -326,7 +336,20 @@ input[type="file"] {
 		</div>
 	</div>
 	<!-- /container -->
-
+	<div class="container" id="preview-container" style="display: none">
+		<div class="row" id="title-preview">
+			<h3>预览日志</h3>
+		</div>
+		<div class="row" id="content-preview">
+			<pre class="note span6">asdfasdfasdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffssssssssssssssdddddddddddddddaaaaaaaaaaaaaaaaaaaaa</pre>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-small dismissupload" data-dismiss="modal"
+				aria-hidden="true">关闭</button>
+			<button class="btn btn-small btn-success" id="saveupload">
+				保存</button>
+		</div>
+	</div>
 	<div class="error" id="error-tips"
 		style="top: 260.183px; left: 1071.5px; display: none;">给日记加个标题吧</div>
 </body>
@@ -476,6 +499,12 @@ input[type="file"] {
 						}, 300);
 						return;
 					}
+					$("#edit-container").css({
+						display : "none"
+					});
+					$('#preview-container').css({
+						display : "block"
+					});
 				});
 			},
 			inituploadinfo : function() {
