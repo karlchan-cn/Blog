@@ -109,9 +109,9 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                
+	filter: alpha(opacity =                                                  
 		                                                         
-		                                                  0);
+		                                                    0);
 	opacity: 0;
 }
 </style>
@@ -336,19 +336,19 @@ input[type="file"] {
 		</div>
 	</div>
 	<!-- /container -->
-	<div class="container" id="preview-container" style="display: none">
+	<div class="container" id="preview-container" style="display: block">
 		<div class="row" id="title-preview">
 			<h3>预览日志</h3>
 		</div>
 		<div class="row" id="content-preview">
 			<pre class="note span6">asdfasdfasdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffssssssssssssssdddddddddddddddaaaaaaaaaaaaaaaaaaaaa</pre>
 		</div>
-		<div class="modal-footer">
-			<button class="btn btn-small dismissupload" data-dismiss="modal"
-				aria-hidden="true">关闭</button>
-			<button class="btn btn-small btn-success" id="saveupload">
-				保存</button>
-		</div>
+		<label class="float-label">
+			<button type="button" class="btn btn-small btm-btn" id="preview-btn">预览</button>
+			<button type="submit" class="btn btn-small btn-success btm-btn">
+				发表</button>
+			<button id='cancel-btn' type="button" class="btn btn-small btm-btn">取消</button>
+		</label>
 	</div>
 	<div class="error" id="error-tips"
 		style="top: 260.183px; left: 1071.5px; display: none;">给日记加个标题吧</div>
@@ -465,7 +465,7 @@ input[type="file"] {
 					var blogutils = $.blogutils;
 					var docElement = $('html,body');
 					var errorTips = $('#error-tips');
-					var editTipsFun = function() {
+					var editTipsFun = function(msg) {
 						errorTips.css({
 							display : "block"
 						});
