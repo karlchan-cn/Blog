@@ -22,32 +22,32 @@ import cn.com.kc.blog.bl.service.IBlogImageService;
 @RequestMapping("/imagemanage")
 public class BlogImageController {
 
-	/**
+/**
 	 * 
 	 */
-	public BlogImageController() {
-		// TODO Auto-generated constructor stub
-	}
+public BlogImageController() {
+	// TODO Auto-generated constructor stub
+}
 
-	@Resource(name = "cn.com.kc.blog.bl.service.IBlogImageService")
-	private IBlogImageService blogImageService;
+@Resource(name = "cn.com.kc.blog.bl.service.IBlogImageService")
+private IBlogImageService blogImageService;
 
-	public IBlogImageService getBlogImageService() {
-		return blogImageService;
-	}
+public IBlogImageService getBlogImageService() {
+	return blogImageService;
+}
 
-	public void setBlogImageService(IBlogImageService blogImageService) {
-		this.blogImageService = blogImageService;
-	}
+public void setBlogImageService(IBlogImageService blogImageService) {
+	this.blogImageService = blogImageService;
+}
 
-	@RequestMapping("/delimage")
-	@ResponseBody
-	public String delImage(
-			@Validated @ModelAttribute("imageId") final Long imageId,
-			final BindingResult result) {
-		//getBlogImageService().delImage(imageId);
-		System.out.println("out");
-		return null;
-	}
+@RequestMapping("/delimage")
+@ResponseBody
+public String delImage(
+				@Validated @ModelAttribute("imageId") final Long imageId,
+				final BindingResult result) {
+	// getBlogImageService().delImage(imageId);
+	System.out.println("out");
+	return null;
+}
 
 }

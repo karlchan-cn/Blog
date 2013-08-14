@@ -109,9 +109,11 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                  
+	filter: alpha(opacity =                     
 		                                                         
-		                                                    0);
+		                                                         
+		                                                                     
+		           0);
 	opacity: 0;
 }
 </style>
@@ -277,8 +279,8 @@ input[type="file"] {
 					<label class="float-label">
 						<button type="button" class="btn btn-small btm-btn"
 							id="preview-btn">预览</button>
-						<button type="submit" class="btn btn-small btn-success btm-btn">
-							发表</button>
+						<button type="button" class="btn btn-small btn-success btm-btn"
+							class="submit-btn">发表</button>
 						<button id='cancel-btn' type="button"
 							class="btn btn-small btm-btn">取消</button>
 					</label> <input type="hidden" id="entityid"
@@ -336,18 +338,17 @@ input[type="file"] {
 		</div>
 	</div>
 	<!-- /container -->
-	<div class="container" id="preview-container" style="display: block">
-		<div class="row" id="title-preview">
-			<h3>预览日志</h3>
+	<div class="container" id="preview-container" style="display: none">
+		<div class="row">
+			<h3 id="title-preview"></h3>
 		</div>
 		<div class="row" id="content-preview">
-			<pre class="note span6">asdfasdfasdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffssssssssssssssdddddddddddddddaaaaaaaaaaaaaaaaaaaaa</pre>
+			<pre class="note span6"></pre>
 		</div>
-		<label class="float-label">
-			<button type="button" class="btn btn-small btm-btn" id="preview-btn">预览</button>
-			<button type="submit" class="btn btn-small btn-success btm-btn">
-				发表</button>
-			<button id='cancel-btn' type="button" class="btn btn-small btm-btn">取消</button>
+		<label class="float-label span6">
+			<button type="button" class="btn btn-small btm-btn" id="reedit-btn">继续编辑</button>
+			<button type="button" class="btn btn-small btn-success btm-btn"
+				class="submit-btn">发表</button>
 		</label>
 	</div>
 	<div class="error" id="error-tips"
@@ -388,6 +389,7 @@ input[type="file"] {
 				showName : ''
 			},
 			uploadtable : $('#uploadfiletable'),
+			//initial method
 			init : function() {
 				//上传表格删除按钮控制
 				var delBtns = $('#uploadfiletable a');
@@ -459,6 +461,7 @@ input[type="file"] {
 				$("#entity_private" + readPrivate).attr("checked", true);
 				//add preview btn click handler
 				var previewBtn = $("#preview-btn");
+				//preview button click event handler
 				previewBtn.bind('click', function() {
 					var entityTitle = $("#title");
 					var entityContent = $("#content");
@@ -475,7 +478,9 @@ input[type="file"] {
 							});
 						}, 5000);
 					}
-					if ($.blogutils.isEmptyString(entityTitle.val())) {
+					var entityTitleVal = entityTitle.val();
+					if ($.blogutils.isEmptyString(entityTitleVal)) {
+						errorTips.text("给日记加个标题吧");
 						var elePosition = entityTitle.position();
 						errorTips.css({
 							left : elePosition.left + entityTitle.width() + 16,
@@ -487,7 +492,9 @@ input[type="file"] {
 						editTipsFun();
 						return;
 					}
-					if (blogutils.isEmptyString(entityContent.val())) {
+					var entityContentVal = entityContent.val();
+					if (blogutils.isEmptyString(entityContentVal)) {
+						errorTips.text("给日记添加内容吧");
 						var elePosition = entityContent.position();
 						errorTips.css({
 							left : elePosition.left + entityTitle.width() + 16,
@@ -499,11 +506,29 @@ input[type="file"] {
 						}, 300);
 						return;
 					}
+					//initial preview content
+					$.post("editepreviewcontent", {
+						previewContent : entityContentVal
+					}, function(data) {
+						$("#content-preview pre").empty().append(data.content);
+						$('#title-preview').text(entityTitleVal);
+						$("#edit-container").css({
+							display : "none"
+						});
+						$('#preview-container').css({
+							display : "block"
+						});
+					}, "json");
+
+				});
+				//re edit button click event handler
+
+				$('#reedit-btn').bind("click", function() {
 					$("#edit-container").css({
-						display : "none"
+						display : "block"
 					});
 					$('#preview-container').css({
-						display : "block"
+						display : "none"
 					});
 				});
 			},

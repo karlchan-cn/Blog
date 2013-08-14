@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -33,10 +32,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSON;
 
 import cn.com.kc.blog.bl.service.IBlogEntityService;
 import cn.com.kc.blog.bl.service.IBlogImageService;
@@ -46,7 +44,8 @@ import cn.com.kc.blog.pojo.BlogEntityConst;
 import cn.com.kc.blog.pojo.BlogImage;
 import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
-import cn.com.kc.blog.vo.BlogEntityVO;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * @author chenjinlong2
@@ -371,6 +370,28 @@ public ModelAndView newEntity(
 	retVal.setViewName(CONST_ENTITY_PAGE);
 	retVal.getModelMap().put("entity", model);
 	return retVal;
+}
+
+@RequestMapping("/editepreviewcontent")
+@ResponseBody
+public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent) {
+	HttpHeaders responseHeaders = new HttpHeaders();
+	responseHeaders.set("Content-Type", "text/plain");
+	responseHeaders.set("charset", "UTF-8");
+	HashMap<String, String> retVal = new HashMap<String, String>();
+	previewContent = previewContent.replaceAll("&", "&amp;");
+	previewContent = previewContent.replaceAll("<", "&lt;");
+	previewContent = previewContent.replaceAll(">", "&gt;");
+	previewContent = previewContent.replaceAll("\"", "&quot;");
+	previewContent = previewContent.replaceAll("\n", "<br>");
+	retVal.put("content", previewContent);
+	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
+					JSON.toJSONString(retVal), responseHeaders, HttpStatus.CREATED);
+	return responseEntity;
+}
+
+public static String transSpecialContent(String content) {
+	return null;
 }
 }
 // to do 保存图片,删除图片,控制上传窗口的状态.
