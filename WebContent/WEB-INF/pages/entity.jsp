@@ -109,11 +109,11 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                     
+	filter: alpha(opacity =                                                     
 		                                                         
 		                                                         
 		                                                                     
-		           0);
+		                                           0);
 	opacity: 0;
 }
 </style>
@@ -241,6 +241,21 @@ input[type="file"] {
 	border: none;
 	background-color: white;
 }
+/**
+image area
+**/
+.image-item {
+	background-color: #F3F3F3;
+	border: 1px solid #CCCCCC;
+	padding: 4px 6px;
+	margin-right: 5px;
+	width: 530px;
+	margin-left: 0;
+}
+
+.image-item div {
+	margin-left: 10px;
+}
 </style>
 </head>
 <body>
@@ -262,6 +277,39 @@ input[type="file"] {
 					</label>
 					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
+					<div id="images">
+						<div class="image-item row">
+							<a title="删除该图片" href="#" class="delete-image">X</a>
+							<div class="span1">
+								<label class="image-name">&lt;图片1&gt;</label>
+								<div class="image-thumb">
+									<img alt="图片1"
+										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+								</div>
+							</div>
+							<div class="image-desc span4">
+								<label for="p1_title" class="field">图片描述(30字以内)</label>
+								<textarea maxlength="30" name="p1_title" id="p1_title"
+									style="height: 80px; width: 100%"></textarea>
+							</div>
+						</div>
+						<div class="image-item row">
+							<a title="删除该图片" href="#" class="delete-image">X</a>
+							<div class="span1">
+								<label class="image-name">&lt;图片1&gt;</label>
+								<div class="image-thumb">
+									<img alt="图片1"
+										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+								</div>
+							</div>
+							<div class="image-desc span4">
+								<label for="p1_title" class="field">图片描述(30字以内)</label>
+								<textarea maxlength="30" name="p1_title" id="p1_title"
+									style="height: 80px; width: 100%"></textarea>
+							</div>
+						</div>
+					</div>
+
 					<div class="blogoptiondiv">
 						<p>设置可见：</p>
 						<label class="radio inline"> <input type="radio" value="P"
@@ -288,6 +336,7 @@ input[type="file"] {
 				</fieldset>
 			</form>
 		</div>
+
 	</div>
 	<!-- Modal -->
 	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
@@ -611,7 +660,7 @@ input[type="file"] {
 															{
 																'name' : 'entity',
 																'value' : $
-																		.toJSON(pageController.blogentity)
+																		.toJSON(pageController.currentEntity)
 															} ]
 												});
 								if (filterResult == null) {

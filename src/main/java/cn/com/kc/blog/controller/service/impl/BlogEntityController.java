@@ -6,6 +6,7 @@ package cn.com.kc.blog.controller.service.impl;
 import java.io.File;
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -375,9 +377,6 @@ public ModelAndView newEntity(
 @RequestMapping("/editepreviewcontent")
 @ResponseBody
 public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent) {
-	HttpHeaders responseHeaders = new HttpHeaders();
-	responseHeaders.set("Content-Type", "text/plain");
-	responseHeaders.set("charset", "UTF-8");
 	HashMap<String, String> retVal = new HashMap<String, String>();
 	previewContent = previewContent.replaceAll("&", "&amp;");
 	previewContent = previewContent.replaceAll("<", "&lt;");
@@ -386,7 +385,7 @@ public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent"
 	previewContent = previewContent.replaceAll("\n", "<br>");
 	retVal.put("content", previewContent);
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
-					JSON.toJSONString(retVal), responseHeaders, HttpStatus.CREATED);
+					JSON.toJSONString(retVal), CommonUtils.getHttpHeadersByType(""), HttpStatus.OK);
 	return responseEntity;
 }
 
