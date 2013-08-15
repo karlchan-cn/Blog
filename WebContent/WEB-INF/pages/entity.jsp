@@ -251,6 +251,7 @@ image area
 	margin-right: 5px;
 	width: 530px;
 	margin-left: 0;
+	margin-top:10px;
 }
 
 .image-item div {
@@ -284,7 +285,7 @@ image area
 								<label class="image-name">&lt;图片1&gt;</label>
 								<div class="image-thumb">
 									<img alt="图片1"
-										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+										src="http://ww4.sinaimg.cn/thumbnail/796c5e31jw1e7m6i591mgj20bk0gojug.jpg">
 								</div>
 							</div>
 							<div class="image-desc span4">
@@ -299,7 +300,7 @@ image area
 								<label class="image-name">&lt;图片1&gt;</label>
 								<div class="image-thumb">
 									<img alt="图片1"
-										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+										src="http://ww4.sinaimg.cn/thumbnail/796c5e31jw1e7m6i591mgj20bk0gojug.jpg">
 								</div>
 							</div>
 							<div class="image-desc span4">
