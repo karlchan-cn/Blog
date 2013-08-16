@@ -18,6 +18,10 @@ body {
 	outline: none;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 h2 {
 	font-size: 14px;
 	line-height: 10px;
@@ -36,7 +40,7 @@ h1 {
 }
 
 #edit-container {
-	font-family: "Arial,Helvetica,sans-serif";
+	font-family: arial, ​​helvetica, ​​sans-serif;
 }
 
 .container input[type="text"] {
@@ -109,11 +113,14 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                     
+	filter: alpha(opacity =         
+		                                                         
+		                                                         
 		                                                         
 		                                                         
 		                                                                     
-		                                           0);
+		                                                                     
+		                                             0);
 	opacity: 0;
 }
 </style>
@@ -244,6 +251,13 @@ input[type="file"] {
 /**
 image area
 **/
+#images {
+	margin-top: 20px;
+	border-bottom: 1px dashed #CCCCCC;
+	padding-bottom: 10px;
+	width: 545px;
+}
+
 .image-item {
 	background-color: #F3F3F3;
 	border: 1px solid #CCCCCC;
@@ -251,10 +265,49 @@ image area
 	margin-right: 5px;
 	width: 530px;
 	margin-left: 0;
+	margin-top: 10px;
+	position: relative;
 }
 
 .image-item div {
 	margin-left: 10px;
+}
+
+.image-item textarea {
+	resize: none;
+}
+
+.image-item label,.video-item label {
+	color: #666666;
+	font-size: 12px;
+}
+
+.image-item .image-thumb {
+	margin-left: 0px;
+	height: 90px;
+}
+
+.image-item .image-thumb img {
+	height: 100%;
+}
+
+a.delete-image,a.delete-video {
+	color: #999999;
+	display: block;
+	height: 16px;
+	line-height: 16px;
+	position: absolute;
+	right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 16px;
+	font-family: arial, ​​helvetica, ​​sans-serif;
+}
+
+a.delete-image:hover,a.delete-video:hover {
+	text-decoration: none;
+	background-color: transparent;
+	color: #333333;
 }
 </style>
 </head>
@@ -277,35 +330,81 @@ image area
 					</label>
 					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
-					<div id="images">
-						<div class="image-item row">
+					<div id="images" style="display: block">
+						<div class="image-item row" id="item1">
 							<a title="删除该图片" href="#" class="delete-image">X</a>
 							<div class="span1">
 								<label class="image-name">&lt;图片1&gt;</label>
 								<div class="image-thumb">
 									<img alt="图片1"
-										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
 								</div>
 							</div>
 							<div class="image-desc span4">
 								<label for="p1_title" class="field">图片描述(30字以内)</label>
 								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 100%"></textarea>
+									style="height: 80px; width: 110%"></textarea>
 							</div>
 						</div>
-						<div class="image-item row">
+						<div class="image-item row" id="item1">
 							<a title="删除该图片" href="#" class="delete-image">X</a>
 							<div class="span1">
 								<label class="image-name">&lt;图片1&gt;</label>
 								<div class="image-thumb">
 									<img alt="图片1"
-										src="http://b163.photo.store.qq.com/psb?/V12YUYhu0tvBaV/SBQZtxLBvSlHEsrng6eBchS5ABSkE*1BCHM5bFPSQms!/b/dL.qNWGeJgAA&bo=1gGgAQAAAAADAFM!">
+										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
 								</div>
 							</div>
 							<div class="image-desc span4">
 								<label for="p1_title" class="field">图片描述(30字以内)</label>
 								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 100%"></textarea>
+									style="height: 80px; width: 110%"></textarea>
+							</div>
+						</div>
+						<div class="image-item row" id="item1">
+							<a title="删除该图片" href="#" class="delete-image">X</a>
+							<div class="span1">
+								<label class="image-name">&lt;图片1&gt;</label>
+								<div class="image-thumb">
+									<img alt="图片1"
+										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
+								</div>
+							</div>
+							<div class="image-desc span4">
+								<label for="p1_title" class="field">图片描述(30字以内)</label>
+								<textarea maxlength="30" name="p1_title" id="p1_title"
+									style="height: 80px; width: 110%"></textarea>
+							</div>
+						</div>
+						<div class="image-item row" id="item1">
+							<a title="删除该图片" href="#" class="delete-image">X</a>
+							<div class="span1">
+								<label class="image-name">&lt;图片1&gt;</label>
+								<div class="image-thumb">
+									<img alt="图片1"
+										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
+								</div>
+							</div>
+							<div class="image-desc span4">
+								<label for="p1_title" class="field">图片描述(30字以内)</label>
+								<textarea maxlength="30" name="p1_title" id="p1_title"
+									style="height: 80px; width: 110%"></textarea>
+							</div>
+						</div>
+						
+						<div class="image-item row" id="item2">
+							<a title="删除该图片" href="#" class="delete-image">X</a>
+							<div class="span1">
+								<label class="image-name">&lt;图片1&gt;</label>
+								<div class="image-thumb">
+									<img alt="图片1"
+										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
+								</div>
+							</div>
+							<div class="image-desc span4">
+								<label for="p1_title" class="field">图片描述(30字以内)</label>
+								<textarea maxlength="30" name="p1_title" id="p1_title"
+									style="height: 80px; width: 110%"></textarea>
 							</div>
 						</div>
 					</div>
@@ -571,7 +670,6 @@ image area
 
 				});
 				//re edit button click event handler
-
 				$('#reedit-btn').bind("click", function() {
 					$("#edit-container").css({
 						display : "block"
@@ -579,6 +677,32 @@ image area
 					$('#preview-container').css({
 						display : "none"
 					});
+				});
+				//images remove click event handler
+				$('.delete-image').bind("click", function() {
+
+					var currentimgItem = $(this).parent();
+					currentimgItem.hide(500);
+					/**
+					currentimgItem.parent().remove(
+							"#" + currentimgItem.attr('id'));
+					/**
+					currentimgItem.animate({
+						height : 0,
+						margin : 0,
+						padding : 0,
+						border : 'none'
+					}, 1000, function() {
+						currentimgItem.remove();
+					});**/
+					/**
+					currentimgItem.hide({
+						display : 'none'
+					}, 1000, function() {
+						currentimgItem.remove();
+					});
+					 **/
+					return false;
 				});
 			},
 			inituploadinfo : function() {

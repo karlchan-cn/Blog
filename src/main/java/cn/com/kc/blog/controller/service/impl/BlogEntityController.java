@@ -234,9 +234,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 	DiskFileItemFactory factory = new DiskFileItemFactory();
 	ServletFileUpload upload = new ServletFileUpload(factory);
 	List<FileItem> items = null;
-	HttpHeaders responseHeaders = new HttpHeaders();
-	responseHeaders.set("Content-Type", "text/plain");
-	responseHeaders.set("charset", "UTF-8");
 	// if over 20 images upload, return false-如果上传超过20张,直接返回false.
 	if (uploadedCount >= 20) {
 		retVal.put(CONST_RET_ERROR, Boolean.TRUE);
@@ -295,7 +292,7 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 		throw new RuntimeException(e);
 	}
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
-					w.toString(), responseHeaders, HttpStatus.CREATED);
+					w.toString(), CommonUtils.getHttpHeadersByType(""), HttpStatus.CREATED);
 	return responseEntity;
 }
 
