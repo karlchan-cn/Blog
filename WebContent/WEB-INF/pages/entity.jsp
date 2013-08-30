@@ -807,7 +807,7 @@ a.delete-image:hover,a.delete-video:hover {
 											tr.find('.uploadlistsize')
 													.removeClass('fileloading')
 													.text(
-															file.size / 1024
+															currentFile.size / 1024
 																	+ 'kb');
 											tr.addClass('warning');
 											tr = null;

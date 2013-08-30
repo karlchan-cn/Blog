@@ -15,3 +15,5 @@ insert into users (id,username,password) values(1,"karlchan","password");
  */
 select * from blog_entity;
 delete from blog_entity;
+
+select * From blog_image;
