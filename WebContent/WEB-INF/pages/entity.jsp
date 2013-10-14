@@ -113,14 +113,14 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =         
+	filter: alpha(opacity =                         
 		                                                         
 		                                                         
 		                                                         
 		                                                         
 		                                                                     
 		                                                                     
-		                                             0);
+		                                                             0);
 	opacity: 0;
 }
 </style>
@@ -391,7 +391,7 @@ a.delete-image:hover,a.delete-video:hover {
 									style="height: 80px; width: 110%"></textarea>
 							</div>
 						</div>
-						
+
 						<div class="image-item row" id="item2">
 							<a title="删除该图片" href="#" class="delete-image">X</a>
 							<div class="span1">
@@ -799,19 +799,63 @@ a.delete-image:hover,a.delete-video:hover {
 								data.submit();
 							},
 							done : function(e, data) {
-								$.each(data.result,
-										function(index, file) {
-											var currentFile = file[0];
-											var tr = $('#tempid_'
-													+ currentFile.tempid);
-											tr.find('.uploadlistsize')
-													.removeClass('fileloading')
-													.text(
-															currentFile.size / 1024
-																	+ 'kb');
-											tr.addClass('warning');
-											tr = null;
-										});
+								$
+										.each(
+												data.result,
+												function(index, file) {
+													var currentFile = file[0];
+													var tr = $('#tempid_'
+															+ currentFile.tempid);
+													tr.attr("id",
+															currentFile.id);
+													tr.addClass("savedFile");
+													var currentFileSize = parseFloat((currentFile.size / 1024)
+															.toFixed(1));
+													var currentSizeType = "KB";
+													if (currentFileSize > 1024) {
+														currentFileSize = (currentFileSize / 1024)
+																.toFixed(1);
+														currentSizeType = "MB";
+													}
+													tr
+															.find(
+																	'.uploadlistsize')
+															.removeClass(
+																	'fileloading')
+															.addClass(
+																	"fileUploaded")
+															.text(
+																	currentFileSize
+																			+ currentSizeType);
+
+													tr.addClass('warning');
+													$("#total-num-image").text(
+															$(".savedFile")
+																	.size());
+													var totalSize = parseFloat(parseFloat(
+															$(
+																	"#total-size-image")
+																	.text())
+															.toFixed(1));
+													if ($("#total-size-type")
+															.text() == "MB") {
+														totalSize = totalSize * 1024;
+													}
+													totalSize = totalSize
+															+ parseFloat((currentFile.size / 1024)
+																	.toFixed(1));
+													var sizeType = "KB";
+													if (totalSize > 1024) {
+														totalSize = (totalSize / 1024)
+																.toFixed(1);
+														sizeType = "MB";
+													}
+													$("#total-size-type").text(
+															sizeType);
+													$("#total-size-image")
+															.text(totalSize);
+													tr = null;
+												});
 							}
 						});
 

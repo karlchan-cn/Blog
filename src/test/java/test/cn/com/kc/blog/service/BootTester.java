@@ -50,6 +50,10 @@ public class BootTester {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+		String a = "";
+		if(a instanceof String){
+			
+		}
 
 	}
 
