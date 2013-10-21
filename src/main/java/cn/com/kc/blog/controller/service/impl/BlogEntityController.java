@@ -144,7 +144,7 @@ public static String getUploadDir(final HttpServletRequest request) {
 	if (UPLOAD_DIR == null) {
 		UPLOAD_DIR = request.getSession().getServletContext()
 						.getRealPath("/")
-						+ "/WEB-INF/upload/images/";
+						+ "/WEB-INF/assets/upload/images/";
 		// 初始化下载目录
 		File uploadDir = new File(UPLOAD_DIR);
 		if (!uploadDir.exists()) {
@@ -265,7 +265,6 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 					blogImage.setShowName(item.getName());
 					blogImage.setSize(item.getSize());
 					item.write(file);
-
 				} else if ("tempid".equals(item.getFieldName())) {
 					blogImage.setTempid(Long.valueOf(item.getString()));
 				} else if ("entity".equals(item.getFieldName())) {

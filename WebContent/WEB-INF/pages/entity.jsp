@@ -113,14 +113,15 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                         
+	filter: alpha(opacity =                                 
 		                                                         
 		                                                         
 		                                                         
 		                                                         
 		                                                                     
 		                                                                     
-		                                                             0);
+		                                                                     0
+		);
 	opacity: 0;
 }
 </style>
@@ -346,67 +347,6 @@ a.delete-image:hover,a.delete-video:hover {
 									style="height: 80px; width: 110%"></textarea>
 							</div>
 						</div>
-						<div class="image-item row" id="item1">
-							<a title="删除该图片" href="#" class="delete-image">X</a>
-							<div class="span1">
-								<label class="image-name">&lt;图片1&gt;</label>
-								<div class="image-thumb">
-									<img alt="图片1"
-										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
-								</div>
-							</div>
-							<div class="image-desc span4">
-								<label for="p1_title" class="field">图片描述(30字以内)</label>
-								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 110%"></textarea>
-							</div>
-						</div>
-						<div class="image-item row" id="item1">
-							<a title="删除该图片" href="#" class="delete-image">X</a>
-							<div class="span1">
-								<label class="image-name">&lt;图片1&gt;</label>
-								<div class="image-thumb">
-									<img alt="图片1"
-										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
-								</div>
-							</div>
-							<div class="image-desc span4">
-								<label for="p1_title" class="field">图片描述(30字以内)</label>
-								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 110%"></textarea>
-							</div>
-						</div>
-						<div class="image-item row" id="item1">
-							<a title="删除该图片" href="#" class="delete-image">X</a>
-							<div class="span1">
-								<label class="image-name">&lt;图片1&gt;</label>
-								<div class="image-thumb">
-									<img alt="图片1"
-										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
-								</div>
-							</div>
-							<div class="image-desc span4">
-								<label for="p1_title" class="field">图片描述(30字以内)</label>
-								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 110%"></textarea>
-							</div>
-						</div>
-
-						<div class="image-item row" id="item2">
-							<a title="删除该图片" href="#" class="delete-image">X</a>
-							<div class="span1">
-								<label class="image-name">&lt;图片1&gt;</label>
-								<div class="image-thumb">
-									<img alt="图片1"
-										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
-								</div>
-							</div>
-							<div class="image-desc span4">
-								<label for="p1_title" class="field">图片描述(30字以内)</label>
-								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 110%"></textarea>
-							</div>
-						</div>
 					</div>
 
 					<div class="blogoptiondiv">
@@ -596,9 +536,25 @@ a.delete-image:hover,a.delete-video:hover {
 				$('.dismissupload').click(function() {
 					//alert('dismissupload');
 				});
-				$('#saveupload').click(function() {
-					//alert('saveupload');
-				});
+				$('#saveupload')
+						.click(
+								function() {
+									var uploadedImages = $("#uploadfiletable .savedFile");
+									uploadedImages
+											.each(function(image) {
+												var currentFile = image
+														.data("file");
+												var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span1'>"
+														+ "<label class='image-name'>&lt;图片1&gt;</label><div class='image-thumb'>"
+														+ "<img alt='图片1' src='"+"http://" + location.host+ "/Blog/assets/images/"+currentFile.name+"'></div>"
+														+ "</div><div class='image-desc span4'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
+														+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px; width: 110%'></textarea></div></div>");
+												imageBlock.attr("id", image
+														.attr("id"));
+											});
+
+									//alert('saveupload');
+								});
 				//initialize read private and commentable
 				var currentEntity = $.evalJSON($("#x-script").text());
 				this.currentEntity = currentEntity;
@@ -806,8 +762,13 @@ a.delete-image:hover,a.delete-video:hover {
 													var currentFile = file[0];
 													var tr = $('#tempid_'
 															+ currentFile.tempid);
+													tr.data({
+														"file" : currentFile
+													});
 													tr.attr("id",
 															currentFile.id);
+													tr.attr("name",
+															currentFile.name);
 													tr.addClass("savedFile");
 													var currentFileSize = parseFloat((currentFile.size / 1024)
 															.toFixed(1));
