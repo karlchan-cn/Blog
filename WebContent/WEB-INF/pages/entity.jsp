@@ -113,15 +113,16 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                 
+	filter: alpha(opacity =        
+		                                                         
 		                                                         
 		                                                         
 		                                                         
 		                                                         
 		                                                                     
 		                                                                     
-		                                                                     0
-		);
+		                                                                     
+		                                0);
 	opacity: 0;
 }
 </style>
@@ -252,7 +253,7 @@ input[type="file"] {
 /**
 image area
 **/
-#images {
+#images-thumb {
 	margin-top: 20px;
 	border-bottom: 1px dashed #CCCCCC;
 	padding-bottom: 10px;
@@ -274,6 +275,14 @@ image area
 	margin-left: 10px;
 }
 
+.image-item .span2 {
+	width: 25%;
+}
+
+.image-item .span3 {
+	width: 65%;
+}
+
 .image-item textarea {
 	resize: none;
 }
@@ -289,7 +298,8 @@ image area
 }
 
 .image-item .image-thumb img {
-	height: 100%;
+	height: 90px;
+	width: 120px;
 }
 
 a.delete-image,a.delete-video {
@@ -331,23 +341,7 @@ a.delete-image:hover,a.delete-video:hover {
 					</label>
 					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
-					<div id="images" style="display: block">
-						<div class="image-item row" id="item1">
-							<a title="删除该图片" href="#" class="delete-image">X</a>
-							<div class="span1">
-								<label class="image-name">&lt;图片1&gt;</label>
-								<div class="image-thumb">
-									<img alt="图片1"
-										src="http://img1.gtimg.com/news/pics/hv1/0/204/1394/90696870.jpg">
-								</div>
-							</div>
-							<div class="image-desc span4">
-								<label for="p1_title" class="field">图片描述(30字以内)</label>
-								<textarea maxlength="30" name="p1_title" id="p1_title"
-									style="height: 80px; width: 110%"></textarea>
-							</div>
-						</div>
-					</div>
+					<div id="images-thumb" style="display: block"></div>
 
 					<div class="blogoptiondiv">
 						<p>设置可见：</p>
@@ -494,18 +488,12 @@ a.delete-image:hover,a.delete-video:hover {
 					var delRow = $(this).parent().parent();
 					var rowid = delRow.attr('id');
 					if ((rowid + '').indexOf('temp') === -1) {
-						$.get("/Blog/entity/inituploadinfo", {
-							action : 'init'
-						});
-						//暂存文章,或者加载上次临时保存的文章
 						$.post("/Blog/imagemanage/delimage", {
-							entity : ''
+							imageId : rowid
 						}, function(data) {
-							//临时保存对象
-							alert('success');
 						}, "json");
 					}
-					delRow.remove();
+					delRow.detach();
 				});
 				/**
 				//暂存文章,或者加载上次临时保存的文章
@@ -519,14 +507,15 @@ a.delete-image:hover,a.delete-video:hover {
 				//注册上传窗体hide事件
 				var uploadModel = $('#myModal');
 				uploadModel.on('hidden', function() {
+
+				});
+				uploadModel.on('show', function() {
 					//表格数据删除
 					$('tr').remove('.uploaditem');
 					$('#total-num-image').text(0);
 					$('#total-size-image').text('0');
 					$('#total-size-type').text('KB');
 					$('#uploadfiletable').hide();
-				});
-				uploadModel.on('show', function() {
 					//初始化缓存
 					$.get("/Blog/entity/inituploadinfo", {
 						action : 'init'
@@ -539,19 +528,35 @@ a.delete-image:hover,a.delete-video:hover {
 				$('#saveupload')
 						.click(
 								function() {
-									var uploadedImages = $("#uploadfiletable .savedFile");
-									uploadedImages
-											.each(function(image) {
-												var currentFile = image
-														.data("file");
-												var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span1'>"
-														+ "<label class='image-name'>&lt;图片1&gt;</label><div class='image-thumb'>"
-														+ "<img alt='图片1' src='"+"http://" + location.host+ "/Blog/assets/images/"+currentFile.name+"'></div>"
-														+ "</div><div class='image-desc span4'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
-														+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px; width: 110%'></textarea></div></div>");
-												imageBlock.attr("id", image
-														.attr("id"));
-											});
+									$('#myModal').modal("hide");
+									window
+											.setTimeout(
+													function() {
+														var uploadedImages = $("#uploadfiletable .savedFile");
+														uploadedImages
+																.each(function(
+																		index,
+																		image) {
+																	var curImgCount = $(
+																			".image-item")
+																			.size() + 1;
+																	var currentFile = $(
+																			image)
+																			.data(
+																					"file");
+																	var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
+																			+ "<label class='image-name'>&lt;图片"
+																			+ curImgCount
+																			+ "&gt;</label><div class='image-thumb'>"
+																			+ "<img alt='图片1' src='"+"http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
+																			+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
+																			+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
+																	$(
+																			"#images-thumb")
+																			.append(
+																					imageBlock);
+																});
+													}, 200);
 
 									//alert('saveupload');
 								});
@@ -635,29 +640,11 @@ a.delete-image:hover,a.delete-video:hover {
 					});
 				});
 				//images remove click event handler
-				$('.delete-image').bind("click", function() {
-
+				$('.delete-image').live("click", function() {
 					var currentimgItem = $(this).parent();
-					currentimgItem.hide(500);
-					/**
-					currentimgItem.parent().remove(
-							"#" + currentimgItem.attr('id'));
-					/**
-					currentimgItem.animate({
-						height : 0,
-						margin : 0,
-						padding : 0,
-						border : 'none'
-					}, 1000, function() {
-						currentimgItem.remove();
-					});**/
-					/**
-					currentimgItem.hide({
-						display : 'none'
-					}, 1000, function() {
-						currentimgItem.remove();
+					currentimgItem.hide(500, function() {
+						currentimgItem.detach();
 					});
-					 **/
 					return false;
 				});
 			},

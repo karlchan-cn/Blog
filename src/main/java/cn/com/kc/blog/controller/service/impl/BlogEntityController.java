@@ -3,10 +3,11 @@
  */
 package cn.com.kc.blog.controller.service.impl;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,9 +32,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +52,9 @@ import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
 
 import com.alibaba.fastjson.JSON;
+import com.mortennobel.imagescaling.AdvancedResizeOp;
+import com.mortennobel.imagescaling.ResampleFilters;
+import com.mortennobel.imagescaling.ResampleOp;
 
 /**
  * @author chenjinlong2
@@ -218,6 +225,78 @@ private Integer getCurrentUploadedCount(HttpSession session) {
 	return imageCount;
 }
 
+/**
+ * high image quality is important.
+ */
+private static float JPEG_QUALITY_HIGH = 1.0f;
+/**
+ * entity's image thumbnail width;
+ */
+private static int JEPG_WIDTH_ENTITY_IMAGE = 120;
+/**
+ * entity's image thumbnail high;
+ */
+private static int JEPG_HIGH_ENTITY_IMAGE = 90;
+
+/**
+ * creat and save image thumbnail use java-image-scaling library.
+ * 
+ * @param sourceFile
+ *            source file location
+ * @param destFile
+ *            desctination file location
+ * @param width
+ *            specified width of the thumbnail
+ * @param height
+ *            specified high of the thumbnail
+ * @throws IOException
+ *             any io exception;
+ */
+private void scaleAndSaveImageWithJImage(String sourceFile, String destFile, int width, int height)
+	throws IOException {
+	BufferedImage sourceImage = ImageIO.read(new File(sourceFile));
+	ResampleOp resampleOp = new ResampleOp(width, height);
+	resampleOp.setFilter(ResampleFilters.getLanczos3Filter());
+	resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Normal);
+	BufferedImage destImage = resampleOp.filter(sourceImage, null);
+	writeJpeg(destImage, destFile, JPEG_QUALITY_HIGH);
+}
+
+/**
+ * Write a JPEG file setting the compression quality.
+ * 
+ * @param image
+ *            a BufferedImage to be saved
+ * @param destFile
+ *            destination file (absolute or relative path)
+ * @param quality
+ *            a float between 0 and 1, where 1 means uncompressed.
+ * @throws IOException
+ *             in case of problems writing the file
+ */
+private void writeJpeg(BufferedImage image, String destFile, float quality)
+	throws IOException {
+	ImageWriter writer = null;
+	FileImageOutputStream output = null;
+	try {
+		writer = ImageIO.getImageWritersByFormatName("jpeg").next();
+		ImageWriteParam param = writer.getDefaultWriteParam();
+		param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+		param.setCompressionQuality(quality);
+		output = new FileImageOutputStream(new File(destFile));
+		writer.setOutput(output);
+		IIOImage iioImage = new IIOImage(image, null, null);
+		writer.write(null, iioImage, param);
+	} catch (IOException ex) {
+		throw ex;
+	} finally {
+		if (writer != null)
+			writer.dispose();
+		if (output != null)
+			output.close();
+	}
+}
+
 @RequestMapping("/savefile")
 @ResponseBody
 @SuppressWarnings("unchecked")
@@ -260,11 +339,15 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 					}
 					String fileName = String.valueOf(System
 									.currentTimeMillis()) + item.getName();
-					File file = new File(uploadDir + fileName);
+					String imageDesPath = uploadDir + fileName;
+					File file = new File(imageDesPath);
 					blogImage.setName(fileName);
 					blogImage.setShowName(item.getName());
 					blogImage.setSize(item.getSize());
 					item.write(file);
+					scaleAndSaveImageWithJImage(imageDesPath, uploadDir + "thumb" + fileName, JEPG_WIDTH_ENTITY_IMAGE,
+									JEPG_HIGH_ENTITY_IMAGE);
+					// Image image =
 				} else if ("tempid".equals(item.getFieldName())) {
 					blogImage.setTempid(Long.valueOf(item.getString()));
 				} else if ("entity".equals(item.getFieldName())) {

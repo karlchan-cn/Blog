@@ -6,10 +6,8 @@ package cn.com.kc.blog.controller.service.impl;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.com.kc.blog.bl.service.IBlogImageService;
@@ -43,9 +41,9 @@ public void setBlogImageService(IBlogImageService blogImageService) {
 @RequestMapping("/delimage")
 @ResponseBody
 public String delImage(
-				@Validated @ModelAttribute("imageId") final Long imageId,
-				final BindingResult result) {
-	// getBlogImageService().delImage(imageId);
+				@RequestParam("imageId") Long imageId
+				) {
+	getBlogImageService().delImage(imageId);
 	System.out.println("out");
 	return null;
 }
