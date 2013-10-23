@@ -6,6 +6,7 @@ package cn.com.kc.blog.controller.service.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -44,6 +45,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.kc.blog.bl.service.IBlogEntityService;
 import cn.com.kc.blog.bl.service.IBlogImageService;
+import cn.com.kc.blog.common.util.CommonControllerUtils;
 import cn.com.kc.blog.common.util.CommonUtils;
 import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogEntityConst;
@@ -144,25 +146,6 @@ private static String UPLOAD_DIR = null;
 
 /**
  * 
- * @param request
- * @return
- */
-public static String getUploadDir(final HttpServletRequest request) {
-	if (UPLOAD_DIR == null) {
-		UPLOAD_DIR = request.getSession().getServletContext()
-						.getRealPath("/")
-						+ "/WEB-INF/assets/upload/images/";
-		// 初始化下载目录
-		File uploadDir = new File(UPLOAD_DIR);
-		if (!uploadDir.exists()) {
-			uploadDir.mkdirs();
-		}
-	}
-	return UPLOAD_DIR;
-}
-
-/**
- * 
  * @param newblogEntityService
  */
 @Resource(name = "cn.com.kc.blog.bl.service.IBlogEntityService")
@@ -237,6 +220,19 @@ private static int JEPG_WIDTH_ENTITY_IMAGE = 120;
  * entity's image thumbnail high;
  */
 private static int JEPG_HIGH_ENTITY_IMAGE = 90;
+/**
+ * thumb string constant.
+ */
+private static String CONST_STR_THUMB = "thumb";
+
+/**
+ * entity's image thumbnail width;
+ */
+private static int JEPG_WIDTH_ENTITY_IMAGE_RAW = 600;
+/**
+ * entity's image thumbnail high;
+ */
+private static int JEPG_HIGH_ENTITY_IMAGE_RAW = 450;
 
 /**
  * creat and save image thumbnail use java-image-scaling library.
@@ -255,6 +251,30 @@ private static int JEPG_HIGH_ENTITY_IMAGE = 90;
 private void scaleAndSaveImageWithJImage(String sourceFile, String destFile, int width, int height)
 	throws IOException {
 	BufferedImage sourceImage = ImageIO.read(new File(sourceFile));
+	ResampleOp resampleOp = new ResampleOp(width, height);
+	resampleOp.setFilter(ResampleFilters.getLanczos3Filter());
+	resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Normal);
+	BufferedImage destImage = resampleOp.filter(sourceImage, null);
+	writeJpeg(destImage, destFile, JPEG_QUALITY_HIGH);
+}
+
+/**
+ * creat and save image thumbnail use java-image-scaling library.
+ * 
+ * @param sourceFile
+ *            source file location
+ * @param destFile
+ *            desctination file location
+ * @param width
+ *            specified width of the thumbnail
+ * @param height
+ *            specified high of the thumbnail
+ * @throws IOException
+ *             any io exception;
+ */
+private void scaleAndSaveImageWithJImage(final InputStream fileis, String destFile, int width, int height)
+	throws IOException {
+	BufferedImage sourceImage = ImageIO.read(fileis);
 	ResampleOp resampleOp = new ResampleOp(width, height);
 	resampleOp.setFilter(ResampleFilters.getLanczos3Filter());
 	resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Normal);
@@ -297,10 +317,10 @@ private void writeJpeg(BufferedImage image, String destFile, float quality)
 	}
 }
 
-@RequestMapping("/savefile")
+@RequestMapping("/saveimagefile")
 @ResponseBody
 @SuppressWarnings("unchecked")
-public ResponseEntity<String> saveFile(HttpServletRequest request,
+public ResponseEntity<String> saveImageFile(HttpServletRequest request,
 				HttpServletResponse response, HttpSession httpSession) {
 
 	JsonFactory jsonFactory = new JsonFactory();
@@ -324,7 +344,7 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 			items = upload.parseRequest(request);
 			Iterator<FileItem> iterator = items.iterator();
 			FileItem item = null;
-			final String uploadDir = getUploadDir(request);
+			final String uploadDir = CommonControllerUtils.getUploadDir(request);
 			while (iterator.hasNext()) {
 				item = iterator.next();
 				if (!item.isFormField()) {
@@ -340,12 +360,15 @@ public ResponseEntity<String> saveFile(HttpServletRequest request,
 					String fileName = String.valueOf(System
 									.currentTimeMillis()) + item.getName();
 					String imageDesPath = uploadDir + fileName;
-					File file = new File(imageDesPath);
 					blogImage.setName(fileName);
 					blogImage.setShowName(item.getName());
 					blogImage.setSize(item.getSize());
-					item.write(file);
-					scaleAndSaveImageWithJImage(imageDesPath, uploadDir + "thumb" + fileName, JEPG_WIDTH_ENTITY_IMAGE,
+					// save the large image
+					scaleAndSaveImageWithJImage(item.getInputStream(), imageDesPath, JEPG_WIDTH_ENTITY_IMAGE_RAW,
+									JEPG_HIGH_ENTITY_IMAGE_RAW);
+					// save the thunmbnail
+					scaleAndSaveImageWithJImage(imageDesPath, uploadDir + CONST_STR_THUMB + fileName,
+									JEPG_WIDTH_ENTITY_IMAGE,
 									JEPG_HIGH_ENTITY_IMAGE);
 					// Image image =
 				} else if ("tempid".equals(item.getFieldName())) {

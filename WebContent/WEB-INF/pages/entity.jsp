@@ -113,7 +113,8 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =        
+	filter: alpha(opacity =                     
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -122,7 +123,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                0);
+		                                                                     
+		                                 0);
 	opacity: 0;
 }
 </style>
@@ -341,7 +343,7 @@ a.delete-image:hover,a.delete-video:hover {
 					</label>
 					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
-					<div id="images-thumb" style="display: block"></div>
+					<div id="images-thumb" style="display: none"></div>
 
 					<div class="blogoptiondiv">
 						<p>设置可见：</p>
@@ -384,7 +386,7 @@ a.delete-image:hover,a.delete-video:hover {
 			<div class="fileupload-buttonbar">
 				<span class="btn btn-success btn-small fileinput-button"><i
 					class="icon-plus icon-white"></i><span>选择图片</span><input
-					id='fileupload' type="file" name="file" data-url="savefile"
+					id='fileupload' type="file" name="file" data-url="saveimagefile"
 					multiple="true"></span>
 			</div>
 			<div class="dialogbd">
@@ -471,8 +473,20 @@ a.delete-image:hover,a.delete-video:hover {
 				showName : ''
 			},
 			uploadtable : $('#uploadfiletable'),
-			//initial method
+			/**
+			 **	delete image.
+			 **/
+			delImage : function(imageId, imageName, handler) {
+				$.post("/Blog/imagemanage/delimage", {
+					"imageId" : imageId,
+					"imageName" : imageName
+				}, handler, "json");
+			},
+			/**
+			 **page initial method
+			 **/
 			init : function() {
+				var that = this;
 				//上传表格删除按钮控制
 				var delBtns = $('#uploadfiletable a');
 				delBtns.live('mouseover', function() {
@@ -488,22 +502,12 @@ a.delete-image:hover,a.delete-video:hover {
 					var delRow = $(this).parent().parent();
 					var rowid = delRow.attr('id');
 					if ((rowid + '').indexOf('temp') === -1) {
-						$.post("/Blog/imagemanage/delimage", {
-							imageId : rowid
-						}, function(data) {
-						}, "json");
+						that.delImage(rowid, delRow.attr('name'));
 					}
+					that.refreshUpdatedImgInfo(-1, -delRow.data("image").size);
 					delRow.detach();
+
 				});
-				/**
-				//暂存文章,或者加载上次临时保存的文章
-				$.post("/Blog/entity/saveentity", {
-					entity : $.toJSON(this.blogentity)
-				}, function(data) {
-					//临时保存对象
-					pageController.blogentity = data;
-				}, "json");
-				 **/
 				//注册上传窗体hide事件
 				var uploadModel = $('#myModal');
 				uploadModel.on('hidden', function() {
@@ -543,7 +547,7 @@ a.delete-image:hover,a.delete-video:hover {
 																	var currentFile = $(
 																			image)
 																			.data(
-																					"file");
+																					"image");
 																	var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
 																			+ "<label class='image-name'>&lt;图片"
 																			+ curImgCount
@@ -551,14 +555,16 @@ a.delete-image:hover,a.delete-video:hover {
 																			+ "<img alt='图片1' src='"+"http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
 																			+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
 																			+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
+																	imageBlock
+																			.data(
+																					"image",
+																					currentFile);
 																	$(
 																			"#images-thumb")
 																			.append(
 																					imageBlock);
 																});
 													}, 200);
-
-									//alert('saveupload');
 								});
 				//initialize read private and commentable
 				var currentEntity = $.evalJSON($("#x-script").text());
@@ -568,10 +574,8 @@ a.delete-image:hover,a.delete-video:hover {
 				(commentable == true)
 						|| $("#cannot_reply").attr("checked", true);
 				$("#entity_private" + readPrivate).attr("checked", true);
-				//add preview btn click handler
-				var previewBtn = $("#preview-btn");
 				//preview button click event handler
-				previewBtn.bind('click', function() {
+				$("#preview-btn").bind('click', function() {
 					var entityTitle = $("#title");
 					var entityContent = $("#content");
 					var blogutils = $.blogutils;
@@ -640,12 +644,26 @@ a.delete-image:hover,a.delete-video:hover {
 					});
 				});
 				//images remove click event handler
-				$('.delete-image').live("click", function() {
-					var currentimgItem = $(this).parent();
-					currentimgItem.hide(500, function() {
-						currentimgItem.detach();
-					});
-					return false;
+				$('.delete-image').live(
+						"click",
+						function() {
+							var currentimgItem = $(this).parent();
+							that.delImage(currentimgItem.attr("id"),
+									currentimgItem.data("image").name);
+							currentimgItem.hide(500, function() {
+								currentimgItem.detach();
+							});
+
+							if ($(".image-item").size() == 0) {
+								$("#delete-image").css({
+									"display" : "none"
+								});
+							}
+							return false;
+						});
+				this.uploadtable.data({
+					count : 0,
+					size : 0
 				});
 			},
 			inituploadinfo : function() {
@@ -658,12 +676,15 @@ a.delete-image:hover,a.delete-video:hover {
 					uploadtable.remove($('.totalfooter'));
 				}
 			},
+			/**
+			 **format size number.
+			 **/
 			countSize : function(size) {
-				var tempSize = size / 1024;
+				var tempSize = parseFloat((size / 1024).toFixed(1));
 				var sizeType = 'KB'
 				if (tempSize > 1024) {
-					tempSize = tempSize / 1024;
-					sizeType = 'Mb';
+					tempSize = parseFloat((tempSize / 1024).toFixed(1));
+					sizeType = 'MB';
 				}
 				return {
 					'size' : tempSize,
@@ -674,10 +695,28 @@ a.delete-image:hover,a.delete-video:hover {
 				var retVal = 0;
 				if (sizeType == 'KB') {
 					retVal = size * 1024;
-				} else if (sizeType == 'Mb') {
+				} else if (sizeType == 'MB') {
 					retVal = size * 1024 * 1024;
 				}
 				return retVal;
+			},
+			/**
+			 **refresh the upload image table's conclusion.
+			 **/
+			refreshUpdatedImgInfo : function(count, size) {
+				var that = pageController;
+				var uploadedInfo = $("#uploadfiletable").data();
+				var imgsCount = uploadedInfo.count + count;
+				var imgsSize = uploadedInfo.size + size;
+				var formatedSize = that.countSize(imgsSize);
+				$("#total-num-image").text(imgsCount);
+				$("#total-size-type").text(formatedSize.sizeType);
+				$("#total-size-image").text(formatedSize.size);
+				uploadedInfo.count = imgsCount;
+				uploadedInfo.size = imgsSize;
+				if (imgsCount == 0) {
+					$('#uploadfiletable').hide();
+				}
 			}
 		};
 		var pageController = window.pageController;
@@ -688,7 +727,7 @@ a.delete-image:hover,a.delete-video:hover {
 							forceIframeTransport : true,
 							acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
 							maxFileSize : 5000000, // 5MB
-							url : 'savefile',
+							url : 'saveimagefile',
 							dataType : 'json',
 							add : function(e, data) {
 								var uploadfiletable = $('#uploadfiletable');
@@ -746,25 +785,20 @@ a.delete-image:hover,a.delete-video:hover {
 										.each(
 												data.result,
 												function(index, file) {
+													var pageController = window.pageController;
 													var currentFile = file[0];
 													var tr = $('#tempid_'
 															+ currentFile.tempid);
 													tr.data({
-														"file" : currentFile
+														"image" : currentFile
 													});
 													tr.attr("id",
 															currentFile.id);
 													tr.attr("name",
 															currentFile.name);
 													tr.addClass("savedFile");
-													var currentFileSize = parseFloat((currentFile.size / 1024)
-															.toFixed(1));
-													var currentSizeType = "KB";
-													if (currentFileSize > 1024) {
-														currentFileSize = (currentFileSize / 1024)
-																.toFixed(1);
-														currentSizeType = "MB";
-													}
+													var formatedSize = pageController
+															.countSize(currentFile.size);
 													tr
 															.find(
 																	'.uploadlistsize')
@@ -773,35 +807,14 @@ a.delete-image:hover,a.delete-video:hover {
 															.addClass(
 																	"fileUploaded")
 															.text(
-																	currentFileSize
-																			+ currentSizeType);
+																	formatedSize.size
+																			+ formatedSize.sizeType);
 
 													tr.addClass('warning');
-													$("#total-num-image").text(
-															$(".savedFile")
-																	.size());
-													var totalSize = parseFloat(parseFloat(
-															$(
-																	"#total-size-image")
-																	.text())
-															.toFixed(1));
-													if ($("#total-size-type")
-															.text() == "MB") {
-														totalSize = totalSize * 1024;
-													}
-													totalSize = totalSize
-															+ parseFloat((currentFile.size / 1024)
-																	.toFixed(1));
-													var sizeType = "KB";
-													if (totalSize > 1024) {
-														totalSize = (totalSize / 1024)
-																.toFixed(1);
-														sizeType = "MB";
-													}
-													$("#total-size-type").text(
-															sizeType);
-													$("#total-size-image")
-															.text(totalSize);
+													pageController
+															.refreshUpdatedImgInfo(
+																	1,
+																	currentFile.size);
 													tr = null;
 												});
 							}
