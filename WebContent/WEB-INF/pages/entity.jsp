@@ -113,7 +113,8 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                     
+	filter: alpha(opacity =                                    
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -124,7 +125,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                 0);
+		                                                                     
+		                                    0);
 	opacity: 0;
 }
 </style>
@@ -194,6 +196,10 @@ input[type="file"] {
 
 .table .totalfooter {
 	color: #777777;
+}
+
+.table .uploadError {
+	color: red
 }
 
 .table .totalfooter .total-num {
@@ -334,14 +340,14 @@ a.delete-image:hover,a.delete-video:hover {
 			<form class="entity-form" action="addentity" method="POST">
 				<fieldset>
 					<label> 题目： </label> <input type="text" name="title" id="title"
-						class="input-xxlarge" placeholder=""
+						class="editable input-xxlarge" placeholder=""
 						value="${requestScope.entity.title}" /> <span class="help-inline"></span>
 					<label class="float-label">
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a class="btn btn-small" href="#">连接</a></span>
 					</label>
-					<textarea name="content" id="content" tabindex="2">${requestScope.entity.content}</textarea>
+					<textarea name="content" class="editable" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
 					<div id="images-thumb" style="display: none"></div>
 
@@ -483,10 +489,58 @@ a.delete-image:hover,a.delete-video:hover {
 				}, handler, "json");
 			},
 			/**
+			 **title text input change handler
+			 **/
+			titleChange : function() {
+				var controller = window.pageController;
+				var titleCtl = $(this);
+				controller.title = titleCtl.value();
+				$("#error-tips").css({
+					"display" : "none"
+				});
+			},
+			//window onload handler
+			saveTempEntity : function() {
+
+			},
+			/**
 			 **page initial method
 			 **/
+			pageUnloadHandler : function() {
+				var url = window.location;
+				return false;
+			},
+			/**
+			 **page initial method
+			 **/
+			saveTempEntity : function() {
+
+			},
+			/**
+			 **editable input blur event handler
+			 **/
+			editCtlBlurHandler : function() {
+				$("#error-tips").css({
+					display : "none"
+				});
+			},
 			init : function() {
 				var that = this;
+				window.setTimeout(function() {
+					$.post("saveentity", {
+						entity : $("#x-script").text()
+					}, function(data) {
+						alert(test);
+					}, "json");
+				}, 5000);
+
+				//bind title change handler
+				//bind window unload prompt message
+				window.onbeforeunload = function(e) {
+					return 'data you have entered may not be saved.';
+				};
+				//bind editable input blur event handler
+				$(".editable").bind("blur", this.editCtlBlurHandler);
 				//上传表格删除按钮控制
 				var delBtns = $('#uploadfiletable a');
 				delBtns.live('mouseover', function() {
@@ -501,10 +555,16 @@ a.delete-image:hover,a.delete-video:hover {
 				$('.delitem').live('click', function() {
 					var delRow = $(this).parent().parent();
 					var rowid = delRow.attr('id');
+					var count = -1;
+					var size = 0;
+					var uploadedCount = 0;
 					if ((rowid + '').indexOf('temp') === -1) {
 						that.delImage(rowid, delRow.attr('name'));
+						size = -delRow.data("image").size;
+						uploadedCount = -1;
+
 					}
-					that.refreshUpdatedImgInfo(-1, -delRow.data("image").size);
+					that.refreshUpdatedImgInfo(count, uploadedCount, size);
 					delRow.detach();
 
 				});
@@ -524,15 +584,25 @@ a.delete-image:hover,a.delete-video:hover {
 					$.get("/Blog/entity/inituploadinfo", {
 						action : 'init'
 					});
+					that.uploadtable.data({
+						count : 0,
+						uploadedCount : 0,
+						size : 0
+					});
 				});
 				//确定/取消上传文件
 				$('.dismissupload').click(function() {
-					//alert('dismissupload');
+					$(".delitem").each(function(index, currentObject) {
+						$(currentObject).click();
+					});
 				});
 				$('#saveupload')
 						.click(
 								function() {
 									$('#myModal').modal("hide");
+									$("#images-thumb").css({
+										"display" : "block"
+									});
 									window
 											.setTimeout(
 													function() {
@@ -652,19 +722,15 @@ a.delete-image:hover,a.delete-video:hover {
 									currentimgItem.data("image").name);
 							currentimgItem.hide(500, function() {
 								currentimgItem.detach();
+								if ($(".image-item").size() == 0) {
+									$("#images-thumb").css({
+										"display" : "none"
+									});
+								}
 							});
-
-							if ($(".image-item").size() == 0) {
-								$("#delete-image").css({
-									"display" : "none"
-								});
-							}
 							return false;
 						});
-				this.uploadtable.data({
-					count : 0,
-					size : 0
-				});
+
 			},
 			inituploadinfo : function() {
 				var uploadtable = this.uploadtable;
@@ -703,13 +769,14 @@ a.delete-image:hover,a.delete-video:hover {
 			/**
 			 **refresh the upload image table's conclusion.
 			 **/
-			refreshUpdatedImgInfo : function(count, size) {
+			refreshUpdatedImgInfo : function(count, uploadedCount, size) {
 				var that = pageController;
 				var uploadedInfo = $("#uploadfiletable").data();
 				var imgsCount = uploadedInfo.count + count;
+				var imgUploaded = uploadedInfo.uploadedCount + uploadedCount;
 				var imgsSize = uploadedInfo.size + size;
 				var formatedSize = that.countSize(imgsSize);
-				$("#total-num-image").text(imgsCount);
+				$("#total-num-image").text(imgUploaded);
 				$("#total-size-type").text(formatedSize.sizeType);
 				$("#total-size-image").text(formatedSize.size);
 				uploadedInfo.count = imgsCount;
@@ -783,15 +850,41 @@ a.delete-image:hover,a.delete-video:hover {
 							done : function(e, data) {
 								$
 										.each(
-												data.result,
+												data.result.imagelist,
 												function(index, file) {
 													var pageController = window.pageController;
-													var currentFile = file[0];
+													var error = data.result.error;
+													var currentFile = file;
 													var tr = $('#tempid_'
 															+ currentFile.tempid);
+													var uploadSize = $(tr
+															.find('.uploadlistsize')[0]);
+
+													uploadSize
+															.removeClass("fileloading ");
 													tr.data({
 														"image" : currentFile
 													});
+													if (error == true) {
+														tr.addClass('error');
+														uploadSize.text("");
+														var nameCol = $(tr
+																.find(".uploadlistname")[0]);
+
+														nameCol
+																.text(
+																		nameCol
+																				.text()
+																				+ "   "
+																				+ data.result.errorMsg)
+																.addClass(
+																		"uploadError");
+														pageController
+																.refreshUpdatedImgInfo(
+																		1, 0, 0);
+														return;
+													}
+
 													tr.attr("id",
 															currentFile.id);
 													tr.attr("name",
@@ -799,11 +892,7 @@ a.delete-image:hover,a.delete-video:hover {
 													tr.addClass("savedFile");
 													var formatedSize = pageController
 															.countSize(currentFile.size);
-													tr
-															.find(
-																	'.uploadlistsize')
-															.removeClass(
-																	'fileloading')
+													uploadSize
 															.addClass(
 																	"fileUploaded")
 															.text(
@@ -813,6 +902,7 @@ a.delete-image:hover,a.delete-video:hover {
 													tr.addClass('warning');
 													pageController
 															.refreshUpdatedImgInfo(
+																	1,
 																	1,
 																	currentFile.size);
 													tr = null;

@@ -86,7 +86,7 @@ public static final String CONST_ENTITY_PAGE = "entity";
 public static final String CONST_IMAGES_COUNT = "image-count";
 public static final String CONST_IMAGES_SIZE = "image-size";
 public static final String CONST_RET_ERROR = "error";
-public static final String CONST_RET_ERROR_MSG = "error-msg";
+public static final String CONST_RET_ERROR_MSG = "errorMsg";
 public static final String CONST_RET_IMGLIST = "imagelist";
 public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张图片。";
 public static final String CONST_ERRORMSG_OULSIZE = "一次只允许上传5Mb图片。";
@@ -322,7 +322,6 @@ private void writeJpeg(BufferedImage image, String destFile, float quality)
 @SuppressWarnings("unchecked")
 public ResponseEntity<String> saveImageFile(HttpServletRequest request,
 				HttpServletResponse response, HttpSession httpSession) {
-
 	JsonFactory jsonFactory = new JsonFactory();
 	// 初始化获取当前上传文件总数量
 	Integer uploadedCount = getCurrentUploadedCount(httpSession);
@@ -386,7 +385,9 @@ public ResponseEntity<String> saveImageFile(HttpServletRequest request,
 			throw new RuntimeException(e);
 		}
 	}
-	blogImageDaoService.saveImage(blogImage);
+	if (!Boolean.TRUE.equals(retVal.get(CONST_RET_ERROR))) {
+		blogImageDaoService.saveImage(blogImage);
+	}
 	// 用此类构造字符串
 	StringWriter w = new StringWriter();
 	retVal.put(CONST_RET_IMGLIST, imageList);
@@ -428,7 +429,7 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
 
 @RequestMapping("/saveentity")
 @ResponseBody
-public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
+public BlogEntity saveEntity(@RequestParam("entity") final String entity,
 				HttpServletRequest request, HttpServletResponse response) {
 	BlogEntity retVal = null;
 	try {
@@ -438,11 +439,9 @@ public BlogEntity saveEntity(@ModelAttribute("entity") final String entity,
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
-	final BlogUser user = new BlogUser();
-
+	final BlogUser user = getCurrentLoginSuccessUser();
 	retVal.setCreatedate(new Timestamp(Calendar.getInstance()
 					.getTimeInMillis()));
-	user.setId(1L);
 	getBlogEntityService().saveEntity(user, retVal);
 	return null;
 }
