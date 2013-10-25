@@ -113,7 +113,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                    
+	filter: alpha(opacity =                                                  
 		                                                         
 		                                                         
 		                                                         
@@ -126,7 +126,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                    0);
+		                                                  0);
 	opacity: 0;
 }
 </style>
@@ -513,8 +513,29 @@ a.delete-image:hover,a.delete-video:hover {
 			/**
 			 **page initial method
 			 **/
-			saveTempEntity : function() {
-
+			updateBlogEntity : function() {
+				var controller = window.pageController;
+				var currentEntity = controller.currentEntity;
+				currentEntity.title = $("#title").val();
+				currentEntity.content = $("#content").val();
+				if ($("#cannot_reply").attr("checked") == "checked") {
+					currentEntity.commentable = false;
+				} else {
+					currentEntity.commentable = true;
+				}
+				$("[name='readprivate']").each(function(index, current) {
+					var current = $(current);
+					if (current.attr("checked") == "checked") {
+						currentEntity.readprivate = current.val();
+						return false;
+					}
+				});
+				$.post("updateEntity", {
+					entity : $.toJSON(controller.currentEntity)
+				}, function(data) {
+					alert(test);
+				}, "json");
+				window.setTimeout(arguments.callee, 60000);
 			},
 			/**
 			 **editable input blur event handler
@@ -524,17 +545,26 @@ a.delete-image:hover,a.delete-video:hover {
 					display : "none"
 				});
 			},
+			/**
+			 **editable input blur event handler
+			 **/
+			editableFieldChangeHandler : function() {
+				var currentCtl = $(this);
+				var ctlId = currentCtl.attr("id");
+				var currentEntity = window.pageController.currentEntity;
+				if (ctlId == "title") {
+					currentEntity.title = currentCtl.val();
+				} else {
+					currentEntity.content = currentCtl.val();
+				}
+
+			},
 			init : function() {
 				var that = this;
-				window.setTimeout(function() {
-					$.post("saveentity", {
-						entity : $("#x-script").text()
-					}, function(data) {
-						alert(test);
-					}, "json");
-				}, 5000);
-
+				window.setTimeout(that.updateBlogEntity, 10000);
 				//bind title change handler
+				//$("#title").bind("change", this.editableFieldChangeHandler);
+				//$("#content").bind("change", this.editableFieldChangeHandler);
 				//bind window unload prompt message
 				window.onbeforeunload = function(e) {
 					return 'data you have entered may not be saved.';

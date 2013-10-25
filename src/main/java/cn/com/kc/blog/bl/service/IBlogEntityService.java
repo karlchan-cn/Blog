@@ -38,4 +38,13 @@ Serializable saveEntity(final BlogUser user, final BlogEntity entity);
  */
 BlogEntity getTempEntity(final BlogUser user);
 
+/**
+ * update bolg entity
+ * 
+ * @param entity
+ *            blog entity to be updated
+ * @param user
+ *            current log in upser
+ */
+void updateEntity(final BlogEntity entity, final BlogUser user);
 }

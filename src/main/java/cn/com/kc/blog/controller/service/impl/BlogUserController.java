@@ -83,6 +83,7 @@ public String validateUser(
 	return result.toString();
 }
 
+@SuppressWarnings("restriction")
 @RequestMapping(produces = MediaType.IMAGE_JPEG_VALUE, value = { "/securitycode" })
 @ResponseBody
 public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequest,
@@ -104,6 +105,7 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 											httpServletRequest.getLocale());
 
 			// a jpeg encoder
+			@SuppressWarnings("restriction")
 			JPEGImageEncoder jpegEncoder =
 							JPEGCodec.createJPEGEncoder(jpegOutputStream);
 			jpegEncoder.encode(challenge);

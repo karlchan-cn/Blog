@@ -140,11 +140,6 @@ public IBlogEntityService getUserService() {
 }
 
 /**
-	 * 
-	 */
-private static String UPLOAD_DIR = null;
-
-/**
  * 
  * @param newblogEntityService
  */
@@ -155,7 +150,7 @@ public void setUserService(final IBlogEntityService newblogEntityService) {
 
 @RequestMapping("/create")
 public ModelAndView createEntity() {
-	// load the temperay
+	// load the temperay	
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	final BlogUser user = getCurrentLoginSuccessUser();
@@ -170,6 +165,8 @@ public ModelAndView createEntity() {
 	entityJson.setContent(entity.getContent());
 	entityJson.setReadprivate(entity.getReadprivate());
 	entityJson.setCommentable(entity.getCommentable());
+	entityJson.setCreatedate(entity.getCreatedate());
+	entityJson.setIsTemp(entity.getIsTemp());
 	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entityJson));
 	return modelAndView;
 }
@@ -427,8 +424,6 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
  * @return
  */
 
-@RequestMapping("/saveentity")
-@ResponseBody
 public BlogEntity saveEntity(@RequestParam("entity") final String entity,
 				HttpServletRequest request, HttpServletResponse response) {
 	BlogEntity retVal = null;
@@ -443,6 +438,33 @@ public BlogEntity saveEntity(@RequestParam("entity") final String entity,
 	retVal.setCreatedate(new Timestamp(Calendar.getInstance()
 					.getTimeInMillis()));
 	getBlogEntityService().saveEntity(user, retVal);
+	return null;
+}
+
+/**
+ * update blog entity.
+ * 
+ * @param entity
+ *            entity to be updated.
+ * @param request
+ *            current wrapped request
+ * @param response
+ *            current wrapped response
+ * @return updated entity
+ */
+@RequestMapping("/updateEntity")
+@ResponseBody
+public BlogEntity updateEntity(@RequestParam("entity") final String entity,
+				HttpServletRequest request, HttpServletResponse response) {
+	BlogEntity retVal = null;
+	try {
+		retVal = mapper.readValue(entity, BlogEntity.class);
+		final BlogUser user = getCurrentLoginSuccessUser();
+		getBlogEntityService().updateEntity(retVal, user);
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new RuntimeException(e);
+	}
 	return null;
 }
 

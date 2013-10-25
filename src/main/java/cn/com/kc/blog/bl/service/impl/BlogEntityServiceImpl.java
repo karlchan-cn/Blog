@@ -43,27 +43,6 @@ public void setUserDao(IBlogUserDaoService userDao) {
 public void setEntityDao(final IBlogEntityDaoService newDAO) {
 	this.entityDao = newDAO;
 }
-/**
-public Serializable saveEntity(final BlogUser user, final BlogEntityVO entity) {
-	final BlogEntity entityPo = new BlogEntity();
-	try {
-		BeanUtils.copyProperties(entityPo, entity);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		throw new RuntimeException(e);
-	}
-	entityPo.setUser(user);
-	BlogEntityVO retVal = new BlogEntityVO();
-	entityDao.save(entityPo);
-	try {
-		BeanUtils.copyProperties(retVal, entityPo);
-	} catch (Exception e) {
-		throw new RuntimeException(e);
-	}
-	return entityPo;
-} 
-**/
 public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
 	entity.setUser(user);
 	entityDao.save(entity);
@@ -75,18 +54,18 @@ public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
  */
 public BlogEntity getTempEntity(BlogUser user) {
 	final List<BlogEntity> list = this.entityDao.getTempEntity(user);
-	//BlogEntityVO retVal = new BlogEntityVO();
 	BlogEntity entity;
 	if (list.size() != 0) {
 		entity = list.get(0);
-//		try {
-//			BeanUtils.copyProperties(retVal, list.get(0));
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
 	} else {
 		entity = new BlogEntity();
 	}
 	return entity;
+}
+
+@Override
+public void updateEntity(BlogEntity entity, BlogUser user) {
+	entity.setUser(user);
+	entityDao.update(entity);
 }
 }
