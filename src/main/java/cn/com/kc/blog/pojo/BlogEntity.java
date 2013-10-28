@@ -43,7 +43,7 @@ private String title;
 @NotNull
 private Timestamp createdate;
 @NotNull
-@Column(columnDefinition = "BLOB")
+@Column(columnDefinition = "TEXT")
 private String content;
 /**
  * P-all S-friend X-self

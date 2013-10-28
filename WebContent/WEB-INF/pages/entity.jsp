@@ -113,7 +113,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                  
+	filter: alpha(opacity =                                                     
 		                                                         
 		                                                         
 		                                                         
@@ -126,7 +126,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                  0);
+		                                                     0);
 	opacity: 0;
 }
 </style>
@@ -345,7 +345,8 @@ a.delete-image:hover,a.delete-video:hover {
 					<label class="float-label">
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
-							aria-hidden="false">图片</a><a class="btn btn-small" href="#">连接</a></span>
+							aria-hidden="false">图片</a><a id="link-btn" class="btn btn-small"
+							href="#">连接</a></span>
 					</label>
 					<textarea name="content" class="editable" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
@@ -533,9 +534,9 @@ a.delete-image:hover,a.delete-video:hover {
 				$.post("updateEntity", {
 					entity : $.toJSON(controller.currentEntity)
 				}, function(data) {
-					alert(test);
+
 				}, "json");
-				window.setTimeout(arguments.callee, 60000);
+				//window.setTimeout(arguments.callee, 60000);
 			},
 			/**
 			 **editable input blur event handler
@@ -561,7 +562,8 @@ a.delete-image:hover,a.delete-video:hover {
 			},
 			init : function() {
 				var that = this;
-				window.setTimeout(that.updateBlogEntity, 10000);
+				//window.setTimeout(that.updateBlogEntity, 10000);
+				$("#link-btn").click(that.updateBlogEntity);
 				//bind title change handler
 				//$("#title").bind("change", this.editableFieldChangeHandler);
 				//$("#content").bind("change", this.editableFieldChangeHandler);
