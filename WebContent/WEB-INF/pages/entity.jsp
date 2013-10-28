@@ -113,7 +113,8 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                     
+	filter: alpha(opacity =                 
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -126,7 +127,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                     0);
+		                                                                     
+		     0);
 	opacity: 0;
 }
 </style>
@@ -560,10 +562,35 @@ a.delete-image:hover,a.delete-video:hover {
 				}
 
 			},
+			/**
+			 **记录当前行数.
+			 **/
+			markCurrentIndex : function() {
+				var that = $(this);
+				var el = that[0];
+				var index = 0;
+				if (el.selectionStart) {
+					index = el.selectionStart;
+				} else if (document.selection) {
+					el.focus();
+
+					var r = document.selection.createRange();
+					if (r == null) {
+						index = 0;
+					}
+					var re = el.createTextRange(), rc = re.duplicate();
+					re.moveToBookmark(r.getBookmark());
+					rc.setEndPoint('EndToStart', re);
+					index = rc.text.length;
+				}
+				that.data("index", index);
+			},
 			init : function() {
 				var that = this;
 				//window.setTimeout(that.updateBlogEntity, 10000);
 				$("#link-btn").click(that.updateBlogEntity);
+				//cache the current content position
+				$("#content").bind("focus", that.markCurrentIndex);
 				//bind title change handler
 				//$("#title").bind("change", this.editableFieldChangeHandler);
 				//$("#content").bind("change", this.editableFieldChangeHandler);
@@ -639,6 +666,7 @@ a.delete-image:hover,a.delete-video:hover {
 											.setTimeout(
 													function() {
 														var uploadedImages = $("#uploadfiletable .savedFile");
+														var picString = "";
 														uploadedImages
 																.each(function(
 																		index,
@@ -650,11 +678,12 @@ a.delete-image:hover,a.delete-video:hover {
 																			image)
 																			.data(
 																					"image");
+
 																	var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
 																			+ "<label class='image-name'>&lt;图片"
 																			+ curImgCount
 																			+ "&gt;</label><div class='image-thumb'>"
-																			+ "<img alt='图片1' src='"+"http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
+																			+ "<img alt='图片"+ curImgCount +"' src='http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
 																			+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
 																			+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
 																	imageBlock
@@ -665,7 +694,20 @@ a.delete-image:hover,a.delete-video:hover {
 																			"#images-thumb")
 																			.append(
 																					imageBlock);
+																	picString = picString
+																			+ "\n<图片"+ curImgCount + ">";
 																});
+														picString = picString
+																+ "\n";
+														var contentCtl = $("#content");
+														contentCtl
+																.val(contentCtl
+																		.val()
+																		.add(
+																				picString,
+																				contentCtl
+																						.data("index")));
+
 													}, 200);
 								});
 				//initialize read private and commentable
