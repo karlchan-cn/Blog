@@ -26,6 +26,7 @@ public void testRegexExpression() {
 	Pattern pattern = Pattern.compile("<图片\\d>");
 	Matcher matcher = pattern.matcher("<图片1> Hello World,正则表达式 Hello World");
 	// 替换第一个符合正则的数据
+	
 	System.out.println(matcher.pattern());
 	String templateString = "<div class='image-thumb'><img alt='图片2' src='http://localhost:8081/Blog/assets/images/1383115183842P1040071.JPG'></div>";
 	System.out.println(matcher.replaceFirst("Java1"));
