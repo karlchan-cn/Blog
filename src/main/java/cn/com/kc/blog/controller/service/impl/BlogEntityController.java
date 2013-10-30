@@ -11,7 +11,9 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -31,8 +33,11 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -54,6 +59,8 @@ import cn.com.kc.blog.pojo.BlogUser;
 import cn.com.kc.blog.userauthenfilter.impl.CustomedAuthenticateConst;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.ResampleFilters;
 import com.mortennobel.imagescaling.ResampleOp;
@@ -150,7 +157,7 @@ public void setUserService(final IBlogEntityService newblogEntityService) {
 
 @RequestMapping("/create")
 public ModelAndView createEntity() {
-	// load the temperay	
+	// load the temperay
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.setViewName(CONST_ENTITY_PAGE);
 	final BlogUser user = getCurrentLoginSuccessUser();
@@ -499,13 +506,27 @@ public ModelAndView newEntity(
 
 @RequestMapping("/editepreviewcontent")
 @ResponseBody
-public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent) {
+public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent,
+				@RequestParam("imagesList") final String imagesList) {
 	HashMap<String, String> retVal = new HashMap<String, String>();
 	previewContent = previewContent.replaceAll("&", "&amp;");
 	previewContent = previewContent.replaceAll("<", "&lt;");
 	previewContent = previewContent.replaceAll(">", "&gt;");
 	previewContent = previewContent.replaceAll("\"", "&quot;");
 	previewContent = previewContent.replaceAll("\n", "<br>");
+	ArrayList<BlogImage> imageArrayList = (ArrayList<BlogImage>) JSON.parseArray(imagesList, BlogImage.class);
+	int i = 1;
+	for (BlogImage currentImage : imageArrayList) {
+		previewContent = previewContent.replaceAll(
+						"&lt;图片" + i + "&gt;",
+						"<div class='image-thumb'><img alt='图片"
+										+ i
+										+ "' src='http://localhost:8081/Blog/assets/images/" + currentImage.getName()
+										+ "'><label class='imagedescription'>"
+										+ (currentImage.getDescription() == null ? "" : currentImage.getDescription())
+										+ "</label></div>");
+		i++;
+	}
 	retVal.put("content", previewContent);
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
 					JSON.toJSONString(retVal), CommonUtils.getHttpHeadersByType(""), HttpStatus.OK);

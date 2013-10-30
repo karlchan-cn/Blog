@@ -24,98 +24,107 @@ import javax.persistence.Transient;
 @Table(name = "BLOG_IMAGE")
 public class BlogImage implements Serializable {
 
-	/**
+/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5219931739057719520L;
+private static final long serialVersionUID = -5219931739057719520L;
 
-	/**
+/**
 	 * 
 	 */
-	public BlogImage() {
+public BlogImage() {
 
-	}
+}
 
-	@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogEntity.class)
-	@JoinColumn(name = "ENTITY_ID", nullable = true)
-	private BlogEntity entity;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String name;
-	private String position;
-	@Transient
-	private Long tempid;
-	@Transient
-	private Long size;
-	@Transient
-	private String sizeUnit;
-	@Transient
-	private String showName;
+@ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogEntity.class)
+@JoinColumn(name = "ENTITY_ID", nullable = true)
+private BlogEntity entity;
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
+private String name;
+private String position;
+@Transient
+private Long tempid;
+@Transient
+private Long size;
+@Transient
+private String sizeUnit;
+@Transient
+private String showName;
+private String description;
 
-	public String getShowName() {
-		return showName;
-	}
+public String getDescription() {
+	return description;
+}
 
-	public void setShowName(String showName) {
-		this.showName = showName;
-	}
+public void setDescription(String description) {
+	this.description = description;
+}
 
-	public Long getSize() {
-		return size;
-	}
+public String getShowName() {
+	return showName;
+}
 
-	public void setSize(Long size) {
-		this.size = size;
-	}
+public void setShowName(String showName) {
+	this.showName = showName;
+}
 
-	public Long getTempid() {
-		return tempid;
-	}
+public Long getSize() {
+	return size;
+}
 
-	public void setTempid(Long tempId) {
-		this.tempid = tempId;
-	}
+public void setSize(Long size) {
+	this.size = size;
+}
 
-	public BlogEntity getEntity() {
-		return entity;
-	}
+public Long getTempid() {
+	return tempid;
+}
 
-	public void setEntity(BlogEntity entity) {
-		this.entity = entity;
-	}
+public void setTempid(Long tempId) {
+	this.tempid = tempId;
+}
 
-	public Long getId() {
-		return id;
-	}
+public BlogEntity getEntity() {
+	return entity;
+}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+public void setEntity(BlogEntity entity) {
+	this.entity = entity;
+}
 
-	public String getName() {
-		return name;
-	}
+public Long getId() {
+	return id;
+}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+public void setId(Long id) {
+	this.id = id;
+}
 
-	public String getPosition() {
-		return position;
-	}
+public String getName() {
+	return name;
+}
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+public void setName(String name) {
+	this.name = name;
+}
 
-	public String getSizeUnit() {
-		return sizeUnit;
-	}
+public String getPosition() {
+	return position;
+}
 
-	public void setSizeUnit(String sizeUnit) {
-		this.sizeUnit = sizeUnit;
-	}
+public void setPosition(String position) {
+	this.position = position;
+}
+
+public String getSizeUnit() {
+	return sizeUnit;
+}
+
+public void setSizeUnit(String sizeUnit) {
+	this.sizeUnit = sizeUnit;
+}
 
 }
 //

@@ -113,7 +113,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                 
+	filter: alpha(opacity =                                 
 		                                                         
 		                                                         
 		                                                         
@@ -128,7 +128,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		     0);
+		                     0);
 	opacity: 0;
 }
 </style>
@@ -312,6 +312,11 @@ image area
 	width: 120px;
 }
 
+.imagedescription {
+	text-align: center;
+	font: 12px/150% Arial, Helvetica, sans-serif;
+}
+
 a.delete-image,a.delete-video {
 	color: #999999;
 	display: block;
@@ -329,6 +334,13 @@ a.delete-image:hover,a.delete-video:hover {
 	text-decoration: none;
 	background-color: transparent;
 	color: #333333;
+}
+
+#title-preview {
+	color: #006600;
+	font: 14px/150% Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 </style>
 </head>
@@ -686,6 +698,8 @@ a.delete-image:hover,a.delete-video:hover {
 																			+ "<img alt='图片"+ curImgCount +"' src='http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
 																			+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
 																			+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
+																	currentFile.currentUploadName = "图片"
+																			+ curImgCount;
 																	imageBlock
 																			.data(
 																					"image",
@@ -719,65 +733,94 @@ a.delete-image:hover,a.delete-video:hover {
 						|| $("#cannot_reply").attr("checked", true);
 				$("#entity_private" + readPrivate).attr("checked", true);
 				//preview button click event handler
-				$("#preview-btn").bind('click', function() {
-					var entityTitle = $("#title");
-					var entityContent = $("#content");
-					var blogutils = $.blogutils;
-					var docElement = $('html,body');
-					var errorTips = $('#error-tips');
-					var editTipsFun = function(msg) {
-						errorTips.css({
-							display : "block"
-						});
-						window.setTimeout(function() {
-							errorTips.css({
-								display : "none"
-							});
-						}, 5000);
-					}
-					var entityTitleVal = entityTitle.val();
-					if ($.blogutils.isEmptyString(entityTitleVal)) {
-						errorTips.text("给日记加个标题吧");
-						var elePosition = entityTitle.position();
-						errorTips.css({
-							left : elePosition.left + entityTitle.width() + 16,
-							top : elePosition.top + 5
-						});
-						docElement.animate({
-							scrollTop : elePosition.top - 30
-						}, 300);
-						editTipsFun();
-						return;
-					}
-					var entityContentVal = entityContent.val();
-					if (blogutils.isEmptyString(entityContentVal)) {
-						errorTips.text("给日记添加内容吧");
-						var elePosition = entityContent.position();
-						errorTips.css({
-							left : elePosition.left + entityTitle.width() + 16,
-							top : elePosition.top + 5
-						});
-						editTipsFun();
-						docElement.animate({
-							scrollTop : elePosition.top - 30
-						}, 300);
-						return;
-					}
-					//initial preview content
-					$.post("editepreviewcontent", {
-						previewContent : entityContentVal
-					}, function(data) {
-						$("#content-preview pre").empty().append(data.content);
-						$('#title-preview').text(entityTitleVal);
-						$("#edit-container").css({
-							display : "none"
-						});
-						$('#preview-container').css({
-							display : "block"
-						});
-					}, "json");
+				$("#preview-btn")
+						.bind(
+								'click',
+								function() {
+									var entityTitle = $("#title");
+									var entityContent = $("#content");
+									var blogutils = $.blogutils;
+									var docElement = $('html,body');
+									var errorTips = $('#error-tips');
+									var editTipsFun = function(msg) {
+										errorTips.css({
+											display : "block"
+										});
+										window.setTimeout(function() {
+											errorTips.css({
+												display : "none"
+											});
+										}, 5000);
+									}
+									var entityTitleVal = entityTitle.val();
+									if ($.blogutils
+											.isEmptyString(entityTitleVal)) {
+										errorTips.text("给日记加个标题吧");
+										var elePosition = entityTitle
+												.position();
+										errorTips.css({
+											left : elePosition.left
+													+ entityTitle.width() + 16,
+											top : elePosition.top + 5
+										});
+										docElement.animate({
+											scrollTop : elePosition.top - 30
+										}, 300);
+										editTipsFun();
+										return;
+									}
+									var entityContentVal = entityContent.val();
+									if (blogutils
+											.isEmptyString(entityContentVal)) {
+										errorTips.text("给日记添加内容吧");
+										var elePosition = entityContent
+												.position();
+										errorTips.css({
+											left : elePosition.left
+													+ entityTitle.width() + 16,
+											top : elePosition.top + 5
+										});
+										editTipsFun();
+										docElement.animate({
+											scrollTop : elePosition.top - 30
+										}, 300);
+										return;
+									}
+									var imagesList = [];
+									$(".image-item")
+											.each(
+													function(index, curObject) {
+														var curObject = $(curObject);
+														var curImage = curObject
+																.data("image");
+														curImage.description = curObject
+																.find(
+																		"textarea")
+																.val();
+														var cloneImage = Object
+																.clone(curImage);
+														delete curImage.entity;
+														imagesList
+																.push(cloneImage);
+													});
+									//initial preview content
+									$.post("editepreviewcontent", {
+										previewContent : entityContentVal,
+										imagesList : $.toJSON(imagesList)
+									}, function(data) {
+										$("#content-preview pre").empty()
+												.append(data.content);
+										$('#title-preview')
+												.text(entityTitleVal);
+										$("#edit-container").css({
+											display : "none"
+										});
+										$('#preview-container').css({
+											display : "block"
+										});
+									}, "json");
 
-				});
+								});
 				//re edit button click event handler
 				$('#reedit-btn').bind("click", function() {
 					$("#edit-container").css({
@@ -795,6 +838,12 @@ a.delete-image:hover,a.delete-video:hover {
 							that.delImage(currentimgItem.attr("id"),
 									currentimgItem.data("image").name);
 							currentimgItem.hide(500, function() {
+								var contentCtl = $("#content");
+								contentCtl.val(contentCtl.val()
+										.replace(
+												new RegExp(currentimgItem.find(
+														".image-name").text(),
+														"g"), ""));
 								currentimgItem.detach();
 								if ($(".image-item").size() == 0) {
 									$("#images-thumb").css({
