@@ -319,6 +319,7 @@ image area
 
 a.delete-image,a.delete-video {
 	color: #999999;
+	
 	display: block;
 	height: 16px;
 	line-height: 16px;
