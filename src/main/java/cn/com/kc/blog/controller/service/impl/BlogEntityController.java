@@ -174,7 +174,8 @@ public ModelAndView createEntity() {
 	entityJson.setCommentable(entity.getCommentable());
 	entityJson.setCreatedate(entity.getCreatedate());
 	entityJson.setIsTemp(entity.getIsTemp());
-	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entityJson));
+	entityJson.setImages(entity.getImages());
+	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entity));
 	return modelAndView;
 }
 
@@ -467,6 +468,7 @@ public BlogEntity updateEntity(@RequestParam("entity") final String entity,
 	try {
 		retVal = mapper.readValue(entity, BlogEntity.class);
 		final BlogUser user = getCurrentLoginSuccessUser();
+		retVal.setCreatedate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		getBlogEntityService().updateEntity(retVal, user);
 	} catch (Exception e) {
 		e.printStackTrace();

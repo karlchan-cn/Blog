@@ -113,7 +113,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                 
+	filter: alpha(opacity =                                                       
 		                                                         
 		                                                         
 		                                                         
@@ -128,7 +128,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                     0);
+		                                           0);
 	opacity: 0;
 }
 </style>
@@ -319,7 +319,6 @@ image area
 
 a.delete-image,a.delete-video {
 	color: #999999;
-	
 	display: block;
 	height: 16px;
 	line-height: 16px;
@@ -361,7 +360,7 @@ a.delete-image:hover,a.delete-video:hover {
 						<p>正文：</p> <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a id="link-btn" class="btn btn-small"
-							href="#">连接</a></span>
+							style="" href="#">连接</a></span>
 					</label>
 					<textarea name="content" class="editable" id="content" tabindex="2">${requestScope.entity.content}</textarea>
 					<span id="content-info" class="help-block"></span>
@@ -598,10 +597,27 @@ a.delete-image:hover,a.delete-video:hover {
 				}
 				that.data("index", index);
 			},
+			/**
+			 **add image list div UI.
+			 **/
+			addImageItem : function(currentFile) {
+				var curImgCount = $(".image-item").size() + 1;
+				var imageBlock = $("<div class='image-item row' id='image"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
+						+ "<label class='image-name'>&lt;图片"
+						+ curImgCount
+						+ "&gt;</label><div class='image-thumb'>"
+						+ "<img alt='图片"+ curImgCount +"' src='http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
+						+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
+						+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
+				currentFile.currentUploadName = "图片" + curImgCount;
+				imageBlock.data("image", currentFile);
+				$("#images-thumb").append(imageBlock);
+				return "<图片"+ curImgCount + ">";
+			},
 			init : function() {
 				var that = this;
 				//window.setTimeout(that.updateBlogEntity, 10000);
-				$("#link-btn").click(that.updateBlogEntity);
+				//$("#link-btn").click(that.updateBlogEntity);
 				//cache the current content position
 				$("#content").bind("focus", that.markCurrentIndex);
 				//bind title change handler
@@ -680,37 +696,18 @@ a.delete-image:hover,a.delete-video:hover {
 													function() {
 														var uploadedImages = $("#uploadfiletable .savedFile");
 														var picString = "";
+														var pageController = window.pageController;
 														uploadedImages
 																.each(function(
 																		index,
 																		image) {
-																	var curImgCount = $(
-																			".image-item")
-																			.size() + 1;
-																	var currentFile = $(
-																			image)
-																			.data(
-																					"image");
-
-																	var imageBlock = $("<div class='image-item row' id='"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
-																			+ "<label class='image-name'>&lt;图片"
-																			+ curImgCount
-																			+ "&gt;</label><div class='image-thumb'>"
-																			+ "<img alt='图片"+ curImgCount +"' src='http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
-																			+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
-																			+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
-																	currentFile.currentUploadName = "图片"
-																			+ curImgCount;
-																	imageBlock
-																			.data(
-																					"image",
-																					currentFile);
-																	$(
-																			"#images-thumb")
-																			.append(
-																					imageBlock);
 																	picString = picString
-																			+ "\n<图片"+ curImgCount + ">";
+																			+ "\n"
+																			+ pageController
+																					.addImageItem($(
+																							image)
+																							.data(
+																									"image"));
 																});
 														picString = picString
 																+ "\n";
@@ -728,6 +725,16 @@ a.delete-image:hover,a.delete-video:hover {
 				//initialize read private and commentable
 				var currentEntity = $.evalJSON($("#x-script").text());
 				this.currentEntity = currentEntity;
+				var images = currentEntity.images;
+				var length = images.length;
+				if (length > 0) {
+					$("#images-thumb").css("display", "block");
+					for ( var i = 0; i < length; i++) {
+						var image = images[i];
+						this.addImageItem(image);
+					}
+				}
+
 				var readPrivate = currentEntity.readprivate;
 				var commentable = currentEntity.commentable;
 				(commentable == true)
@@ -836,8 +843,8 @@ a.delete-image:hover,a.delete-video:hover {
 						"click",
 						function() {
 							var currentimgItem = $(this).parent();
-							that.delImage(currentimgItem.attr("id"),
-									currentimgItem.data("image").name);
+							var currentImage = currentimgItem.data("image");
+							that.delImage(currentImage.id, currentImage.name);
 							currentimgItem.hide(500, function() {
 								var contentCtl = $("#content");
 								contentCtl.val(contentCtl.val()
@@ -945,21 +952,19 @@ a.delete-image:hover,a.delete-video:hover {
 										+ file.name
 										+ '</td><td class="uploadlistsize fileloading">上传中...</td><td class="uploadlistdel"><a title="删除图片" class="btn btn-link delitem"><i class="icon-trash"></i></a></td></tr>');
 								fileitme.insertBefore($('#totalfooter'));
-								fileuploader
-										.fileupload(
-												'option',
-												{
-													'formData' : [
-															{
-																'name' : 'tempid',
-																'value' : tempid
-															},
-															{
-																'name' : 'entity',
-																'value' : $
-																		.toJSON(pageController.currentEntity)
-															} ]
-												});
+								var cloneEntity = {};
+								var currentEntity = pageController.currentEntity;
+								cloneEntity.name = currentEntity.name;
+								cloneEntity.id = currentEntity.id;
+								fileuploader.fileupload('option', {
+									'formData' : [ {
+										'name' : 'tempid',
+										'value' : tempid
+									}, {
+										'name' : 'entity',
+										'value' : $.toJSON(cloneEntity)
+									} ]
+								});
 								if (filterResult == null) {
 									var imageerror = $('<span class="image-error">请选择图片文件(JPG/JPEG, PNG,或GIF) </span>');
 									fileitme.addClass('error');
