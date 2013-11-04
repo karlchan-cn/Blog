@@ -43,6 +43,7 @@ public void setUserDao(IBlogUserDaoService userDao) {
 public void setEntityDao(final IBlogEntityDaoService newDAO) {
 	this.entityDao = newDAO;
 }
+
 public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
 	entity.setUser(user);
 	entityDao.save(entity);
@@ -67,5 +68,10 @@ public BlogEntity getTempEntity(BlogUser user) {
 public void updateEntity(BlogEntity entity, BlogUser user) {
 	entity.setUser(user);
 	entityDao.update(entity);
+}
+
+@Override
+public void publishEntity(final BlogEntity entity) {
+	
 }
 }

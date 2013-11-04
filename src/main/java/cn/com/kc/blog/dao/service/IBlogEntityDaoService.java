@@ -14,12 +14,34 @@ import cn.com.kc.blog.pojo.BlogUser;
  * 
  */
 public interface IBlogEntityDaoService extends IBaseDao<BlogEntity, Long> {
-	/**
-	 * Bean name;
-	 */
-	String BEAN_NAME = IBlogEntityDaoService.class.getName();
+/**
+ * Bean name;
+ */
+String BEAN_NAME = IBlogEntityDaoService.class.getName();
 
-	void saveNewEntity(final BlogUser user, final BlogEntity entity);
+/**
+ * save new entity to specified user
+ * 
+ * @param user
+ *            user
+ * @param entity
+ *            entity to be saved;
+ */
+void saveNewEntity(final BlogUser user, final BlogEntity entity);
 
-	List<BlogEntity> getTempEntity(final BlogUser user);
+/**
+ * get user's temporery entity.
+ * 
+ * @param user
+ *            current user
+ * @return entity list;
+ */
+List<BlogEntity> getTempEntity(final BlogUser user);
+
+/**
+ * update the entity title,content,isTemp,saveTime,visible,commentable
+ * 
+ * @param entity
+ */
+void publishEntity(final BlogEntity entity);
 }

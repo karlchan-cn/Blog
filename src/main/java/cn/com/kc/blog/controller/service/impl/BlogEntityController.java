@@ -431,21 +431,19 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
  * 
  * @return
  */
-
-public BlogEntity saveEntity(@RequestParam("entity") final String entity,
+@RequestMapping("/updateEntity")
+@ResponseBody
+public BlogEntity publishEntity(@RequestParam("entity") final String entity,
 				HttpServletRequest request, HttpServletResponse response) {
 	BlogEntity retVal = null;
 	try {
 		retVal = mapper.readValue(entity, BlogEntity.class);
+		blogEntityService.publishEntity(retVal);
 	} catch (Exception e) {
-
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
-	final BlogUser user = getCurrentLoginSuccessUser();
-	retVal.setCreatedate(new Timestamp(Calendar.getInstance()
-					.getTimeInMillis()));
-	getBlogEntityService().saveEntity(user, retVal);
+	
 	return null;
 }
 
@@ -479,13 +477,6 @@ public BlogEntity updateEntity(@RequestParam("entity") final String entity,
 
 public BlogEntity initEditEntity() {
 	return null;
-}
-
-@RequestMapping("/saveimage")
-@ResponseBody
-public BlogImage saveImage() {
-	final BlogImage blogImage = new BlogImage();
-	return blogImage;
 }
 
 /**
@@ -533,10 +524,6 @@ public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent"
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
 					JSON.toJSONString(retVal), CommonUtils.getHttpHeadersByType(""), HttpStatus.OK);
 	return responseEntity;
-}
-
-public static String transSpecialContent(String content) {
-	return null;
 }
 }
 // to do 保存图片,删除图片,控制上传窗口的状态.

@@ -47,4 +47,11 @@ BlogEntity getTempEntity(final BlogUser user);
  *            current log in upser
  */
 void updateEntity(final BlogEntity entity, final BlogUser user);
+
+/**
+ * update the entity title,content,isTemp,saveTime,visible,commentable
+ * 
+ * @param entity
+ */
+void publishEntity(final BlogEntity entity);
 }

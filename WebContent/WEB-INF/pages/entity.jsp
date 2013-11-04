@@ -113,7 +113,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                       
+	filter: alpha(opacity =                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -128,7 +128,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                           0);
+		                                             0);
 	opacity: 0;
 }
 </style>
@@ -349,6 +349,12 @@ a.delete-image:hover,a.delete-video:hover {
 	<div class="container" id="edit-container">
 		<div class='row'>
 			<h1 class="span12 offset1" id="form-welcome">新加日记</h1>
+		</div>
+		<div class="row">
+			<p style="display: none; color: #999999; margin: 0 0 10px 60px;"
+				class="autosave-tip">
+				现在载入的是自动保存内容，时间&nbsp;<span>2013-11-04 10:41:05</span>
+			</p>
 		</div>
 		<div class='span6'>
 			<form class="entity-form" action="addentity" method="POST">
