@@ -109,7 +109,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity = 
+	filter: alpha(opacity =             
 		                                                         
 		                                                         
 		                                                         
@@ -125,7 +125,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                               0);
+		                                                           0);
 	opacity: 0;
 }
 </style>
@@ -386,8 +386,8 @@ a.delete-image:hover,a.delete-video:hover {
 					<label class="float-label">
 						<button type="button" class="btn btn-small btm-btn"
 							id="preview-btn">预览</button>
-						<button type="button" class="btn btn-small btn-success btm-btn"
-							class="submit-btn">发表</button>
+						<button type="button"
+							class="btn btn-small btn-success btm-btn submit-btn">发表</button>
 						<button id='cancel-btn' type="button"
 							class="btn btn-small btm-btn">取消</button>
 					</label> <input type="hidden" id="entityid"
@@ -455,8 +455,8 @@ a.delete-image:hover,a.delete-video:hover {
 		</div>
 		<label class="float-label span6">
 			<button type="button" class="btn btn-small btm-btn" id="reedit-btn">继续编辑</button>
-			<button type="button" class="btn btn-small btn-success btm-btn"
-				class="submit-btn">发表</button>
+			<button type="button"
+				class="btn btn-small btn-success btm-btn submit-btn">发表</button>
 		</label>
 	</div>
 	<div class="error" id="error-tips"
@@ -617,6 +617,70 @@ a.delete-image:hover,a.delete-video:hover {
 				$("#images-thumb").append(imageBlock);
 				return "<图片"+ curImgCount + ">";
 			},
+			/**
+			 **validate entity title and content all filled.
+			 **/
+			validateEntityInputs : function() {
+				var entityTitle = $("#title");
+				var entityContent = $("#content");
+				var blogutils = $.blogutils;
+				var docElement = $('html,body');
+				var errorTips = $('#error-tips');
+				var editTipsFun = function(msg) {
+					errorTips.css({
+						display : "block"
+					});
+					window.setTimeout(function() {
+						errorTips.css({
+							display : "none"
+						});
+					}, 5000);
+				}
+				var entityTitleVal = entityTitle.val();
+				if ($.blogutils.isEmptyString(entityTitleVal)) {
+					errorTips.text("给日记加个标题吧");
+					var elePosition = entityTitle.position();
+					errorTips.css({
+						left : elePosition.left + entityTitle.width() + 16,
+						top : elePosition.top + 5
+					});
+					docElement.animate({
+						scrollTop : elePosition.top - 30
+					}, 300);
+					editTipsFun();
+					return false;
+				}
+				var entityContentVal = entityContent.val();
+				if (blogutils.isEmptyString(entityContentVal)) {
+					errorTips.text("给日记添加内容吧");
+					var elePosition = entityContent.position();
+					errorTips.css({
+						left : elePosition.left + entityTitle.width() + 16,
+						top : elePosition.top + 5
+					});
+					editTipsFun();
+					docElement.animate({
+						scrollTop : elePosition.top - 30
+					}, 300);
+					return false;
+				}
+				return true;
+			},
+			/**
+			 **get uploaded images list in this page.
+			 **/
+			getImagesList : function() {
+				var imagesList = [];
+				$(".image-item").each(function(index, curObject) {
+					var curObject = $(curObject);
+					var curImage = curObject.data("image");
+					curImage.description = curObject.find("textarea").val();
+					var cloneImage = Object.clone(curImage);
+					delete curImage.entity;
+					imagesList.push(cloneImage);
+				});
+				return imagesList;
+			},
 			init : function() {
 				var that = this;
 				//window.setTimeout(that.updateBlogEntity, 10000);
@@ -744,94 +808,27 @@ a.delete-image:hover,a.delete-video:hover {
 						|| $("#cannot_reply").attr("checked", true);
 				$("#entity_private" + readPrivate).attr("checked", true);
 				//preview button click event handler
-				$("#preview-btn")
-						.bind(
-								'click',
-								function() {
-									var entityTitle = $("#title");
-									var entityContent = $("#content");
-									var blogutils = $.blogutils;
-									var docElement = $('html,body');
-									var errorTips = $('#error-tips');
-									var editTipsFun = function(msg) {
-										errorTips.css({
-											display : "block"
-										});
-										window.setTimeout(function() {
-											errorTips.css({
-												display : "none"
-											});
-										}, 5000);
-									}
-									var entityTitleVal = entityTitle.val();
-									if ($.blogutils
-											.isEmptyString(entityTitleVal)) {
-										errorTips.text("给日记加个标题吧");
-										var elePosition = entityTitle
-												.position();
-										errorTips.css({
-											left : elePosition.left
-													+ entityTitle.width() + 16,
-											top : elePosition.top + 5
-										});
-										docElement.animate({
-											scrollTop : elePosition.top - 30
-										}, 300);
-										editTipsFun();
-										return;
-									}
-									var entityContentVal = entityContent.val();
-									if (blogutils
-											.isEmptyString(entityContentVal)) {
-										errorTips.text("给日记添加内容吧");
-										var elePosition = entityContent
-												.position();
-										errorTips.css({
-											left : elePosition.left
-													+ entityTitle.width() + 16,
-											top : elePosition.top + 5
-										});
-										editTipsFun();
-										docElement.animate({
-											scrollTop : elePosition.top - 30
-										}, 300);
-										return;
-									}
-									var imagesList = [];
-									$(".image-item")
-											.each(
-													function(index, curObject) {
-														var curObject = $(curObject);
-														var curImage = curObject
-																.data("image");
-														curImage.description = curObject
-																.find(
-																		"textarea")
-																.val();
-														var cloneImage = Object
-																.clone(curImage);
-														delete curImage.entity;
-														imagesList
-																.push(cloneImage);
-													});
-									//initial preview content
-									$.post("editepreviewcontent", {
-										previewContent : entityContentVal,
-										imagesList : $.toJSON(imagesList)
-									}, function(data) {
-										$("#content-preview pre").empty()
-												.append(data.content);
-										$('#title-preview')
-												.text(entityTitleVal);
-										$("#edit-container").css({
-											display : "none"
-										});
-										$('#preview-container').css({
-											display : "block"
-										});
-									}, "json");
+				$("#preview-btn").bind('click', function() {
+					var pageController = window.pageController;
+					if (pageController.validateEntityInputs() == false) {
+						return false;
+					}
+					//initial preview content
+					$.post("editepreviewcontent", {
+						previewContent : entityContentVal,
+						imagesList : $.toJSON(pageController.getImagesList())
+					}, function(data) {
+						$("#content-preview pre").empty().append(data.content);
+						$('#title-preview').text(entityTitleVal);
+						$("#edit-container").css({
+							display : "none"
+						});
+						$('#preview-container').css({
+							display : "block"
+						});
+					}, "json");
 
-								});
+				});
 				//re edit button click event handler
 				$('#reedit-btn').bind("click", function() {
 					$("#edit-container").css({
