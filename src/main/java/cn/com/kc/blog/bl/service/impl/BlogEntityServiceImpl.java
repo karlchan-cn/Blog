@@ -72,6 +72,11 @@ public void updateEntity(BlogEntity entity, BlogUser user) {
 
 @Override
 public void publishEntity(final BlogEntity entity) {
-	
+
+}
+
+@Override
+public BlogEntity getEntityById(final Long entityId) {
+	return entityDao.get(entityId);
 }
 }

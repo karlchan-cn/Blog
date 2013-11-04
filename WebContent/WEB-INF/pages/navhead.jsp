@@ -4,9 +4,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <style type="text/css">
 body {
-	font: 12px arial, ​helvetica, ​sans-serif;
-	font-style: normal;
-	font-size-adjust: none;
+	font: 12px Helvetica, Arial, sans-serif;
+	
 }
 
 .container {

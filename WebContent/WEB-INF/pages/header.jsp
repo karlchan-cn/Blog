@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <link href="/Blog/assets/css/bootstrap.css" rel="stylesheet">
 <link href="/Blog/assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/Blog/assets/css/common.css" rel="stylesheet">
 <link rel="shortcut icon" href="/Blog/assets/ico/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="/Blog/assets/ico/apple-touch-icon-144-precomposed.png">

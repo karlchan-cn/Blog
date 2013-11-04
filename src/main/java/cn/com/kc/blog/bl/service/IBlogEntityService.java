@@ -54,4 +54,14 @@ void updateEntity(final BlogEntity entity, final BlogUser user);
  * @param entity
  */
 void publishEntity(final BlogEntity entity);
+
+/**
+ * query the entity with id.
+ * 
+ * @param entityId
+ *            entity to be queried.
+ * 
+ * @return entity.
+ */
+BlogEntity getEntityById(final Long entityId);
 }

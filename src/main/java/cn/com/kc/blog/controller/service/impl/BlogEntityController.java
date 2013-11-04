@@ -87,9 +87,10 @@ private BlogUser getCurrentLoginSuccessUser() {
 }
 
 /**
- * tet commite
+ * entity.jsp
  */
 public static final String CONST_ENTITY_PAGE = "entity";
+public static final String CONST_VIEW_ENTITY_PAGE = "viewentity";
 public static final String CONST_IMAGES_COUNT = "image-count";
 public static final String CONST_IMAGES_SIZE = "image-size";
 public static final String CONST_RET_ERROR = "error";
@@ -99,6 +100,7 @@ public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张
 public static final String CONST_ERRORMSG_OULSIZE = "一次只允许上传5Mb图片。";
 public static final String CONST_UL_ACTION_INIT = "init";
 public static final String CONST_UL_ACTION_CLEAR = "clear";
+public static final String CONST_REQUESTATTRIBUTENAME_ENTITY = "entity";
 public static final BigDecimal CONST_MAX_UPLOAD_SIZE = new BigDecimal(
 				1024 * 1024 * 5);
 
@@ -165,7 +167,7 @@ public ModelAndView createEntity() {
 	if (entity.getId() == null) {
 		entity = createTempEntity(user, entity);
 	}
-	modelAndView.getModelMap().put("entity", entity);
+	modelAndView.getModelMap().put(CONST_REQUESTATTRIBUTENAME_ENTITY, entity);
 	BlogEntity entityJson = new BlogEntity();
 	entityJson.setId(entity.getId());
 	entityJson.setTitle(entity.getTitle());
@@ -176,6 +178,22 @@ public ModelAndView createEntity() {
 	entityJson.setIsTemp(entity.getIsTemp());
 	entityJson.setImages(entity.getImages());
 	modelAndView.getModelMap().put("entityjson", JSON.toJSONString(entity));
+	return modelAndView;
+}
+
+/**
+ * view entity with entity id;
+ * 
+ * @param entityId
+ *            entity id;
+ * @return model and view
+ */
+@RequestMapping("/view/{entityId}")
+public ModelAndView viewEntity(@PathVariable final Long entityId) {
+	// load the temperay
+	ModelAndView modelAndView = new ModelAndView();
+	modelAndView.setViewName(CONST_VIEW_ENTITY_PAGE);
+	modelAndView.addObject(CONST_REQUESTATTRIBUTENAME_ENTITY, blogEntityService.getEntityById(entityId));
 	return modelAndView;
 }
 
@@ -431,19 +449,21 @@ public String delEntityImage(@ModelAttribute("imageId") final Long imageId) {
  * 
  * @return
  */
-@RequestMapping("/updateEntity")
+@RequestMapping("/publishEntity")
 @ResponseBody
 public BlogEntity publishEntity(@RequestParam("entity") final String entity,
+				@RequestParam("imagesList") final String imagesList,
 				HttpServletRequest request, HttpServletResponse response) {
 	BlogEntity retVal = null;
 	try {
 		retVal = mapper.readValue(entity, BlogEntity.class);
+		retVal.setContent("");
 		blogEntityService.publishEntity(retVal);
 	} catch (Exception e) {
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
-	
+
 	return null;
 }
 
@@ -475,39 +495,21 @@ public BlogEntity updateEntity(@RequestParam("entity") final String entity,
 	return null;
 }
 
-public BlogEntity initEditEntity() {
-	return null;
-}
-
 /**
+ * parse content to show-type.
  * 
- * @param entityid
- * @return
+ * @param previewContent
+ *            content
+ * @param imageArrayList
+ *            images
+ * @return parsed content
  */
-@RequestMapping("/")
-public ModelAndView newEntity(
-				@ModelAttribute("entityid") final String entityid) {
-	BlogEntity model = null;
-	if (entityid == null) {
-		model = blogEntityService.getTempEntity(null);
-	}
-	ModelAndView retVal = new ModelAndView();
-	retVal.setViewName(CONST_ENTITY_PAGE);
-	retVal.getModelMap().put("entity", model);
-	return retVal;
-}
-
-@RequestMapping("/editepreviewcontent")
-@ResponseBody
-public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent,
-				@RequestParam("imagesList") final String imagesList) {
-	HashMap<String, String> retVal = new HashMap<String, String>();
+private String getShowContent(String previewContent, final ArrayList<BlogImage> imageArrayList) {
 	previewContent = previewContent.replaceAll("&", "&amp;");
 	previewContent = previewContent.replaceAll("<", "&lt;");
 	previewContent = previewContent.replaceAll(">", "&gt;");
 	previewContent = previewContent.replaceAll("\"", "&quot;");
 	previewContent = previewContent.replaceAll("\n", "<br>");
-	ArrayList<BlogImage> imageArrayList = (ArrayList<BlogImage>) JSON.parseArray(imagesList, BlogImage.class);
 	int i = 1;
 	for (BlogImage currentImage : imageArrayList) {
 		previewContent = previewContent.replaceAll(
@@ -520,7 +522,16 @@ public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent"
 										+ "</label></div>");
 		i++;
 	}
-	retVal.put("content", previewContent);
+	return previewContent;
+}
+
+@RequestMapping("/editepreviewcontent")
+@ResponseBody
+public ResponseEntity<String> editePreviewContent(@RequestParam("previewContent") String previewContent,
+				@RequestParam("imagesList") final String imagesList) {
+	HashMap<String, String> retVal = new HashMap<String, String>();
+	ArrayList<BlogImage> imageArrayList = (ArrayList<BlogImage>) JSON.parseArray(imagesList, BlogImage.class);
+	retVal.put("content", getShowContent(previewContent, imageArrayList));
 	ResponseEntity<String> responseEntity = new ResponseEntity<String>(
 					JSON.toJSONString(retVal), CommonUtils.getHttpHeadersByType(""), HttpStatus.OK);
 	return responseEntity;

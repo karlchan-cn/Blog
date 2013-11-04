@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <title>新加日记 &middot; 这儿</title>
@@ -10,10 +10,6 @@
 <meta name="author" content="">
 <!-- 导入通用的css ico --><%@ include file="header.jsp"%>
 <style type="text/css">
-body {
-	font: Helvetica, ​Arial, ​sans-serif 12px;
-}
-
 .btn:focus {
 	outline: none;
 }
@@ -113,7 +109,8 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                                         
+	filter: alpha(opacity = 
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -128,7 +125,7 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                             0);
+		                                               0);
 	opacity: 0;
 }
 </style>
