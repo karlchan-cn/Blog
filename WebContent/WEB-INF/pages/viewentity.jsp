@@ -28,10 +28,11 @@
 			<span class="pl gtleft">&nbsp;1人浏览</span> <span class="gtleft">&gt;
 				<a href="#" class="a_edit_tag">添加标签</a>&nbsp; &nbsp;
 			</span> <span class="gtleft">&gt; <a
-				href="http://www.douban.com/note/287817279/edit">修改</a>&nbsp; &nbsp;
+				href="http://localhost:8081/Blog/entity/edit/${requestScope.entity.id}">修改</a>&nbsp;
+				&nbsp;
 			</span> <span class="gtleft"> &gt; <a rel="confirm_direct"
 				title="删除这篇日记吗?" class="j a_post_link"
-				href="http://www.douban.com/note/287817279/remove">删除</a>
+				href="http://localhost:8081/Blog/entity/remove/${requestScope.entity.id}">删除</a>
 			</span>
 		</div>
 	</div>

@@ -109,7 +109,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =             
+	filter: alpha(opacity =                                                
 		                                                         
 		                                                         
 		                                                         
@@ -125,7 +125,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                           0);
+		                                                                     
+		                        0);
 	opacity: 0;
 }
 </style>
@@ -383,13 +384,10 @@ a.delete-image:hover,a.delete-video:hover {
 						<p>设置权限：</p>
 						<input type="checkbox" id="cannot_reply" value=""><span>不允许回应</span>
 					</div>
-					<label class="float-label">
-						<button type="button" class="btn btn-small btm-btn"
-							id="preview-btn">预览</button>
-						<button type="button"
-							class="btn btn-small btn-success btm-btn submit-btn">发表</button>
-						<button id='cancel-btn' type="button"
-							class="btn btn-small btm-btn">取消</button>
+					<label class="float-label"> <a type="button"
+						class="btn btn-small btm-btn" id="preview-btn">预览</a> <a
+						type="button" class="btn btn-small btn-success btm-btn submit-btn"></a>
+						<a id='cancel-btn' type="button" class="btn btn-small btm-btn">取消</a>
 					</label> <input type="hidden" id="entityid"
 						value="${requestScope.entity.id}" />
 				</fieldset>
@@ -453,10 +451,9 @@ a.delete-image:hover,a.delete-video:hover {
 		<div class="row" id="content-preview">
 			<pre class="note span6"></pre>
 		</div>
-		<label class="float-label span6">
-			<button type="button" class="btn btn-small btm-btn" id="reedit-btn">继续编辑</button>
-			<button type="button"
-				class="btn btn-small btn-success btm-btn submit-btn">发表</button>
+		<label class="float-label span6"> <a
+			class="btn btn-small btm-btn" id="reedit-btn">继续编辑</a> <a
+			class="btn btn-small btn-success btm-btn submit-btn"></a>
 		</label>
 	</div>
 	<div class="error" id="error-tips"
@@ -532,24 +529,9 @@ a.delete-image:hover,a.delete-video:hover {
 			 **page initial method
 			 **/
 			updateBlogEntity : function() {
-				var controller = window.pageController;
-				var currentEntity = controller.currentEntity;
-				currentEntity.title = $("#title").val();
-				currentEntity.content = $("#content").val();
-				if ($("#cannot_reply").attr("checked") == "checked") {
-					currentEntity.commentable = false;
-				} else {
-					currentEntity.commentable = true;
-				}
-				$("[name='readprivate']").each(function(index, current) {
-					var current = $(current);
-					if (current.attr("checked") == "checked") {
-						currentEntity.readprivate = current.val();
-						return false;
-					}
-				});
-				$.post("updateEntity", {
-					entity : $.toJSON(controller.currentEntity)
+				var currentEntity = pageController.getCurrentEntityValue();
+				$.post("/Blog/entity/updateEntity", {
+					entity : $.toJSON(currentEntity)
 				}, function(data) {
 
 				}, "json");
@@ -618,6 +600,61 @@ a.delete-image:hover,a.delete-video:hover {
 				return "<图片"+ curImgCount + ">";
 			},
 			/**
+			 **publish note.
+			 **/
+			publishEntity : function() {
+				var submitBtns = $('.submit-btn');
+				var disabledStr = "disabled";
+				if (submitBtns.hasClass(disabledStr)) {
+					return;
+				}
+				submitBtns.addClass(disabledStr);
+				var controller = window.pageController;
+				if (controller.validateEntityInputs() == false) {
+					return;
+				}
+				var currentEntity = controller.getCurrentEntityValue();
+				var imagesList = controller.getImagesList();
+				$
+						.post(
+								"/Blog/entity/publishEntity",
+								{
+									'entity' : $.toJSON(currentEntity),
+									'imagesList' : $.toJSON(imagesList)
+								},
+								function(data) {
+									window.onbeforeunload = null;
+									window.location.href = "http://localhost:8081/Blog/entity/view/"
+											+ currentEntity.id;
+								}, "json");
+				return false;
+			},
+			/**
+			 **get entity's current values.
+			 **/
+			getCurrentEntityValue : function() {
+				var controller = window.pageController;
+				var currentEntity = controller.currentEntity;
+				currentEntity.title = $("#title").val();
+				currentEntity.content = $("#content").val();
+				if ($("#cannot_reply").attr("checked") == "checked") {
+					currentEntity.commentable = false;
+				} else {
+					currentEntity.commentable = true;
+				}
+				$("[name='readprivate']").each(function(index, current) {
+					var current = $(current);
+					if (current.attr("checked") == "checked") {
+						currentEntity.readprivate = current.val();
+						return false;
+					}
+				});
+				var retVal = Object.clone(currentEntity);
+				delete retVal.images;
+				delete retVal.user;
+				return retVal;
+			},
+			/**
 			 **validate entity title and content all filled.
 			 **/
 			validateEntityInputs : function() {
@@ -676,10 +713,18 @@ a.delete-image:hover,a.delete-video:hover {
 					var curImage = curObject.data("image");
 					curImage.description = curObject.find("textarea").val();
 					var cloneImage = Object.clone(curImage);
-					delete curImage.entity;
+					delete cloneImage.entity;
 					imagesList.push(cloneImage);
 				});
 				return imagesList;
+			},
+			/**
+			 **scroll page to specified location.
+			 **/
+			scrollPagePosition : function(scrollTop) {
+				$('html,body').animate({
+					"scrollTop" : scrollTop
+				}, 300);
 			},
 			init : function() {
 				var that = this;
@@ -694,6 +739,7 @@ a.delete-image:hover,a.delete-video:hover {
 				window.onbeforeunload = function(e) {
 					return 'data you have entered may not be saved.';
 				};
+				$('.submit-btn').bind("click", this.publishEntity);
 				//bind editable input blur event handler
 				$(".editable").bind("blur", this.editCtlBlurHandler);
 				//上传表格删除按钮控制
@@ -792,6 +838,12 @@ a.delete-image:hover,a.delete-video:hover {
 				//initialize read private and commentable
 				var currentEntity = $.evalJSON($("#x-script").text());
 				this.currentEntity = currentEntity;
+
+				if (currentEntity.isTemp) {
+					$('.submit-btn').text('发表');
+				} else {
+					$('.submit-btn').text('保存');
+				}
 				var images = currentEntity.images;
 				var length = images.length;
 				if (length > 0) {
@@ -808,36 +860,51 @@ a.delete-image:hover,a.delete-video:hover {
 						|| $("#cannot_reply").attr("checked", true);
 				$("#entity_private" + readPrivate).attr("checked", true);
 				//preview button click event handler
-				$("#preview-btn").bind('click', function() {
-					var pageController = window.pageController;
-					if (pageController.validateEntityInputs() == false) {
-						return false;
-					}
-					//initial preview content
-					$.post("editepreviewcontent", {
-						previewContent : entityContentVal,
-						imagesList : $.toJSON(pageController.getImagesList())
-					}, function(data) {
-						$("#content-preview pre").empty().append(data.content);
-						$('#title-preview').text(entityTitleVal);
-						$("#edit-container").css({
-							display : "none"
-						});
-						$('#preview-container').css({
-							display : "block"
-						});
-					}, "json");
+				$("#preview-btn")
+						.bind(
+								'click',
+								function() {
+									var pageController = window.pageController;
+									if (pageController.validateEntityInputs() == false) {
+										return false;
+									}
+									//initial preview content
+									$.post("/Blog/entity/editepreviewcontent", {
+										previewContent : $("#content").val(),
+										imagesList : $.toJSON(pageController
+												.getImagesList())
+									}, function(data) {
+										$("#content-preview pre").empty()
+												.append(data.content);
+										$('#title-preview').text(
+												$("#title").val());
+										$("#edit-container").css({
+											display : "none"
+										});
+										$('#preview-container').css({
+											display : "block"
+										});
+										pageController
+												.scrollPagePosition($(
+														'#title-preview')
+														.position().top - 30);
+									}, "json");
 
-				});
+								});
 				//re edit button click event handler
-				$('#reedit-btn').bind("click", function() {
-					$("#edit-container").css({
-						display : "block"
-					});
-					$('#preview-container').css({
-						display : "none"
-					});
-				});
+				$('#reedit-btn')
+						.bind(
+								"click",
+								function() {
+									$("#edit-container").css({
+										display : "block"
+									});
+									$('#preview-container').css({
+										display : "none"
+									});
+									window.pageController.scrollPagePosition($(
+											'#title').position().top - 30);
+								});
 				//images remove click event handler
 				$('.delete-image').live(
 						"click",

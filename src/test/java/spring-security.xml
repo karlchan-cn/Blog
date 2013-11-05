@@ -16,9 +16,16 @@
 
 	<http entry-point-ref="authenticationEntryPoint">
 		<logout logout-success-url="/" />
+		<intercept-url pattern="/entity/create/*" access="ROLE_USER" />
 		<intercept-url pattern="/entity/create" access="ROLE_USER" />
-		<intercept-url pattern="/entity/modify" access="ROLE_USER" />
-		<intercept-url pattern="/entity/delete" access="ROLE_USER" />
+		<intercept-url pattern="/entity/updateEntity/*" access="ROLE_USER" />
+		<intercept-url pattern="/entity/updateEntity" access="ROLE_USER" />
+		<intercept-url pattern="/entity/publishEntity/*" access="ROLE_USER" />
+		<intercept-url pattern="/entity/publishEntity" access="ROLE_USER" />
+		<intercept-url pattern="/entity/edit/*" access="ROLE_USER" />
+		<intercept-url pattern="/entity/edit" access="ROLE_USER" />
+		<intercept-url pattern="/entity/remove/*" access="ROLE_USER" />
+		<intercept-url pattern="/entity/remove" access="ROLE_USER" />
 		<!-- <form-login login-page="/user/login" authentication-failure-url="/user/login?a=1234" 
 			/> -->
 		<custom-filter ref="securityCodeUsernamePasswordAuthenticationFilter"

@@ -72,11 +72,17 @@ public void updateEntity(BlogEntity entity, BlogUser user) {
 
 @Override
 public void publishEntity(final BlogEntity entity) {
-
+	entityDao.updateEntityByHQL(entity);
 }
 
 @Override
 public BlogEntity getEntityById(final Long entityId) {
 	return entityDao.get(entityId);
+}
+
+@Override
+public boolean delEntity(BlogEntity blogEntity) {
+	entityDao.delete(blogEntity);
+	return true;
 }
 }

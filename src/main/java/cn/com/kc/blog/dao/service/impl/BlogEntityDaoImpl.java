@@ -25,9 +25,11 @@ import cn.com.kc.blog.pojo.BlogUser;
 public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 				IBlogEntityDaoService {
 public static final String CONST_HQL_LOAD_TEMP_ENTITY = "from BlogEntity entity where entity.isTemp = true and entity.user = ?";
-public static final String CONST_HQL_PUBLISH_ENTITY = "update BlogEntity e set e.title = :title,e.content = :content," +
-														"e.createdate = :createdate,e.readprivate =:readprivate," +
-														"e.commentable = :commentable,e.isTemp = false where e.id =:id";
+public static final String CONST_HQL_PUBLISH_ENTITY = "update BlogEntity e set e.title = :title,e.content = :content,"
+														+
+														"e.createdate = :createdate,e.readprivate =:readprivate,"
+														+
+														"e.commentable = :commentable,e.isTemp = :isTemp where e.id =:id";
 public static final String CONST_FIELD_ID = "id";
 public static final String CONST_FIELD_TITLE = "title";
 public static final String CONST_FIELD_CONTENT = "content";
@@ -59,14 +61,15 @@ public List<BlogEntity> getTempEntity(final BlogUser user) {
 }
 
 @Override
-public void publishEntity(final BlogEntity entity) {
-	final int updatedRowsCount = getCurrentSession().createQuery(CONST_HQL_PUBLISH_ENTITY)
+public void updateEntityByHQL(final BlogEntity entity) {
+	getCurrentSession().createQuery(CONST_HQL_PUBLISH_ENTITY)
 					.setLong(CONST_FIELD_ID, entity.getId())
 					.setString(CONST_FIELD_TITLE, entity.getTitle())
 					.setString(CONST_FIELD_CONTENT, entity.getContent())
 					.setString(CONST_FIELD_READPRIVATE, entity.getReadprivate())
 					.setTimestamp(CONST_FIELD_CREATEDATE, entity.getCreatedate())
-					.setBoolean(CONST_FIELD_COMMENTABLE, entity.getCommentable()).executeUpdate();
+					.setBoolean(CONST_FIELD_COMMENTABLE, entity.getCommentable())
+					.setBoolean(CONST_FIELD_ISTEMP, entity.getIsTemp()).executeUpdate();
 
 }
 }

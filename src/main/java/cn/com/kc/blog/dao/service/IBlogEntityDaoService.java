@@ -43,5 +43,5 @@ List<BlogEntity> getTempEntity(final BlogUser user);
  * 
  * @param entity
  */
-void publishEntity(final BlogEntity entity);
+void updateEntityByHQL(final BlogEntity entity);
 }

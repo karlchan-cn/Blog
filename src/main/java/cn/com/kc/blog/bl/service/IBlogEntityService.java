@@ -64,4 +64,11 @@ void publishEntity(final BlogEntity entity);
  * @return entity.
  */
 BlogEntity getEntityById(final Long entityId);
+
+/**
+ * delete entity
+ * 
+ * @return consequence.
+ */
+boolean delEntity(final BlogEntity blogEntity);
 }
