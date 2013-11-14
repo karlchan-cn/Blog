@@ -52,6 +52,7 @@ public void saveNewEntity(final BlogUser user, final BlogEntity entity) {
 
 @SuppressWarnings("unchecked")
 public List<BlogEntity> getTempEntity(final BlogUser user) {
+	
 	final Session session = getCurrentSession();
 	final Query query = session
 					.createQuery(CONST_HQL_LOAD_TEMP_ENTITY);

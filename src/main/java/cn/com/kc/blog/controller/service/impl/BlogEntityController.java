@@ -200,6 +200,15 @@ public ModelAndView viewEntity(@PathVariable final Long entityId) {
 	modelAndView.addObject(CONST_REQUESTATTRIBUTENAME_ENTITY, entity);
 	return modelAndView;
 }
+/**
+ * 
+ * @return
+ */
+public ModelAndView viewEntities(){
+	
+	return null;
+}
+
 
 /**
  * 
