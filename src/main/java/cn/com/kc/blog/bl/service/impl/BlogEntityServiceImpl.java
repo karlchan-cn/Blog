@@ -4,20 +4,20 @@
 package cn.com.kc.blog.bl.service.impl;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
+
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import cn.com.kc.blog.bl.service.IBlogEntityService;
+import cn.com.kc.blog.commondao.pagination.service.Page;
+import cn.com.kc.blog.commondao.pagination.service.PageRequest;
 import cn.com.kc.blog.dao.service.IBlogEntityDaoService;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
 import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogUser;
-import cn.com.kc.blog.vo.BlogEntityVO;
 
 /**
  * @author chenjinlong2
@@ -84,5 +84,11 @@ public BlogEntity getEntityById(final Long entityId) {
 public boolean delEntity(BlogEntity blogEntity) {
 	entityDao.delete(blogEntity);
 	return true;
+}
+
+@Override
+public Page<BlogEntity> getBasePagedEntityDataByParam(PageRequest pageRequest, Object... parameters) {
+
+	return entityDao.getBasePagedEntityData(pageRequest, parameters);
 }
 }

@@ -10,13 +10,15 @@ import java.util.List;
  * 
  * @param <T>
  */
-public interface Page<T extends Serializable> extends Iterable<Serializable> {
+public interface Page<T extends Serializable> extends Iterable<T> {
 /**
  * get page content list.
  * 
  * @return
  */
 List<T> getContent();
+
+void setContent(List<T> content);
 
 /**
  * get current page number.

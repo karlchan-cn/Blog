@@ -3,11 +3,15 @@
  */
 package cn.com.kc.blog.dao.service.impl;
 
+import java.io.Serializable;
+
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import cn.com.kc.blog.commondao.pagination.service.Page;
+import cn.com.kc.blog.commondao.pagination.service.PageRequest;
 import cn.com.kc.blog.commondao.service.impl.BaseDaoImpl;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
 import cn.com.kc.blog.pojo.BlogUser;
@@ -43,6 +47,18 @@ public int updateUserPassword(String userName, String password) {
 	query.setString(1, userName);
 	return query.executeUpdate();
 
+}
+
+@Override
+public String getBaseTotalQueryHQL() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public String getBasetoalListQueryHQL() {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }
