@@ -82,12 +82,6 @@ public void delUser(final BlogUser user) {
  */
 public BlogUser getUserByUsername(String username) {
 	BlogUser user = userDao.getUserByUsername(username);
-	// BlogUserVO retVal = new BlogUserVO();
-	// try {
-	// BeanUtils.copyProperties(retVal, user);
-	// } catch (Exception e) {
-	// throw new RuntimeException(e);
-	// }
 	return user;
 }
 

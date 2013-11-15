@@ -11,11 +11,17 @@ import cn.com.kc.blog.commondao.pagination.service.Page;
  * @author kchen1
  * 
  */
-public class PageImpl implements Page<Serializable> {
+public class PageImpl<T extends Serializable> implements Page<T> {
+@Override
+public void setContent(List<T> content) {
+	this.content = content;
+}
+
 /**
  * page elementss
  */
-private List<Serializable> content;
+
+private List<T> content;
 /**
  * total numbers of all elements
  */
@@ -30,16 +36,16 @@ private int pageSize;
 private int pageNumber;
 
 @Override
-public Iterator<Serializable> iterator() {
+public Iterator<T> iterator() {
 	return content.iterator();
 }
 
 @Override
-public List<Serializable> getContent() {
+public List<T> getContent() {
 	return content;
 }
 
-public PageImpl(final List<Serializable> content, final Long totalNumberOfElements, final int pageSize,
+public PageImpl(final List<T> content, final Long totalNumberOfElements, final int pageSize,
 				final int pageNumber) {
 	this.content = content;
 	this.totalNumberOfElements = totalNumberOfElements;

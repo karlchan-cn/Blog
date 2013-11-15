@@ -6,6 +6,7 @@ package cn.com.kc.blog.commondao.service.impl;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ import cn.com.kc.blog.commondao.service.IBaseDao;
  */
 @Scope("singleton")
 @Component("cn.com.kc.blog.commondao.service.IBaseDao")
-public class BaseDaoImpl<M extends Serializable, PK extends Serializable>
+public abstract class BaseDaoImpl<M extends Serializable, PK extends Serializable>
 				implements IBaseDao<M, PK> {
 /**
 	 * 
@@ -97,12 +98,10 @@ public void update(M model) {
 }
 
 @Override
-public Long getTotalEntityNumberBySQL(final String queryString, final Boolean isUnique, final Object... parameter) {
+public Long getTotalEntityNumberBySQL(final String queryString, final Boolean isUnique, final Object... parameters) {
 	final Session session = getCurrentSession();
 	final Query query = session.createQuery(queryString);
-	for (int i = 0; i < parameter.length; i++) {
-		query.setParameter(i, parameter[i]);
-	}
+	setQueryParameters(query, parameters);
 	if (isUnique) {
 		return (Long) query.uniqueResult();
 	} else {
@@ -110,12 +109,50 @@ public Long getTotalEntityNumberBySQL(final String queryString, final Boolean is
 	}
 }
 
+/**
+ * initial query parameter by indexs.
+ * 
+ * @param query
+ *            hibernate query.
+ * @param parameters
+ *            parameters
+ */
+private void setQueryParameters(final Query query, final Object... parameters) {
+	for (int i = 0; i < parameters.length; i++) {
+		query.setParameter(i, parameters[i]);
+	}
+}
+
 @Override
-public Page<Serializable> getPagedEntityListByHQL(PageRequest pageRequest, String queryHQL, Long totalNumberOfElements,
+public Page<M> getPagedEntityListByHQL(PageRequest pageRequest, String queryHQL,
+				Long totalNumberOfElements,
 				Object... parameters) {
 	final Query query = getCurrentSession().createQuery(queryHQL);
+	setQueryParameters(query, parameters);
 	query.setFirstResult((pageRequest.getPageNumber() - 1) * pageRequest.getPageSize());
 	query.setMaxResults(pageRequest.getPageSize());
-	return new PageImpl(query.list(), totalNumberOfElements, pageRequest.getPageNumber(), pageRequest.getPageNumber());
+	return new PageImpl<M>(query.list(), totalNumberOfElements,
+					pageRequest.getPageNumber(),
+					pageRequest.getPageNumber());
 }
+
+@Override
+public Page<M> getBasePagedEntityData(final PageRequest pageRequest, final Object... parameters) {
+	final Long totalNumberOfElements = getTotalEntityNumberBySQL(getBaseTotalQueryHQL(), true);
+	return getPagedEntityListByHQL(pageRequest, getBasetoalListQueryHQL(), totalNumberOfElements);
+}
+
+/**
+ * base count hql method needed to implement
+ * 
+ * @return string
+ */
+public abstract String getBaseTotalQueryHQL();
+
+/**
+ * base data list query hql method needed to implement
+ * 
+ * @return string
+ */
+public abstract String getBasetoalListQueryHQL();
 }

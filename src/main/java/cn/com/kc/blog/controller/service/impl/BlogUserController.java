@@ -156,4 +156,13 @@ public void saveUser(
 	}
 	this.userService.saveUser(user);
 }
+
+/**
+ * 
+ * @param username
+ * @return
+ */
+public BlogUser getBlogUserByName(final String username) {
+	return this.userService.getUserByUsername(username);
+}
 }

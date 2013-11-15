@@ -3,14 +3,17 @@
  */
 package cn.com.kc.blog.dao.service.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-
+import cn.com.kc.blog.commondao.pagination.service.Page;
+import cn.com.kc.blog.commondao.pagination.service.PageRequest;
 import cn.com.kc.blog.commondao.service.impl.BaseDaoImpl;
 import cn.com.kc.blog.dao.service.IBlogEntityDaoService;
 import cn.com.kc.blog.dao.service.IBlogUserDaoService;
@@ -30,6 +33,14 @@ public static final String CONST_HQL_PUBLISH_ENTITY = "update BlogEntity e set e
 														"e.createdate = :createdate,e.readprivate =:readprivate,"
 														+
 														"e.commentable = :commentable,e.isTemp = :isTemp where e.id =:id";
+/**
+ * 
+ */
+public static final String CONST_HQL_GET_ALL_ENTITY_COUNT = " select count(entity.id) from BlogEntity entity";
+/**
+ * 
+ */
+public static final String CONST_HQL_GET_LISTEDENTITY_INFO = " select entity.title,entity.content,entity.createdate from BlogEntity entity";
 public static final String CONST_FIELD_ID = "id";
 public static final String CONST_FIELD_TITLE = "title";
 public static final String CONST_FIELD_CONTENT = "content";
@@ -52,7 +63,7 @@ public void saveNewEntity(final BlogUser user, final BlogEntity entity) {
 
 @SuppressWarnings("unchecked")
 public List<BlogEntity> getTempEntity(final BlogUser user) {
-	
+
 	final Session session = getCurrentSession();
 	final Query query = session
 					.createQuery(CONST_HQL_LOAD_TEMP_ENTITY);
@@ -73,4 +84,33 @@ public void updateEntityByHQL(final BlogEntity entity) {
 					.setBoolean(CONST_FIELD_ISTEMP, entity.getIsTemp()).executeUpdate();
 
 }
+
+@Override
+public Page<BlogEntity> getBasePagedEntityData(PageRequest pageRequest, Object... parameters) {
+	Page<BlogEntity> page = super.getBasePagedEntityData(pageRequest, parameters);
+	final List<?> content = page.getContent();
+	List<BlogEntity> entitiesList = new ArrayList<BlogEntity>();
+	BlogEntity entity = null;
+	for (Iterator<?> iterator = content.iterator(); iterator.hasNext();) {
+		Object[] value = (Object[]) iterator.next();
+		entity = new BlogEntity();
+		entity.setTitle(String.valueOf(value[0]));
+		entity.setContent(String.valueOf(value[1]));
+		entity.setCreatedate((Timestamp) value[2]);
+		entitiesList.add(entity);
+	}
+	page.setContent(entitiesList);
+	return page;
+}
+
+@Override
+public String getBaseTotalQueryHQL() {
+	return CONST_HQL_GET_ALL_ENTITY_COUNT;
+}
+
+@Override
+public String getBasetoalListQueryHQL() {
+	return CONST_HQL_GET_LISTEDENTITY_INFO;
+}
+
 }
