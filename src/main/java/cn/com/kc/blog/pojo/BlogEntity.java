@@ -63,7 +63,7 @@ private BlogUser user;
 
 @OneToMany(cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "entity")
 private Set<BlogComments> comments;
-@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.EAGER, targetEntity = BlogCategory.class, mappedBy = "entities")
+@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogCategory.class, mappedBy = "entities")
 private List<BlogCategory> categorys;
 
 public List<BlogImage> getImages() {

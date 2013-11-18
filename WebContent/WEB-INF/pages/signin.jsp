@@ -62,7 +62,7 @@ a:hover {
 						<h1 class="col-sm-3 control-label">登录后台</h1>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-5">
+						<div class="col-sm-offset-2 col-sm-5">
 							<label class="text-error" for="errormsg">
 								${requestScope.SPRING_SECURITY_LAST_EXCEPTION} </label>
 						</div>
