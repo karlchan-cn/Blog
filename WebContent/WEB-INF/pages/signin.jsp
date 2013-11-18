@@ -11,15 +11,15 @@
 <!-- 导入通用的css ico --><%@ include file="header.jsp"%>
 
 <style type="text/css">
-.form-horizontal .control-group {
+.form-horizontal .form-group {
 	margin-bottom: 10px;
 }
 
-.form-horizontal .control-group .controls img {
+.form-horizontal .form-group .col-sm-5 img {
 	height: 40px;
 }
 
-.form-horizontal .control-group .changeimage {
+.form-horizontal .form-group .changeimage {
 	font-size: 12px;
 	display: inline;
 	position: relative;
@@ -53,74 +53,61 @@ a:hover {
 <body>
 	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container">
-		<!-- 
-		<form class="form-signin" action="/Blog/j_spring_security_check"
-			method="POST">
-			<h4 class="form-signin-heading lead muted">请登陆</h4>
-			<input type="text" name="j_username" class="input-block-level"
-				placeholder="用户名"><input type="password" name="j_password"
-				class="input-block-level" placeholder="密码"> <img
-				src="/Blog/user/securitycode"> <input type="password"
-				name="j_password" class="input-block-level" placeholder="请输入上图中的字母">
-			<label class="checkbox"> <input type="checkbox"
-				value="remember-me">记住我
-			</label>
-			<button class="btn btn-normal btn-primary" type="submit">登陆
-			</button>
-		</form>
-		 -->
-
 		<div class="row">
-			<div class="span6">
+			<div class="col-md-6">
 				<form class="form-signin form-horizontal"
 					action="/Blog/j_spring_security_check" id="signinform"
 					method="POST">
-					<div class="control-group">
-						<h2 class=" control-label">请登陆</h2>
+					<div class="form-group">
+						<h1 class="col-sm-3 control-label">登录后台</h1>
 					</div>
-					<div class="control-group">
-						<div class="controls">
+					<div class="form-group">
+						<div class="col-sm-5">
 							<label class="text-error" for="errormsg">
 								${requestScope.SPRING_SECURITY_LAST_EXCEPTION} </label>
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label" for="j_username">用户名</label>
-						<div class="controls">
-							<input type="text" name="j_username" id="j_username" class="" />
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="j_username">用户名</label>
+						<div class="col-sm-5">
+							<input type="text" name="j_username" id="j_username"
+								class="form-control" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label" for="j_password">密码</label>
-						<div class="controls">
-							<input type="password" id="j_password" name="j_password" class="" />
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="j_password">密码</label>
+						<div class="col-sm-5">
+							<input type="password" id="j_password" name="j_password"
+								class="form-control" />
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
+					<div class="form-group">
+						<div class="col-sm-10">
 							<img src="/Blog/user/securitycode" id="securitycodeimg">
-							<p class="muted changeimage">
+							<p class="text-muted changeimage">
 								看不清？<a href="" id="changeimagebtn">换一个</a>
 							</p>
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label muted mutedlabel" for="securitycode">请输入上图中的字母</label>
-						<div class="controls">
+					<div class="form-group">
+						<label class="col-sm-2 control-label text-muted mutedlabel"
+							for="securitycode">验证码</label>
+						<div class="col-sm-3">
 							<input type="text" id="securitycode" name="securitycode"
-								class="input-small">
+								class="form-control">
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<label class="checkbox muted mutedlabel"> <input
-								type="checkbox"> 记住我
-							</label>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox text-muted mutedlabel">
+								<label> <input type="checkbox">记住我
+								</label>
+							</div>
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<button type="submit" class="btn">登陆</button>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">登陆</button>
 						</div>
 					</div>
 				</form>

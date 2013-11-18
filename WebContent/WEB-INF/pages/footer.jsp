@@ -5,9 +5,14 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/Blog/assets/js/jquery-1.7.2.js">
+<script src="/Blog/assets/js/jquery-1.10.2.js">
 	
 </script>
+
+<script src="/Blog/assets/js/bootstrap_3.0.2.js">
+	
+</script>
+<!-- 
 <script src="/Blog/assets/js/bootstrap-transition.js">
 	
 </script>
@@ -44,6 +49,7 @@
 <script src="/Blog/assets/js/bootstrap-typeahead.js">
 	
 </script>
+-->
 <script src="/Blog/assets/js/sugar-1.2.2.js">
 	
 </script>
