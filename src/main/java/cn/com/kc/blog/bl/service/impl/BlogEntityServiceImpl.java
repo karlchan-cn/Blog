@@ -88,7 +88,6 @@ public boolean delEntity(BlogEntity blogEntity) {
 
 @Override
 public Page<BlogEntity> getBasePagedEntityDataByParam(PageRequest pageRequest, Object... parameters) {
-
 	return entityDao.getBasePagedEntityData(pageRequest, parameters);
 }
 }
