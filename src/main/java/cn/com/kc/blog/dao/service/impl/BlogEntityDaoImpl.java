@@ -27,7 +27,10 @@ import cn.com.kc.blog.pojo.BlogUser;
 @Repository("cn.com.kc.blog.dao.service.IBlogEntityDaoService")
 public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 		IBlogEntityDaoService {
-	public static final String CONST_HQL_LOAD_TEMP_ENTITY = "from BlogEntity entity where entity.isTemp = true and entity.user = ?";
+	public static final String CONST_HQL_LOAD_TEMP_ENTITY = "select entity.id,entity.title,entity.content,entity.createdate,"
+			+ " entity.readprivate,entity.commentable,image.id,image.name,image.description,image.position "
+			+ " from BlogEntity entity inner join entity.images as image "
+			+ " where entity.isTemp = true and entity.user = ?";
 	public static final String CONST_HQL_PUBLISH_ENTITY = "update BlogEntity e set e.title = :title,e.content = :content,"
 			+ "e.createdate = :createdate,e.readprivate =:readprivate,"
 			+ "e.commentable = :commentable,e.isTemp = :isTemp where e.id =:id";
@@ -39,7 +42,7 @@ public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
  * 
  */
 	public static final String CONST_HQL_GET_LISTEDENTITY_INFO = " select entity.title,entity.content,entity.createdate,"
-			+ " user.id from BlogEntity entity right outer join entity.user as user "
+			+ " user.id from BlogEntity entity inner join entity.user as user "
 			+ " where user.id = ?";
 	public static final String CONST_FIELD_ID = "id";
 	public static final String CONST_FIELD_TITLE = "title";
@@ -62,12 +65,11 @@ public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<BlogEntity> getTempEntity(final BlogUser user) {
-
+	public List<Object[]> getTempEntity(final BlogUser user) {
 		final Session session = getCurrentSession();
 		final Query query = session.createQuery(CONST_HQL_LOAD_TEMP_ENTITY);
 		query.setEntity(0, user);
-		List<BlogEntity> list = query.list();
+		List<Object[]> list = query.list();
 		return list;
 	}
 
