@@ -18,7 +18,7 @@ public class OpenSessionInViewFilterCustomedImpl extends OpenSessionInViewFilter
  * 须要过滤掉的url设定变量
  */
 private static final String EXCLUDE_SUFFIXS_NAME = "excludeSuffixs";
-private static final String[] DEFAULT_UN_FILTERED_TYPES = { ".css", ".js", ".jpg", ".jpeg", ".gif", ".ico" };
+private static final String[] DEFAULT_UN_FILTERED_TYPES = { ".css", ".js", ".jpg", ".jpeg", ".gif", ".ico", ".eot", ".svg", ".ttf", ".woff" };
 /**
  * 须要过滤掉的url设定变量数组
  */
