@@ -58,7 +58,7 @@ public BlogEntity getTempEntity(BlogUser user) {
 	BlogEntity entity;
 	if (list.size() != 0) {
 		entity = list.get(0);
-	} else {
+	}		 else {
 		entity = new BlogEntity();
 	}
 	return entity;
