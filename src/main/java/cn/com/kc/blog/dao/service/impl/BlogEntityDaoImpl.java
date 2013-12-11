@@ -29,7 +29,7 @@ public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 		IBlogEntityDaoService {
 	public static final String CONST_HQL_LOAD_TEMP_ENTITY = "select entity.id,entity.title,entity.content,entity.createdate,"
 			+ " entity.readprivate,entity.commentable,image.id,image.name,image.description,image.position "
-			+ " from BlogEntity entity inner join entity.images as image "
+			+ " from BlogEntity entity left join entity.images as image "
 			+ " where entity.isTemp = true and entity.user = ?";
 	public static final String CONST_HQL_PUBLISH_ENTITY = "update BlogEntity e set e.title = :title,e.content = :content,"
 			+ "e.createdate = :createdate,e.readprivate =:readprivate,"
