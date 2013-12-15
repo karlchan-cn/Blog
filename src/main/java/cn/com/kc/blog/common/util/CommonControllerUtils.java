@@ -30,7 +30,7 @@ public static String getUploadDir(final HttpServletRequest request) {
 	if (UPLOAD_DIR == null) {
 		UPLOAD_DIR = request.getSession().getServletContext()
 						.getRealPath("/")
-						+ "WEB-INF\\assets\\upload\\images\\";
+						+ "WEB-INF/assets/upload/images/";
 		// 初始化下载目录
 		File uploadDir = new File(UPLOAD_DIR);
 		if (!uploadDir.exists()) {

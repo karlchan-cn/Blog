@@ -74,13 +74,15 @@ public class BlogEntityServiceImpl implements IBlogEntityService {
 			for (Iterator<Object[]> iterator = list.iterator(); iterator
 					.hasNext();) {
 				Object[] objects = iterator.next();
-				BlogImage image = new BlogImage();
-				image.setId((Long) objects[6]);
-				image.setName((String) objects[7]);
-				image.setDescription((String) objects[8]);
-				image.setPosition((String) objects[9]);
-				imageList.add(image);
-				image.setEntity(entity);
+				if ((Long) objects[6] != null) {
+					BlogImage image = new BlogImage();
+					image.setId((Long) objects[6]);
+					image.setName((String) objects[7]);
+					image.setDescription((String) objects[8]);
+					image.setPosition((String) objects[9]);
+					imageList.add(image);
+					image.setEntity(entity);
+				}
 			}
 
 		}

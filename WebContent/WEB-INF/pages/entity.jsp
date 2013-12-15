@@ -123,7 +123,8 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                   
+	filter: alpha(opacity =    
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -141,14 +142,14 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                                     0
-		);
+		                                                                     
+		                          0);
 	opacity: 0;
 }
 </style>
 <style type="text/css">
 .modal {
-	width: 648px;
+	/**width: 648px; **/
 }
 
 #uploadfiletable {
@@ -370,104 +371,133 @@ a.delete-image:hover,a.delete-video:hover {
 				现在载入的是自动保存内容，时间&nbsp;<span>2013-11-04 10:41:05</span>
 			</p>
 		</div>
-		<div class='col-md-6 row'>
-			<form class="entity-form" action="addentity" method="POST">
-				<fieldset>
-					<label> 题目： </label> <input type="text" name="title" id="title"
-						class="editable input-xxlarge form-control" placeholder=""
-						value="${requestScope.entity.title}" /> <span class="help-inline"></span>
-					<label class="float-label row " id="float-label">
-						<p>正文：</p>
-						<ul class="list-inline">
-							<li><a class="btn btn-default btn-sm" href="#myModal"
-								role="button" data-toggle="modal" aria-hidden="false">图片</a></li>
-							<li><a id="link-btn" class="btn btn-default btn-sm" style=""
-								href="#">连接</a></li>
+		<div class='row'>
+			<div class="col-md-7">
+				<form class="entity-form" action="addentity" method="POST">
+					<fieldset>
+						<div class="form-group">
+							<label for="title">题目：</label> <input type="text" name="title"
+								id="title" class="editable input-xxlarge form-control"
+								placeholder="" value="${requestScope.entity.title}"
+								placeholder="Enter Title" />
+						</div>
+						<div class="form-group">
+							<span class="help-inline"></span>
+						</div>
+						<div class="form-group">
+							<label for="content">正文：
+								<div class="row" style="margin-top: 5px">
+									<div class="col-md-12">
+										<button class="btn btn-default btn-xs pull-right"
+											data-target="#myModal" role="button" data-toggle="modal"
+											aria-hidden="false">图片</button>
+										<button type="button" id="link-btn"
+											class="btn btn-default btn-xs pull-right">连接</button>
+									</div>
+								</div>
 
-						</ul> <!-- <span class="btn-group"><a class="btn btn-small"
+							</label>
+							<textarea name="content" class="editable form-control"
+								id="content" tabindex="2">${requestScope.entity.content}</textarea>
+						</div>
+						<!-- 
+						<label class="float-label" id="float-label">
+							<p>正文：</p>  <ul class="list-inline">
+								<li><a class="btn btn-default btn-sm" href="#myModal"
+									role="button" data-toggle="modal" aria-hidden="false">图片</a></li>
+								<li><a id="link-btn" class="btn btn-default btn-sm"
+									style="" href="#">连接</a></li>
+							</ul>
+							</label>
+							-->
+						<!-- <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a id="link-btn" class="btn btn-small"
 							style="" href="#">连接</a></span>
 							 -->
-					</label>
-					<textarea name="content" class="editable form-control" id="content"
-						tabindex="2">${requestScope.entity.content}</textarea>
-					<span id="content-info" class="help-block"></span>
-					<div id="images-thumb" style="display: none"></div>
 
-					<div class="blogoptiondiv row">
-						<label class="radio-inline control-label">设置可见：</label> <label
-							class="radio-inline"> <input type="radio" value="P"
-							name="readprivate" id="entity_privateP" tabindex="3" /><span>所有人看见</span>
-						</label> <label class="radio-inline"> <input type="radio"
-							value="S" name="readprivate" id="entity_privateS" tabindex="4" /><span>仅朋友可见</span>
-						</label> <label class="radio-inline"> <input type="radio"
-							value="X" name="readprivate" id="entity_privateX" tabindex="5" /><span>仅自己可见</span>
-						</label>
-					</div>
-					<div class="blogoptiondiv row">
-						<label class='checkbox-inline'>设置权限：</label> <label
-							class='checkbox-inline'><input type="checkbox"
-							id="cannot_reply" value=""><span>不允许回应 </span></label>
-					</div>
-					<label class="float-label"> <a type="button"
-						class="btn btn-default btn-sm btm-btn" id="preview-btn">预览</a> <a
-						type="button" class="btn btn-sm btn-success btm-btn submit-btn">发表</a>
-						<a id='cancel-btn' type="button"
-						class="btn btn-default btn-sm btm-btn">取消</a>
-					</label> <input type="hidden" id="entityid"
-						value="${requestScope.entity.id}" />
-				</fieldset>
-			</form>
+
+
+						<span id="content-info" class="help-block"></span>
+						<div id="images-thumb" style="display: none"></div>
+
+						<div class="blogoptiondiv row">
+							<label class="radio-inline control-label">设置可见：</label> <label
+								class="radio-inline"> <input type="radio" value="P"
+								name="readprivate" id="entity_privateP" tabindex="3" /><span>所有人看见</span>
+							</label> <label class="radio-inline"> <input type="radio"
+								value="S" name="readprivate" id="entity_privateS" tabindex="4" /><span>仅朋友可见</span>
+							</label> <label class="radio-inline"> <input type="radio"
+								value="X" name="readprivate" id="entity_privateX" tabindex="5" /><span>仅自己可见</span>
+							</label>
+						</div>
+						<div class="blogoptiondiv row">
+							<label class='checkbox-inline'>设置权限：</label> <label
+								class='checkbox-inline'><input type="checkbox"
+								id="cannot_reply" value=""><span>不允许回应 </span></label>
+						</div>
+						<label class="float-label"> <a type="button"
+							class="btn btn-default btn-sm btm-btn" id="preview-btn">预览</a> <a
+							type="button" class="btn btn-sm btn-success btm-btn submit-btn">发表</a>
+							<a id='cancel-btn' type="button"
+							class="btn btn-default btn-sm btm-btn">取消</a>
+						</label> <input type="hidden" id="entityid"
+							value="${requestScope.entity.id}" />
+					</fieldset>
+				</form>
+			</div>
 		</div>
 
 	</div>
 	<!-- Modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
-		data-backdrop="static" aria-labelledby="myModalLabel"
-		aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close dismissupload"
-				data-dismiss="modal" aria-hidden="true">×</button>
-			<h2 id="myModalLabel">添加文件</h2>
-		</div>
-		<div class="modal-body">
-			<div class="fileupload-buttonbar">
-				<span class="btn btn-success btn-small fileinput-button"><i
-					class="icon-plus icon-white"></i><span>选择图片</span><input
-					id='fileupload' type="file" name="file" data-url="saveimagefile"
-					multiple="true"></span>
-			</div>
-			<div class="dialogbd">
-				<p class="infotips">图片不超过5M，一次最多20张</p>
-				<div class="filelists">
-					<table id='uploadfiletable' class="table table-hover">
-						<thead>
-							<tr>
-								<th class="uploadlistname">图片</th>
-								<th class="uploadlisttime">大小</th>
-								<th class="uploadlistdel">删除?</th>
-							</tr>
-						</thead>
-						<tr class="totalfooter" id="totalfooter">
-							<td class="total-num" id="total-num">共<span
-								class="total-num-image" id="total-num-image">0</span>张<span
-								id="uploaderror">已经到达上传数量上限。</span>
-							</td>
-							<td class="total-size" colspan="2">总计:<span
-								class='total-size-image' id='total-size-image'>0</span> <span
-								class='total-size-type' id='total-size-type'>KB</span>
-							</td>
-						</tr>
-					</table>
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close dismissupload"
+						data-dismiss="modal" aria-hidden="true">×</button>
+					<h2 id="myModalLabel">添加文件</h2>
+				</div>
+				<div class="modal-body">
+					<div class="fileupload-buttonbar">
+						<span class="btn btn-success btn-small fileinput-button"><i
+							class="icon-plus icon-white"></i><span>选择图片</span><input
+							id='fileupload' type="file" name="file" data-url="saveimagefile"
+							multiple="true"></span>
+					</div>
+					<div class="dialogbd">
+						<p class="infotips">图片不超过5M，一次最多20张</p>
+						<div class="filelists">
+							<table id='uploadfiletable' class="table table-hover">
+								<thead>
+									<tr>
+										<th class="uploadlistname">图片</th>
+										<th class="uploadlisttime">大小</th>
+										<th class="uploadlistdel">删除?</th>
+									</tr>
+								</thead>
+								<tr class="totalfooter" id="totalfooter">
+									<td class="total-num" id="total-num">共<span
+										class="total-num-image" id="total-num-image">0</span>张<span
+										id="uploaderror">已经到达上传数量上限。</span>
+									</td>
+									<td class="total-size" colspan="2">总计:<span
+										class='total-size-image' id='total-size-image'>0</span> <span
+										class='total-size-type' id='total-size-type'>KB</span>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-small dismissupload" data-dismiss="modal"
+						aria-hidden="true">关闭</button>
+					<button class="btn btn-small btn-success" id="saveupload">
+						保存</button>
 				</div>
 			</div>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-small dismissupload" data-dismiss="modal"
-				aria-hidden="true">关闭</button>
-			<button class="btn btn-small btn-success" id="saveupload">
-				保存</button>
 		</div>
 	</div>
 	<!-- /container -->
@@ -800,12 +830,12 @@ a.delete-image:hover,a.delete-video:hover {
 				});
 				//注册上传窗体hide事件
 				var uploadModel = $('#myModal');
-				uploadModel.on('hidden', function() {
+				uploadModel.on('hide.bs.modal', function() {
 
 				});
-				uploadModel.on('show', function() {
+				uploadModel.on('show.bs.modal', function() {
 					//表格数据删除
-					$('tr').remove('.uploaditem');
+					$('#uploadfiletable tr').remove('.uploaditem');
 					$('#total-num-image').text(0);
 					$('#total-size-image').text('0');
 					$('#total-size-type').text('KB');
