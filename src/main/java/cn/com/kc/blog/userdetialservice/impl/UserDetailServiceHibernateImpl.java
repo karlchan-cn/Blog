@@ -77,7 +77,6 @@ public UserDetails loadUserByUsername(final String username) throws UsernameNotF
 										"AbstractUserDetailsAuthenticationProvider.usernamenonexist"));
 	}
 	// save current user for use.
-
 	final List<BlogAuthorities> authorities = user.getAuthorities();
 	List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 	for (BlogAuthorities authority : authorities) {
