@@ -376,8 +376,7 @@ a.delete-image:hover,a.delete-video:hover {
 					<label> 题目： </label> <input type="text" name="title" id="title"
 						class="editable input-xxlarge form-control" placeholder=""
 						value="${requestScope.entity.title}" /> <span class="help-inline"></span>
-					<label class="float-label row" id="float-label">
-
+					<label class="float-label row " id="float-label">
 						<p>正文：</p>
 						<ul class="list-inline">
 							<li><a class="btn btn-default btn-sm" href="#myModal"
