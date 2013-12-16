@@ -29,51 +29,52 @@ import cn.com.kc.blog.pojo.BlogUser;
  */
 @Service("cn.com.kc.blog.bl.service.IBlogEntityService")
 public class BlogEntityServiceImpl implements IBlogEntityService {
-	/**
+/**
 	 * 
 	 */
-	private IBlogEntityDaoService entityDao;
-	/**
+private IBlogEntityDaoService entityDao;
+/**
 	 * 
 	 */
-	private IBlogUserDaoService userDao;
+private IBlogUserDaoService userDao;
 
-	@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
-	public void setUserDao(IBlogUserDaoService userDao) {
-		this.userDao = userDao;
-	}
+@Resource(name = "cn.com.kc.blog.dao.service.IBlogUserDaoService")
+public void setUserDao(IBlogUserDaoService userDao) {
+	this.userDao = userDao;
+}
 
-	@Resource(name = "cn.com.kc.blog.dao.service.IBlogEntityDaoService")
-	public void setEntityDao(final IBlogEntityDaoService newDAO) {
-		this.entityDao = newDAO;
-	}
+@Resource(name = "cn.com.kc.blog.dao.service.IBlogEntityDaoService")
+public void setEntityDao(final IBlogEntityDaoService newDAO) {
+	this.entityDao = newDAO;
+}
 
-	public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
-		entity.setUser(user);
-		entityDao.save(entity);
-		return entity;
-	}
+public Serializable saveEntity(final BlogUser user, final BlogEntity entity) {
+	entity.setUser(user);
+	entityDao.save(entity);
+	return entity;
+}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public BlogEntity getTempEntity(BlogUser user) {
-		final List<Object[]> list = this.entityDao.getTempEntity(user);
-		BlogEntity entity;
-		entity = new BlogEntity();
-		if (list.size() != 0) {
-			Object[] firstRow = (Object[]) list.get(0);
-			entity.setId((Long) firstRow[0]);
-			entity.setTitle((String) firstRow[1]);
-			entity.setContent((String) firstRow[2]);
-			entity.setCreatedate((Timestamp) firstRow[3]);
-			entity.setReadprivate((String) firstRow[4]);
-			entity.setCommentable((Boolean) firstRow[5]);
-			List<BlogImage> imageList = new ArrayList<BlogImage>();
-			entity.setImages(imageList);
-			for (Iterator<Object[]> iterator = list.iterator(); iterator
-					.hasNext();) {
-				Object[] objects = iterator.next();
+/**
+ * {@inheritDoc}
+ */
+public BlogEntity getTempEntity(BlogUser user) {
+	final List<Object[]> list = this.entityDao.getTempEntity(user);
+	BlogEntity entity;
+	entity = new BlogEntity();
+	if (list.size() != 0) {
+		Object[] firstRow = (Object[]) list.get(0);
+		entity.setId((Long) firstRow[0]);
+		entity.setTitle((String) firstRow[1]);
+		entity.setContent((String) firstRow[2]);
+		entity.setCreatedate((Timestamp) firstRow[3]);
+		entity.setReadprivate((String) firstRow[4]);
+		entity.setCommentable((Boolean) firstRow[5]);
+		List<BlogImage> imageList = new ArrayList<BlogImage>();
+		entity.setImages(imageList);
+		for (Iterator<Object[]> iterator = list.iterator(); iterator
+						.hasNext();) {
+			Object[] objects = iterator.next();
+			if (objects[6] != null) {
 				BlogImage image = new BlogImage();
 				image.setId((Long) objects[6]);
 				image.setName((String) objects[7]);
@@ -84,34 +85,36 @@ public class BlogEntityServiceImpl implements IBlogEntityService {
 			}
 
 		}
-		return entity;
-	}
 
-	@Override
-	public void updateEntity(BlogEntity entity, BlogUser user) {
-		entity.setUser(user);
-		entityDao.update(entity);
 	}
+	return entity;
+}
 
-	@Override
-	public void publishEntity(final BlogEntity entity) {
-		entityDao.updateEntityByHQL(entity);
-	}
+@Override
+public void updateEntity(BlogEntity entity, BlogUser user) {
+	entity.setUser(user);
+	entityDao.update(entity);
+}
 
-	@Override
-	public BlogEntity getEntityById(final Long entityId) {
-		return entityDao.get(entityId);
-	}
+@Override
+public void publishEntity(final BlogEntity entity) {
+	entityDao.updateEntityByHQL(entity);
+}
 
-	@Override
-	public boolean delEntity(BlogEntity blogEntity) {
-		entityDao.delete(blogEntity);
-		return true;
-	}
+@Override
+public BlogEntity getEntityById(final Long entityId) {
+	return entityDao.get(entityId);
+}
 
-	@Override
-	public Page<BlogEntity> getBasePagedEntityDataByParam(
-			PageRequest pageRequest, Object... parameters) {
-		return entityDao.getBasePagedEntityData(pageRequest, parameters);
-	}
+@Override
+public boolean delEntity(BlogEntity blogEntity) {
+	entityDao.delete(blogEntity);
+	return true;
+}
+
+@Override
+public Page<BlogEntity> getBasePagedEntityDataByParam(
+				PageRequest pageRequest, Object... parameters) {
+	return entityDao.getBasePagedEntityData(pageRequest, parameters);
+}
 }

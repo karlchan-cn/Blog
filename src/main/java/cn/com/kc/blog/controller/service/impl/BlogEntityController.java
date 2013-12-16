@@ -194,8 +194,20 @@ public ModelAndView createEntity() {
 	final BlogUser user = getCurrentLoginSuccessUser();
 	BlogEntity entity = blogEntityService.getTempEntity(user);
 	if (entity.getId() == null) {
+		// detached object, as session is closed and to avoid to-json method
+		// cause the hibernate's seesion error,so here it createa a entity
+		// and copies saved properties from the detached object.
 		entity = createTempEntity(user, entity);
+		BlogEntity tempEntity = new BlogEntity();
+		tempEntity.setId(entity.getId());
+		tempEntity.setIsTemp(entity.getIsTemp());
+		tempEntity.setCreatedate(entity.getCreatedate());
+		tempEntity.setCommentable(entity.getCommentable());
+		tempEntity.setReadprivate(entity.getReadprivate());
+		entity = tempEntity;
+		tempEntity = null;
 	}
+	// construct the return json object.
 	modelAndView.getModelMap().put(CONST_REQUESTATTRIBUTENAME_ENTITY,
 					entity);
 	BlogEntity entityJson = new BlogEntity();
@@ -224,7 +236,6 @@ public BlogEntity createTempEntity(final BlogUser user,
 					.getTimeInMillis()));
 	entity.setCommentable(true);
 	entity.setReadprivate(BlogEntityConst.CONSTR_READ_PRATE_ALL);
-	//final BlogEntity returnEntity = (BlogEntity) entity.clone();
 	return (BlogEntity) blogEntityService.saveEntity(user, entity);
 }
 

@@ -123,7 +123,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                   
+	filter: alpha(opacity =                                                 
 		                                                         
 		                                                         
 		                                                         
@@ -141,8 +141,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                                     0
-		);
+		                                                                     
+		             0);
 	opacity: 0;
 }
 </style>
@@ -370,56 +370,56 @@ a.delete-image:hover,a.delete-video:hover {
 				现在载入的是自动保存内容，时间&nbsp;<span>2013-11-04 10:41:05</span>
 			</p>
 		</div>
-		<div class='col-md-6 row'>
-			<form class="entity-form" action="addentity" method="POST">
-				<fieldset>
-					<label> 题目： </label> <input type="text" name="title" id="title"
-						class="editable input-xxlarge form-control" placeholder=""
-						value="${requestScope.entity.title}" /> <span class="help-inline"></span>
-					<label class="float-label row" id="float-label">
-
-						<p>正文：</p>
-						<ul class="list-inline">
-							<li><a class="btn btn-default btn-sm" href="#myModal"
+		<div class='row'>
+			<div class="col-md-7">
+				<form class="entity-form" action="addentity" method="POST">
+					<fieldset>
+						<label> 题目： </label> <input type="text" name="title" id="title"
+							class="editable input-xxlarge form-control" placeholder=""
+							value="${requestScope.entity.title}" /> <span
+							class="help-inline"></span> <label class="" id=""> 正文： </label>
+						<!-- <ul class="inline">
+							<li><a class="btn btn-default btn-sm btn-xs" href="#myModal"
 								role="button" data-toggle="modal" aria-hidden="false">图片</a></li>
-							<li><a id="link-btn" class="btn btn-default btn-sm" style=""
-								href="#">连接</a></li>
+							<li><a id="link-btn" class="btn btn-default btn-sm btn-xs"
+								style="" href="#">连接</a></li>
 
-						</ul> <!-- <span class="btn-group"><a class="btn btn-small"
+						</ul> -->
+						<!-- <span class="btn-group"><a class="btn btn-small"
 							href="#myModal" role="button" data-toggle="modal"
 							aria-hidden="false">图片</a><a id="link-btn" class="btn btn-small"
 							style="" href="#">连接</a></span>
 							 -->
-					</label>
-					<textarea name="content" class="editable form-control" id="content"
-						tabindex="2">${requestScope.entity.content}</textarea>
-					<span id="content-info" class="help-block"></span>
-					<div id="images-thumb" style="display: none"></div>
+						<textarea name="content" class="editable form-control"
+							id="content" tabindex="2">${requestScope.entity.content}</textarea>
+						<span id="content-info" class="help-block"></span>
+						<div id="images-thumb" style="display: none"></div>
 
-					<div class="blogoptiondiv row">
-						<label class="radio-inline control-label">设置可见：</label> <label
-							class="radio-inline"> <input type="radio" value="P"
-							name="readprivate" id="entity_privateP" tabindex="3" /><span>所有人看见</span>
-						</label> <label class="radio-inline"> <input type="radio"
-							value="S" name="readprivate" id="entity_privateS" tabindex="4" /><span>仅朋友可见</span>
-						</label> <label class="radio-inline"> <input type="radio"
-							value="X" name="readprivate" id="entity_privateX" tabindex="5" /><span>仅自己可见</span>
-						</label>
-					</div>
-					<div class="blogoptiondiv row">
-						<label class='checkbox-inline'>设置权限：</label> <label
-							class='checkbox-inline'><input type="checkbox"
-							id="cannot_reply" value=""><span>不允许回应 </span></label>
-					</div>
-					<label class="float-label"> <a type="button"
-						class="btn btn-default btn-sm btm-btn" id="preview-btn">预览</a> <a
-						type="button" class="btn btn-sm btn-success btm-btn submit-btn">发表</a>
-						<a id='cancel-btn' type="button"
-						class="btn btn-default btn-sm btm-btn">取消</a>
-					</label> <input type="hidden" id="entityid"
-						value="${requestScope.entity.id}" />
-				</fieldset>
-			</form>
+						<div class="blogoptiondiv row">
+							<label class="radio-inline control-label">设置可见：</label> <label
+								class="radio-inline"> <input type="radio" value="P"
+								name="readprivate" id="entity_privateP" tabindex="3" /><span>所有人看见</span>
+							</label> <label class="radio-inline"> <input type="radio"
+								value="S" name="readprivate" id="entity_privateS" tabindex="4" /><span>仅朋友可见</span>
+							</label> <label class="radio-inline"> <input type="radio"
+								value="X" name="readprivate" id="entity_privateX" tabindex="5" /><span>仅自己可见</span>
+							</label>
+						</div>
+						<div class="blogoptiondiv row">
+							<label class='checkbox-inline'>设置权限：</label> <label
+								class='checkbox-inline'><input type="checkbox"
+								id="cannot_reply" value=""><span>不允许回应 </span></label>
+						</div>
+						<label class="float-label"> <a type="button"
+							class="btn btn-default btn-sm btm-btn" id="preview-btn">预览</a> <a
+							type="button" class="btn btn-sm btn-success btm-btn submit-btn">发表</a>
+							<a id='cancel-btn' type="button"
+							class="btn btn-default btn-sm btm-btn">取消</a>
+						</label> <input type="hidden" id="entityid"
+							value="${requestScope.entity.id}" />
+					</fieldset>
+				</form>
+			</div>
 		</div>
 
 	</div>
