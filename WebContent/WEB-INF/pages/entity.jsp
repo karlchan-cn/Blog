@@ -23,12 +23,13 @@ h2 {
 	line-height: 10px;
 }
 
-h1 {
+h3 {
 	font-family: "Arial,Helvetica,sans-serif";
 	font-size: 25px;
 	line-height: normal;
 	font-weight: 700;
 	color: #494949;
+	line-height: normal;
 }
 
 .infotips {
@@ -123,7 +124,7 @@ h1 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =    
+	filter: alpha(opacity =                                             
 		                                                         
 		                                                         
 		                                                         
@@ -143,13 +144,13 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                          0);
+		                                                                   0);
 	opacity: 0;
 }
 </style>
 <style type="text/css">
-.modal {
-	/**width: 648px; **/
+.modal { /**width: 648px; **/
+	
 }
 
 #uploadfiletable {
@@ -363,13 +364,15 @@ a.delete-image:hover,a.delete-video:hover {
 	<%@ include file="navhead.jsp"%>
 	<div class="container" id="edit-container">
 		<div class='row'>
-			<h1 class="span12 offset1" id="form-welcome">新加日记</h1>
-		</div>
-		<div class="row">
-			<p style="display: none; color: #999999; margin: 0 0 10px 60px;"
-				class="autosave-tip">
-				现在载入的是自动保存内容，时间&nbsp;<span>2013-11-04 10:41:05</span>
-			</p>
+			<div class="col-md-7">
+				<h3 id="">
+					新加日记<small class="text-muted autosave-tip" id="autosave-tip"
+						style="display: none; font-size: 12px">现在载入的是自动保存内容，时间:<span>2013-11-04
+							10:41:05</span>
+					</small>
+				</h3>
+			</div>
+
 		</div>
 		<div class='row'>
 			<div class="col-md-7">
@@ -415,9 +418,6 @@ a.delete-image:hover,a.delete-video:hover {
 							aria-hidden="false">图片</a><a id="link-btn" class="btn btn-small"
 							style="" href="#">连接</a></span>
 							 -->
-
-
-
 						<span id="content-info" class="help-block"></span>
 						<div id="images-thumb" style="display: none"></div>
 
@@ -451,7 +451,8 @@ a.delete-image:hover,a.delete-video:hover {
 	</div>
 	<!-- Modal -->
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -590,9 +591,11 @@ a.delete-image:hover,a.delete-video:hover {
 				$.post("/Blog/entity/updateEntity", {
 					entity : $.toJSON(currentEntity)
 				}, function(data) {
-
+					$("#autosave-tip span").text(data.createdate);
 				}, "json");
-				//window.setTimeout(arguments.callee, 60000);
+				//auto save 10minutes/time
+				//window.setTimeout(arguments.callee, 600000);
+				
 			},
 			/**
 			 **editable input blur event handler
@@ -733,7 +736,7 @@ a.delete-image:hover,a.delete-video:hover {
 				var entityTitleVal = entityTitle.val();
 				if ($.blogutils.isEmptyString(entityTitleVal)) {
 					errorTips.text("给日记加个标题吧");
-					var elePosition = entityTitle.position();
+					var elePosition = entityTitle.offset();
 					errorTips.css({
 						left : elePosition.left + entityTitle.width() + 16,
 						top : elePosition.top + 5
@@ -747,7 +750,7 @@ a.delete-image:hover,a.delete-video:hover {
 				var entityContentVal = entityContent.val();
 				if (blogutils.isEmptyString(entityContentVal)) {
 					errorTips.text("给日记添加内容吧");
-					var elePosition = entityContent.position();
+					var elePosition = entityContent.offset();
 					errorTips.css({
 						left : elePosition.left + entityTitle.width() + 16,
 						top : elePosition.top + 5
@@ -785,7 +788,7 @@ a.delete-image:hover,a.delete-video:hover {
 			},
 			init : function() {
 				var that = this;
-				//window.setTimeout(that.updateBlogEntity, 10000);
+				window.setTimeout(that.updateBlogEntity, 10000);
 				//$("#link-btn").click(that.updateBlogEntity);
 				//cache the current content position
 				$("#content").bind("focus", that.markCurrentIndex);
@@ -793,11 +796,9 @@ a.delete-image:hover,a.delete-video:hover {
 				//$("#title").bind("change", this.editableFieldChangeHandler);
 				//$("#content").bind("change", this.editableFieldChangeHandler);
 				//bind window unload prompt message
-				/**
 				window.onbeforeunload = function(e) {
 					return 'data you have entered may not be saved.';
 				};
-				 **/
 				$('.submit-btn').bind("click", this.publishEntity);
 				//bind editable input blur event handler
 				$(".editable").bind("blur", this.editCtlBlurHandler);
@@ -1055,6 +1056,7 @@ a.delete-image:hover,a.delete-video:hover {
 				$("#total-size-image").text(formatedSize.size);
 				uploadedInfo.count = imgsCount;
 				uploadedInfo.size = imgsSize;
+				uploadedInfo.uploadedCount = imgUploaded;
 				if (imgsCount == 0) {
 					$('#uploadfiletable').hide();
 				}
@@ -1084,7 +1086,7 @@ a.delete-image:hover,a.delete-video:hover {
 								if (itemCount >= 20) {
 									var uploaderror = $("#uploaderror");
 									uploaderror.text("已经达到上传上限。").css({
-										"display" : 'blok'
+										"display" : 'block'
 									});
 									return;
 								}

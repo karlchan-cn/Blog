@@ -92,12 +92,10 @@ body h1,h2,h3 {
 	<div class="navbar navbar-static-top">
 		<div class="navbar-inner">
 			<div class="container" id="topnavbarcontainer">
-				<ul class="nav">
+				<ul class="nav nav-pills">
 					<li><a href="/Blog/entity/create">日志</a></li>
-				</ul>
-				<!-- /.nav-collapse -->
-				<ul class="nav pull-right">
-					<li><a href="/Blog/j_spring_security_logout">退出登录</a></li>
+					<li class="pull-right"><a
+						href="/Blog/j_spring_security_logout">退出登录</a></li>
 				</ul>
 			</div>
 		</div>

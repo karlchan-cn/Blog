@@ -572,7 +572,7 @@ public BlogEntity updateEntity(@RequestParam("entity") final String entity,
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
-	return null;
+	return retVal;
 }
 
 @RequestMapping("/edit/{entityId}")
