@@ -37,148 +37,148 @@ import org.springframework.security.core.userdetails.User;
 @Table(name = "USERS", uniqueConstraints = { @UniqueConstraint(columnNames = { "USERNAME" }) })
 public class BlogUser implements Serializable {
 
-/**
+	/**
 	 * 
 	 */
-private static final long serialVersionUID = -2467016020275506982L;
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
-private Long id;
-@NotNull(message = "{username.illegal}")
-@Column(unique = true, name = "USERNAME")
-@IndexColumn(name = "USERNAME")
-private String userName;
-@NotNull
-private String showName;
-@NotNull
-private String password;
-@NotNull
-@Email
-private String email;
-@NotNull
-private Timestamp createTime;
-@NotNull
-private String address;
-@NotNull
-private String phoneNumber;
-@NotNull
-private String validateCode;
-private Boolean enabled;
+	private static final long serialVersionUID = -2467016020275506982L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@NotNull(message = "{username.illegal}")
+	@Column(unique = true, name = "USERNAME")
+	@IndexColumn(name = "USERNAME")
+	private String userName;
+	@NotNull
+	private String showName;
+	@NotNull
+	private String password;
+	@NotNull
+	@Email
+	private String email;
+	@NotNull
+	private Timestamp createTime;
+	@NotNull
+	private String address;
+	@NotNull
+	private String phoneNumber;
+	@NotNull
+	private String validateCode;
+	private Boolean enabled;
 
-public Boolean getEnabled() {
-	return enabled;
-}
-
-public void setEnabled(Boolean enabled) {
-	this.enabled = enabled;
-}
-
-@OneToMany(fetch = FetchType.EAGER, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.ALL })
-private List<BlogAuthorities> authorities;
-
-public List<BlogAuthorities> getAuthorities() {
-	if (authorities == null) {
-		authorities = new ArrayList<BlogAuthorities>();
+	public Boolean getEnabled() {
+		return enabled;
 	}
-	return authorities;
-}
 
-public void setAuthorities(List<BlogAuthorities> authorities) {
-	this.authorities = authorities;
-}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
-@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-private Set<BlogEntity> entities;
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = BlogAuthorities.class, mappedBy = "user", cascade = { CascadeType.ALL })
+	private List<BlogAuthorities> authorities;
 
-@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
-private Set<BlogComments> comments;
+	public List<BlogAuthorities> getAuthorities() {
+		if (authorities == null) {
+			authorities = new ArrayList<BlogAuthorities>();
+		}
+		return authorities;
+	}
 
-public Set<BlogComments> getComments() {
-	return comments;
-}
+	public void setAuthorities(List<BlogAuthorities> authorities) {
+		this.authorities = authorities;
+	}
 
-public void setComments(Set<BlogComments> comments) {
-	this.comments = comments;
-}
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogEntity.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+	private Set<BlogEntity> entities;
 
-public Set<BlogEntity> getEntities() {
-	return entities;
-}
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogComments.class, mappedBy = "user", cascade = { CascadeType.REMOVE })
+	private Set<BlogComments> comments;
 
-public void setEntities(Set<BlogEntity> entities) {
-	this.entities = entities;
-}
+	public Set<BlogComments> getComments() {
+		return comments;
+	}
 
-public Long getId() {
-	return id;
-}
+	public void setComments(Set<BlogComments> comments) {
+		this.comments = comments;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public Set<BlogEntity> getEntities() {
+		return entities;
+	}
 
-public String getUserName() {
-	return userName;
-}
+	public void setEntities(Set<BlogEntity> entities) {
+		this.entities = entities;
+	}
 
-public void setUserName(String userName) {
-	this.userName = userName;
-}
+	public Long getId() {
+		return id;
+	}
 
-public String getShowName() {
-	return showName;
-}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-public void setShowName(String showName) {
-	this.showName = showName;
-}
+	public String getUserName() {
+		return userName;
+	}
 
-public String getPassword() {
-	return password;
-}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-public void setPassword(String password) {
-	this.password = password;
-}
+	public String getShowName() {
+		return showName;
+	}
 
-public String getEmail() {
-	return email;
-}
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public String getPassword() {
+		return password;
+	}
 
-public Timestamp getCreateTime() {
-	return createTime;
-}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-public void setCreateTime(Timestamp createTime) {
-	this.createTime = createTime;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public String getAddress() {
-	return address;
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-public void setAddress(String address) {
-	this.address = address;
-}
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-public String getPhoneNumber() {
-	return phoneNumber;
-}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
-public void setPhoneNumber(String phoneNumber) {
-	this.phoneNumber = phoneNumber;
-}
+	public String getAddress() {
+		return address;
+	}
 
-public String getValidateCode() {
-	return validateCode;
-}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-public void setValidateCode(String validateCode) {
-	this.validateCode = validateCode;
-}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getValidateCode() {
+		return validateCode;
+	}
+
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
 
 }
