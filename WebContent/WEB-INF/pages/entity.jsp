@@ -60,8 +60,7 @@ h3 {
 	
 }
 
-.entity-form textarea {
-	width: 530px;
+.entity-form textarea { /**width: 530px; **/
 	resize: vertical;
 	height: 400px;
 }
@@ -79,7 +78,7 @@ h3 {
 	line-height: 1.62;
 	margin-top: 5px;
 	padding: 3px;
-	width: 582px;
+	/**width: 582px; **/
 }
 
 .float-label {
@@ -124,7 +123,8 @@ h3 {
 
 input[type="file"] {
 	height: 25px;
-	filter: alpha(opacity =                                             
+	filter: alpha(opacity =       
+		                                                         
 		                                                         
 		                                                         
 		                                                         
@@ -144,7 +144,8 @@ input[type="file"] {
 		                                                                     
 		                                                                     
 		                                                                     
-		                                                                   0);
+		                                                                     
+		                 0);
 	opacity: 0;
 }
 </style>
@@ -283,34 +284,22 @@ image area
 	margin-top: 20px;
 	border-bottom: 1px dashed #CCCCCC;
 	padding-bottom: 10px;
-	width: 545px;
 }
 
 .image-item {
 	background-color: #F3F3F3;
 	border: 1px solid #CCCCCC;
-	padding: 4px 6px;
+	padding: 10px 6px;
 	margin-right: 5px;
-	width: 530px;
+	/**width: 530px; **/
 	margin-left: 0;
 	margin-top: 10px;
 	position: relative;
 }
 
-.image-item div {
-	margin-left: 10px;
-}
-
-.image-item .span2 {
-	width: 25%;
-}
-
-.image-item .span3 {
-	width: 65%;
-}
-
 .image-item textarea {
 	resize: none;
+	height: 90px;
 }
 
 .image-item label,.video-item label {
@@ -323,8 +312,7 @@ image area
 	height: 90px;
 }
 
-.image-item .image-thumb img {
-	height: 90px;
+.image-item .image-thumb img { /**height: 90px; **/
 	width: 120px;
 }
 
@@ -375,7 +363,7 @@ a.delete-image:hover,a.delete-video:hover {
 
 		</div>
 		<div class='row'>
-			<div class="col-md-7">
+			<div class="col-md-5">
 				<form class="entity-form" action="addentity" method="POST">
 					<fieldset>
 						<div class="form-group">
@@ -419,7 +407,7 @@ a.delete-image:hover,a.delete-video:hover {
 							style="" href="#">连接</a></span>
 							 -->
 						<span id="content-info" class="help-block"></span>
-						<div id="images-thumb" style="display: none"></div>
+						<div id="images-thumb" class="form-group" style="display: none"></div>
 
 						<div class="blogoptiondiv row">
 							<label class="radio-inline control-label">设置可见：</label> <label
@@ -588,14 +576,22 @@ a.delete-image:hover,a.delete-video:hover {
 			 **/
 			updateBlogEntity : function() {
 				var currentEntity = pageController.getCurrentEntityValue();
-				$.post("/Blog/entity/updateEntity", {
-					entity : $.toJSON(currentEntity)
-				}, function(data) {
-					$("#autosave-tip span").text(data.createdate);
-				}, "json");
+				$
+						.post(
+								"/Blog/entity/updateEntity",
+								{
+									entity : $.toJSON(currentEntity)
+								},
+								function(data) {
+									$("#autosave-tip span")
+											.text(
+													new Date(data.createdate)
+															.format('{yyyy}-{MM}-{dd} {24hr}:{mm}:{ss}'))
+											.parent().css("display", "inline");
+								}, "json");
 				//auto save 10minutes/time
-				//window.setTimeout(arguments.callee, 600000);
-				
+				window.setTimeout(arguments.callee, 600000);
+
 			},
 			/**
 			 **editable input blur event handler
@@ -647,13 +643,15 @@ a.delete-image:hover,a.delete-video:hover {
 			 **/
 			addImageItem : function(currentFile) {
 				var curImgCount = $(".image-item").size() + 1;
-				var imageBlock = $("<div class='image-item row' id='image"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='span2'>"
+				var imageBlock = $("<div class='image-item row' id='image"+currentFile.id+"'> <a title='删除该图片' href='#' class='delete-image'>X</a><div class='col-md-3'>"
 						+ "<label class='image-name'>&lt;图片"
 						+ curImgCount
 						+ "&gt;</label><div class='image-thumb'>"
 						+ "<img alt='图片"+ curImgCount +"' src='http://" + location.host + "/Blog/assets/images/"+"thumb"+currentFile.name+"'></div>"
-						+ "</div><div class='image-desc span3'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
-						+ "<textarea maxlength='30' name='p1_title' id='p1_title' style='height: 80px;width:100%'></textarea></div></div>");
+						+ "</div><div class='image-desc col-md-9'><label for='p1_title' class='field'>图片描述(30字以内)</label>"
+						+ "<textarea maxlength='30' name='p1_title' id='image-desc-'"
+						+ currentFile.id
+						+ " style='height: 90px;width:100%'></textarea></div></div>");
 				currentFile.currentUploadName = "图片" + curImgCount;
 				imageBlock.data("image", currentFile);
 				$("#images-thumb").append(imageBlock);
@@ -702,8 +700,8 @@ a.delete-image:hover,a.delete-video:hover {
 				} else {
 					currentEntity.commentable = true;
 				}
-				$("[name='readprivate']").each(function(index, current) {
-					var current = $(current);
+				$("[name='readprivate']").each(function(index, currentParam) {
+					var current = $(currentParam);
 					if (current.attr("checked") == "checked") {
 						currentEntity.readprivate = current.val();
 						return false;
@@ -768,8 +766,8 @@ a.delete-image:hover,a.delete-video:hover {
 			 **/
 			getImagesList : function() {
 				var imagesList = [];
-				$(".image-item").each(function(index, curObject) {
-					var curObject = $(curObject);
+				$(".image-item").each(function(index, curObjectParam) {
+					var curObject = $(curObjectParam);
 					var curImage = curObject.data("image");
 					curImage.description = curObject.find("textarea").val();
 					var cloneImage = Object.clone(curImage);
