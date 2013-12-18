@@ -95,7 +95,7 @@ public void updateEntity(BlogEntity entity, BlogUser user) {
 }
 
 @Override
-public void publishEntity(final BlogEntity entity) {
+public void updatePublished(final BlogEntity entity) {
 	entityDao.updateEntityByHQL(entity);
 }
 
@@ -114,5 +114,12 @@ public boolean delEntity(BlogEntity blogEntity) {
 public Page<BlogEntity> getBasePagedEntityDataByParam(
 				PageRequest pageRequest, Object... parameters) {
 	return entityDao.getBasePagedEntityData(pageRequest, parameters);
+}
+
+@Override
+public BlogEntity getEntityAndImagesById(final Long entityId) {
+	final BlogEntity entity = getEntityById(entityId);
+	entity.getImages();
+	return entity;
 }
 }

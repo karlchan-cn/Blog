@@ -255,7 +255,7 @@ public ModelAndView viewEntity(@PathVariable final String entityId) {
 		modelAndView
 						.addObject(CONST_REQUESTATTRIBUTENAME_ENTITY, CONST_ALL);
 	} else {
-		BlogEntity entity = blogEntityService.getEntityById(Long
+		final BlogEntity entity = blogEntityService.getEntityAndImagesById(Long
 						.valueOf(entityId));
 		entity.setContent(getDisplayedContent(entity.getContent(),
 						entity.getImages()));
@@ -537,7 +537,7 @@ public BlogEntity publishEntity(
 		// JSON.parseArray(imagesList, BlogImage.class);
 		// blogEntity.setContent(getDisplayedContent(blogEntity.getContent(),
 		// imageArrayList));
-		blogEntityService.publishEntity(blogEntity);
+		blogEntityService.updatePublished(blogEntity);
 	} catch (Exception e) {
 		e.printStackTrace();
 		throw new RuntimeException(e);

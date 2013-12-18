@@ -54,7 +54,7 @@ private String readprivate;
 private Boolean commentable;
 @NotNull
 private Boolean isTemp;
-@OneToMany(fetch = FetchType.LAZY, targetEntity = BlogImage.class, mappedBy = "entity", cascade = { CascadeType.REMOVE })
+@OneToMany(fetch = FetchType.EAGER, targetEntity = BlogImage.class, mappedBy = "entity", cascade = { CascadeType.REMOVE })
 private List<BlogImage> images;
 
 @ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY, targetEntity = BlogUser.class)

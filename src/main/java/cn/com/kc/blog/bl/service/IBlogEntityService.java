@@ -53,7 +53,7 @@ void updateEntity(final BlogEntity entity, final BlogUser user);
  * 
  * @param entity
  */
-void publishEntity(final BlogEntity entity);
+void updatePublished(final BlogEntity entity);
 
 /**
  * query the entity with id.
@@ -64,6 +64,16 @@ void publishEntity(final BlogEntity entity);
  * @return entity.
  */
 BlogEntity getEntityById(final Long entityId);
+/**
+ * query the entity and its images with id.
+ * 
+ * @param entityId
+ *            entity to be queried.
+ * 
+ * @return entity.
+ */
+BlogEntity getEntityAndImagesById(final Long entityId);
+
 
 /**
  * delete entity
@@ -83,4 +93,5 @@ boolean delEntity(final BlogEntity blogEntity);
  * 
  */
 Page<BlogEntity> getBasePagedEntityDataByParam(final PageRequest pageRequest, final Object... parameters);
+
 }
