@@ -3,10 +3,6 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <style type="text/css">
-body {
-	font: 12px Helvetica, Arial, sans-serif;
-}
-
 .container {
 	margin-top: 10px;
 }
