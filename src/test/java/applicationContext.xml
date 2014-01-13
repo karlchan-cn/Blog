@@ -26,6 +26,8 @@
 		<property name="url" value="${connection.url}"></property>
 		<property name="username" value="${connection.username}"></property>
 		<property name="password" value="${connection.password}"></property>
+		<property name="maxActive" value="${connection.maxActive}"></property>
+		
 	</bean>
 	<!-- 配置事务 advice -->
 	<tx:advice id="txAdvice" transaction-manager="hibTransactionManager">
