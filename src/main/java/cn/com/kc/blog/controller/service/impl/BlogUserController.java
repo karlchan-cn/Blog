@@ -103,9 +103,6 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 
 			// a jpeg encoder
 			ImageIO.write(challenge, "JPEG", jpegOutputStream);
-			// JPEGImageEncoder jpegEncoder =
-			// JPEGCodec.createJPEGEncoder(jpegOutputStream);
-			// jpegEncoder.encode(challenge);
 		} catch (IllegalArgumentException e) {
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
