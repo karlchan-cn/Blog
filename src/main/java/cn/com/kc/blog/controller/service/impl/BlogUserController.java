@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,8 +29,6 @@ import cn.com.kc.blog.pojo.BlogUser;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @author chenjinlong2
@@ -87,7 +86,6 @@ public String validateUser(
 @ResponseBody
 public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequest,
 				HttpServletResponse httpServletResponse, HttpSession httpSession) {
-	byte[] captchaChallengeAsJpeg = null;
 	// the output stream to render the captcha image as jpeg into
 	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 	ResponseEntity<byte[]> responseEntity = null;
@@ -104,10 +102,10 @@ public ResponseEntity<byte[]> getSecurityCode(HttpServletRequest httpServletRequ
 											httpServletRequest.getLocale());
 
 			// a jpeg encoder
-			@SuppressWarnings("restriction")
-			JPEGImageEncoder jpegEncoder =
-							JPEGCodec.createJPEGEncoder(jpegOutputStream);
-			jpegEncoder.encode(challenge);
+			ImageIO.write(challenge, "JPEG", jpegOutputStream);
+			// JPEGImageEncoder jpegEncoder =
+			// JPEGCodec.createJPEGEncoder(jpegOutputStream);
+			// jpegEncoder.encode(challenge);
 		} catch (IllegalArgumentException e) {
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
