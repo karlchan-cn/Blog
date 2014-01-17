@@ -28,7 +28,6 @@ private static final String DROP_TABLE_SQL = "drop table test";
 private static final String INSERT_SQL = "insert into test(name,id) values(?,?)";
 private static final String COUNT_SQL = "select count(*) from test";
 
-@Test
 public void testSaveUser() {
 	try {
 		final BlogUser user = new BlogUser();
@@ -37,8 +36,6 @@ public void testSaveUser() {
 		user.setPassword("password");
 		final IBlogUserService userService = (IBlogUserService) context
 						.getBean(IBlogUserService.BEAN_NAME);
-		final IBlogUserDaoService userdaoService = (IBlogUserDaoService) context
-						.getBean(IBlogUserDaoService.BEAN_NAME);
 		userService.saveUser(user);
 		final BlogUser user2 = new BlogUser();
 		user2.setShowName("show name1");
@@ -75,7 +72,6 @@ public void testPlatformTransactionManager() {
 		jdbcTx.rollback(status);
 		e.printStackTrace();
 	}
-	// jdbcTemplate.execute(DROP_TABLE_SQL);
 }
 
 public void testSaveNewEntity() {
@@ -86,7 +82,6 @@ public void testSaveNewEntity() {
 		entity.setUser(user);
 		final IBlogEntityService entityService = (IBlogEntityService) context
 						.getBean(IBlogEntityService.BEAN_NAME);
-		// entityService.saveEntity(user, entity);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}

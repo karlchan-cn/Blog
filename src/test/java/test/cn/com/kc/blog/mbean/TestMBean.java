@@ -19,7 +19,6 @@ public int getNumber() {
 
 protected TestMBean(Class<?> mbeanInterface) throws NotCompliantMBeanException {
 	super(mbeanInterface);
-	// TODO Auto-generated constructor stub
 }
 
 }

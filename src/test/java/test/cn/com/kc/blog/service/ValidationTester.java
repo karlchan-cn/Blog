@@ -25,11 +25,6 @@ public class ValidationTester extends BootTester {
 
 	@BeforeClass
 	public static void initSetup() {
-
-		// validator 原始生成方式
-		// ValidatorFactory validatorFactory = Validation
-		// .buildDefaultValidatorFactory();
-		// validator = validatorFactory.getValidator();
 		validator = (Validator) context
 				.getBean(BeanNamesConst.NAME_HIBERNATE_VALIDATOR);
 	}
@@ -43,8 +38,6 @@ public class ValidationTester extends BootTester {
 				.iterator(); iterator.hasNext();) {
 			constraintViolation = iterator.next();
 			System.out.println(constraintViolation.getPropertyPath());
-			// assertEquals("may not be shit",
-			// constraintViolation.getMessage());
 			System.out.println(constraintViolation.getMessage());
 		}
 

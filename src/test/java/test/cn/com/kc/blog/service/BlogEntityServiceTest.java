@@ -23,8 +23,6 @@ import cn.com.kc.blog.controller.service.impl.BlogUserController;
 import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogUser;
 
-import com.alibaba.fastjson.JSON;
-
 /**
  * @author chenjinlong2
  * 
@@ -47,23 +45,11 @@ public void initialize() {
 					.getName());
 }
 
-@Test
-public void saveEntity() {
-	final BlogUser blogUser = new BlogUser();
-	blogUser.setId(1l);
-	final IBlogEntityService blogEntityService = (IBlogEntityService) context
-					.getBean(IBlogEntityService.class.getName());
-	BlogEntity blogEntity = new BlogEntity();
-	// Assert.assertNotNull(blogEntityService.saveEntity(blogUser,
-	// blogEntity));
-}
-
-@Test
 public void testNullId() {
 	Assert.assertNull(new BlogEntity().getId());
 }
 
-@Test
+
 public void testQueryTempEntity() {
 	try {
 		final IBlogEntityService blogEntityService = (IBlogEntityService) context
@@ -71,25 +57,12 @@ public void testQueryTempEntity() {
 		BlogUser user = new BlogUser();
 		user.setId(1l);
 		blogEntityService.getTempEntity(user);
-		// final BlogEntityVO entity =
-		// blogEntityService.getTempEntity(null);
-		// Assert.assertNotNull(entity);
 	} catch (Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException(e);
 	}
 
 }
 
-@Test
-public void testSaveTempEntity() {
-	BlogUser user = userService.getUser(1l);
-	BlogEntity entity = new BlogEntity();
-	// entityController.createTempEntity(user, entity);
-	System.out.println(JSON.toJSONString(entity));
-}
-
-@Test
 public void testInsertEntityListData() {
 	final String username = "admin";
 	final BlogUser adminUser = userController.getBlogUserByName(username);
@@ -103,9 +76,8 @@ public void testInsertEntityListData() {
 		entity.setTitle("Test Entity " + i);
 		entity.setContent(content);
 		entityController.createTempEntity(adminUser, entity);
-		
+
 	}
-	
 	List<Object> list = new ArrayList<Object>();
 	Collections.sort(list, new Comparator() {
 		@Override
@@ -115,16 +87,21 @@ public void testInsertEntityListData() {
 	});
 }
 
-@Test
+
 public void testGetPagingEntities() {
-	PageRequestImpl pageRequest = new PageRequestImpl(3, 50);
-	Page<BlogEntity> page = entityService
-					.getBasePagedEntityDataByParam(pageRequest);
-	List<BlogEntity> content = page.getContent();
-	for (Iterator<BlogEntity> iterator = content.iterator(); iterator
-					.hasNext();) {
-		BlogEntity blogEntity = iterator.next();
-		System.out.println(blogEntity.getTitle());
+	try {
+		PageRequestImpl pageRequest = new PageRequestImpl(3, 50);
+		Page<BlogEntity> page = entityService
+						.getBasePagedEntityDataByParam(pageRequest);
+		List<BlogEntity> content = page.getContent();
+		for (Iterator<BlogEntity> iterator = content.iterator(); iterator
+						.hasNext();) {
+			BlogEntity blogEntity = iterator.next();
+			System.out.println(blogEntity.getTitle());
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
 	}
+
 }
 }

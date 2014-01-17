@@ -9,9 +9,9 @@
 	<session-factory>
 
 		<!-- Database connection settings -->
-		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<property name="connection.url">jdbc:oracle:thin:@10.51.4.219:1521:GDRL</property>
-		<property name="connection.username">FMIS0000</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://127.0.0.1:3307/Blog?useUnicode=true&amp;characterEncoding=utf-8</property>
+		<property name="connection.username">root</property>
 		<property name="connection.password">FMIS0000</property>
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>

@@ -3,8 +3,6 @@
  */
 package test.cn.com.kc.blog.service;
 
-import javax.xml.stream.events.EndDocument;
-
 import junit.framework.Assert;
 
 import org.junit.Test;

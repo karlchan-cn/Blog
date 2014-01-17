@@ -67,7 +67,7 @@ public class BootTester {
 		}
 	}
 
-	@Test
+
 	public void testHiberSetup() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -86,7 +86,7 @@ public class BootTester {
 		HibernateUtil.getSessionFactory().close();
 	}
 
-	@Test
+
 	public void testHibernateUpdateDatatchedObject() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();

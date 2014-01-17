@@ -38,38 +38,48 @@ private UserDetailsService getUserDetailServiceImpl() {
 					.getBean(UserDetailServiceHibernateImpl.class.getName());
 }
 
-@Test
-public void saveNewUser() {
+public void saveSystemAdmin() {
 	final BlogUser blogUser = new BlogUser();
-	blogUser.setUserName("admin");
-	blogUser.setPassword("admin");
-	final BlogUserController blogUserController = getController();
-	final BindingResult bindingResult = new BeanPropertyBindingResult(
-					blogUser, RolesListConst.ROLE_USER);
-	blogUserController.saveUser(blogUser, bindingResult);
+	try {
+		blogUser.setUserName("admin");
+		blogUser.setPassword("admin");
+		final BlogUserController blogUserController = getController();
+		final BindingResult bindingResult = new BeanPropertyBindingResult(
+						blogUser, RolesListConst.ROLE_USER);
+		blogUserController.saveUser(blogUser, bindingResult);
+	} catch (Exception e) {
+		//e.printStackTrace();
+	}
+	Assert.assertNotNull("could not save default admin", blogUser.getId());
+
 }
 
-@Test
-public void delUser() {
-	final BlogUserController blogUserController = getController();
-	final BlogUser blogUser = blogUserController.getUserService().getUser(21l);
-	blogUserController.getUserService().delUser(blogUser);
-}
 
-@Test
 public void testLoadUserByName() {
-	UserDetailsService userDetailsService = getUserDetailServiceImpl();
-	UserDetails user = userDetailsService.loadUserByUsername("admin");
+	UserDetails user = null;
+	try {
+		UserDetailsService userDetailsService = getUserDetailServiceImpl();
+		user = userDetailsService.loadUserByUsername("admin");
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	Assert.assertNotNull(user);
 }
 
-@Test
+
 public void testUpdateUserPassword() {
 	IBlogUserService userService = getUserService();
 	final BlogUser user = new BlogUser();
-	user.setUserName("KarlChan");
-	user.setPassword("test");
-	Assert.assertSame(1, userService.updateUserPassword(user));
+	int updateRet = 0;
+	try {
+		user.setUserName("KarlChan");
+		user.setPassword("test");
+		updateRet = userService.updateUserPassword(user);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	Assert.assertSame(1, updateRet);
 }
 
 }
