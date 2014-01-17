@@ -13,7 +13,7 @@ insert into users (id,username,password) values(1,"karlchan","password");
 /**
  *entity 新增 
  */
-select * from blog_entity for update;
+select * from blog_entity where id < 100  for update;
 select * from blog_entity where USER_ID =1 and isTemp =0;
 delete from blog_entity where id < 100;
 

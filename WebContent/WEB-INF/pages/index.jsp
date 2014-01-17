@@ -86,46 +86,39 @@
 <body data-spy="scroll" data-target=".navbar-example">
 	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container" id="content">
-
 		<div class="row">
-			<div class="col-md-3">
-				<div role="complementary"
-					class="bs-sidebar hidden-print affix navbar-example">
-					<ul class="nav bs-sidenav">
-						<li><a href="#overview">日记</a>
-							<ul class="nav">
-								<li><a href="#overview-doctype">新增日记</a></li>
-								<li><a href="#overview-mobile">管理日记</a></li>
-							</ul></li>
-						<li><a href="#setting">设置</a>
-							<ul class="nav">
-								<li><a href="#user-setting">用户管理</a></li>
-								<li><a href="#blog-setting">博客管理</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-9" role="main"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2  ">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Dropdown <span class="caret"></span>
+
+					<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">日记<span
+							class="caret pull-right"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li>menu 1</li>
-							<li>menu 2</li>
+							<li><a href="#">所有日记</a></li>
+							<li><a href="#">写文章</a></li>
+							<li><a href="#">分类目录</a></li>
+							<li><a href="#">标签</a></li>
 						</ul></li>
-					<li><a href="#">Messages</a></li>
+					<li class=""><a class="dropdown-toggle" data-toggle="dropdown"
+						href="#">多媒体<span class="caret pull-right"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">媒体库</a></li>
+							<li><a href="#">添加</a></li>
+
+						</ul></li>
+					<li><a href="#">设置</a></li>
 				</ul>
 			</div>
-
+			<div class="col-md-9" role="main"></div>
 		</div>
 	</div>
 	<!-- /container -->
 </body>
 <!-- 导入通用js  -->
 <%@ include file="footer.jsp"%>
+<script type="text/javascript">
+	$('#dropdown').popover({
+		content : "<ul class=''><li>menu 1</li>	<li>menu 2</li></ul>"
+	});
+</script>
 </html>
