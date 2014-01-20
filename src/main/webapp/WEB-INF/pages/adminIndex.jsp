@@ -82,6 +82,19 @@
 		width: 263px;
 	}
 }
+
+.sub-menu {
+	display: none
+}
+
+.sub-menu li {
+	text-indent: 35px
+}
+
+.postsbox-nav li a {
+	padding-left: 0;
+	padding-right: 0;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar-example">
@@ -89,6 +102,7 @@
 	<div class="container" id="content">
 		<div class="row">
 			<div class="col-md-3">
+				<!-- 
 				<div role="complementary"
 					class="bs-sidebar hidden-print affix navbar-example">
 					<ul class="nav bs-sidenav">
@@ -104,354 +118,117 @@
 							</ul></li>
 					</ul>
 				</div>
+				 -->
+				<ul class="nav nav-pills nav-stacked" style="margin-top: 15px">
+					<li><a href="#" class="pitem">日记</a>
+						<ul class="nav nav-pills nav-stacked sub-menu">
+							<li><a href="#">日记列表</a></li>
+							<li><a href="#">新增日记</a></li>
+							<li><a href="#">分类列表</a></li>
+							<li><a href="#">标签列表</a></li>
+						</ul></li>
+					<li><a href="#" class="pitem">用户</a>
+						<ul class="nav nav-pills nav-stacked sub-menu">
+							<li><a href="#">用户列表</a></li>
+							<li><a href="#">增加用户</a></li>
+							<li><a href="#">我的资料</a></li>
+						</ul></li>
+				</ul>
+
 			</div>
 
 			<div class="col-md-9" role="main">
-
-				<h3 id="overview">overview</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:124) - Mapping
-					[/assets/js/jquery.json-2.4.js] to HandlerExecutionChain with
-					handler
-					[org.springframework.web.servlet.resource.ResourceHttpRequestHandler@5303a7a]
-					and 1 interceptor DEBUG [http-bio-8081-exec-9]
-					(DispatcherServlet.java:902) - Last-Modified value for
-					[/Blog/assets/js/jquery.json-2.4.js] is: -1 DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:161) -
-					Trying relative path [jquery.json-2.4.js] against base location:
-					ServletContext resource [/WEB-INF/assets/js/] DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:161) -
-					Trying relative path [jquery.json-2.4.js] against base location:
-					ServletContext resource [/WEB-INF/assets/js/bootstrap/] DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:161) -
-					Trying relative path [jquery.json-2.4.js] against base location:
-					ServletContext resource [/WEB-INF/assets/js/jquery/] DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:166) -
-					Found matching resource: ServletContext resource
-					[/WEB-INF/assets/js/jquery/jquery.json-2.4.js] DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:120) -
-					Determined media type 'application/javascript' for ServletContext
-					resource [/WEB-INF/assets/js/jquery/jquery.json-2.4.js] DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:131) -
-					Resource not modified - returning 304 DEBUG [http-bio-8081-exec-9]
-					(DispatcherServlet.java:957) - Null ModelAndView returned to
-					DispatcherServlet with name 'spring': assuming HandlerAdapter</p>
-
-				<h3 id="overview-doctype">overview-doctype</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:124) - Mapping
-					[/assets/js/jquery.json-2.4.js] to HandlerExecutionChain with</p>
-
-				<h3 id="overview-mobile">overview-mobile</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:124) - Mapping
-					[/assets/js/jquery.json-2.4.js] to HandlerExecutionChain with
-					handler
-					[org.springframework.web.servlet.resource.ResourceHttpRequestHandler@5303a7a]
-					and 1 interceptor DEBUG [http-bio-8081-exec-9]
-					(DispatcherServlet.java:902) - Last-Modified value for
-					[/Blog/assets/js/jquery.json-2.4.js] is: -1 DEBUG
-					[http-bio-8081-exec-9] (ResourceHttpRequestHandler.java:161) -
-
-					completed request</p>
-
-				<h3 id="setting">setting</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9] 081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]</p>
-
-				<h3 id="user-setting">user-setting</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9](AbstractUrlHandlerMapping.java:169)
-					- Matching patterns for request [/assets/js/jquery.json-2.4.js] are
-					[/assets/js/**] DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:193) - URI Template variables for
-					request [/assets/js/jquery.json-2.4.js] are {} DEBUG
-					[http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9(AbstractUrlHandlerMapping.java:169)
-					- Matching patterns for request [/assets/js/jquery.json-2.4.js] are
-					[/assets/js/**] DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:193) - URI Template variables for
-					request [/assets/js/jquery.json-2.4.js] are {} DEBUG
-					[http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9(AbstractUrlHandlerMapping.java:169)
-					- Matching patterns for request [/assets/js/jquery.json-2.4.js] are
-					[/assets/js/**] DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:193) - URI Template variables for
-					request [/assets/js/jquery.json-2.4.js] are {} DEBUG
-					[http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9(AbstractUrlHandlerMapping.java:169)
-					- Matching patterns for request [/assets/js/jquery.json-2.4.js] are
-					[/assets/js/**] DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:193) - URI Template variables for
-					request [/assets/js/jquery.json-2.4.js] are {} DEBUG
-					[http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9(AbstractUrlHandlerMapping.java:169)
-					- Matching patterns for request [/assets/js/jquery.json-2.4.js] are
-					[/assets/js/**] DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:193) - URI Template variables for
-					request [/assets/js/jquery.json-2.4.js] are {} DEBUG
-					[http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9</p>
-
-
-				<h3 id="blog-setting">blog-setting</h3>
-
-				<p>DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]overview-mobile
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]
-					(AbstractUrlHandlerMapping.java:169) - Matching patterns for
-					request [/assets/js/jquery.json-2.4.js] are [/assets/js/**] DEBUG
-					[http-bio-8081-exec-9] (AbstractUrlHandlerMapping.java:193) - URI
-					Template variables for request [/assets/js/jquery.json-2.4.js] are
-					{} DEBUG [http-bio-8081-exec-9]</p>
-
+				<div class="row">
+					<div class="col-md-6" role="main">
+						<h2>
+							日记<small><a href="#" class="btn btn-link btn-xm">新增</a></small>
+						</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<ul class="nav nav-justified postsbox-nav">
+							<li class="active"><a href="#">所有日记</a></li>
+							<li><a href="#">发表箱</a></li>
+							<li><a href="#">草稿箱</a></li>
+							<li><a href="#">垃圾箱</a></li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Username</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Larry</td>
+								<td>the Bird</td>
+								<td>@twitter</td>
+							</tr>
+						</tbody>
+					</table></div>
 			</div>
-
 		</div>
+		<div class="row"></div>
 	</div>
 	<!-- /container -->
 </body>
 <!-- 导入通用js  -->
 <%@ include file="footer.jsp"%>
+<script type="text/javascript">
+	$(function() {
+		var win = window, controller;
+		controller = {
+			/**
+			 * main menu click event handler.
+			 **/
+			pitemHandler : (function() {
+				var lastItem = null;
+				return function() {
+					try {
+						lastItem.css("display", "none");
+					} catch (e) {
+
+					}
+					var that = $(this);
+					lastItem = that.next();
+					lastItem.css({
+						display : "block"
+					});
+					return false;
+				};
+			})(),
+			init : function() {
+				$(".pitem").click(this.pitemHandler);
+			},
+			//check form inpurt elements			
+			checkform : function() {
+				var that = this;
+				return false;
+			}
+		};
+		win.pageController = controller;
+		controller.init();
+
+	});
+</script>
 </html>
