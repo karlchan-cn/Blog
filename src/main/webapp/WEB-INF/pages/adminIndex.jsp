@@ -145,7 +145,7 @@
 						</h2>
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-5">
 						<ul class="nav nav-justified postsbox-nav">
 							<li class="active"><a href="#">所有日记</a></li>
@@ -153,6 +153,16 @@
 							<li><a href="#">草稿箱</a></li>
 							<li><a href="#">垃圾箱</a></li>
 						</ul>
+					</div>
+				</div>
+				 -->
+				<div class="row">
+					<div class="col-md-5">
+						<div class="btn-group">
+							<a href="#" class="btn btn-default">发表箱</a> <a href="#"
+								class="btn btn-default">草稿箱</a> <a href="#"
+								class="btn btn-default">垃圾箱</a>
+						</div>
 					</div>
 				</div>
 				<div>
@@ -185,7 +195,8 @@
 								<td>@twitter</td>
 							</tr>
 						</tbody>
-					</table></div>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="row"></div>
