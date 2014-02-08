@@ -132,20 +132,28 @@
 							<li><a href="#">用户列表</a></li>
 							<li><a href="#">增加用户</a></li>
 							<li><a href="#">我的资料</a></li>
+
+						</ul></li>
+					<li><a href="#" class="pitem">多媒体</a>
+						<ul class="nav nav-pills nav-stacked sub-menu">
+							<li><a href="#">媒体库</a></li>
+							<li><a href="#">添加</a></li>
+
 						</ul></li>
 				</ul>
 
 			</div>
 
 			<div class="col-md-9" role="main">
-				<div class="row">
-					<div class="col-md-6" role="main">
-						<h2>
-							日记<small><a href="#" class="btn btn-link btn-xm">新增</a></small>
-						</h2>
+				<div id="listEntities">
+					<div class="row">
+						<div class="col-md-6" role="main">
+							<h2>
+								文章<small><a href="#" class="btn  btn-sm">新增</a></small>
+							</h2>
+						</div>
 					</div>
-				</div>
-				<!-- <div class="row">
+					<!-- <div class="row">
 					<div class="col-md-5">
 						<ul class="nav nav-justified postsbox-nav">
 							<li class="active"><a href="#">所有日记</a></li>
@@ -155,7 +163,7 @@
 						</ul>
 					</div>
 				</div>
-				 -->
+				
 				<div class="row">
 					<div class="col-md-5">
 						<div class="btn-group">
@@ -164,42 +172,91 @@
 								class="btn btn-default">垃圾箱</a>
 						</div>
 					</div>
+				</div> 
+				<div class="row">
+					<div class="col-md-5">
+						<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">
+								<a href="#" class="btn btn-default">全部<span>(12)</span></a>
+							</div>
+							<div class="btn-group">
+								<a href="#" class="btn btn-default">已发布<span>(11)</span></a>
+							</div>
+							<div class="btn-group">
+								<a href="#" class="btn btn-default">草稿<span>(1)</span></a>
+							</div>
+						</div>
+					</div>
+				</div>-->
+					<div class="row">
+						<div class="col-md-12">
+							<ul id="entityTab" class="nav nav-tabs">
+								<li><a href="" id="allEntities" class="">全部<span>(12)</span></a></li>
+								<li class="active"><a id="releasedEntities" href=""
+									class="">已发布<span>(11)</span></a></li>
+								<li><a id="draftEntities" href="" class="">草稿<span>(1)</span></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- 
+				<div class="row">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+						<li><a href="#profile" data-toggle="tab">Profile</a></li>
+						<li><a href="#messages" data-toggle="tab">Messages</a></li>
+						<li><a href="#settings" data-toggle="tab">Settings</a></li>
+					</ul>
+
+					
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">...</div>
+					<div class="tab-pane" id="profile">.profile</div>
+					<div class="tab-pane" id="messages">.messages</div>
+					<div class="tab-pane" id="settings">.settings</div>
 				</div>
-				<div>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-							</tr>
-						</tbody>
-					</table>
+			</div>
+			-->
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>名字</th>
+										<th>姓氏</th>
+										<th>用户名</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>Thornton</td>
+										<td>@fat</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row" id="ListMedia"></div>
+
 				</div>
 			</div>
 		</div>
-		<div class="row"></div>
+		<div class="row" id="mediaContent"></div>
 	</div>
 	<!-- /container -->
 </body>
@@ -209,6 +266,17 @@
 	$(function() {
 		var win = window, controller;
 		controller = {
+			entitiesTabHandler : function(e) {
+				e.preventDefault();
+				var strActive = "active";
+				var strAll = "allEntities";
+				var strRel = "releasedEntities";
+				var strDra = "draftEntities";
+				$("#entityTab li").removeClass(strActive);
+				$(this).parent().addClass(strActive);
+
+			},
+
 			/**
 			 * main menu click event handler.
 			 **/
@@ -230,6 +298,7 @@
 			})(),
 			init : function() {
 				$(".pitem").click(this.pitemHandler);
+				$("#entityTab a").click(this.entitiesTabHandler);
 			},
 			//check form inpurt elements			
 			checkform : function() {
