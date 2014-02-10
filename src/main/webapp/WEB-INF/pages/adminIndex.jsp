@@ -95,6 +95,104 @@
 	padding-left: 0;
 	padding-right: 0;
 }
+/**
+**Uplad area CSS
+**/
+.upload-area {
+	border: 4px dashed #BBBBBB;
+	height: 200px;
+}
+
+.upload-area .drag-drop-inside {
+	margin: 70px auto 0;
+	width: 250px;
+}
+
+.upload-area .drag-drop-inside p,.drag-drop-inside p.drag-drop-buttons {
+	display: block;
+}
+
+.drag-drop-inside p.drag-drop-info {
+	font-size: 20px;
+}
+
+.upload-area .drag-drop-inside p {
+	text-align: center;
+}
+
+.drag-drop-inside p {
+	color: #AAAAAA;
+	font-size: 14px;
+	margin: 5px 0;
+}
+
+.upload-area .drag-drop-inside p {
+	text-align: center;
+}
+
+.drag-drop-buttons input {
+    cursor: pointer;
+    direction: ltr;
+    font-size: 200px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+*:before,*:after {
+	-moz-box-sizing: border-box;
+}
+
+*:before,*:after {
+	-moz-box-sizing: border-box;
+}
+
+.nav-tabs>li>a {
+	border: 1px solid rgba(0, 0, 0, 0);
+	border-radius: 4px 4px 0 0;
+	line-height: 1.42857;
+	margin-right: 2px;
+}
+
+.nav>li>a {
+	display: block;
+	padding: 10px 15px;
+	position: relative;
+}
+
+a {
+	color: #428BCA;
+	text-decoration: none;
+}
+
+a {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+* {
+	-moz-box-sizing: border-box;
+}
+
+.nav {
+	list-style: none outside none;
+}
+
+body {
+	color: #333333;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+html {
+	font-family: sans-serif;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar-example">
@@ -145,7 +243,7 @@
 			</div>
 
 			<div class="col-md-9" role="main">
-				<div id="listEntities">
+				<div id="EntitiesRegion">
 					<div class="row">
 						<div class="col-md-6" role="main">
 							<h2>
@@ -197,29 +295,8 @@
 								<li><a id="draftEntities" href="" class="">草稿<span>(1)</span></a></li>
 							</ul>
 						</div>
-					</div>
-
-					<!-- 
-				<div class="row">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-						<li><a href="#profile" data-toggle="tab">Profile</a></li>
-						<li><a href="#messages" data-toggle="tab">Messages</a></li>
-						<li><a href="#settings" data-toggle="tab">Settings</a></li>
-					</ul>
-
-					
-				<div class="tab-content">
-					<div class="tab-pane active" id="home">...</div>
-					<div class="tab-pane" id="profile">.profile</div>
-					<div class="tab-pane" id="messages">.messages</div>
-					<div class="tab-pane" id="settings">.settings</div>
-				</div>
-			</div>
-			-->
-					<div class="row">
 						<div class="col-md-12">
-							<table class="table table-striped">
+							<table class="table table-striped" id="EntitiesTable">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -231,9 +308,9 @@
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
+										<td>Karl</td>
+										<td>Chen</td>
+										<td>@karl</td>
 									</tr>
 									<tr>
 										<td>2</td>
@@ -251,10 +328,100 @@
 							</table>
 						</div>
 					</div>
-					<div class="row" id="ListMedia"></div>
+				</div>
+				<!-- Entities Region -->
+				<!-- 
+				<div class="row">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+						<li><a href="#profile" data-toggle="tab">Profile</a></li>
+						<li><a href="#messages" data-toggle="tab">Messages</a></li>
+						<li><a href="#settings" data-toggle="tab">Settings</a></li>
+					</ul>
 
+					
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">...</div>
+					<div class="tab-pane" id="profile">.profile</div>
+					<div class="tab-pane" id="messages">.messages</div>
+					<div class="tab-pane" id="settings">.settings</div>
 				</div>
 			</div>
+			-->
+				<div id="MediaRegion">
+					<div class="row">
+						<div class="col-md-6" role="main">
+							<h2>
+								媒体库<small><a href="#" class="btn  btn-sm">添加</a></small>
+							</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<ul id="MediaTab" class="nav nav-tabs">
+								<li><a href="" id="allEntities" class="">全部<span>(12)</span></a></li>
+								<li class="active"><a id="releasedEntities" href=""
+									class="">图像<span>(11)</span></a></li>
+								<li><a id="draftEntities" href="" class="">未附加<span>(1)</span></a></li>
+							</ul>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-striped" id="MediaTable">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>名字</th>
+										<th>姓氏</th>
+										<th>用户名</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Karl</td>
+										<td>Chen</td>
+										<td>@karl</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>Thornton</td>
+										<td>@fat</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row" id="add-media-region">
+						<div class="col-md-12">
+							<h2>上传新媒体文件</h2>
+							<br>
+						</div>
+						<div class="col-md-12">
+							<div class="upload-area">
+								<div class="drag-drop-inside">
+									<p class="drag-drop-info">将文件拖到这里</p>
+									<p>或</p>
+									<p class="drag-drop-buttons">
+										<span class="btn btn-success btn-sm"> <span>选择文件</span>
+											<input type="file" value="" id="plupload-browse-button"
+											name="files[]" style="">
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of media region -->
+			</div>
+			<!-- end of main content  -->
 		</div>
 		<div class="row" id="mediaContent"></div>
 	</div>
@@ -262,10 +429,20 @@
 </body>
 <!-- 导入通用js  -->
 <%@ include file="footer.jsp"%>
+<script src="/Blog/assets/js/jquery.ui.widget.js">
+	
+</script>
+<script src="/Blog/assets/js/jquery.iframe-transport.js">
+	
+</script>
+<script src="/Blog/assets/js/jquery.fileupload.js">
+	
+</script>
 <script type="text/javascript">
 	$(function() {
 		var win = window, controller;
 		controller = {
+
 			entitiesTabHandler : function(e) {
 				e.preventDefault();
 				var strActive = "active";
@@ -299,6 +476,10 @@
 			init : function() {
 				$(".pitem").click(this.pitemHandler);
 				$("#entityTab a").click(this.entitiesTabHandler);
+				//file upload handler registeration
+				$(".upload-area").fileupload({
+					dataType : 'json',
+				});
 			},
 			//check form inpurt elements			
 			checkform : function() {
