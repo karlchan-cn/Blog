@@ -14,12 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller(value = "cn.com.kc.blog.controller.service.impl.BlogAdminMgrController")
 @RequestMapping("/admin")
 public class BlogAdminMgrController {
-	final public static String ADMININDEX = "adminIndex";
+final public static String ADMININDEX = "adminIndex";
 
-	@RequestMapping("/index")
-	public ModelAndView adminIndex() {
-		final ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(ADMININDEX);
-		return modelAndView;
-	}
+@RequestMapping("/index")
+public ModelAndView adminIndex() {
+	final ModelAndView modelAndView = new ModelAndView();
+	modelAndView.setViewName(ADMININDEX);
+	return modelAndView;
+}
+
+@RequestMapping("/upload")
+public String uploadFile() {
+	return null;
+}
 }

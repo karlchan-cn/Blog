@@ -131,14 +131,14 @@
 }
 
 .drag-drop-buttons input {
-    cursor: pointer;
-    direction: ltr;
-    font-size: 200px;
-    margin: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+	cursor: pointer;
+	direction: ltr;
+	font-size: 200px;
+	margin: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 *:before,*:after {
@@ -479,6 +479,7 @@ html {
 				//file upload handler registeration
 				$(".upload-area").fileupload({
 					dataType : 'json',
+					url : 'upload'
 				});
 			},
 			//check form inpurt elements			
