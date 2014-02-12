@@ -103,6 +103,10 @@
 	height: 200px;
 }
 
+.drag-over {
+	border-color: #83B4D8;
+}
+
 .upload-area .drag-drop-inside {
 	margin: 70px auto 0;
 	width: 250px;
@@ -133,12 +137,13 @@
 .drag-drop-buttons input {
 	cursor: pointer;
 	direction: ltr;
-	font-size: 200px;
+	font-size: 20px;
 	margin: 0;
 	opacity: 0;
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 405px;
+	top: 133px;
+	width: 70px;
 }
 
 *:before,*:after {
@@ -404,14 +409,14 @@ html {
 							<br>
 						</div>
 						<div class="col-md-12">
-							<div class="upload-area">
+							<div class="upload-area" id="upload-area">
 								<div class="drag-drop-inside">
 									<p class="drag-drop-info">将文件拖到这里</p>
 									<p>或</p>
 									<p class="drag-drop-buttons">
 										<span class="btn btn-success btn-sm"> <span>选择文件</span>
 											<input type="file" value="" id="plupload-browse-button"
-											name="files[]" style="">
+											name="file" style="">
 										</span>
 									</p>
 								</div>
@@ -438,11 +443,86 @@ html {
 <script src="/Blog/assets/js/jquery.fileupload.js">
 	
 </script>
+<script src="/Blog/assets/js/modernizr-2.7.1.js">
+	
+</script>
+<script src="/Blog/assets/js/dropzone.js">
+	
+</script>
+
 <script type="text/javascript">
 	$(function() {
 		var win = window, controller;
-		controller = {
+		//cumstomize DND hadler from stackoverflow 
+		$.fn.dndhover = function(options) {
+			return this.each(function() {
+				var self = $(this);
+				var collection = $();
 
+				self.on('dragenter', function(event) {
+					if (collection.size() === 0) {
+						self.trigger('dndHoverStart');
+					}
+					collection = collection.add(event.target);
+				});
+				self.on('drop', function(event) {
+					self.trigger('dndHoverEnd');
+					event.stopPropagation();
+					event.preventDefault();
+					return false;
+
+				});
+				self.on('dragover', function(event) {
+					event.stopPropagation();
+					event.preventDefault();
+					return false;
+
+				});
+				self.on('dragleave', function(event) {
+					/*
+					 * Firefox 3.6 fires the dragleave event on the previous element
+					 * before firing dragenter on the next one so we introduce a delay
+					 */
+					setTimeout(function() {
+						collection = collection.not(event.target);
+						if (collection.size() === 0) {
+							self.trigger('dndHoverEnd');
+						}
+					}, 1);
+				});
+			});
+		};
+
+		controller = {
+			/**
+			 **file update handler
+			 **/
+			fileUploadHandler : function(e) {
+				if (Modernizr.draganddrop) {
+					$('.upload-area').dropzone({
+						url : "upload"
+					});
+					$('.upload-area').dndhover().on({
+						'dndHoverStart' : function(event) {
+							$('.upload-area').addClass('drag-over');
+							event.stopPropagation();
+							event.preventDefault();
+							return false;
+						},
+						'dndHoverEnd' : function(event) {
+							$('.upload-area').removeClass('drag-over');
+							event.stopPropagation();
+							event.preventDefault();
+							return false;
+						}
+					});
+				} else {
+					// Fallback to a library solution.
+				}
+			},
+			/**
+			 **
+			 **/
 			entitiesTabHandler : function(e) {
 				e.preventDefault();
 				var strActive = "active";
@@ -477,10 +557,12 @@ html {
 				$(".pitem").click(this.pitemHandler);
 				$("#entityTab a").click(this.entitiesTabHandler);
 				//file upload handler registeration
-				$(".upload-area").fileupload({
+				/**
+				$("#upload-area").fileupload({
 					dataType : 'json',
 					url : 'upload'
-				});
+				}); **/
+				this.fileUploadHandler();
 			},
 			//check form inpurt elements			
 			checkform : function() {
