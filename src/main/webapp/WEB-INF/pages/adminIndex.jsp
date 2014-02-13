@@ -101,6 +101,7 @@
 .upload-area {
 	border: 4px dashed #BBBBBB;
 	height: 200px;
+	margin-bottom: 0;
 }
 
 .drag-over {
@@ -159,7 +160,7 @@
 	opacity: 0;
 	position: absolute;
 	right: 405px;
-	top: 133px;
+	top: 150px;
 	width: 70px;
 }
 
@@ -440,6 +441,9 @@ html {
 											</span>
 										</p>
 									</div>
+								</div>
+								<div>
+									<span class="max-upload-size"><small>最大上传文件大小：2MB.</small></span>
 								</div>
 							</form>
 						</div>
