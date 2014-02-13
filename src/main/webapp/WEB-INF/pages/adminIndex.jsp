@@ -107,6 +107,23 @@
 	border-color: #83B4D8;
 }
 
+#upload-area.in {
+	border-color: #83B4D8;
+}
+
+#upload-area.hover {
+	border-color: #83B4D8;
+}
+
+#upload-area.fade {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	opacity: 1;
+}
+
 .upload-area .drag-drop-inside {
 	margin: 70px auto 0;
 	width: 250px;
@@ -409,18 +426,22 @@ html {
 							<br>
 						</div>
 						<div class="col-md-12">
-							<div class="upload-area" id="upload-area">
-								<div class="drag-drop-inside">
-									<p class="drag-drop-info">将文件拖到这里</p>
-									<p>或</p>
-									<p class="drag-drop-buttons">
-										<span class="btn btn-success btn-sm"> <span>选择文件</span>
-											<input type="file" value="" id="plupload-browse-button"
-											name="file" style="">
-										</span>
-									</p>
+							<form id="file-form" class="media-upload-form type-form validate"
+								action="http://www.nightletter.me/wp-admin/media-new.php"
+								method="post" enctype="multipart/form-data">
+								<div class="upload-area fade well" id="upload-area">
+									<div class="drag-drop-inside">
+										<p class="drag-drop-info">将文件拖到这里</p>
+										<p>或</p>
+										<p class="drag-drop-buttons">
+											<span class="btn btn-success btn-sm"> <span>选择文件</span>
+												<input type="file" value="" id="plupload-browse-button"
+												name="file" style="">
+											</span>
+										</p>
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -498,10 +519,53 @@ html {
 			 **file update handler
 			 **/
 			fileUploadHandler : function(e) {
+
 				if (Modernizr.draganddrop) {
-					$('.upload-area').dropzone({
-						url : "upload"
+					//if support d and drop. HTML5 new feature.
+					$("#upload-area").fileupload({
+						dataType : 'json',
+						url : 'uploadfile',
+						dropZone : $('#upload-area'),
+						//forceIframeTransport : true,
+						acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+						maxFileSize : 2000000, // 2MB
+						formAcceptCharset : 'utf-8'
 					});
+					$(document)
+							.bind(
+									'dragover',
+									function(e) {
+										var dropZone = $('#upload-area'), timeout = window.dropZoneTimeout;
+										if (!timeout) {
+											dropZone.addClass('in');
+										} else {
+											clearTimeout(timeout);
+										}
+										var found = false, node = e.target;
+										do {
+											if (node === dropZone[0]) {
+												found = true;
+												break;
+											}
+											node = node.parentNode;
+										} while (node != null);
+										if (found) {
+											dropZone.addClass('hover');
+										} else {
+											dropZone.removeClass('hover');
+										}
+										window.dropZoneTimeout = setTimeout(
+												function() {
+													window.dropZoneTimeout = null;
+													dropZone
+															.removeClass('in hover');
+												}, 100);
+									});
+					$(document).bind('drop dragover', function(e) {
+						e.preventDefault();
+					});
+
+					/**
 					$('.upload-area').dndhover().on({
 						'dndHoverStart' : function(event) {
 							$('.upload-area').addClass('drag-over');
@@ -516,6 +580,7 @@ html {
 							return false;
 						}
 					});
+					 **/
 				} else {
 					// Fallback to a library solution.
 				}
@@ -557,11 +622,6 @@ html {
 				$(".pitem").click(this.pitemHandler);
 				$("#entityTab a").click(this.entitiesTabHandler);
 				//file upload handler registeration
-				/**
-				$("#upload-area").fileupload({
-					dataType : 'json',
-					url : 'upload'
-				}); **/
 				this.fileUploadHandler();
 			},
 			//check form inpurt elements			
@@ -571,8 +631,8 @@ html {
 			}
 		};
 		win.pageController = controller;
+		//all the action begin from here.
 		controller.init();
-
 	});
 </script>
 </html>
