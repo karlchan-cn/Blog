@@ -10,6 +10,61 @@
 <meta name="author" content="">
 <!-- 导入通用的css ico --><%@ include file="header.jsp"%>
 <style type="text/css">
+*:before,*:after {
+	-moz-box-sizing: border-box;
+}
+
+*:before,*:after {
+	-moz-box-sizing: border-box;
+}
+
+.nav-tabs>li>a {
+	border: 1px solid rgba(0, 0, 0, 0);
+	border-radius: 4px 4px 0 0;
+	line-height: 1.42857;
+	margin-right: 2px;
+}
+
+.nav>li>a {
+	display: block;
+	padding: 10px 15px;
+	position: relative;
+}
+
+a {
+	color: #428BCA;
+	text-decoration: none;
+}
+
+a {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+* {
+	-moz-box-sizing: border-box;
+}
+
+.nav {
+	list-style: none outside none;
+}
+
+body {
+	color: #333333;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+html {
+	font-family: sans-serif;
+}
+</style>
+
+<style type="text/css">
 .bs-sidebar.affix {
 	position: static;
 }
@@ -163,58 +218,31 @@
 	top: 150px;
 	width: 70px;
 }
-
-*:before,*:after {
-	-moz-box-sizing: border-box;
+/**
+**uploaded items
+**/
+.media-item {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	min-height: 36px;
+	border-color: #DFDFDF;
 }
 
-*:before,*:after {
-	-moz-box-sizing: border-box;
+.media-item .pinkynail {
+	float: left;
+	margin: 2px 10px 0 0;
+	max-height: 32px;
+	max-width: 40px;
 }
 
-.nav-tabs>li>a {
-	border: 1px solid rgba(0, 0, 0, 0);
-	border-radius: 4px 4px 0 0;
-	line-height: 1.42857;
-	margin-right: 2px;
+.media-item div {
+	padding: 0;
 }
 
-.nav>li>a {
-	display: block;
-	padding: 10px 15px;
-	position: relative;
-}
-
-a {
-	color: #428BCA;
-	text-decoration: none;
-}
-
-a {
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-}
-
-* {
-	-moz-box-sizing: border-box;
-}
-
-.nav {
-	list-style: none outside none;
-}
-
-body {
-	color: #333333;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	line-height: 1.42857;
-}
-
-html {
-	font-size: 62.5%;
-}
-
-html {
-	font-family: sans-serif;
+.media-item .filename {
+	line-height: 36px;
+	color: #444444;
+	font-size: 13px;
 }
 </style>
 </head>
@@ -447,6 +475,26 @@ html {
 								</div>
 							</form>
 						</div>
+						<div class="col-md-8 media-items">
+							<div class="media-item">
+								<div class="col-md-1 pull-left">
+									<img class="pinkynail"
+										src="http://www.nightletter.me/wp-content/uploads/2014/02/p446343-150x150.jpg" />
+								</div>
+								<div class="col-md-10 filename pull-left">
+									<span>icon_GZ.JPG</span>
+								</div>
+								<div class="col-md-1 pull-right">
+									<a class="pull-right">编辑</a>
+								</div>
+							</div>
+						</div>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="60"
+								aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+								60%</div>
+						</div>
+
 					</div>
 				</div>
 				<!-- end of media region -->
@@ -534,6 +582,8 @@ html {
 						acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
 						maxFileSize : 2000000, // 2MB
 						formAcceptCharset : 'utf-8'
+					}).bind("fileuploadprogress", function(e, data) {
+						$(".max-upload-size").find("small").text(data.bitrate);
 					});
 					$(document)
 							.bind(
