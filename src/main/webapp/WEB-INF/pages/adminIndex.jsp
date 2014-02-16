@@ -490,9 +490,8 @@ html {
 							</div>
 						</div>
 						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="60"
-								aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-								60%</div>
+							<div class="progress-bar" role="progressbar" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100" style="">0%</div>
 						</div>
 
 					</div>
@@ -582,9 +581,18 @@ html {
 						acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
 						maxFileSize : 2000000, // 2MB
 						formAcceptCharset : 'utf-8'
-					}).bind("fileuploadprogress", function(e, data) {
-						$(".max-upload-size").find("small").text(data.bitrate);
-					});
+					}).bind(
+							"fileuploadprogress",
+							function(e, data) {
+								var _progress = data._progress;
+								var percentage = (_progress.loaded
+										/ _progress.total * 100).toFixed(0);
+								var percentage_str = percentage + '%'
+								$('.progress-bar').attr('aria-valuenow',
+										percentage)
+										.css('width', percentage_str).text(
+												percentage_str);
+							});
 					$(document)
 							.bind(
 									'dragover',

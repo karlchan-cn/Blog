@@ -165,6 +165,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 	imageList.add(blogImage);
 	final DiskFileItemFactory factory = new DiskFileItemFactory();
 	final ServletFileUpload upload = new ServletFileUpload(factory);
+
 	List<FileItem> items = null;
 	// analyze request error
 	try {
@@ -179,6 +180,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 				// 判断该次上传文件长度不超过2mb
 				if (CONST_MAX_UPLOAD_SIZE.subtract(
 								BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
+					item.delete();
 					retVal.put(CONST_RET_ERROR, Boolean.TRUE);
 					retVal.put(CONST_RET_ERROR_MSG,
 									CONST_ERRORMSG_OULSIZE);
