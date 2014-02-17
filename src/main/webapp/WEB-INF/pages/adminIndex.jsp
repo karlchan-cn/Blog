@@ -475,25 +475,9 @@ html {
 								</div>
 							</form>
 						</div>
-						<div class="col-md-8 media-items">
-							<div class="media-item">
-								<div class="col-md-1 pull-left">
-									<img class="pinkynail"
-										src="http://www.nightletter.me/wp-content/uploads/2014/02/p446343-150x150.jpg" />
-								</div>
-								<div class="col-md-10 filename pull-left">
-									<span>icon_GZ.JPG</span>
-								</div>
-								<div class="col-md-1 pull-right">
-									<a class="pull-right">编辑</a>
-								</div>
-							</div>
+						<div class="col-md-8 upload-media-items" id="upload-medis-items">
 						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0"
-								aria-valuemin="0" aria-valuemax="100" style="">0%</div>
-						</div>
-
+						<div></div>
 					</div>
 				</div>
 				<!-- end of media region -->
@@ -573,26 +557,74 @@ html {
 
 				if (Modernizr.draganddrop) {
 					//if support d and drop. HTML5 new feature.
-					$("#upload-area").fileupload({
-						dataType : 'json',
-						url : 'uploadfile',
-						dropZone : $('#upload-area'),
-						//forceIframeTransport : true,
-						acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-						maxFileSize : 2000000, // 2MB
-						formAcceptCharset : 'utf-8'
-					}).bind(
-							"fileuploadprogress",
-							function(e, data) {
-								var _progress = data._progress;
-								var percentage = (_progress.loaded
-										/ _progress.total * 100).toFixed(0);
-								var percentage_str = percentage + '%'
-								$('.progress-bar').attr('aria-valuenow',
-										percentage)
-										.css('width', percentage_str).text(
-												percentage_str);
-							});
+					$("#upload-area")
+							.fileupload(
+									{
+										dataType : 'json',
+										url : 'uploadfile',
+										dropZone : $('#upload-area'),
+										//forceIframeTransport : true,
+										acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+										maxFileSize : 2000000, // 2MB
+										formAcceptCharset : 'utf-8',
+										submit : (function() {
+											//add one upload html item
+											var items = $("#upload-medis-items");
+											var item_template = $($(
+													"#file-upload-template")
+													.text());
+											return function(e, data) {
+												var temp_id = 'upload-item-'
+														+ ($('#upload-medis-items .media-item').length + 1);
+												var item = item_template
+														.clone();
+												item.attr("id", temp_id);
+												item
+														.find(".filename span")
+														.text(
+																data.files[0].name);
+												data.id = temp_id;
+												items.append(item);
+												return true;
+											};
+										})(),
+										progress : function(e, data) {
+											//update the item's pregress bar status
+											var _progress = data._progress;
+											var percentage = (_progress.loaded
+													/ _progress.total * 100)
+													.toFixed(0);
+											var percentage_str = percentage
+													+ "%";
+											$("#" + data.id + " .progress-bar")
+													.attr("aria-valuenow",
+															percentage).css(
+															"width",
+															percentage_str)
+													.text(percentage_str);
+											;
+										},
+										always : function(e, data) {
+											var item = $('#' + data.id);
+											item.find(".col-md-8").css(
+													"display", "none");
+											if (data.result.error) {
+												var filenamespan = item
+														.find('.filename span');
+												filenamespan.text(filenamespan
+														.text()
+														+ data.result.errorMsg);
+											} else {
+												item.find(".col-md-1").css(
+														"display", "block");
+												var pinkynail = item
+														.find(".pinkynail");
+												pinkynail.attr("src",
+														"http://localhost:8081/Blog/assets/images/"
+																+ "");
+											}
+										}
+									});
 					$(document)
 							.bind(
 									'dragover',
@@ -696,5 +728,26 @@ html {
 		//all the action begin from here.
 		controller.init();
 	});
+</script>
+
+<script type="x-script" id="file-upload-template">
+<div class="media-item">
+								<div class="col-md-1 pull-left" style="display: none">
+									<img class="pinkynail" src="" />
+								</div>
+								<div class="col-md-4 filename pull-left">
+									<span></span>
+								</div>
+								<div class="col-md-8 pull-right">
+									<div class="progress"
+										style="margin-bottom: 0px; margin-top: 10px;">
+										<div class="progress-bar" role="progressbar" aria-valuenow="0"
+											aria-valuemin="0" aria-valuemax="100" style="">0%</div>
+									</div>
+								</div>
+								<div class="col-md-1 pull-right" style="display: none">
+									<a class="edit-item" class="pull-right" >编辑</a>
+								</div>
+</div>
 </script>
 </html>

@@ -6,7 +6,7 @@ package cn.com.kc.blog.bl.service.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,11 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +40,6 @@ import cn.com.kc.blog.bl.service.IBlogAdminMgrService;
 import cn.com.kc.blog.bl.service.IBlogImageService;
 import cn.com.kc.blog.common.util.CommonControllerUtils;
 import cn.com.kc.blog.common.util.CommonUtils;
-import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogImage;
 
 /**
@@ -65,6 +61,7 @@ public static final String CONST_IMAGES_SIZE = "image-size";
 public static final String CONST_RET_ERROR = "error";
 public static final String CONST_RET_ERROR_MSG = "errorMsg";
 public static final String CONST_RET_IMGLIST = "imagelist";
+public static final String CONST_RET_IMG = "image";
 public static final String CONST_ERRORMSG_OULCOUNT = "一次只允许上传20张图片。";
 public static final String CONST_ERRORMSG_OULSIZE = "文件不能超过2Mb";
 public static final String CONST_ERRORMSG_NOTIMAGEFILE = "准允许上传图片文件。";
@@ -177,38 +174,43 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 		while (iterator.hasNext()) {
 			item = iterator.next();
 			if (!item.isFormField()) {
-				// 判断该次上传文件长度不超过2mb
-				if (CONST_MAX_UPLOAD_SIZE.subtract(
-								BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
-					item.delete();
-					retVal.put(CONST_RET_ERROR, Boolean.TRUE);
-					retVal.put(CONST_RET_ERROR_MSG,
-									CONST_ERRORMSG_OULSIZE);
-					break;
-				}
-				String fileName = String.valueOf(System
-								.currentTimeMillis()) + item.getName();
-				String imageDesPath = uploadDir + fileName;
-				blogImage.setName(fileName);
-				blogImage.setShowName(item.getName());
-				blogImage.setSize(item.getSize());
-				BufferedImage sourceImage = null;
 				try {
-					sourceImage = ImageIO.read(item.getInputStream());
-				} catch (Exception e) {
-					retVal.put(CONST_RET_ERROR, Boolean.TRUE);
-					retVal.put(CONST_RET_ERROR_MSG,
-									CONST_ERRORMSG_NOTIMAGEFILE);
-					break;
+					// 判断该次上传文件长度不超过2mb
+					if (CONST_MAX_UPLOAD_SIZE.subtract(
+									BigDecimal.valueOf(item.getSize())).longValue() < 0L) {
+						retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+						retVal.put(CONST_RET_ERROR_MSG,
+										CONST_ERRORMSG_OULSIZE);
+						break;
+					}
+					String fileName = String.valueOf(System
+									.currentTimeMillis()) + item.getName();
+					String imageDesPath = uploadDir + fileName;
+					blogImage.setName(fileName);
+					blogImage.setShowName(item.getName());
+					blogImage.setSize(item.getSize());
+					BufferedImage sourceImage = null;
+					try {
+						sourceImage = ImageIO.read(item.getInputStream());
+					} catch (Exception e) {
+						retVal.put(CONST_RET_ERROR, Boolean.TRUE);
+						retVal.put(CONST_RET_ERROR_MSG,
+										CONST_ERRORMSG_NOTIMAGEFILE);
+						break;
+					}
+					// save the large image
+					scaleAndSaveImageWithJImage(sourceImage,
+									imageDesPath, sourceImage.getWidth(),
+									sourceImage.getHeight());
+					// save the thunmbnail
+					scaleAndSaveImageWithJImage(sourceImage, uploadDir
+																+ CONST_STR_THUMB + fileName,
+									JEPG_WIDTH_ENTITY_IMAGE, JEPG_HIGH_ENTITY_IMAGE);
+				} finally {
+					// ensure the uploaded file would be removed.
+					item.delete();
 				}
-				// save the large image
-				scaleAndSaveImageWithJImage(sourceImage,
-								imageDesPath, sourceImage.getWidth(),
-								sourceImage.getHeight());
-				// save the thunmbnail
-				scaleAndSaveImageWithJImage(sourceImage, uploadDir
-															+ CONST_STR_THUMB + fileName,
-								JEPG_WIDTH_ENTITY_IMAGE, JEPG_HIGH_ENTITY_IMAGE);
+
 			}
 
 		}
@@ -221,7 +223,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 	}
 	// 用此类构造字符串
 	StringWriter w = new StringWriter();
-	retVal.put(CONST_RET_IMGLIST, imageList);
+	retVal.put(CONST_RET_IMG, blogImage);
 	try {
 		mapper.writeValue(w, retVal);
 	} catch (Exception e) {
