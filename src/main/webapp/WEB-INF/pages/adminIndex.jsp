@@ -34,9 +34,6 @@
 a {
 	color: #428BCA;
 	text-decoration: none;
-}
-
-a {
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 
@@ -51,15 +48,12 @@ a {
 body {
 	color: #333333;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 1.42857;
 }
 
 html {
 	font-size: 62.5%;
-}
-
-html {
 	font-family: sans-serif;
 }
 </style>
@@ -239,10 +233,42 @@ html {
 	padding: 0;
 }
 
-.media-item .filename {
+.media-item .filename,.media-item .error-msg {
 	line-height: 36px;
 	color: #444444;
 	font-size: 13px;
+}
+
+div.error,.login #login_error {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-left: 4px solid #DD3D36;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/**
+** end of uploaded items
+**/
+</style>
+<style type="text/css">
+/**
+** start of form css
+**/
+form .form-group label strong {
+	font-size: 13px;
+	line-height: 1.5;
+	cursor: pointer;
+	color: #777777;
+}
+
+form .form-group textarea {
+	resize: vertical;
+}
+
+/**
+** submit div style sheet
+**/
+.submitdiv {
+	background-color: #F9F9F9;
 }
 </style>
 </head>
@@ -380,26 +406,7 @@ html {
 						</div>
 					</div>
 				</div>
-				<!-- Entities Region -->
-				<!-- 
-				<div class="row">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-						<li><a href="#profile" data-toggle="tab">Profile</a></li>
-						<li><a href="#messages" data-toggle="tab">Messages</a></li>
-						<li><a href="#settings" data-toggle="tab">Settings</a></li>
-					</ul>
-
-					
-				<div class="tab-content">
-					<div class="tab-pane active" id="home">...</div>
-					<div class="tab-pane" id="profile">.profile</div>
-					<div class="tab-pane" id="messages">.messages</div>
-					<div class="tab-pane" id="settings">.settings</div>
-				</div>
-			</div>
-			-->
-				<div id="MediaRegion">
+				<div id="media-region">
 					<div class="row">
 						<div class="col-md-6" role="main">
 							<h2>
@@ -477,7 +484,82 @@ html {
 						</div>
 						<div class="col-md-8 upload-media-items" id="upload-medis-items">
 						</div>
-						<div></div>
+					</div>
+					<!-- edit media region -->
+					<div class="row" id="edit-media-region">
+						<div class="col-md-12">
+							<h2>
+								编辑媒体<small><a href="#" class="btn  btn-sm">添加</a></small>
+							</h2>
+							<br>
+						</div>
+						<div class="row">
+							<div class="col-md-9">
+
+								<div class="col-md-12">
+									<form class="description-form" role="form">
+										<div class="form-group">
+											<input type="text" class="form-control input-sm"
+												autocomplete="off" id="edit-media-title" value=""
+												name="edit-media-title">
+										</div>
+										<div class="form-group">
+											<img class="edit-media-src" id="edit-media-src"
+												style="width: 75%; height: 500px"
+												src="http://www.nightletter.me/wp-content/uploads/2014/02/p446344.jpg" />
+										</div>
+										<div class="form-group">
+											<label for="edit-media-state"><strong class="">说明</strong></label>
+											<textarea rows="3" class="form-control" id="edit-media-state"
+												name="edit-media-state"></textarea>
+
+										</div>
+
+										<div class="form-group">
+											<label for="edit-media-replacement"><strong class="">替代文本</strong>
+											</label> <input type="text" class="form-control input-sm"
+												id="edit-media-replacement" placeholder=""
+												name="edit-media-replacement" autocomplete="off" value="">
+										</div>
+										<div class="form-group">
+											<label for="edit-media-description"><strong class="">图像描述</strong></label>
+											<textarea rows="3" class="form-control"
+												id="edit-media-description" name="edit-media-description"></textarea>
+
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-default ">
+									<!-- Default panel contents -->
+									<div class="panel-heading">保存</div>
+									<div class="panel-body">
+										<span class="glyphicon glyphicon-upload"></span>上传于：2014年2月13日@
+										6:36
+									</div>
+									<!-- List group -->
+									<ul class="list-group">
+										<li class="list-group-item">文件URL：<!-- <input type="text"
+											class="form-control input-sm" autocomplete="off"
+											id="detail-media-url"
+											value="http://www.nightletter.me/wp-content/uploads/2014/02/p584291.jpg"
+											name="detail-media-url"> -->
+											<p>http://www.nightletter.me/wp-content/uploads/2014/02/p584291.jpg</p>
+										</li>
+										<li class="list-group-item">文件名： <strong>p584291.jpg</strong>
+										</li>
+										<li class="list-group-item">文件类型： <strong> JPG</strong></li>
+										<li class="list-group-item">文件大小： <strong>237 kB</strong></li>
+										<li class="list-group-item">尺寸：<strong>600 × 553</strong></li>
+										<li class="list-group-item"><a href="delete"
+											class="btn btn-danger btn-sm">永久删除</a><a href="update"
+											class="btn btn-success btn-sm pull-right">更新</a></li>
+
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- end of media region -->
@@ -609,19 +691,30 @@ html {
 											item.find(".col-md-8").css(
 													"display", "none");
 											if (data.result.error) {
-												var filenamespan = item
-														.find('.filename span');
-												filenamespan.text(filenamespan
-														.text()
-														+ data.result.errorMsg);
+												item.addClass("error");
+												item
+														.find(".error-msg")
+														.css("display", "block")
+														.find("span")
+														.text(
+																data.result.errorMsg);
 											} else {
+												var image = data.result.image;
+												var new_id = "image_"
+														+ image.id;
+												item.attr("id", new_id);
+												item.find(".edit-item").attr(
+														"href", new_id);
+												item.data("image", image);
 												item.find(".col-md-1").css(
 														"display", "block");
 												var pinkynail = item
 														.find(".pinkynail");
-												pinkynail.attr("src",
-														"http://localhost:8081/Blog/assets/images/"
-																+ "");
+												pinkynail
+														.attr(
+																"src",
+																"http://localhost:8081/Blog/assets/images/thumb_"
+																		+ data.result.image.name);
 											}
 										}
 									});
@@ -658,7 +751,29 @@ html {
 					$(document).bind('drop dragover', function(e) {
 						e.preventDefault();
 					});
-
+					//register edit media item click event
+					$(document).on(
+							"click",
+							".edit-item",
+							function(e) {
+								e.preventDefault();
+								var image = $("#" + $(this).attr("href")).data(
+										"image");
+								$("#edit-media-title").text(image.name);
+								$("#edit-media-description").text(
+										image.description === null ? ""
+												: image.description);
+								$("#edit-media-state")
+										.text(
+												image.state === null ? ""
+														: image.state);
+								$("#edit-media-replacement").text(
+										image.replacement);
+								$("#edit-media-src").attr(
+										"src",
+										"http://localhost:8081/Blog/assets/images/"
+												+ image.name);
+							});
 					/**
 					$('.upload-area').dndhover().on({
 						'dndHoverStart' : function(event) {
@@ -738,6 +853,9 @@ html {
 								<div class="col-md-4 filename pull-left">
 									<span></span>
 								</div>
+								<div class="col-md-4 pull-left error-msg" style="display: none">
+									<span></span>
+								</div>
 								<div class="col-md-8 pull-right">
 									<div class="progress"
 										style="margin-bottom: 0px; margin-top: 10px;">
@@ -746,7 +864,7 @@ html {
 									</div>
 								</div>
 								<div class="col-md-1 pull-right" style="display: none">
-									<a class="edit-item" class="pull-right" >编辑</a>
+									<a class="edit-item" href="" class="pull-right" >编辑</a>
 								</div>
 </div>
 </script>

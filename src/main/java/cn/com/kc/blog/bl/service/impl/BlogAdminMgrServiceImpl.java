@@ -87,7 +87,7 @@ private static int JEPG_HIGH_ENTITY_IMAGE = 90;
 /**
  * thumb string constant.
  */
-private static String CONST_STR_THUMB = "thumb";
+private static String CONST_STR_THUMB = "thumb_";
 
 /**
  * json mapper
@@ -184,7 +184,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 						break;
 					}
 					String fileName = String.valueOf(System
-									.currentTimeMillis()) + item.getName();
+									.currentTimeMillis() + "_" + item.getName());
 					String imageDesPath = uploadDir + fileName;
 					blogImage.setName(fileName);
 					blogImage.setShowName(item.getName());
@@ -208,6 +208,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 									JEPG_WIDTH_ENTITY_IMAGE, JEPG_HIGH_ENTITY_IMAGE);
 				} finally {
 					// ensure the uploaded file would be removed.
+					
 					item.delete();
 				}
 

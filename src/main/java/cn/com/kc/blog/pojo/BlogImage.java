@@ -52,7 +52,34 @@ private Long size;
 private String sizeUnit;
 @Transient
 private String showName;
+/**
+ * image's description
+ */
 private String description;
+/**
+ * image's state
+ */
+private String state;
+/**
+ * while image can't be display,the text replacement.
+ */
+private String replacement;
+
+public String getReplacement() {
+	return replacement;
+}
+
+public void setReplacement(String replacement) {
+	this.replacement = replacement;
+}
+
+public String getState() {
+	return state;
+}
+
+public void setState(String state) {
+	this.state = state;
+}
 
 public String getDescription() {
 	return description;
