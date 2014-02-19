@@ -276,7 +276,7 @@ form .form-group textarea {
 	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container" id="content">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<!-- 
 				<div role="complementary"
 					class="bs-sidebar hidden-print affix navbar-example">
@@ -319,7 +319,7 @@ form .form-group textarea {
 
 			</div>
 
-			<div class="col-md-9" role="main">
+			<div class="col-md-10" role="main">
 				<div id="EntitiesRegion">
 					<div class="row">
 						<div class="col-md-6" role="main">
@@ -416,7 +416,7 @@ form .form-group textarea {
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<ul id="MediaTab" class="nav nav-tabs">
+							<ul id="media-tab" class="nav nav-tabs">
 								<li><a href="" id="allEntities" class="">全部<span>(12)</span></a></li>
 								<li class="active"><a id="releasedEntities" href=""
 									class="">图像<span>(11)</span></a></li>
@@ -424,34 +424,54 @@ form .form-group textarea {
 							</ul>
 						</div>
 						<div class="col-md-12">
-							<table class="table table-striped" id="MediaTable">
+							<table class="table table-striped  table-bordered"
+								id="media-table">
 								<thead>
 									<tr>
-										<th>#</th>
-										<th>名字</th>
-										<th>姓氏</th>
-										<th>用户名</th>
+										<th>序号</th>
+										<th>文件</th>
+										<th>作者</th>
+										<th>上传至</th>
+										<th>日期</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td>Karl</td>
-										<td>Chen</td>
-										<td>@karl</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+										<td>@twitter</td>
 									</tr>
 									<tr>
 										<td>2</td>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+										<td>@twitter</td>
 									</tr>
 									<tr>
 										<td>3</td>
 										<td>Larry</td>
 										<td>the Bird</td>
 										<td>@twitter</td>
+										<td>@twitter</td>
 									</tr>
+									<tr>
+										<td>4</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+										<td>@twitter</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Larry</td>
+										<td>the Bird</td>
+										<td>@twitter</td>
+										<td>@twitter</td>
+									</tr>
+
 								</tbody>
 							</table>
 						</div>
@@ -533,13 +553,15 @@ form .form-group textarea {
 							<div class="col-md-3">
 								<div class="panel panel-default ">
 									<!-- Default panel contents -->
-									<div class="panel-heading">保存</div>
-									<div class="panel-body">
-										<span class="glyphicon glyphicon-upload"></span>上传于：2014年2月13日@
-										6:36
+									<div class="panel-heading">
+										保存 <a href="update" class="  pull-right"><span
+											id="panel-fold-btn" class="glyphicon glyphicon-chevron-up"></span></a>
 									</div>
 									<!-- List group -->
-									<ul class="list-group">
+									<ul class="list-group" id="panel-list-group">
+										<li class="list-group-item"><span
+											class="glyphicon glyphicon-upload"></span>上传于：2014年2月13日@
+											6:36</li>
 										<li class="list-group-item">文件URL：<!-- <input type="text"
 											class="form-control input-sm" autocomplete="off"
 											id="detail-media-url"
@@ -557,6 +579,8 @@ form .form-group textarea {
 											class="btn btn-success btn-sm pull-right">更新</a></li>
 
 									</ul>
+									<div class="panel-body" style="display: none"></div>
+
 								</div>
 							</div>
 						</div>
@@ -584,7 +608,7 @@ form .form-group textarea {
 <script src="/Blog/assets/js/modernizr-2.7.1.js">
 	
 </script>
-<script src="/Blog/assets/js/dropzone.js">
+<script src="/Blog/assets/js/jquery.dataTables.js">
 	
 </script>
 
@@ -636,7 +660,6 @@ form .form-group textarea {
 			 **file update handler
 			 **/
 			fileUploadHandler : function(e) {
-
 				if (Modernizr.draganddrop) {
 					//if support d and drop. HTML5 new feature.
 					$("#upload-area")
@@ -797,6 +820,187 @@ form .form-group textarea {
 			/**
 			 **
 			 **/
+			registerUpdataPanelHandler : function() {
+				//panel save-media-button click event
+				$("#panel-fold-btn").bind("click", function(e) {
+					e.preventDefault();
+					var _this = $(this);
+					var up_icon_cls = "glyphicon glyphicon-chevron-up";
+					var down_icon_cls = "glyphicon glyphicon-chevron-down";
+					var panel_list_group = $("#panel-list-group");
+					if (_this.hasClass(up_icon_cls)) {
+						_this.removeClass(up_icon_cls).addClass(down_icon_cls);
+						panel_list_group.slideUp("normal");
+					} else if (_this.hasClass(down_icon_cls)) {
+						_this.removeClass(down_icon_cls).addClass(up_icon_cls);
+						panel_list_group.slideDown("normal");
+					}
+				});
+
+				/* Bootstrap style pagination control */
+				$
+						.extend(
+								$.fn.dataTableExt.oPagination,
+								{
+									"bootstrap" : {
+										"fnInit" : function(oSettings, nPaging,
+												fnDraw) {
+											var oLang = oSettings.oLanguage.oPaginate;
+											var fnClickHandler = function(e) {
+												e.preventDefault();
+												if (oSettings.oApi
+														._fnPageChange(
+																oSettings,
+																e.data.action)) {
+													fnDraw(oSettings);
+												}
+											};
+
+											$(nPaging)
+
+													.append(
+															'<ul class="pagination pull-right" style="margin:0px">'
+																	+ '<li class="prev disabled"><a href="#">&larr; '
+																	+ oLang.sPrevious
+																	+ '</a></li>'
+																	+ '<li class="next disabled"><a href="#">'
+																	+ oLang.sNext
+																	+ ' &rarr; </a></li>'
+																	+ '</ul>');
+											var els = $('a', nPaging);
+											$(els[0]).bind('click.DT', {
+												action : "previous"
+											}, fnClickHandler);
+											$(els[1]).bind('click.DT', {
+												action : "next"
+											}, fnClickHandler);
+										},
+
+										"fnUpdate" : function(oSettings, fnDraw) {
+											var iListLength = 5;
+											var oPaging = oSettings.oInstance
+													.fnPagingInfo();
+											var an = oSettings.aanFeatures.p;
+											var i, ien, j, sClass, iStart, iEnd, iHalf = Math
+													.floor(iListLength / 2);
+
+											if (oPaging.iTotalPages < iListLength) {
+												iStart = 1;
+												iEnd = oPaging.iTotalPages;
+											} else if (oPaging.iPage <= iHalf) {
+												iStart = 1;
+												iEnd = iListLength;
+											} else if (oPaging.iPage >= (oPaging.iTotalPages - iHalf)) {
+												iStart = oPaging.iTotalPages
+														- iListLength + 1;
+												iEnd = oPaging.iTotalPages;
+											} else {
+												iStart = oPaging.iPage - iHalf
+														+ 1;
+												iEnd = iStart + iListLength - 1;
+											}
+
+											for (i = 0, ien = an.length; i < ien; i++) {
+												// Remove the middle elements
+												$('li:gt(0)', an[i]).filter(
+														':not(:last)').remove();
+
+												// Add the new list items and their event handlers
+												for (j = iStart; j <= iEnd; j++) {
+													sClass = (j == oPaging.iPage + 1) ? 'class="active"'
+															: '';
+													$(
+															'<li '+sClass+'><a href="#">'
+																	+ j
+																	+ '</a></li>')
+															.insertBefore(
+																	$(
+																			'li:last',
+																			an[i])[0])
+															.bind(
+																	'click',
+																	function(e) {
+																		e
+																				.preventDefault();
+																		oSettings._iDisplayStart = (parseInt(
+																				$(
+																						'a',
+																						this)
+																						.text(),
+																				10) - 1)
+																				* oPaging.iLength;
+																		fnDraw(oSettings);
+																	});
+												}
+
+												// Add / remove disabled classes from the static elements
+												if (oPaging.iPage === 0) {
+													$('li:first', an[i])
+															.addClass(
+																	'disabled');
+												} else {
+													$('li:first', an[i])
+															.removeClass(
+																	'disabled');
+												}
+
+												if (oPaging.iPage === oPaging.iTotalPages - 1
+														|| oPaging.iTotalPages === 0) {
+													$('li:last', an[i])
+															.addClass(
+																	'disabled');
+												} else {
+													$('li:last', an[i])
+															.removeClass(
+																	'disabled');
+												}
+											}
+										}
+									}
+								});
+
+				/* API method to get paging information */
+				$.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
+					return {
+						"iStart" : oSettings._iDisplayStart,
+						"iEnd" : oSettings.fnDisplayEnd(),
+						"iLength" : oSettings._iDisplayLength,
+						"iTotal" : oSettings.fnRecordsTotal(),
+						"iFilteredTotal" : oSettings.fnRecordsDisplay(),
+						"iPage" : oSettings._iDisplayLength === -1 ? 0 : Math
+								.ceil(oSettings._iDisplayStart
+										/ oSettings._iDisplayLength),
+						"iTotalPages" : oSettings._iDisplayLength === -1 ? 0
+								: Math.ceil(oSettings.fnRecordsDisplay()
+										/ oSettings._iDisplayLength)
+					};
+				};
+				$.extend($.fn.dataTableExt.oStdClasses, {
+					"sWrapper" : "dataTables_wrapper form-inline"
+				});
+				//media table handler
+				$("#media-table")
+						.dataTable(
+								{
+									"sDom" : "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+									"sPaginationType" : "bootstrap",
+									"oLanguage" : {
+										"sLengthMenu" : "_MENU_",
+										"sZeroRecords" : "无任何数据",
+										"sInfo" : "展示  _TOTAL_ 条记录 当中的 _START_ 到 _END_  ",
+										"sInfoEmpty" : "展示0条记录当中的 0  到 0",
+										"sInfoFiltered" : "(从 _MAX_ total 条记中过滤)",
+										"sSearch" : "<div class='pull-right'> _INPUT_ </div>"
+									}
+								});
+				$("#media-table_length select").addClass(
+						"form-control pull-left input-sm col-xs-1");
+				$("#media-table_filter input").addClass(
+						"form-control pull-right input-sm col-xs-2");
+			},
+			/**
+			 **
+			 **/
 			entitiesTabHandler : function(e) {
 				e.preventDefault();
 				var strActive = "active";
@@ -805,7 +1009,6 @@ form .form-group textarea {
 				var strDra = "draftEntities";
 				$("#entityTab li").removeClass(strActive);
 				$(this).parent().addClass(strActive);
-
 			},
 
 			/**
@@ -832,6 +1035,8 @@ form .form-group textarea {
 				$("#entityTab a").click(this.entitiesTabHandler);
 				//file upload handler registeration
 				this.fileUploadHandler();
+				//media update panel event register
+				this.registerUpdataPanelHandler();
 			},
 			//check form inpurt elements			
 			checkform : function() {
