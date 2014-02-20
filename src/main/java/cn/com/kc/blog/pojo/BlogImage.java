@@ -4,6 +4,7 @@
 package cn.com.kc.blog.pojo;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -44,6 +45,7 @@ private BlogEntity entity;
 private Long id;
 private String name;
 private String position;
+private Timestamp createDate;
 @Transient
 private Long tempid;
 @Transient
@@ -64,6 +66,16 @@ private String state;
  * while image can't be display,the text replacement.
  */
 private String replacement;
+
+
+
+public Timestamp getCreateDate() {
+	return createDate;
+}
+
+public void setCreateDate(Timestamp createDate) {
+	this.createDate = createDate;
+}
 
 public String getReplacement() {
 	return replacement;

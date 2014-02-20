@@ -271,29 +271,199 @@ form .form-group textarea {
 	background-color: #F9F9F9;
 }
 </style>
+
+<style type="text/css">
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter label {
+	float: right;
+}
+
+div.dataTables_info {
+	padding-top: 8px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+
+table.table thead .sorting,table.table thead .sorting_asc,table.table thead .sorting_desc,table.table thead .sorting_asc_disabled,table.table thead .sorting_desc_disabled
+	{
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .sorting {
+	background: url('/Blog/assets/images/sort_both.png') no-repeat center
+		right;
+}
+
+table.table thead .sorting_asc {
+	background: url('/Blog/assets/images/sort_asc.png') no-repeat center
+		right;
+}
+
+table.table thead .sorting_desc {
+	background: url('/Blog/assets/images/sort_desc.png') no-repeat center
+		right;
+}
+
+table.table thead .sorting_asc_disabled {
+	background: url('/Blog/assets/images/sort_asc_disabled.png') no-repeat
+		center right;
+}
+
+table.table thead .sorting_desc_disabled {
+	background: url('/Blog/assets/images/sort_desc_disabled.png') no-repeat
+		center right;
+}
+
+table.dataTable th:active {
+	outline: none;
+}
+
+/* Scrolling */
+div.dataTables_scrollHead table {
+	margin-bottom: 0 !important;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+div.dataTables_scrollHead table thead tr:last-child th:first-child,div.dataTables_scrollHead table thead tr:last-child td:first-child
+	{
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody tbody tr:first-child th,div.dataTables_scrollBody tbody tr:first-child td
+	{
+	border-top: none;
+}
+
+div.dataTables_scrollFoot table {
+	border-top: none;
+}
+
+/*
+ * TableTools styles
+ */
+.table tbody tr.active td,.table tbody tr.active th {
+	background-color: #08C;
+	color: white;
+}
+
+.table tbody tr.active:hover td,.table tbody tr.active:hover th {
+	background-color: #0075b0 !important;
+}
+
+.table-striped tbody tr.active:nth-child(odd) td,.table-striped tbody tr.active:nth-child(odd) th
+	{
+	background-color: #017ebc;
+}
+
+table.DTTT_selectable tbody tr {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+div.DTTT .btn {
+	color: #333 !important;
+	font-size: 12px;
+}
+
+div.DTTT .btn:hover {
+	text-decoration: none !important;
+}
+
+ul.DTTT_dropdown.dropdown-menu a {
+	color: #333 !important;
+	/* needed only when demo_page.css is included */
+}
+
+ul.DTTT_dropdown.dropdown-menu li:hover a {
+	background-color: #0088cc;
+	color: white !important;
+}
+
+/* TableTools information display */
+div.DTTT_print_info.modal {
+	height: 150px;
+	margin-top: -75px;
+	text-align: center;
+}
+
+div.DTTT_print_info h6 {
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 28px;
+	margin: 1em;
+}
+
+div.DTTT_print_info p {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+/*
+ * FixedColumns styles
+ */
+div.DTFC_LeftHeadWrapper table,div.DTFC_LeftFootWrapper table,table.DTFC_Cloned tr.even
+	{
+	background-color: white;
+}
+
+div.DTFC_LeftHeadWrapper table {
+	margin-bottom: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftHeadWrapper table thead tr:last-child th:first-child,div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child
+	{
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper tbody tr:first-child th,div.DTFC_LeftBodyWrapper tbody tr:first-child td
+	{
+	border-top: none;
+}
+
+div.DTFC_LeftFootWrapper table {
+	border-top: none;
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".navbar-example">
 	<!-- 导入navhead --><%@ include file="navhead.jsp"%>
 	<div class="container" id="content">
 		<div class="row">
 			<div class="col-md-2">
-				<!-- 
-				<div role="complementary"
-					class="bs-sidebar hidden-print affix navbar-example">
-					<ul class="nav bs-sidenav">
-						<li><a href="#overview">日记</a>
-							<ul class="nav">
-								<li><a href="#overview-doctype">新增日记</a></li>
-								<li><a href="#overview-mobile">管理日记</a></li>
-							</ul></li>
-						<li><a href="#setting">设置</a>
-							<ul class="nav">
-								<li><a href="#user-setting">用户管理</a></li>
-								<li><a href="#blog-setting">博客管理</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				 -->
 				<ul class="nav nav-pills nav-stacked" style="margin-top: 15px">
 					<li><a href="#" class="pitem">日记</a>
 						<ul class="nav nav-pills nav-stacked sub-menu">
@@ -313,14 +483,13 @@ form .form-group textarea {
 						<ul class="nav nav-pills nav-stacked sub-menu">
 							<li><a href="#">媒体库</a></li>
 							<li><a href="#">添加</a></li>
-
 						</ul></li>
 				</ul>
 
 			</div>
 
 			<div class="col-md-10" role="main">
-				<div id="EntitiesRegion">
+				<div id="entities-region">
 					<div class="row">
 						<div class="col-md-6" role="main">
 							<h2>
@@ -328,41 +497,6 @@ form .form-group textarea {
 							</h2>
 						</div>
 					</div>
-					<!-- <div class="row">
-					<div class="col-md-5">
-						<ul class="nav nav-justified postsbox-nav">
-							<li class="active"><a href="#">所有日记</a></li>
-							<li><a href="#">发表箱</a></li>
-							<li><a href="#">草稿箱</a></li>
-							<li><a href="#">垃圾箱</a></li>
-						</ul>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-5">
-						<div class="btn-group">
-							<a href="#" class="btn btn-default">发表箱</a> <a href="#"
-								class="btn btn-default">草稿箱</a> <a href="#"
-								class="btn btn-default">垃圾箱</a>
-						</div>
-					</div>
-				</div> 
-				<div class="row">
-					<div class="col-md-5">
-						<div class="btn-toolbar" role="toolbar">
-							<div class="btn-group">
-								<a href="#" class="btn btn-default">全部<span>(12)</span></a>
-							</div>
-							<div class="btn-group">
-								<a href="#" class="btn btn-default">已发布<span>(11)</span></a>
-							</div>
-							<div class="btn-group">
-								<a href="#" class="btn btn-default">草稿<span>(1)</span></a>
-							</div>
-						</div>
-					</div>
-				</div>-->
 					<div class="row">
 						<div class="col-md-12">
 							<ul id="entityTab" class="nav nav-tabs">
@@ -415,6 +549,7 @@ form .form-group textarea {
 						</div>
 					</div>
 					<div class="row">
+						<!-- 
 						<div class="col-md-12">
 							<ul id="media-tab" class="nav nav-tabs">
 								<li><a href="" id="allEntities" class="">全部<span>(12)</span></a></li>
@@ -422,13 +557,13 @@ form .form-group textarea {
 									class="">图像<span>(11)</span></a></li>
 								<li><a id="draftEntities" href="" class="">未附加<span>(1)</span></a></li>
 							</ul>
-						</div>
+						</div> -->
 						<div class="col-md-12">
 							<table class="table table-striped  table-bordered"
 								id="media-table">
 								<thead>
 									<tr>
-										<th>序号</th>
+										<th>#</th>
 										<th>文件</th>
 										<th>作者</th>
 										<th>上传至</th>
@@ -436,42 +571,7 @@ form .form-group textarea {
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-										<td>@twitter</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-										<td>@twitter</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-										<td>@twitter</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-										<td>@twitter</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-										<td>@twitter</td>
-									</tr>
-
+									
 								</tbody>
 							</table>
 						</div>
@@ -860,12 +960,10 @@ form .form-group textarea {
 
 													.append(
 															'<ul class="pagination pull-right" style="margin:0px">'
-																	+ '<li class="prev disabled"><a href="#">&larr; '
-																	+ oLang.sPrevious
+																	+ '<li class="prev disabled"><a href="#">«'
 																	+ '</a></li>'
 																	+ '<li class="next disabled"><a href="#">'
-																	+ oLang.sNext
-																	+ ' &rarr; </a></li>'
+																	+ '»</a></li>'
 																	+ '</ul>');
 											var els = $('a', nPaging);
 											$(els[0]).bind('click.DT', {
@@ -987,16 +1085,17 @@ form .form-group textarea {
 									"oLanguage" : {
 										"sLengthMenu" : "_MENU_",
 										"sZeroRecords" : "无任何数据",
-										"sInfo" : "展示  _TOTAL_ 条记录 当中的 _START_ 到 _END_  ",
+										"sInfo" : "展示_TOTAL_条记录当中的_START_到_END_",
 										"sInfoEmpty" : "展示0条记录当中的 0  到 0",
-										"sInfoFiltered" : "(从 _MAX_ total 条记中过滤)",
-										"sSearch" : "<div class='pull-right'> _INPUT_ </div>"
+										"sInfoFiltered" : "(从_MAX_条记中过滤)",
+										"sSearch" : "<div class='pull-right'>_INPUT_</div>"
 									}
 								});
 				$("#media-table_length select").addClass(
-						"form-control pull-left input-sm col-xs-1");
-				$("#media-table_filter input").addClass(
-						"form-control pull-right input-sm col-xs-2");
+						"form-control pull-left input-sm col-xs-1 col-md-1");
+				$("#media-table_filter label").addClass("pull-right").find(
+						"input").addClass("form-control input-sm");
+				$("#media-table_info").addClass("infotips");
 			},
 			/**
 			 **

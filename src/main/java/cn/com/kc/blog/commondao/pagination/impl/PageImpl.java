@@ -34,6 +34,10 @@ private int pageSize;
  * page number;
  */
 private int pageNumber;
+/**
+ * total number of pages
+ */
+private int totalPages;
 
 @Override
 public Iterator<T> iterator() {
@@ -56,8 +60,7 @@ public PageImpl(final List<T> content, final Long totalNumberOfElements, final i
 
 @Override
 public int getPageNumber() {
-
-	return 0;
+	return this.pageNumber;
 }
 
 @Override
@@ -67,8 +70,7 @@ public int getNumberOfElements() {
 
 @Override
 public int getPageSize() {
-
-	return pageSize;
+	return this.pageSize;
 }
 
 @Override
@@ -84,7 +86,7 @@ public int getTotalPages() {
 	if (getPageSize() == 0) {
 		return 1;
 	}
-	int totalPages = (int) (totalNumberOfElements / pageSize);
+	this.totalPages = (int) (totalNumberOfElements / pageSize);
 	if ((totalNumberOfElements % pageSize) > 0) {
 		totalPages++;
 	}
@@ -109,7 +111,6 @@ public boolean isFirstPage() {
 
 @Override
 public boolean isLastPage() {
-
 	return pageNumber == getTotalPages();
 }
 

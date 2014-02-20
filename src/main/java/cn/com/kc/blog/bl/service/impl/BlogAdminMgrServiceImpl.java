@@ -9,7 +9,9 @@ import java.io.IOException;
 
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -186,9 +188,13 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 					String fileName = String.valueOf(System
 									.currentTimeMillis() + "_" + item.getName());
 					String imageDesPath = uploadDir + fileName;
+					if (new File(uploadDir + item.getName()).exists()) {
+
+					}
 					blogImage.setName(fileName);
 					blogImage.setShowName(item.getName());
 					blogImage.setSize(item.getSize());
+					blogImage.setCreateDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 					BufferedImage sourceImage = null;
 					try {
 						sourceImage = ImageIO.read(item.getInputStream());
@@ -208,7 +214,7 @@ public ResponseEntity<String> saveUploadFile(HttpServletRequest request, HttpSer
 									JEPG_WIDTH_ENTITY_IMAGE, JEPG_HIGH_ENTITY_IMAGE);
 				} finally {
 					// ensure the uploaded file would be removed.
-					
+
 					item.delete();
 				}
 

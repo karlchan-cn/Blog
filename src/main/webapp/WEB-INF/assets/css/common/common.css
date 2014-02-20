@@ -64,3 +64,12 @@ a:hover {
 	width: 100%;
 	word-wrap: break-word;
 }
+/**
+** entity display common css
+**/
+.infotips {
+	color: #777777;
+	cursor: pointer;
+	font-size: 13px;
+	line-height: 1.5;
+}
