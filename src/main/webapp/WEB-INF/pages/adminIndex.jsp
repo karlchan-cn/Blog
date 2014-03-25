@@ -1087,42 +1087,47 @@ div.DTFC_LeftFootWrapper table {
 											fnCallback, oSettings) {
 										var oSettings = $(this).dataTable()
 												.fnSettings();
-										oSettings.jqXHR = $
-												.ajax({
-													"dataType" : 'json',
-													"type" : "POST",
-													"url" : sSource,
-													data : aoData,
-													/**
-													"data" : {
-														"pageNumber" : oSettings._iDisplayStart,
-														"pageSize" : oSettings._iDisplayLength
-													},
-													 **/
-													"success" : function(data,
-															textStatus, jqXHR) {
-														$("#media-table").DataTable
-																.fnSettings({
-																	"aoData" : data.page.content
-																});
-													}
-												});
+										oSettings.jqXHR = $.ajax({
+											"dataType" : 'json',
+											"type" : "POST",
+											"url" : sSource,
+											data : aoData,
+											/**
+											"data" : {
+												"pageNumber" : oSettings._iDisplayStart,
+												"pageSize" : oSettings._iDisplayLength
+											},
+											 **/
+											"success" : fnCallback
+										/**function(data,
+												textStatus, jqXHR) {
+											$("#media-table").DataTable
+													.fnSettings({
+														"aoData" : data.page.content
+													});
+										}**/
+										});
 									},
 									"aoColumns" : [ {
 										"sTitle" : "#",
-										"mData" : "index"
+										"mData" : "idx",
+										sDefaultContent : ""
 									}, {
 										"sTitle" : "Name",
-										"mData" : "name"
+										"mData" : "name",
+										sDefaultContent : ""
 									}, {
 										"sTitle" : "User",
-										"mData" : "user"
+										"mData" : "user",
+										sDefaultContent : ""
 									}, {
 										"sTitle" : "Create Date",
-										"mData" : "createDate"
+										"mData" : "createDate",
+										sDefaultContent : ""
 									}, {
 										"sTitle" : "Create Date",
-										"mData" : "createDate"
+										"mData" : "createDate",
+										sDefaultContent : ""
 									} ],
 									"sDom" : "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 									"sPaginationType" : "bootstrap",

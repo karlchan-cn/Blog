@@ -134,7 +134,7 @@ public abstract class BaseDaoImpl<M extends Serializable, PK extends Serializabl
 				* pageRequest.getPageSize());
 		query.setMaxResults(pageRequest.getPageSize());
 		return new PageImpl<M>(query.list(), totalNumberOfElements,
-				pageRequest.getPageNumber(), pageRequest.getPageNumber());
+				pageRequest.getPageSize(), pageRequest.getPageNumber());
 	}
 
 	@Override
