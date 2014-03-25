@@ -8,23 +8,22 @@ import java.io.File;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
-
 import cn.com.kc.blog.bl.service.IBlogImageService;
 import cn.com.kc.blog.common.util.CommonControllerUtils;
-import cn.com.kc.blog.common.util.CommonUtils;
+import cn.com.kc.blog.common.util.DataTableUtility;
 import cn.com.kc.blog.commondao.pagination.impl.PageRequestImpl;
 import cn.com.kc.blog.commondao.pagination.service.Page;
 import cn.com.kc.blog.commondao.pagination.service.PageRequest;
-import cn.com.kc.blog.pojo.BlogEntity;
 import cn.com.kc.blog.pojo.BlogImage;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author karl
@@ -74,14 +73,16 @@ public String delImage(HttpServletRequest request,
  */
 @RequestMapping("/getpaginatedimages")
 @ResponseBody
-public ResponseEntity<String> getPaginatedImages(
-				@RequestParam("page") PageRequestImpl pageRequestImpl) {
+public ResponseEntity<String> getPaginatedImages(final HttpServletRequest request
+				) {
 	// if do not privide page request,insance a default page request with
 	// page size of 10 and page number of 1
+	PageRequest pageRequestImpl = null;
 	if (pageRequestImpl == null) {
 		pageRequestImpl = new PageRequestImpl(
 						PageRequest.DEFAULT_PAGENUMBER,
 						PageRequest.DEFAULT_PAGESIZE);
+		pageRequestImpl = DataTableUtility.extractRequstParameters(request);
 	}
 	// request user's entity list
 	final Page<BlogImage> page = blogImageService

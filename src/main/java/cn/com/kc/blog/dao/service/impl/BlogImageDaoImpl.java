@@ -27,18 +27,16 @@ public class BlogImageDaoImpl extends BaseDaoImpl<BlogImage, Long> implements
 				IBlogImageDaoService {
 
 public static final String CONST_HQL_GET_ALL_IMAGE_COUNT = " select count(image.id) from BlogImage image";
-public static final String CONST_HQL_GET_LISTEDIMAGE_INFO = " select image.id,image.name,image.position,image.createDate,image.showName,image.description,image.state,image.replacement "
-															+ " from BlogImage image";
+public static final String CONST_HQL_GET_LISTEDIMAGE_INFO = " select image.id,image.name,image.position,image.createDate,image.description,"
+															+ "image.state,image.replacement from BlogImage image";
 
 @Override
 public String getBaseTotalQueryHQL() {
-
 	return CONST_HQL_GET_ALL_IMAGE_COUNT;
 }
 
 @Override
 public String getBasetoalListQueryHQL() {
-
 	return CONST_HQL_GET_LISTEDIMAGE_INFO;
 }
 
@@ -56,10 +54,10 @@ public Page<BlogImage> getPaginatedImagesData(PageRequest pageRequest, Object...
 		image.setName((String) value[1]);
 		image.setPosition((String) value[2]);
 		image.setCreateDate((Timestamp) value[3]);
-		image.setShowName((String) value[4]);
-		image.setDescription((String) value[5]);
-		image.setState((String) value[6]);
-		image.setReplacement((String) value[7]);
+		// image.setShowName((String) value[4]);
+		image.setDescription((String) value[4]);
+		image.setState((String) value[5]);
+		image.setReplacement((String) value[6]);
 		entitiesList.add(image);
 	}
 	page.setContent(entitiesList);

@@ -29,4 +29,16 @@ Integer getPageNumber();
  * @return
  */
 Integer getPageSize();
+
+/**
+ * 
+ * @param size
+ */
+void setPageNumber(final Integer size);
+
+/**
+ * 
+ * @param size
+ */
+void setPageSize(final Integer size);
 }

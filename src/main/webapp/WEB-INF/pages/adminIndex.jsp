@@ -571,7 +571,7 @@ div.DTFC_LeftFootWrapper table {
 									</tr>
 								</thead>
 								<tbody>
-									
+
 								</tbody>
 							</table>
 						</div>
@@ -1080,6 +1080,50 @@ div.DTFC_LeftFootWrapper table {
 				$("#media-table")
 						.dataTable(
 								{
+									"bProcessing" : true,
+									"bServerSide" : true,
+									"sAjaxSource" : "/Blog/imagemanage/getpaginatedimages",
+									"fnServerData" : function(sSource, aoData,
+											fnCallback, oSettings) {
+										var oSettings = $(this).dataTable()
+												.fnSettings();
+										oSettings.jqXHR = $
+												.ajax({
+													"dataType" : 'json',
+													"type" : "POST",
+													"url" : sSource,
+													data : aoData,
+													/**
+													"data" : {
+														"pageNumber" : oSettings._iDisplayStart,
+														"pageSize" : oSettings._iDisplayLength
+													},
+													 **/
+													"success" : function(data,
+															textStatus, jqXHR) {
+														$("#media-table").DataTable
+																.fnSettings({
+																	"aoData" : data.page.content
+																});
+													}
+												});
+									},
+									"aoColumns" : [ {
+										"sTitle" : "#",
+										"mData" : "index"
+									}, {
+										"sTitle" : "Name",
+										"mData" : "name"
+									}, {
+										"sTitle" : "User",
+										"mData" : "user"
+									}, {
+										"sTitle" : "Create Date",
+										"mData" : "createDate"
+									}, {
+										"sTitle" : "Create Date",
+										"mData" : "createDate"
+									} ],
 									"sDom" : "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 									"sPaginationType" : "bootstrap",
 									"oLanguage" : {
