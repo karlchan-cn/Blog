@@ -82,10 +82,12 @@ public class DataTableUtility {
 	public static PageRequest extractRequstParameters(
 			final HttpServletRequest request) {
 		final PageRequest pageRequest = new PageRequestImpl();
-		pageRequest.setPageNumber(Integer.valueOf(request
-				.getParameter(CONST_PARANAME_iDisplayStart)));
-		pageRequest.setPageSize(Integer.valueOf(request
-				.getParameter(CONST_PARANAME_iDisplayLength)));
+		final Integer startPlace = Integer.valueOf(request
+						.getParameter(CONST_PARANAME_iDisplayStart));
+		final Integer displayLength =Integer.valueOf(request
+						.getParameter(CONST_PARANAME_iDisplayLength));
+		pageRequest.setPageNumber(startPlace / displayLength +1);
+		pageRequest.setPageSize(displayLength);
 		return pageRequest;
 
 	}
