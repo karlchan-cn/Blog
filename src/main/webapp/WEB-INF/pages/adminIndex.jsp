@@ -1082,7 +1082,7 @@ div.DTFC_LeftFootWrapper table {
 								{
 									"bProcessing" : true,
 									"bServerSide" : true,
-									"bStateSave": true,
+									"bStateSave" : true,
 									"sAjaxSource" : "/Blog/imagemanage/getpaginatedimages",
 									"fnServerData" : function(sSource, aoData,
 											fnCallback, oSettings) {
@@ -1112,23 +1112,23 @@ div.DTFC_LeftFootWrapper table {
 									"aoColumns" : [ {
 										"sTitle" : "#",
 										"mData" : "idx",
-										sDefaultContent : ""
+										"sDefaultContent" : ""
 									}, {
 										"sTitle" : "Name",
 										"mData" : "name",
-										sDefaultContent : ""
+										"sDefaultContent" : ""
 									}, {
 										"sTitle" : "User",
 										"mData" : "user",
-										sDefaultContent : ""
+										"sDefaultContent" : ""
 									}, {
 										"sTitle" : "Create Date",
 										"mData" : "createDate",
-										sDefaultContent : ""
+										"sDefaultContent" : ""
 									}, {
 										"sTitle" : "Create Date",
 										"mData" : "createDate",
-										sDefaultContent : ""
+										"sDefaultContent" : ""
 									} ],
 									"sDom" : "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 									"sPaginationType" : "bootstrap",
@@ -1138,7 +1138,7 @@ div.DTFC_LeftFootWrapper table {
 										"sInfo" : "展示_TOTAL_条记录当中的_START_到_END_",
 										"sInfoEmpty" : "展示0条记录当中的 0  到 0",
 										"sInfoFiltered" : "(从_MAX_条记中过滤)",
-										"sProcessing": "加载中...",
+										"sProcessing" : "加载中...",
 										"sSearch" : "<div class='pull-right'>_INPUT_</div>"
 									}
 								});

@@ -1,5 +1,8 @@
 package cn.com.kc.blog.commondao.pagination.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.kc.blog.commondao.pagination.service.PageRequest;
 
 public class PageRequestImpl implements PageRequest {
@@ -9,7 +12,14 @@ public class PageRequestImpl implements PageRequest {
 public PageRequestImpl() {
 
 }
-
+/**
+ * columns to be used to filter query.
+ */
+public List<String> filterColumns =  new ArrayList<String>();
+/**
+ * columns to be used to sort.
+ */
+public List<String> sortColumns =  new ArrayList<String>();
 /**
  * constructor.
  * 
@@ -61,6 +71,16 @@ public void setPageNumber(final Integer pageNumber) {
  */
 public void setPageSize(final Integer pageSize) {
 	this.pageSize = pageSize;
+}
+
+@Override
+public List<String> getFilterColumns() {
+	return this.filterColumns;
+}
+
+@Override
+public List<String> getSortColumns() {
+	return this.sortColumns;
 }
 
 }
