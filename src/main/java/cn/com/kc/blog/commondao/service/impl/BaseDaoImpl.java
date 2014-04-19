@@ -159,4 +159,9 @@ public abstract String getBaseTotalQueryHQL();
  * @return string
  */
 public abstract String getBasetoalListQueryHQL(final List<String> filterColumn, final List<String>  sortColumns);
+
+public String getBasetoalListQueryHQL() {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

@@ -121,4 +121,11 @@ public class BlogEntityDaoImpl extends BaseDaoImpl<BlogEntity, Long> implements
 		return CONST_HQL_GET_LISTEDENTITY_INFO;
 	}
 
+	@Override
+	public String getBasetoalListQueryHQL(List<String> filterColumn,
+			List<String> sortColumns) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

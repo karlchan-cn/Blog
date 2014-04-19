@@ -4,6 +4,7 @@
 package cn.com.kc.blog.dao.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
@@ -57,6 +58,13 @@ public String getBaseTotalQueryHQL() {
 
 @Override
 public String getBasetoalListQueryHQL() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public String getBasetoalListQueryHQL(List<String> filterColumn,
+		List<String> sortColumns) {
 	// TODO Auto-generated method stub
 	return null;
 }
