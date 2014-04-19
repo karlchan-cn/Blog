@@ -1,4 +1,3 @@
-
 package cn.com.kc.blog.common.util;
 
 import java.io.Serializable;
