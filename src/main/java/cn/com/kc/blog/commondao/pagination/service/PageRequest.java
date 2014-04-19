@@ -1,5 +1,7 @@
 package cn.com.kc.blog.commondao.pagination.service;
 
+import java.util.List;
+
 /**
  * paging request object
  * 
@@ -15,6 +17,21 @@ public static final Integer DEFAULT_PAGESIZE = 10;
  * default page number;
  */
 public static final Integer DEFAULT_PAGENUMBER = 1;
+
+
+/**
+ * get Filtercolumns list.
+ * 
+ * @return list
+ */
+List<String> getFilterColumns();
+
+/**
+ * sort columns list.
+ * 
+ * @return list
+ */
+List<String> getSortColumns();
 
 /**
  * query page number

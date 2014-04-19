@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import cn.com.kc.blog.common.util.DataTableUtility;
 import cn.com.kc.blog.commondao.pagination.service.Page;
 import cn.com.kc.blog.commondao.pagination.service.PageRequest;
 import cn.com.kc.blog.commondao.service.impl.BaseDaoImpl;
@@ -29,6 +30,22 @@ public class BlogImageDaoImpl extends BaseDaoImpl<BlogImage, Long> implements
 public static final String CONST_HQL_GET_ALL_IMAGE_COUNT = " select count(image.id) from BlogImage image";
 public static final String CONST_HQL_GET_LISTEDIMAGE_INFO = " select image.id,image.name,image.position,image.createDate,image.description,"
 															+ "image.state,image.replacement from BlogImage image";
+/**
+ * STRING CONSTANCE-image dot.
+ */
+private static final String CONST_IMAGE_DOT = "image.";
+/**
+ * STRING CONSTANCE-ORDER BY;
+ */
+private static final String CONST_ORDER_BU = " order by ";
+/**
+ * STRING CONSTANCE-SPACE;
+ */
+private static final String CONST_SPACE = " ";
+/**
+ * STRING CONSTANCE-COMMA;
+ */
+private static final String CONST_COMMA = ",";
 
 @Override
 public String getBaseTotalQueryHQL() {
@@ -36,8 +53,20 @@ public String getBaseTotalQueryHQL() {
 }
 
 @Override
-public String getBasetoalListQueryHQL() {
-	return CONST_HQL_GET_LISTEDIMAGE_INFO;
+public String getBasetoalListQueryHQL(final List<String> filterColumn, final List<String>  sortColumns) {
+	int length;
+	StringBuffer hqlSB = new StringBuffer();
+	hqlSB.append(CONST_HQL_GET_LISTEDIMAGE_INFO);
+	if ((length = sortColumns.size()) > 0) {
+		hqlSB.append(CONST_ORDER_BU);
+		String[] sortStrs;
+		for(int i = 0; i < length;i++){
+			sortStrs = sortColumns.get(i).split(DataTableUtility.CONST_PARANAME_SEPERATOR_AT);
+			hqlSB.append(CONST_IMAGE_DOT).append(sortStrs[0]).append(CONST_SPACE).append(sortStrs[1]).append(CONST_COMMA);
+		}
+		hqlSB.deleteCharAt(hqlSB.length()-1);
+	}
+	return hqlSB.toString();
 }
 
 @Override
